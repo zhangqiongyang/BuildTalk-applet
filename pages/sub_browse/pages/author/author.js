@@ -118,54 +118,54 @@ Page({
     // console.log(event);
     var course_id = event.currentTarget.dataset.course_id;
     // console.log(course_id)
-    // wx.navigateTo({
-    //   url: "/pages/sub_browse/pages/list/list?course_id=" + course_id,
-    // })
+    wx.navigateTo({
+      url: "/pages/sub_browse/pages/list/list?course_id=" + course_id,
+    })
 
-    if (app.globalData.isLogin) {
-      wx.request({
-        url: 'https://wx.bjjy.com/courselistinfo',
-        data: {
-          'openid': wx.getStorageSync('openid'),
-          'course_id': course_id
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        dataType: 'json',
-        responseType: 'text',
-        success: function(res) {
-          console.log('------------这里是res--------------')
-          console.log(res)
-          if (res.data.msg == '1') {
-            console.log('---------已经购买了------------')
-            wx.navigateTo({
-              url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-            })
-          } else {
-            console.log('---------还未购买------------')
-            wx.navigateTo({
-              url: "/pages/sub_browse/pages/buy/buy?course_id=" + course_id
-            })
-          }
-        },
-      })
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function(res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-        fail: function(res) {},
-      })
-    }
+    // if (app.globalData.isLogin) {
+    //   wx.request({
+    //     url: 'https://wx.bjjy.com/courselistinfo',
+    //     data: {
+    //       'openid': wx.getStorageSync('openid'),
+    //       'course_id': course_id
+    //     },
+    //     header: {
+    //       'content-type': 'application/x-www-form-urlencoded'
+    //     },
+    //     method: 'POST',
+    //     dataType: 'json',
+    //     responseType: 'text',
+    //     success: function(res) {
+    //       console.log('------------这里是res--------------')
+    //       console.log(res)
+    //       if (res.data.msg == '1') {
+    //         console.log('---------已经购买了------------')
+    //         wx.navigateTo({
+    //           url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+    //         })
+    //       } else {
+    //         console.log('---------还未购买------------')
+    //         wx.navigateTo({
+    //           url: "/pages/sub_browse/pages/buy/buy?course_id=" + course_id
+    //         })
+    //       }
+    //     },
+    //   })
+    // } else {
+    //   wx.showModal({
+    //     title: '未登录',
+    //     content: '请先登录',
+    //     showCancel: true,
+    //     cancelText: '取消',
+    //     confirmText: '确定',
+    //     success: function(res) {
+    //       wx.switchTab({
+    //         url: '/pages/tabbar/mine/mine',
+    //       })
+    //     },
+    //     fail: function(res) {},
+    //   })
+    // }
   },
 
 
