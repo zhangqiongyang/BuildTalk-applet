@@ -177,16 +177,32 @@ Page({
 
     var course_id = event.currentTarget.dataset.courseid;
 
-    wx: wx.navigateTo({
-      url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-    }) 
+    if (app.globalData.isLogin) {
 
+      wx: wx.navigateTo({
+        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+      })
 
+    }
+    else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
 
     // console.log('课程id' + course_id)
     // console.log('openid' + '    ' + wx.getStorageSync('openid'))
 
-    
+
     // if (app.globalData.isLogin) {
     //   wx.request({
     //     url: 'https://wx.bjjy.com/courselistinfo',

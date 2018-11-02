@@ -29,7 +29,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
 
 
@@ -57,20 +57,34 @@ Page({
 
 
 
-// 跳转到相应页面
-  jumpToArticle:function(event){
+  // 跳转到相应页面
+  jumpToArticle: function(event) {
     console.log(event);
 
     var course_id = event.currentTarget.dataset.courseid;
 
     console.log(course_id)
+    if (app.globalData.isLogin) {
 
+      wx: wx.navigateTo({
+        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+      })
 
-    wx: wx.navigateTo({
-      url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-    })
-
-
+    }
+    else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function(res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
 
     // if (app.globalData.isLogin){
     //   wx.request({
@@ -115,7 +129,7 @@ Page({
     //     },
     //   })
     // }
-    
+
 
 
 
@@ -127,49 +141,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

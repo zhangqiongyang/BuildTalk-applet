@@ -118,9 +118,27 @@ Page({
     // console.log(event);
     var course_id = event.currentTarget.dataset.course_id;
     // console.log(course_id)
-    wx.navigateTo({
-      url: "/pages/sub_browse/pages/list/list?course_id=" + course_id,
-    })
+    if (app.globalData.isLogin) {
+
+      wx: wx.navigateTo({
+        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+      })
+
+    }
+    else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
 
     // if (app.globalData.isLogin) {
     //   wx.request({
