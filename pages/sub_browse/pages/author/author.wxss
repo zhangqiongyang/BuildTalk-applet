@@ -1,0 +1,386 @@
+/* pages/author/author.wxss */
+
+/* 作者信息 */
+.authorInfo{
+  display: flex;
+  flex-direction: row;
+  padding: 40rpx;
+}
+.authorInfo image{
+  width: 120rpx;
+  height: 120rpx;
+  border: 4px solid #eaeaea;
+}
+.authorText{
+  display: flex;
+  flex-direction: column;
+  padding-left: 30rpx;
+}
+.authorName{
+  font-size: 36rpx;
+  padding-bottom: 20rpx;
+}
+
+
+/* 导航栏 */
+.nav{
+  padding: 30rpx;
+  display: flex;
+  flex-direction: row;
+}
+.navText{
+  display:flex;
+  border: 1px solid #eaeaea;
+  width: 340rpx;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.active{
+  display:flex;
+  border: 1px solid #eaeaea;
+  width: 340rpx;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  background-color: #10AEFF;
+  color: #fff;
+  /* border: none; */
+}
+
+/* 精品单文 */
+.article{
+  background-color: #fdfaf3;
+  padding-top: 56rpx;
+  padding-bottom: 66rpx;
+}
+.articleItem{
+  position: relative;
+  /* width: 100%; */
+
+  margin: 0 auto 78rpx auto;
+  width: 698rpx;
+}
+
+.articleItemCon{
+  background-color: #fff;
+  padding-top: 1rpx;
+}
+
+.articleOrder{
+  width: 270rpx;
+  height: 64rpx;
+  margin: -13rpx auto 0 auto;
+}
+
+.articleOrder image{
+  width: 270rpx;
+  height: 64rpx;
+  position: absolute;
+  /* position: absolute; */
+}
+
+.articleOrder text{
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  height: 64rpx;
+  color: #fff;
+  font-size: 42rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.articleContent{
+  width: 698rpx;
+  /* height: 846rpx; */
+  border: 1px solid #e6e5e1;
+  border-radius: 10px;
+  padding-top: 50rpx;
+  margin-top: -54rpx;
+  padding-bottom: 60rpx;
+}
+
+.articlePrice{
+  color: red;
+  font-size: 48rpx;
+  float: right;
+  padding-right: 60rpx;
+  padding-top: 20rpx;
+}
+
+.articleName{
+  font-size: 38rpx;
+  text-align: center;
+  padding-top: 54px;
+  padding-bottom: 50rpx;
+  margin: 0 auto;
+  width: 582rpx;
+  display: block;
+}
+
+.articleImage{
+  margin: 0 auto;
+  width: 652rpx;
+  height: 356rpx;
+}
+
+.articleImage image{
+  width: 100%;
+  height: 100%;
+}
+
+.articleCon{
+  padding-top: 30rpx;
+  margin: 0 auto;
+  display: -webkit-box;
+  width: 646rpx;
+  font-size: 28rpx;
+  line-height: 46rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:4;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+
+
+.read{
+  width: 260rpx;
+  height: 74rpx;
+  border:  1px solid #e9a130;
+  background-color: #fff;
+  color: #fd9606;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50rpx auto 0 auto;
+}
+
+.author_clickBox{
+  /* padding: 20rpx; */
+  width: 100%;
+}
+
+.author_clickBoxImage{
+  width: 34rpx;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.author_clickBoxImage image{
+  width: 34rpx;
+  height: 30rpx;
+}
+
+.author_click{
+  background-color: #ff9801;
+  width: 688rpx;
+  height: 74rpx;
+  border:  1px solid #ed9b21;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30rpx auto 76rpx auto;
+}
+
+.author_click image{
+  width: 46rpx;
+  height: 53rpx;
+}
+
+.author_click text{
+  color: #fff;
+  padding-left: 20rpx;
+}
+
+.tips{
+  width: 696rpx;
+  /* height: 286rpx; */
+  background-color: #fff6e4;
+  border: 2px solid #fff;
+  margin: 0 auto;
+  padding: 16rpx 52rpx 32rpx 56rpx;
+  box-sizing: border-box;
+}
+
+.tipsTitle{
+  display: flex;
+  flex-direction: row;
+  height: 88rpx;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 88rpx;
+}
+
+.author_line{
+  height: 1px;
+  width: 176rpx;
+  background-color: #ffd591;
+}
+
+.tipsTitleText{
+  background-color: #ff9a00;
+  color: #fff;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  width: 174rpx;
+  height: 48rpx;
+}
+
+.tips text{
+  line-height: 44rpx;
+  font-size: 26rpx;
+  color: #888;
+  display: block;
+}
+
+.none{
+  font-size: 28rpx;
+  color: #888;
+  text-align: center;
+  height: 400rpx;
+  line-height: 400rpx;
+}
+
+
+/* 系列课程 */
+
+.course{
+  background-color: #f5f5f5;
+}
+.S-list{
+  background-color: #fff;
+  margin-bottom: 18rpx;
+  padding: 38rpx 36rpx 20rpx 24rpx;
+}
+.s_listCon{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.s_listTeacherInfo {
+  display: flex;
+  flex-direction: row;
+  width: 470rpx;
+  padding-bottom: 18rpx;
+  border-bottom: 1px solid #e8e8e8;
+}
+.s_listTeacherImg{
+  width: 68rpx;
+  height: 68rpx;
+  border: 1px solid #ff5d0a;
+  border-radius: 50%;
+}
+.s_listTeacherImg image{
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+.s_listTeacherCon{
+  display: flex;
+  flex-direction: column;
+  padding-left: 18rpx;
+}
+.s_listTeacherName{
+  font-size: 26rpx;
+}
+.s_listTeacherPosition{
+  font-size: 26rpx;
+  color: #888;
+}
+
+
+
+
+
+.s_listCourseInfo{
+  display: flex;
+  flex-direction: column;
+  /* padding-top: 26rpx; */
+}
+.s_listCourseName{
+  font-size:30rpx;
+  color:#333;
+}
+.s_listCourseSynopsis{
+  font-size: 22rpx;
+  color: #888;
+  padding-top: 20rpx;
+}
+
+
+
+
+.S-listImg{
+  width: 182rpx;
+  height: 174rpx;
+}
+.S-listImg image{
+  width: 182rpx;
+  height: 174rpx;
+}
+
+
+
+
+.s_listArticle{
+  padding-top: 28rpx;
+  display: flex;
+  flex-direction: row;
+}
+.s_listArticleId{
+  font-size: 26rpx;
+  color: #888;
+}
+.s_listArticleName{
+  font-size: 26rpx;
+  color: #888;
+  padding-left: 10rpx;
+}
+
+
+
+
+.underline{
+  background-color: #ddd;
+  height: 2rpx;
+  width: 22rpx;
+  margin-top: 28rpx;
+  margin-bottom: 18rpx;
+}
+
+
+
+
+.s_listPriceGroup{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s_listPriceGroupText{
+  color: #888;
+  font-size: 22rpx;
+}
+.s_listPrice{
+  color: #ff5a05;
+}
+
+
+.search_none{
+  color: #888;
+  font-size: 30rpx;
+  text-align: center;
+  padding-top: 100rpx;
+}
+

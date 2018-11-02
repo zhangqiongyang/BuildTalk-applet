@@ -1,0 +1,130 @@
+/* pages/alreadyBought/alreadyBought.wxss */
+
+/* 全部 */
+
+.titleBar {
+  height: 100rpx;
+  border-bottom: 2px solid #f4f4f4;
+  align-items: center;
+  display: flex;
+}
+
+.classify {
+  font-size: 30rpx;
+  /* padding: 0 20rpx; */
+  margin-left: 20rpx;
+  /* width: 80rpx; */
+  height: 60rpx;
+  display: inline-block;
+}
+
+.active{
+  border-bottom: 6rpx solid #fa8919;
+}
+
+.underline {
+  /* position: absolute; */
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: 48rpx;
+  height: 6rpx;
+  background-color: #fa8919;
+  border-radius: 20%;
+}
+
+.courseList {
+  padding: 0 32rpx;
+  border-bottom: 2px solid #f4f4f4;
+}
+
+.title {
+  height: 110rpx;
+  display: flex;
+  align-items: center;
+}
+
+.courseItem {
+  display: flex;
+  height: 188rpx;
+  align-items: center;
+  margin: 40rpx 0;
+}
+
+.course {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.courseItem image {
+  width: 122rpx;
+  height: 122rpx;
+}
+
+.courseInfo {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20rpx;
+}
+
+.courseName {
+  font-size: 32rpx;
+  color: #4d4d4d;
+  /* padding-top: 10rpx; */
+}
+
+.courseDate {
+  color: #888;
+  font-size: 24rpx;
+  padding-top: 26rpx;
+}
+
+.courseNumber {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .courseNumber view{
+  display: inline;
+} */
+
+
+.courseAlreadyLearnText {
+  color: #888;
+  font-size: 24rpx;
+  letter-spacing: 5rpx;
+}
+
+.courseAlreadyLearn {
+  color: #fa8919;
+    font-size: 24rpx;
+  letter-spacing: 5rpx;
+}
+
+.starToLearn {
+  border: 2px solid #fa8919;
+  height: 50rpx;
+  width: 176rpx;
+  border-radius: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.starToLearn image {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.starToLearn text {
+  color: #fa8919;
+}
+
+
+/* .swiper{
+  height: ;
+} */

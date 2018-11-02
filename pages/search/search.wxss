@@ -1,0 +1,256 @@
+/* pages/search/search.wxss */
+@import "/wxParse/wxParse.wxss";
+
+view {
+  overflow: visible;
+}
+
+/* 搜索框 */
+
+.search_inputGroup {
+  display: flex;
+  height: 88rpx;
+  border-bottom: 1rpx solid #EAEAEA;
+  background-color: #fff;
+  align-items: center;
+  flex-direction: row;
+}
+
+.search {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.placeholder {
+  font-size: 26rpx;
+  padding-left: 44rpx;
+  color: #424242;
+}
+
+.search_img {
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  position: absolute;
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.search_clear {
+  position: absolute;
+  right: 3%;
+  z-index: 10;
+  height: 100%;
+  width: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_input {
+  position: absolute;
+  background-color: #f5f5f5;
+  padding-left: 76rpx;  
+  border-radius: 28rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  width: 690rpx;
+  height: 56rpx;
+  margin-left: 30rpx;
+}
+
+/* .search_cancel {
+  flex: 1;
+  text-align: center;
+  line-height: 88rpx;
+} */
+
+/* 历史记录 */
+
+.search_history {
+  background-color: #fff;
+  margin-top: 30rpx;
+}
+
+.search_historyList {
+  border-bottom: 1px solid #EAEAEA;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+
+.searchKeyword {
+  width: 646rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 42rpx;
+}
+
+.search_history image {
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.search_historyCon {
+  padding-left: 24rpx;
+  font-size: 26rpx;
+}
+
+.search_historyCal {
+  flex: 1;
+  float: right;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.search_historyCal text{
+  font-size: 20rpx;
+  color: #999999;
+}
+
+.search_calAllHistory {
+  height: 86rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search_calAllHistory image{
+  padding-right: 10rpx;
+}
+.search_calAllHistory text{
+  color: #AFAFAF;
+  font-size: 24rpx;
+}
+
+/* 搜索展示列表 */
+
+.search_list {
+  height: 1000rpx;
+  /* overflow:hidden;white-space:nowrap; */
+}
+
+.S-list {
+  background-color: #fff;
+  margin-bottom: 18rpx;
+  padding: 38rpx 36rpx 20rpx 24rpx;
+}
+
+.s_listCon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.s_listTeacherInfo {
+  display: flex;
+  flex-direction: row;
+  width: 470rpx;
+  padding-bottom: 18rpx;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.s_listTeacherImg {
+  width: 68rpx;
+  height: 68rpx;
+  border: 1px solid #ff5d0a;
+  border-radius: 50%;
+}
+
+.s_listTeacherImg image {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+
+.s_listTeacherCon {
+  display: flex;
+  flex-direction: column;
+  padding-left: 18rpx;
+}
+
+.s_listTeacherName {
+  font-size: 26rpx;
+}
+
+.s_listTeacherPosition {
+  font-size: 26rpx;
+  color: #888;
+}
+
+.s_listCourseInfo {
+  display: flex;
+  flex-direction: column;
+  padding-top: 26rpx;
+}
+
+.s_listCourseName {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.s_listCourseSynopsis {
+  font-size: 22rpx;
+  color: #888;
+}
+
+.S-listImg {
+  width: 182rpx;
+  height: 174rpx;
+}
+
+.S-listImg image {
+  width: 182rpx;
+  height: 174rpx;
+}
+
+.s_listArticle {
+  padding-top: 28rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.s_listArticleId {
+  font-size: 26rpx;
+  color: #888;
+}
+
+.s_listArticleName {
+  font-size: 26rpx;
+  color: #888;
+  padding-left: 10rpx;
+}
+
+.underline {
+  background-color: #ddd;
+  height: 2rpx;
+  width: 22rpx;
+  margin-top: 28rpx;
+  margin-bottom: 18rpx;
+}
+
+.s_listPriceGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.s_listPriceGroupText {
+  color: #888;
+  font-size: 22rpx;
+}
+
+.s_listPrice {
+  color: #ff5a05;
+}
+
+.search_none {
+  color: #888;
+  font-size: 30rpx;
+  text-align: center;
+  padding-top: 100rpx;
+}

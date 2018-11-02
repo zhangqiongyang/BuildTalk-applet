@@ -1,0 +1,145 @@
+<!--pages/author/author.wxml-->
+<view>
+
+  <view class='authorInfo'>
+    <image src='{{authorinfo.author_pic}}'></image>
+    <view class='authorText'>
+      <text class='authorName'>{{authorinfo.author_name}}</text>
+      <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+    </view>
+  </view>
+
+
+
+  <view>
+
+    <view class='nav' wx:if='{{isArticle}}'>
+      <text class='active' bindtap='switchMode' data-id='article'>精品单文</text>
+      <text class='navText' bindtap='switchMode' data-id='course'>系列课程</text>
+    </view>
+    <view class='nav' wx:if='{{!isArticle}}'>
+      <text class='navText' bindtap='switchMode' data-id='article'>精品单文</text>
+      <text class='active' bindtap='switchMode' data-id='course'>系列课程</text>
+    </view>
+
+    <!-- <view class='nav'>
+      <text class='{{isArticle}}?"active":"navText"' bindtap='switchMode' data-id='article'>精品单文</text>
+      <text class='{{isArticle}}?"navText":"active"' bindtap='switchMode' data-id='course'>系列课程</text>
+    </view> -->
+  </view>
+
+
+
+  <view wx:if='{{isArticle}}'>
+    <view wx:if='{{isHaveArticle}}' class='article'>
+      <block wx:for='{{articleinfo}}' wx:key='key'>
+        <view class='articleItem' bindtap='jumpToArticle' data-article_id='{{item.article_id}}' data-article_price='{{item.article_price}}'>
+          <view class='articleItemCon'>
+            <view class='articleOrder'>
+              <image src='/image/author_article.png'></image>
+              <text>{{index + 1}}</text>
+            </view>
+            <view class='articleContent'>
+              <text wx:if="{{item.isFree}}" class='articlePrice'>免费</text>
+              <text wx:else class='articlePrice'>￥{{item.article_price}}</text>
+              
+              <text class='articleName'>{{item.article_title}}</text>
+              <view class='articleImage'>
+                <image src='{{item.article_pic}}' mode='aspectFill'></image>
+              </view>
+              <text class='articleCon'>{{item.article_desc}}</text>
+            </view>
+          </view>
+          <!-- <view class='read'>戳此阅读</view> -->
+        </view>
+
+      </block>
+
+
+
+      <!-- <view class='author_clickBox'>
+        <view class='author_clickBoxImage'>
+          <image src='/image/article_down.png'></image>
+        </view>
+        <view class='author_click'>
+          <image src='/image/article_click.png'></image>
+          <text>访问AWS定制专区,阅读更多私房书单与文章</text>
+        </view>
+      </view> -->
+
+
+
+
+      <view class='tips'>
+        <view class='tipsTitle'>
+          <view class='author_line'></view>
+          <view class='tipsTitleText'>阅读须知</view>
+          <view class='author_line'></view>
+        </view>
+
+        <text>1.本系列共{{articleinfo.length}}篇文章，剩余内容将逐步上线,可永久阅读;</text>
+        <text>2.在阅读过程中，如有任何问题,请邮件联系:xxxxxxx@bjjy.com</text>
+      </view>
+    </view>
+    <view wx:if='{{!isHaveArticle}}' class='none'>
+      暂无文章
+    </view>
+
+
+  </view>
+
+
+
+
+
+  <view wx:else>
+    <view class='course' wx:if='{{isHaveCoruse}}'>
+      <block wx:for='{{courseinfo}}' wx:key='key'>
+        <view class='S-list' bindtap='jumpToCourse' data-course_id='{{item.course_id}}'>
+          <view class='s_listCon'>
+            <view>
+
+              <view class='s_listCourseInfo'>
+                <text>{{item.course_name}}</text>
+                <text class='s_listCourseSynopsis'>{{item.course_desc}}</text>
+                <!-- <view class='s_listCourseName'>
+            <template is="wxParse" data="{{wxParseData:item.course_name.nodes}}" />
+          </view>
+          <view class='s_listCourseSynopsis'>
+            <template is="wxParse" data="{{wxParseData:item.course_desc.nodes}}" />
+          </view> -->
+              </view>
+
+            </view>
+            <view class='S-listImg'>
+              <image src='{{item.course_pic}}'></image>
+            </view>
+          </view>
+          <!-- <view class='s_listArticle'>
+              <text class='s_listArticleId'>第{{item.article_id}}讲</text> -->
+          <!-- <text class='s_listArticleName'>伟大的建筑</text> -->
+          <!-- <template is="wxParse" data="{{wxParseData:item.article_name.nodes}}"/>
+            </view> -->
+          <view class='underline'></view>
+          <view class='s_listPriceGroup'>
+            <text class='s_listPrice'>预售￥{{item.course_money}}/{{item.coursenum}}期</text>
+            <text class='s_listPriceGroupText'>8856人购买</text>
+            <text class='s_listPriceGroupText'>{{item.updatetime}}</text>
+          </view>
+        </view>
+      </block>
+
+    </view>
+    <view wx:if='{{!isHaveCoruse}}' class='none'>
+      暂无课程
+    </view>
+  </view>
+
+
+
+
+
+
+
+
+</view>

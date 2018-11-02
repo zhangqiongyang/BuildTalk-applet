@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/tabbar/index/index",
+    "pages/tabbar/allAuthor/allAuthor",
+    "pages/tabbar/mine/mine",
+    "pages/phone/phone",
+    "pages/search/search",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "建谈",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#10AEFF",
+    "list": [
+      {
+        "pagePath": "pages/tabbar/index/index",
+        "text": "首页",
+        "iconPath": "image/index.png",
+        "selectedIconPath": "image/indexHover.png"
+      },
+      {
+        "pagePath": "pages/tabbar/allAuthor/allAuthor",
+        "text": "作者",
+        "iconPath": "image/course.png",
+        "selectedIconPath": "image/courseHover.png"
+      },
+      {
+        "pagePath": "pages/tabbar/mine/mine",
+        "text": "我的",
+        "iconPath": "image/mine.png",
+        "selectedIconPath": "image/mineHover.png"
+      }
+    ]
+  },
+  "subpackages": [
+    {
+      "root": "pages/sub_personalCenter",
+      "name":"sub_personalCenter",
+      "pages": [
+        "pages/address/address",
+        "pages/alreadyBought/alreadyBought",
+        "pages/myMsgDetails/myMsgDetails",
+        "pages/myMsg/myMsg",
+        "pages/inviteRules/inviteRules",
+        "pages/inviteFriends/inviteFriends",
+        "pages/giftCertificate/giftCertificate"
+      ]
+    },
+    {
+      "root": "pages/sub_browse",
+      "pages": [
+        "pages/AllCourse/AllCourse",
+        "pages/video/video",
+        "pages/list/list",
+        "pages/buy/buy",
+        "pages/activity/activity",
+        "pages/author/author",
+        "pages/message/message",
+        "pages/article/article"
+      ]
+    }
+  ]
+}

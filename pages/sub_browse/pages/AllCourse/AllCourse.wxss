@@ -1,0 +1,130 @@
+/* pages/AllCourse/AllCourse.wxss */
+.search_list{
+  height: 1000rpx;
+  /* overflow:hidden;white-space:nowrap; */
+}
+.S-list{
+  background-color: #fff;
+  margin-bottom: 18rpx;
+  padding: 38rpx 36rpx 20rpx 24rpx;
+}
+.s_listCon{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.s_listTeacherInfo {
+  display: flex;
+  flex-direction: row;
+  width: 470rpx;
+  padding-bottom: 18rpx;
+  border-bottom: 1px solid #e8e8e8;
+}
+.s_listTeacherImg{
+  width: 68rpx;
+  height: 68rpx;
+  border: 1px solid #ff5d0a;
+  border-radius: 50%;
+}
+.s_listTeacherImg image{
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+.s_listTeacherCon{
+  display: flex;
+  flex-direction: column;
+  padding-left: 18rpx;
+}
+.s_listTeacherName{
+  font-size: 26rpx;
+}
+.s_listTeacherPosition{
+  font-size: 26rpx;
+  color: #888;
+}
+
+
+
+
+
+.s_listCourseInfo{
+  display: flex;
+  flex-direction: column;
+  padding-top: 26rpx;
+}
+.s_listCourseName{
+  font-size:30rpx;
+  color:#333;
+}
+.s_listCourseSynopsis{
+  font-size: 22rpx;
+  color: #888;
+}
+
+
+
+
+.S-listImg{
+  width: 182rpx;
+  height: 174rpx;
+}
+.S-listImg image{
+  width: 182rpx;
+  height: 174rpx;
+}
+
+
+
+
+.s_listArticle{
+  padding-top: 28rpx;
+  display: flex;
+  flex-direction: row;
+}
+.s_listArticleId{
+  font-size: 26rpx;
+  color: #888;
+}
+.s_listArticleName{
+  font-size: 26rpx;
+  color: #888;
+  padding-left: 10rpx;
+}
+
+
+
+
+.underline{
+  background-color: #ddd;
+  height: 2rpx;
+  width: 22rpx;
+  margin-top: 28rpx;
+  margin-bottom: 18rpx;
+}
+
+
+
+
+.s_listPriceGroup{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.s_listPriceGroupText{
+  color: #888;
+  font-size: 22rpx;
+}
+.s_listPrice{
+  color: #ff5a05;
+}
+
+
+.search_none{
+  color: #888;
+  font-size: 30rpx;
+  text-align: center;
+  padding-top: 100rpx;
+}

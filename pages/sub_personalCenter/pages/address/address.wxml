@@ -1,0 +1,38 @@
+<!--pages/address/address.wxml-->
+<view class='background'  style='height:{{windowHeight+"px"}}'>
+
+
+  <view class='form'>
+    <view class='formList'>
+      <input value='{{recevinginfo.consignee}}' placeholder='收货人' placeholder-class='placeholder' auto-focus bindblur='writeNameFinish'></input>
+      <text wx:if='{{isNotName}}' class='verifyInfo'>请输入用户名</text>
+    </view>
+    <view class='formList'>
+      <input value='{{recevinginfo.telephone}}' type='number' placeholder='手机号码' placeholder-class='placeholder' bindblur='writePhoneFinish'></input>
+      <text wx:if='{{isNotPhone}}' class='verifyInfo'>请输入手机号码</text>
+    </view>
+    <view class='formList'>
+      <textarea value='{{recevinginfo.address}}' placeholder='详细地址' placeholder-class='placeholder' bindblur='writeAddressFinish'></textarea>
+      <text wx:if='{{isNotAddress}}' class='verifyInfo'>请输入详细地址</text>      
+    </view>
+  </view>
+  <view class='submitBtn' bindtap='submit'>保存</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</view>

@@ -1,0 +1,15 @@
+/* pages/inviteRules/inviteRules.wxss */
+.inviteRules{
+  display: flex;
+  flex-direction: column;
+  padding: 46rpx 46rpx 0 46rpx;
+}
+.inviteRulesName{
+  font-size: 42rpx;
+  padding-bottom: 50rpx;
+}
+.inviteRulesText{
+  font-size: 32rpx;
+  line-height: 56rpx;
+  padding-bottom: 10rpx;
+}

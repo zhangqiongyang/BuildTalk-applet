@@ -1,0 +1,582 @@
+/* pages/index/index.wxss */
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.indexImgItem {
+  text-align: center;
+}
+
+/* 搜索框 */
+
+.index_search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  line-height: 56rpx;
+  border-bottom: 1px solid #9a9693;
+  width: 100%;
+  height: 88rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.index_service_button {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  width: 148rpx;
+  height: 100%;
+}
+
+.index_service {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 148rpx;
+  height: 100%;
+  justify-content: center;
+}
+
+.index_service text {
+  font-size: 20rpx;
+  line-height: 36rpx;
+  color: #000;
+}
+
+.index_service_img {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.index_search_input {
+  background-color: #f5f5f5;
+  border-radius: 50px;
+  width: 454rpx;
+  height: 56rpx;
+  font-size: 26rpx;
+  color: #424242;
+  text-align: center;
+  /* margin-top: 18rpx;
+  margin-bottom: 16rpx; */
+}
+
+/* 轮播图 */
+
+.index_slideshow {
+  padding-top: 88rpx;
+}
+
+/* 新闻样式 */
+
+.index_news {
+  background-color: #fff;
+}
+
+.newsNav {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1px solid #f1f1f1;
+  background-color: #fff;
+  text-align: center;
+}
+
+.navImg {
+  width: 12rpx;
+  height: 16rpx;
+}
+
+.newsTitle {
+  font-size: 34rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.newsAll {
+  height: 88rpx;
+  width: 150rpx;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  padding-right: 34rpx;
+}
+
+.newsAll image {
+  width: 32rpx;
+  height: 8rpx;
+}
+
+.newsList {
+  padding: 30rpx 28rpx;
+}
+
+.newsListImg {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.newsListImg image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.newsList navigator {
+  display: inline-block;
+  line-height: 58rpx;
+  padding-left: 20rpx;
+  font-size: 28rpx;
+}
+
+/* 精品专栏样式 */
+
+.index_boutique {
+  background-color: #fff;
+  /* margin-top: 18rpx; */
+}
+
+.swiperbackground {
+  background-color: #fff;
+
+  height: 438rpx;
+}
+
+.boutique_swiper {
+  margin: 30rpx 0 30rpx 30rpx;
+  width: 566rpx;
+  height: 386rpx;
+  background-color: #fff;
+  border-radius: 20px;
+  display: inline-block;
+    border: 1px solid #EAEAEA;
+}
+
+.boutique_img {
+  width: 566rpx;
+  height: 142rpx;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.boutique_img image {
+  width: 566rpx;
+  height: 142rpx;
+}
+
+.boutique_course text {
+  display: block;
+}
+
+.boutique_course {
+  padding: 26rpx 20rpx 34rpx 22rpx;
+  overflow: hidden;
+  border-bottom: 1px solid #eaeaea;
+  width: 566rpx;
+  box-sizing: border-box;
+}
+
+.boutique_NameBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.boutique_name {
+  font-size: 30rpx;
+}
+
+.boutique_priceBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.boutique_price {
+  font-size: 26rpx;
+  color: #f86161;
+}
+
+.boutique_num {
+  font-size: 20rpx;
+  color: #afafaf;
+  line-height: 40rpx;
+}
+
+.boutique_introduce {
+  float: left;
+  font-size: 24rpx;
+  color: #777;
+  padding-top: 16rpx;
+}
+
+.boutique_author {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx 22rpx 22rpx 22rpx;
+}
+
+.boutique_authorImg {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+}
+
+.index_line {
+  width: 2rpx;
+  height: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.boutique_authorName {
+  margin-left: 20rpx;
+  font-size: 26rpx;
+}
+
+.boutique_authorPosition {
+  color: #afafaf;
+  font-size: 22rpx;
+}
+
+/* 视频课程 */
+
+.videoCourse {
+  margin-top: 30rpx;
+}
+
+.courseItem {
+  background-color: #fff;
+  padding: 30rpx;
+  border-bottom: 1px solid #f1f1f1;
+  display: flex;
+  flex-direction: row;
+}
+
+.teacherImg {
+  width: 184rpx;
+  height: 218rpx;
+  float: left;
+  padding-right: 20rpx;
+}
+
+.teacherImg image {
+  width: 184rpx;
+  height: 218rpx;
+  border-radius: 10px;
+}
+
+.courseContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* .courseNameBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.courseName {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  padding-top: 6rpx;
+  padding-bottom: 12rpx;
+}
+
+.CourseIntroduce {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #777;
+  padding-bottom: 28rpx;
+}
+
+
+.courseTimeAndPrice {
+  padding-bottom: 60rpx;
+  line-height: 22rpx;
+}
+
+.courseTime {
+  font-size: 22rpx;
+  color: #AFAFAF;
+}
+
+.coursePrice {
+  font-size: 26rpx;
+  color: #F86161;
+} */
+.teacherInformation {
+  display: flex;
+  flex-direction: column;
+}
+
+.teacherName {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  padding-top: 6rpx;
+  padding-bottom: 20rpx;
+}
+
+.teacherPosition {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #777;
+  padding-bottom: 28rpx;
+}
+.labelBox{
+  padding-top: 50rpx;
+  display: flex;
+  flex-direction: row;
+}
+.label{
+  font-size: 26rpx;
+  color: #888;
+  background-color: #ddd;
+  /* width: 100rpx; */
+  padding: 4rpx 10rpx;
+  margin:0 10rpx; 
+  height: 40rpx;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 建谈商城样式 */
+/* .index_shop{
+  margin-top: 30rpx;
+}
+.shop {
+  background-color: #fff;
+  padding: 30rpx 0 26rpx 0;
+}
+
+.bookItem {
+  padding-left: 30rpx;
+  display: inline-block;
+}
+
+.bookImg {
+  width: 242rpx;
+  height: 260rpx;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookImg image {
+  width: 139rpx;
+  height: 193rpx;
+}
+
+.bookInformation {
+  display: flex;
+  flex-direction: column;
+  margin-top: 26rpx;
+}
+
+.bookName {
+  padding: 0 20rpx;
+  display: inline-block;
+  white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow:ellipsis;
+  line-height: 30rpx;
+}
+
+.bookPrice {
+  padding-top: 18rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  color: #F86161;
+  font-size: 26rpx;
+  line-height: 26rpx;
+} */
+
+/* 热点专题 */
+
+.hotTopic {
+  margin-top: 30rpx;
+  background-color: #fff;
+}
+
+.hotItem {
+  padding: 30rpx 0;
+}
+
+.hotImg {
+  padding-left: 30rpx;
+  display: inline-block;
+  width: 302rpx;
+  height: 134rpx;
+  /* border: 1px solid #e8e7e5; */
+  border-radius: 10px;
+}
+
+.hotItem image {
+  width: 302rpx;
+  height: 134rpx;
+  border-radius: 10px;
+}
+
+/* 建谈视频样式 */
+/* .index_video{
+  margin-top: 30rpx;
+}
+.video {
+  padding: 30rpx 0 66rpx 0;
+  background-color: #fff;
+}
+
+.videoItem {
+  display: inline-block;
+  padding-left: 30rpx;
+  width: 302rpx;
+  border-radius: 10px;
+}
+
+.videoImg {
+  width: 302rpx;
+  height: 218rpx;
+  position: relative;
+  border-radius: 10px;  
+}
+
+.videoPlayImg {
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  left: 37%;
+  top: 27%;
+}
+
+.videoInformation {
+  display: flex;
+  flex-direction: column;
+  width: 302rpx;
+  padding-top: 16rpx;
+}
+
+.videoName {
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  display: inline-block;
+  white-space: nowrap; 
+  width: 302rpx; 
+  overflow: hidden;
+  text-overflow:ellipsis;
+  font-size: 24rpx;
+}
+
+.videoAuthor {
+  font-size: 26rpx;
+  color: #AFAFAF;
+  padding-top: 18rpx;
+  padding-left: 20rpx;
+} */
+
+
+
+
+
+
+/* 2018-10-24前视频课程 */
+/* .videoCourse {
+  margin-top: 30rpx;
+}
+
+.courseItem {
+  background-color: #fff;
+  padding: 30rpx;
+  border-bottom: 1px solid #f1f1f1;
+  display: flex;
+  flex-direction: row;
+}
+
+.teacherImg {
+  width: 184rpx;
+  height: 218rpx;
+  float: left;
+  padding-right: 20rpx;
+}
+
+.teacherImg image {
+  width: 184rpx;
+  height: 218rpx;
+  border-radius: 10px;
+}
+
+.courseContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.courseNameBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.courseName {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  padding-top: 6rpx;
+  padding-bottom: 12rpx;
+}
+
+.CourseIntroduce {
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #777;
+  padding-bottom: 28rpx;
+}
+
+
+.courseTimeAndPrice {
+  padding-bottom: 60rpx;
+  line-height: 22rpx;
+}
+
+.courseTime {
+  font-size: 22rpx;
+  color: #AFAFAF;
+}
+
+.coursePrice {
+  font-size: 26rpx;
+  color: #F86161;
+}
+.teacherInformation {
+  line-height: 26rpx;
+}
+
+.teacherName {
+  padding-right: 10rpx;
+  color: #333;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+
+.teacherPosition {
+  padding-left: 10rpx;
+  color: #AFAFAF;
+  font-size: 22rpx;
+}
+*/
+
+
+
+

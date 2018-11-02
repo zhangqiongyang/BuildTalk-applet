@@ -1,0 +1,92 @@
+<view class='background'>
+
+
+
+  <!-- 列表首图 -->
+  <view class='listHeadImg'>
+    <image src='/image/index2.jpg'></image>
+  </view>
+
+
+
+  <!-- 列表导航 -->
+  <view class='listNav'>
+    <view class='navContent'>
+      <view class='navListOrder' bindtap='changeOrder'>
+        <view class='navListOrderImgBox' >
+        <!-- <view class='navListOrderImg'> -->
+          <image class='navListOrderImg' src='/image/list_order.png'></image>
+        <!-- </view> -->
+        </view>
+        <text class='navListOrderText' wx:if='{{order==true}}'>倒序</text>
+        <text class='navListOrderText' wx:if='{{order==false}}'>正序</text>
+      </view>
+      <!-- <text style='padding-top: 20rpx;padding-bottom: 20rpx;'>|</text> -->
+      <text class='navContentText'>已更新{{articleLen}}篇文章</text>
+    </view>
+    <view class='navPattern' bindtap='changMode' >
+      <!-- <view class='navPatternImg'> -->
+        <image wx:if='{{mode==true}}'  class='navPatternImg' src='/image/list_list.png'></image>
+        <image wx:if='{{mode==false}}' class='navPatternImg' src='/image/list_image.png'></image>
+      <!-- </view> -->
+      <text wx:if='{{mode==true}}' class='navPatternText'>列表模式</text>
+      <text wx:if='{{mode==false}}' class='navPatternText'>图文模式</text>
+    </view>
+  </view>
+
+
+
+
+  <!-- 列表模式内容 -->
+  <!-- <scroll-view scroll-y scroll-into-view='{{toView}}' scroll-with-animation style='height:1000rpx;' wx:if='{{mode==true}}' class='listMode'> -->
+    <view wx:if='{{mode==true}}' class='listMode'>
+    <block wx:for='{{articlelist}}' wx:key='key'>
+      <view class='listModeList' id='{{"inToView"+item.article_id}}' bindtap='jumpToArticle' data-articleid='{{item.article_id}}' data-audioid='{{item.audio_id}}'>
+        <view class='listModeContent'>
+          <text class='listModeOrder'>第{{item.article_number}}讲</text>
+          <!-- <text>|</text> -->
+          <text class='listModeTitle'>{{item.article_title}}</text>
+        </view>
+        <view class='listModeTime'>
+          <image src='/image/list_time.png'></image>
+          <text class='listModeTimeText'>{{item.publish_time}}</text>
+        </view>
+      </view>
+    </block>
+    </view>
+  <!-- </scroll-view> -->
+
+
+
+  <!-- 图文模式内容 -->
+  <!-- <scroll-view scroll-y scroll-into-view='{{toView}}' scroll-with-animation style='height:1000rpx;' wx:if='{{mode==false}}' class='imageTextMode'> -->
+    <view wx:if='{{mode==false}}' class='imageTextMode'>
+    <block wx:for='{{articlelist}}' wx:key='key'>
+      <view class='imageTextModeList' id='{{"inToView"+item.article_id}}' bindtap='jumpToArticle' data-articleid='{{item.article_id}}' data-audioid='{{item.audio_id}}'>
+        <view class='listModeContent'>
+          <text class='listModeOrder'>第{{item.article_number}}讲</text>
+          <!-- <text>|</text> -->
+          <text class='listModeTitle'>{{item.article_title}}</text>
+        </view>
+        <view class='listModeTime'>
+          <image src='/image/list_time.png'></image>
+          <text class='listModeTimeText'>{{item.publish_time}}</text>
+        </view>
+        <view class='imageTextImg'>
+          <image src='{{item.pic_url}}'></image>
+        </view>
+        <view class='imageTextText'>
+          <text>{{item.article_desc}}</text>
+        </view>
+        <view class='imageTextToFull'>
+          <text>阅读全文</text>
+          <image src='/image/list_more.png'></image>
+        </view>
+      </view>
+    </block>
+    </view>
+  <!-- </scroll-view> -->
+
+
+
+</view>

@@ -1,0 +1,161 @@
+/* pages/buy/buy.wxss */
+
+/* canvas */
+
+.buy_canvas {
+  padding-top: 26rpx;
+  padding-left: 22rpx;
+}
+
+.canvas_bg {
+  border: 2px solid #d7ab70;
+  width: 686rpx;
+  height: 686rpx;
+}
+
+.canvas_content {
+  border: 2px solid #d7ab70;
+  width: 686rpx;
+  height: 686rpx;
+  position: absolute;
+  left: 40rpx;
+  top: 44rpx;
+  box-sizing: border-box;
+  padding: 46rpx 34rpx 0 43rpx;
+}
+
+.canvas_userInfo {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #d5d5d5;
+}
+
+.canvas_userInfo text {
+  padding-bottom: 30rpx;
+}
+
+.userName {
+  font-size: 36rpx;
+  color: #444;
+}
+
+.phone {
+  font-size: 24rpx;
+  color: #404040;
+}
+
+.welcome {
+  font-size: 26rpx;
+  color: #000;
+}
+
+.cost {
+  border-bottom: 2px solid #d5d5d5;
+  height: 90rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cost_text {
+  font-size: 26rpx;
+  color: #d7ab70;
+}
+
+.price {
+  font-size: 44rpx;
+  color: #d7ab70;
+}
+
+.canvas_con {
+  padding-top: 58rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas_con text {
+  padding-bottom: 26rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.courseInfo {
+  position: absolute;
+  right: 42rpx;
+  top: 14rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.courseInfo image {
+  width: 77rpx;
+  height: 77rpx;
+  padding-right: 14rpx;
+}
+
+.courseName {
+  display: flex;
+  flex-direction: column;
+}
+
+.courseName text {
+  font-size: 24rpx;
+  /* font-family: sans-serif; */
+}
+
+
+
+
+/* 收货信息 */
+.address{
+  padding:20rpx;
+  /* padding-bottom: 0; */
+}
+.addressInfo{
+  color: #999;
+}
+
+
+
+
+/* 支付方式 */
+.payStyle {
+  /* padding-top: 48rpx; */
+  padding-left: 100rpx;
+}
+
+.pay {
+  padding-left: 26rpx;
+  font-size: 28rpx;
+  color: #000;
+}
+
+
+
+/* 支付按钮 */
+.button {
+  width: 690rpx;
+  height: 88rpx;
+  background-color: #d7ab70;
+  border-radius: 10rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50rpx auto;
+  font-size: 28rpx;
+}
+
+
+
+/* 小提示 */
+.tips {
+  width: 100%;
+  text-align: center;
+}
+
+.tips text {
+  font-size: 24rpx;
+  color: #999;
+}

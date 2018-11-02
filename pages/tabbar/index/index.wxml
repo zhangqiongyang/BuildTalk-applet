@@ -1,0 +1,226 @@
+<view class='background'>
+
+
+
+  <!-- 搜索 -->
+  <view class='index_search'>
+    <view class='index_service'>
+      <button open-type='contact' class='index_service_button'></button>
+      <!-- <contact-button type="default-light" size="80" session-from="weapp" class='index_service_button'></contact-button> -->
+      <image class='index_service_img' src='/image/index_service.png' />
+      <text>客服</text>
+    </view>
+    <view class='index_search_input' bindtap='jumpToSearch'>教师 课程 关键词</view>
+    <view class='index_service'>
+      <image class='index_service_img' src='/image/index_history.png' />
+      <text>历史</text>
+    </view>
+  </view>
+
+
+
+
+  <!-- 轮播图 -->
+  <view class='index_slideshow'>
+    <swiper style='height:330rpx;' indicator-dots="{{indicatorDots}}" indicator-color='#33333399' indicator-active-color='#fff' autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{indexpicinfo}}" wx:key='key'>
+        <swiper-item class='indexImgItem'>
+          <image src="{{item.pic_url}}" style='width: 100%;height:330rpx;' mode='aspectFill' bindtap='jumpToActivityBanner' data-id='{{item.pic_id}}'/>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+
+
+
+
+  <!-- 建谈新闻 -->
+  <!-- <view class='index_news'>
+    <view class='newsNav'>
+      <text class='newsTitle'>建谈新闻</text>
+      <text class='newsAll'>查看全部></text>
+    </view>
+    <view class='newsList'>
+      <block wx:for='{{newsList}}'>
+        <view>
+          <image class='newsListImg' src='/image/index_play.png'></image>
+          <navigator>{{item}}</navigator>
+        </view>
+      </block>
+    </view>
+  </view> -->
+
+
+  <!-- 精品专栏 -->
+  <view class='index_boutique'>
+    <view class='newsNav'>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <text class='newsTitle'>精品专栏</text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <view class='newsAll' bindtap='jumpToAllCourse'>
+        <image src='/image/index_more.png'></image>
+      </view>
+    </view>
+    <view class='swiperbackground'>
+      <scroll-view scroll-x style='white-space: nowrap;'>
+        <block wx:for="{{courseinfo}}" wx:key='key'>
+          <view class='boutique_swiper'>
+            <view class='boutique_img' bindtap='jumpToList' data-courseid='{{item.course_id}}'>
+              <image src='{{item.course_picurl}}' mode='aspectFill'></image>
+            </view>
+            <view class='boutique_course' bindtap='jumpToList' data-courseid='{{item.course_id}}'>
+              <view class='boutique_NameBox'>
+                <text class='boutique_name'>{{item.course_name}}</text>
+                <!-- <text class='boutique_price'>{{item.coursePrice}}</text>
+              <text>/</text>
+              <text class='boutique_price'>{{item.coursePrice}}</text> -->
+                <view class='boutique_priceBox'>
+                  <text class='boutique_price'>￥{{item.course_money}}</text>
+                  <text class='boutique_num'>/</text>
+                  <text class='boutique_num'>{{item.coursenum}}期</text>
+                </view>
+              </view>
+              <text class='boutique_introduce'>{{item.course_desc}}</text>
+            </view>
+            <view class='boutique_author' bindtap='jumpToAuthor' data-author_id='{{item.author_id}}'>
+              <image class='boutique_authorImg' src='{{item.author_pic}}'></image>
+              <text class='boutique_authorName'>{{item.author_name}}</text>
+              <image class='index_line' src='/image/index_line.png'></image>
+              <text class='boutique_authorPosition'>{{item.author_desc}}</text>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+
+
+
+  <!-- 作者专栏 -->
+  <view class='videoCourse'>
+    <view class='newsNav'>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <text class='newsTitle'>推荐作者</text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <view class='newsAll' bindtap='jumpToAllAuthor'>
+        <image src='/image/index_more.png'></image>
+      </view>
+    </view>
+    <block wx:for="{{authorinfo}}" wx:key='key'>
+      <view class='courseItem' bindtap='jumpToAuthor' data-author_id='{{item.author_id}}'>
+        <view class='teacherImg'>
+          <image src='{{item.author_pic}}' mode='aspectFit'></image>
+        </view>
+        <view class='courseContent'>
+          <!-- <view class='courseNameBox'>
+            <text class='courseName'>{{item.course_name}}</text>
+            <text class='coursePrice'>￥{{item.course_money}}</text>
+          </view>
+          <text class='CourseIntroduce'>{{item.course_desc}}</text>
+          <view class='courseTimeAndPrice'>
+            <text class='courseTime'>{{item.course_hour}}课时·约{{item.course_time}}分钟</text>
+
+          </view> -->
+          <view class='teacherInformation'>
+            <text class='teacherName'>{{item.author_name}}</text>
+            <!-- <text class='teacherPosition'>|</text> -->
+            <text class='teacherPosition'>{{item.author_desc}}</text>
+          </view>
+
+
+          <view class='labelBox'>
+            <block wx:for='{{item.sign}}' wx:key='key'>
+              <text class='label' catchtap='jumpToSearchLabel' data-label='{{item}}'>{{item}}</text>
+            </block>
+          </view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+
+
+
+  <!-- 建谈商城 -->
+  <!-- <view class='index_shop'>
+    <view class='newsNav'>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <text class='newsTitle'>建谈商城</text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <view class='newsAll'>
+        <image src='/image/index_more.png'></image>
+      </view>
+    </view>
+    <view class='shop'>
+      <scroll-view scroll-x style='white-space: nowrap;'>
+        <block wx:for="{{bookList}}" wx:key='key'>
+          <view class='bookItem'>
+            <view class='bookImg'>
+              <image src='{{item.bookImg}}'></image>
+            </view>
+            <view class='bookInformation'>
+              <text class='bookName'>{{item.bookName}}</text>
+              <text class='bookPrice'>￥{{item.bookPrice}}</text>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view> -->
+
+
+
+  <!-- 热点专题 -->
+  <view class='hotTopic'>
+    <view class='newsNav'>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <text class='newsTitle'>热点专题</text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <view class='newsAll'>
+        <image src='/image/index_more.png'></image>
+      </view>
+    </view>
+    <view class='hotItem'>
+      <scroll-view scroll-x style='white-space: nowrap;'>
+        <block wx:for="{{hotItem}}" wx:key='key'>
+          <view class='hotImg' data-label='{{item.label}}' bindtap='jumpToActivity'>
+            <image src='{{item.image}}'></image>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+
+
+  <!-- 建谈视频 -->
+  <!-- <view class='index_video'>
+    <view class='newsNav'>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <text class='newsTitle'>建谈视频</text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <view class='newsAll'>
+        <image src='/image/index_more.png'></image>
+      </view>
+    </view>
+    <view class='video'>
+      <scroll-view scroll-x style='white-space: nowrap;'>
+        <block wx:for="{{videoItem}}" wx:key='key'>
+          <view class='videoItem'>
+            <view class='videoImg'>
+              <image class='videoImg' src='{{item.videoImg}}'></image> -->
+  <!-- <image class='videoPlayImg' src='/image/index_video_play.png'></image> -->
+  <!-- </view>
+            <view class='videoInformation'>
+              <text class='videoName'>{{item.videoName}}</text>
+              <text class='videoAuthor'>{{item.videoAuthor}}</text>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view> -->
+
+
+
+</view>

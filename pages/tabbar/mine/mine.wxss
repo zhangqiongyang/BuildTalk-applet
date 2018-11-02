@@ -1,0 +1,107 @@
+/* pages/mine/mine.wxss */
+
+
+/* 登录及个人信息样式 */
+.personalInformation{
+  width: 100%;
+  height: 208rpx;
+  background-color: #fff;
+}
+.userBg{
+  width:100%;
+  height:208rpx;
+  float:left;
+}
+.userContent{
+  position: absolute;
+  z-index: 1;
+}
+.headPortrait{
+  height: 100rpx;
+  width: 100rpx;
+  margin:48rpx 28rpx 0 28rpx;
+  float: left;
+  border: 3px solid #fff;
+  border-radius: 50%;
+}
+.headPortrait image{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+}
+.userInformation{
+  float: left;
+  margin-top: 54rpx;
+  display: flex;
+  flex-direction: column;
+}
+.userinfo-nickname{
+  font-size: 44rpx;
+  color: #fff;
+}
+.userinfo_phone{
+  font-size: 22rpx;
+  color: #fff;
+  padding-top: 16rpx;
+}
+
+
+
+/* 账户样式 */
+.account{
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+}
+.mineAccount{
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+
+.accountItem{
+  height: 88rpx;
+  border: 1px solid #e8e8e8;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.accountContent{
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+.accountImg{
+  width: 44rpx;
+  height: 44rpx;
+  display: inline-block;
+  padding-left: 34rpx;
+}
+.accountImg image{
+  width: 44rpx;
+  height: 44rpx;
+}
+.accountName{
+  padding-left: 24rpx;
+  color: #333;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+.accountInfo{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.accountInfo image{
+  width: 15rpx;
+  height: 28rpx;
+  padding-left: 22rpx;
+  padding-right: 32rpx;
+}
+.accountNumber{
+  font-size: 26rpx;
+}
+.accountNumberColor{
+ color: #F86161;
+}

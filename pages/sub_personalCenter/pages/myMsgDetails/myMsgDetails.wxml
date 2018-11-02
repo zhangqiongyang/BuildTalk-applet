@@ -1,0 +1,57 @@
+<!--pages/myMsgDetails/myMsgDetails.wxml-->
+
+<view class='back'>
+  
+    <view class='msgItem'>
+      <view class='myMsg'>
+        <view class='myMessage'>
+          <text class='myMsgInfo'>留言·{{guestbookinfo.guestbook_time}}</text>
+          <view class='myMessageImage' bindtap='myMsgDel' data-guestbook_id='{{item.guestbook_id}}'>
+            <image src='/image/myMsg_delete.png'></image>
+          </view>
+          <button open-type='share'>
+            <image src='/image/myMsg_share.png'></image>
+          </button>
+        </view>
+        <view class='myMsgTextBox'>
+          <text class='myMsgText'>{{guestbookinfo.content}}</text>
+        </view>
+      </view>
+
+
+
+
+
+
+      <view class='authorMsg'>
+        <view class='article' bindtap='jumpToArticle' data-article_id='{{guestbookinfo.article_id}}'>
+          <image src='/image/myMsg_book.png'></image>
+          <text>第{{guestbookinfo.article_number}}讲</text>
+          <text>|</text>
+          <text>{{guestbookinfo.article_title}}</text>
+          <text class='right'>></text>
+        </view>
+        <view class='authorMessage'>
+          <view class='authorReply'>
+            <view class='line'></view>
+            <text class='myMsgInfo'>作者回复</text>
+          </view>
+          <text class='authorMsgText'>{{guestbookinfo.author_reply}}</text>
+          <text class='authorMsgTime'>回复于·{{guestbookinfo.reply_time}}</text>
+        </view>
+      </view>
+
+    </view>
+ 
+
+
+
+
+
+
+
+
+
+
+
+</view>

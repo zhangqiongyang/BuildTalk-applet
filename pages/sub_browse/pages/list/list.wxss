@@ -1,0 +1,165 @@
+/* 列表样式 */
+
+
+/* 列表首图 */
+.listHeadImg{
+  width: 100%;
+  height: 440rpx;
+}
+.listHeadImg image{
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 列表导航 */
+.listNav{
+  /* padding: 20rpx 34rpx 20rpx 22rpx; */
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  align-items: center;
+  /* overflow: hidden; */
+  line-height: 26rpx;
+  height: 80rpx;
+  background-color: #fff;
+}
+.listNav text{
+  font-size: 24rpx;
+}
+.navContent{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
+.navListOrder{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* position: relative; */
+  width: 144rpx;
+  height: 100%;
+  align-items: center;
+}
+.navListOrderImgBox{
+  height: 100%;
+  padding-right: 12rpx;
+  display: flex;
+  align-items: center;
+}
+.navListOrderImg{
+  width: 23rpx;
+  height: 23rpx;
+
+}
+.navListOrderImg image{
+  width: 23rpx;
+  height: 23rpx;
+}
+
+.navContentText{
+  color: #999;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.navPattern{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 200rpx;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 30rpx;
+}
+.navPatternImg{
+  width: 23rpx;
+  height: 18rpx;
+  margin-right: 20rpx;
+}
+.navPatternImg image{
+  width: 23rpx;
+  height: 18rpx;
+}
+
+
+/* 列表模式内容 */
+
+.listMode{
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.listModeList{
+  padding: 40rpx 30rpx 30rpx 30rpx;
+  border-bottom: 1px solid #EAEAEA;
+}
+
+.listModeOrder{
+  padding-right: 12rpx;
+  font-size: 34rpx;
+}
+.listModeTitle{
+  /* padding-left: 12rpx; */
+  font-size: 34rpx;  
+  line-height: 34rpx;
+}
+.listModeTime{
+  padding-top: 26rpx;
+  line-height: 20rpx;
+}
+.listModeTime image{
+  width: 21rpx;
+  height: 21rpx;
+}
+.listModeTimeText{
+  font-size: 20rpx;
+  color: #999999;
+  padding-left: 16rpx;
+}
+
+
+
+
+/* 图文模式内容 */
+.imageTextMode{
+  margin-top: 20rpx; 
+}
+
+.imageTextModeList{
+  background-color: #fff;
+  padding: 40rpx 30rpx 0 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.imageTextImg{
+  width: 100%;
+  height: 328rpx;
+  padding-top: 20rpx;
+}
+.imageTextImg image{
+  width: 100%;
+  height:100%;
+}
+.imageTextText{
+  padding: 30rpx 0; 
+  border-bottom: 1px solid #EAEAEA;
+}
+.imageTextText text{
+  color: #666;
+  font-size: 28rpx;
+}
+.imageTextToFull{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.imageTextToFull text{
+  color: #999;
+  font-size: 24rpx;
+}
+.imageTextToFull image{
+  width: 15rpx;
+  height: 28rpx;
+}

@@ -1,0 +1,136 @@
+<!-- 引入模板 -->
+<import src="/wxParse/wxParse.wxml" />
+
+<view class='bg'>
+
+
+
+  <!-- 文章标题 -->
+  <view class='articleTitle'>
+    <text class='article_title'>{{articleinfo.article_title}}</text>
+    <text class='article_author'>{{authorinfo.author_name}}</text>
+    <text class='article_time'>{{articleinfo.publish_time}}</text>
+
+  </view>
+
+
+
+  <!-- 文章首图 -->
+  <view class='articleHeadImg'>
+    <image src='{{articleinfo.article_pic}}'></image>
+  </view>
+
+
+
+  <!-- 音频播放器 -->
+  <view class='articleAudio' wx:if="{{isHaveAudio}}">
+    <!--当前为停止状态  -->
+    <view class='player' wx:if="{{isplay==false}}">
+      <view class='playerIcon' bindtap='play'>
+        <image class='playStop' src='/image/article_play.png'></image>
+      </view>
+      <view class='playerInfo'>
+        <text class='player_article_title'>{{articleinfo.article_title}}</text>
+        <view class='player_article_audioInfo'>
+          <text class='player_article_declaimer'>朗读人：丁婵{{articles.article_author}}</text>
+          <text class='player_article_time'>02'34''</text>
+          <image src='/image/acticle_line.png'></image>
+          <text class='player_article_size'>1.18M</text>
+        </view>
+      </view>
+      <!-- <view class='playerDown'>
+        <image src='/image/article_down.jpg'></image>
+      </view> -->
+    </view>
+    <!--当前为播放状态  -->
+    <view class='player' wx:if="{{isplay==true}}">
+      <view class='playerIcon' bindtap='stop'>
+        <image class='playStop' src='/image/article_stop.png'></image>
+      </view>
+      <view class='playerInfo'>
+        <text class='player_article_title'>{{articleinfo.article_title}}</text>
+        <view class='player_article_audioInfo'>
+          <text class='player_article_declaimer'>朗读人：丁婵{{articles.article_author}}</text>
+          <text class='player_article_time'>02'34''</text>
+          <image src='/image/acticle_line.png'></image>
+          <text class='player_article_size'>1.18M</text>
+        </view>
+      </view>
+      <!-- <view class='playerDown'>
+        <image src='/image/article_down.png'></image>
+      </view> -->
+    </view>
+  </view>
+
+
+
+
+  <!-- 文章主体 -->
+  <view class='articleContent'>
+    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+  </view>
+
+
+
+  <!-- 文章尾图 -->
+  <view class='articleFootImg'>
+    <image src='/image/articleFootImg.jpg'></image>
+  </view>
+
+
+  <!-- 精选留言 -->
+  <view class='articleMessage'>
+    <view class='msgTitle'>
+      <image class='article_msg_line' src='/image/article_msg_line.png'></image>
+      <text>精选留言</text>
+      <image class='article_msg_line' src='/image/article_msg_line.png'></image>      
+    </view>
+    <block wx:for='{{guestbookinfo}}' wx:for-index='key' wx:key='key'>
+      <view class='msgContent'>
+        <view class='msgUserImg'>
+          <image src='{{item.headimage}}'></image>
+        </view>
+        <view class='msgText'>
+          <view class='msgHead'>
+            <text class='msgUserName'>{{item.nickname}}</text>
+            <view class='msgLikeGroup' bindtap='msglike'>
+              <!-- <image class='msgLike' src='/image/article_transmit.png'></image> -->
+              <image wx:if="{{item.is_valid=='0'}}" bindtap='msglike' class='msgLike' src='/image/article_msg_like_hover.png' data-key='{{key}}' data-guestbookid='{{item.guestbook_id}}'></image>
+              <image wx:else class='msgLike' bindtap='msglike' src='/image/article_msg_like.png' data-key='{{key}}' data-guestbookid='{{item.guestbook_id}}'></image>
+              <text class='likeNum'>{{item.countpraise}}</text>
+            </view>
+          </view>
+          <text class='msg'>{{item.content}}</text>
+          <text class='msgTime'>{{item.guestbook_time}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+
+  <!-- 点赞、转发及写留言 -->
+  <view class='articleTabbar'>
+    <view class='tabbarList' bindtap='articleLike'>
+      <image wx:if="{{articleinfo.is_valid=='0'}}" src='/image/article_like_hover.png'></image>
+      <image wx:else src='/image/article_like.png'></image>
+      <text class='tabbarText'>{{articleinfo.countcollect}}</text>
+    </view>
+    <view class='tabbarList' bindtap='jumpToMsg' data-articleid='{{articleinfo.article_id}}'>
+      <image src='/image/article_msg.png'></image>
+      <text class='tabbarText'>写留言</text>
+    </view>
+    <button class='tabbarList acticleShare' open-type='share'>
+      <image src='/image/acticle_share.png'></image>
+      <text class='tabbarText'>分享给朋友</text>
+    </button>
+  </view>
+
+
+
+  <!--canvas绘制分享图 -->
+  <!-- <view class="canvas-box" >
+    <canvas canvas - id="myCanvas" style = "width:100%;height:{{windowHeight}}px;" > </canvas>
+  </view> -->
+
+
+</view>

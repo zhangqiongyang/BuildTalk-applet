@@ -1,0 +1,58 @@
+<!--pages/activity/activity.wxml-->
+<view class='back'>
+
+  <view class='headImage'>
+    <image src='/image/activity.png' mode='widthFix'></image>
+  </view>
+
+  <view class='tipsBox'>
+    <view class='tips'>
+      <image src='/image/activity_star.png'></image>
+      <text>温馨提示</text>
+      <image src='/image/activity_star.png'></image>
+    </view>
+    <view class='tipsItem'>
+      <text class='tipsBoxText'>工业互联网上升为国家战略，引领建筑产业转型升级，加速全球建筑产业进入工业化、数字化的网络时代。</text>
+      <!-- <text class='strong tipsBoxText'>大会官网日程</text> -->
+    </view>
+    <view class='tipsItem'>
+      <text class='tipsBoxText'>工业互联网平台成为建筑产业竞争制高点驱动建筑产业 Made In Internet，重构绿色智能建筑产业新生态。</text>
+      <!-- <text class='strong tipsBoxText'>建谈小程序</text>
+      <text class='tipsBoxText'>发布，敬请期待！</text> -->
+    </view>
+    <text class='tipsBoxText tipsItem'>产品整合产业链，数据整合工艺链，平台颠覆产业世界观，工业互联网平台必将颠覆整个产业的商业模式。</text>
+  </view>
+
+
+
+  <block wx:for='{{authorList}}'>
+    <view class='authorItem'>
+      <image src='{{item.authorImg}}'></image>
+      <view>
+        <text class='articleName'>{{item.articleName}}</text>
+        <view class='authorInfo'>
+          <text class='authorText'>{{item.authorName}}</text>
+          <text class='authorText'>/</text>
+          <text class='authorText'>{{item.authorInfo}}</text>
+        </view>
+        <text class='authorText time'>{{item.time}}</text>
+      </view>
+    </view>
+  </block>
+
+
+
+
+
+
+  <view class='copyright'>
+    ©2018-版权归承办方所有
+  </view>
+
+
+
+
+
+
+
+</view>

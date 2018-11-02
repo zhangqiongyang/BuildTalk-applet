@@ -1,0 +1,47 @@
+<!-- 写留言 -->
+
+<view class='background'>
+
+
+
+  <!-- 写留言 -->
+  <view>
+    <!-- <form> -->
+      <view class='msgTextareaCon'>
+        <textarea class='msgTextarea' placeholder='{{placeholder}}' placeholder-class='msgPlaceholder' maxlength='{{maxlength}}' auto-focus show-confirm-bar bindinput='bindWordLimit' value='{{value}}'></textarea>
+        <text class='currentNoteLen'>{{currentNoteLen}}/{{maxlength}}个字</text>
+      </view>
+      <view>
+        <view class='msgBtn' bindtap='msgSubmit'>提交</view>
+      </view>
+    <!-- </form> -->
+  </view>
+
+
+  <!-- 我的留言 -->
+  <view class='myMsg'>
+    <view class='myMsgTitle'>
+      <text>我的留言</text>
+    </view>
+    <block wx:for='{{guestbookinfo}}' wx:for-index='index' wx:key='key'>
+      <view class='myMsgList'>
+        <view class='magUserImg'>
+          <open-data type='userAvatarUrl' class='userAvatarUrl'></open-data>
+        </view>
+        <view class='myMsgContent'>
+          <open-data type='userNickName' class='userNickName'></open-data>
+          <text class='myMsgCon'>{{item.content}}</text>
+        </view>
+        <view class='line'></view>
+        <view class='myMsgDelBox'>
+        <view class='myMsgDel' bindtap='myMsgDel' data-index='{{index}}' data-guestbookid='{{item.guestbook_id}}'>
+          <image src='/image/search_calAllHistory.png'></image>
+          <text>删除</text>
+        </view></view>
+      </view>
+    </block>
+  </view>
+
+
+
+</view>

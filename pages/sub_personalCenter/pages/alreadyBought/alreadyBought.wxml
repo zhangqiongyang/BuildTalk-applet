@@ -1,0 +1,130 @@
+<!--pages/alreadyBought/alreadyBought.wxml-->
+<view>
+
+
+  <scroll-view scroll-x class='titleBar'>
+    <view class='classify {{currentTab=="0"?"active":""}}' data-current='0' bindtap='swichNav'>全部</view>
+    <view class='classify {{currentTab=="1"?"active":""}}' data-current='1' bindtap='swichNav'>课程</view>
+    <view class='classify {{currentTab=="2"?"active":""}}' data-current='2' bindtap='swichNav'>文章</view>
+    <!-- <view class='underline'></view> -->
+  </scroll-view>
+
+
+
+  <!-- 选项卡内容 -->
+  <swiper current='{{currentTab}}' class='swiper' bindchange='bindChange' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>
+
+    
+    <!-- 全部选项卡 -->
+    <swiper-item>
+      <view class='courseList'>
+        <view class='title'>全部</view>
+        <block wx:for='{{alreadyinfo}}' wx:key='key'>
+          <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
+            <view class='course'>
+              <image src='{{item.pic_url}}'></image>
+              <view class='courseInfo'>
+                <text class='courseName'>{{item.course_name}}</text>
+                <text class='courseDate'>课程描述</text>
+                <text class='courseDate'>{{item.updatetime}}</text>
+                <view class='courseNumber'>
+                  <text class='courseAlreadyLearnText'>已更新{{item.courseNumber}}讲</text>
+                  <text class='courseAlreadyLearnText'>|</text>
+                  <text class='courseAlreadyLearnText'>已学习</text>
+                  <text class='courseAlreadyLearn'>{{item.courseAlreadyLearn}}</text>
+                  <text class='courseAlreadyLearnText'>讲</text>
+                </view>
+              </view>
+              <view class='starToLearn'>
+                <image src='/image/alreadyBought_play.png'></image>
+                <text>开始学习</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </swiper-item>
+
+    
+    
+    
+    
+    
+    <!-- 课程选项卡 -->
+    <swiper-item>
+      <view class='courseList'>
+        <view class='title'>课程</view>
+        <block wx:for='{{alreadyinfo}}' wx:key='key'>
+          <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
+            <view class='course'>
+              <image src='{{item.pic_url}}'></image>
+              <view class='courseInfo'>
+                <text class='courseName'>{{item.course_name}}</text>
+                <text class='courseDate'>课程描述</text>
+                <text class='courseDate'>{{item.updatetime}}</text>
+                <view class='courseNumber'>
+                  <text class='courseAlreadyLearnText'>已更新{{item.courseNumber}}讲</text>
+                  <text class='courseAlreadyLearnText'>|</text>
+                  <text class='courseAlreadyLearnText'>已学习</text>
+                  <text class='courseAlreadyLearn'>{{item.courseAlreadyLearn}}</text>
+                  <text class='courseAlreadyLearnText'>讲</text>
+                </view>
+              </view>
+              <view class='starToLearn'>
+                <image src='/image/alreadyBought_play.png'></image>
+                <text>开始学习</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </swiper-item>
+
+
+
+    <!-- 文章选项卡 -->
+    <swiper-item>
+      <view class='courseList'>
+        <view class='title'>文章</view>
+        <block wx:for='{{alreadyinfo}}' wx:key='key'>
+          <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
+            <view class='course'>
+              <image src='{{item.pic_url}}'></image>
+              <view class='courseInfo'>
+                <text class='courseName'>文章标题{{item.course_name}}</text>
+                <text class='courseDate'>课程描述</text>
+                <!-- <text class='courseDate'>{{item.updatetime}}</text> -->
+                <!-- <view class='courseNumber'>
+                  <text class='courseAlreadyLearnText'>已更新{{item.courseNumber}}讲</text>
+                  <text class='courseAlreadyLearnText'>|</text>
+                  <text class='courseAlreadyLearnText'>已学习</text>
+                  <text class='courseAlreadyLearn'>{{item.courseAlreadyLearn}}</text>
+                  <text class='courseAlreadyLearnText'>讲</text>
+                </view> -->
+              </view>
+              <view class='starToLearn'>
+                <image src='/image/alreadyBought_play.png'></image>
+                <text>开始学习</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </swiper-item>
+
+  </swiper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</view>
