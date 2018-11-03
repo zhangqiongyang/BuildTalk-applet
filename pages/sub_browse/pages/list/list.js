@@ -5,19 +5,19 @@ Page({
    */
   data: {
     article: ['lalallalalal', '/image/index1.jpg', 'asdfas'],
-    mode:true,
-    order:true,
-    articlelist:'',
-    toView:'inToView5',
+    mode: true,
+    order: true,
+    articlelist: '',
+    toView: 'inToView5',
   },
 
 
 
 
   // 切换列表模式与图文模式
-  changMode: function(){
+  changMode: function() {
     this.setData({
-      mode : !this.data.mode
+      mode: !this.data.mode
     })
   },
 
@@ -25,7 +25,7 @@ Page({
 
 
   // 切换列表模式与图文模式
-  changeOrder: function () {
+  changeOrder: function() {
     this.setData({
       order: !this.data.order
     })
@@ -35,23 +35,49 @@ Page({
 
 
   // 跳转到相应页面
-  jumpToArticle: function (event) {
+  jumpToArticle: function(event) {
     console.log(event);
-    var article_id = event.currentTarget.dataset.articleid;
-    var audio_id = event.currentTarget.dataset.audioid;
+    var that = this;
+    var article_id = event.currentTarget.dataset.articleid,
+      audio_id = event.currentTarget.dataset.audioid,
+      is_audition = event.currentTarget.dataset.is_audition;
     console.log(article_id)
-    console.log(audio_id)    
-    if (audio_id){
-      console.log('--------------跳转到音频文章-------------')
-      wx: wx.navigateTo({
-        url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
-      })
-    }else{
-      console.log('--------------跳转到视频文章-------------')      
-      wx: wx.navigateTo({
-        url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
-      })
+    console.log(audio_id)
+    console.log(is_audition)
+    if (this.data.isBuy) {
+      if (audio_id) {
+        console.log('--------------跳转到音频文章-------------')
+        wx: wx.navigateTo({
+          url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+        })
+      } else {
+        console.log('--------------跳转到视频文章-------------')
+        wx: wx.navigateTo({
+          url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
+        })
+      }
+    } else {
+      if (is_audition == '1') {
+        if (audio_id) {
+          console.log('--------------跳转到音频文章-------------')
+          wx: wx.navigateTo({
+            url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+          })
+        } else {
+          console.log('--------------跳转到视频文章-------------')
+          wx: wx.navigateTo({
+            url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
+          })
+        }
+      } else {
+        console.log('---------还未购买------------')
+        wx: wx.redirectTo({
+          url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.course_id
+        })
+      }
+
     }
+
   },
 
 
@@ -99,13 +125,43 @@ Page({
       success: function(res) {
         console.log('-------------课程列表数据---------------')
         console.log(res)
-        that.setData({
-          articlelist: res.data.articlelist,
-          articleLen: res.data.articlelist.length
-        })
+        //判断是否购买
+        //msg=1代表已购买，msg=0代表未购买
+        //已购买正常添加课程列表数据
+        //未购买，将课程前五节isAudition设为true，反之false
+        if (res.data.msg == '1') {
+          that.setData({
+            articlelist: res.data.articlelist,
+            articleLen: res.data.articlelist.length,
+            course_id: res.data.courseinfo.course_id,
+            isBuy: true
+          })
+        } else {
+          that.setData({
+            articlelist: res.data.articlelist,
+            articleLen: res.data.articlelist.length,
+            course_id: res.data.courseinfo.course_id,
+            isBuy: false
+          })
+          if (res.data.articlelist.length >= 5) {
+            for (var i = 0; i < 5; i++) {
+              var is_audition = 'articlelist[' + i + '].is_audition';
+              that.setData({
+                [is_audition]: '1'
+              })
+            }
+          } else {
+            that.setData({
+              'articlelist[0].is_audition': '1'
+            })
+          }
+
+        }
+        console.log(that.data.articlelist)
+
       },
       fail: function(res) {
-        console.log('-------------失败啦---------------')        
+        console.log('-------------失败啦---------------')
       },
 
     })
@@ -163,13 +219,13 @@ Page({
 
 
 
-// updateData: function () {
-//   var pages = getCurrentPages();
-//     var prevPage = pages[pages.length - 2];
-//     prevPage.setData({
-//       info: 'LaternKiwis'
-//     })
-//   }
+  // updateData: function () {
+  //   var pages = getCurrentPages();
+  //     var prevPage = pages[pages.length - 2];
+  //     prevPage.setData({
+  //       info: 'LaternKiwis'
+  //     })
+  //   }
 
 
 })
