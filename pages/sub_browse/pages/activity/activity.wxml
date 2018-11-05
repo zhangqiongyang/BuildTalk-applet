@@ -25,7 +25,7 @@
 
 
 
-  <block wx:for='{{authorList}}'>
+  <block wx:for='{{authorList}}' wx:key='key'>
     <view class='authorItem'>
       <image src='{{item.authorImg}}'></image>
       <view>

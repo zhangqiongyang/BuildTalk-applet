@@ -179,8 +179,18 @@ Page({
                       console.log('----------修改订单状态成功了------------')
 
                       //跳转到相应页面
-                      wx.redirectTo({
-                        url: "/pages/sub_browse/pages/list/list?course_id=" + that.data.courseinfo.course_id
+                      // wx.redirectTo({
+                      //   url: "/pages/sub_browse/pages/list/list?course_id=" + that.data.courseinfo.course_id
+                      // })
+
+                      var pages = getCurrentPages();
+                      var prevPage = pages[pages.length - 2];
+                      prevPage.setData({
+                        netState: '1'
+                      })
+                      prevPage.onShow();
+                      wx.navigateBack({
+                        delta: 1,
                       })
 
                     },
