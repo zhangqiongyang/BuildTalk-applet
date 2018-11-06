@@ -179,7 +179,7 @@ Page({
   jumpToArticle(event){
     // var article_id = event.currentTarget.dataset.article_id
     wx.navigateTo({
-      url: "/pages/sub_browse/pages/video/video?article_id=" + 11
+      url: "/pages/sub_browse/pages/video/video?article_id=" + 86
     })
   },
 

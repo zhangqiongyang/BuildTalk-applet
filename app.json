@@ -48,7 +48,8 @@
         "pages/myMsg/myMsg",
         "pages/inviteRules/inviteRules",
         "pages/inviteFriends/inviteFriends",
-        "pages/giftCertificate/giftCertificate"
+        "pages/giftCertificate/giftCertificate",
+        "pages/feedback/feedback"
       ]
     },
     {

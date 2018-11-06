@@ -14,7 +14,7 @@ Page({
   data: {
     windowHeight: app.globalData.windowHeight,
     isGetCode: false,
-    countDown:'60',
+    countDown:'300',
     btnText:'获取验证码',
     formData : {
       phone:'',

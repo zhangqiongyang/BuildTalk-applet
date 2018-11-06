@@ -7,7 +7,7 @@
 
   <!-- 视频 -->
   <view>
-    <video id="myVideo" class='video' src="{{articleinfo.video_url}}" binderror="videoErrorCallback" controls></video>
+    <video id="myVideo" class='video' src="{{articleinfo.video_url}}" binderror="videoErrorCallback" controls custom-cache="{{false}}"></video>
   </view>
 
 

@@ -353,6 +353,30 @@ Page({
 
 
 
+  jumpToFeedback() {
+    if (app.globalData.isLogin) {
+      wx.navigateTo({
+        url: "/pages/sub_personalCenter/pages/feedback/feedback",
+      })
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+
+  },
+
 
 
   /**
