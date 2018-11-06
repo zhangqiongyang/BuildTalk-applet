@@ -246,6 +246,7 @@ Page({
           console.log("---------------验证码正确---------------")
           util._showToast("成功绑定手机号")
           app.globalData.isBindingPhone = true;
+          app.globalData.phoneNumber = that.data.formData.phone;
           wx.navigateBack({
             delta: 1,
           })

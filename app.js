@@ -184,6 +184,7 @@ App({
     },
     isLogin:null,
     isBindingPhone:null,
+    phoneNumber:'',
     windowHeight:''
   }
 })

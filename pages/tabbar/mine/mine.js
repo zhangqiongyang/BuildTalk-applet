@@ -11,6 +11,7 @@ Page({
    */
   data: {
     windowHeight: app.globalData.windowHeight,
+    phoneNumber: app.globalData.phoneNumber,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -73,6 +74,7 @@ Page({
 
     console.log('----------mine 打印openid-------------')
     console.log(wx.getStorageSync('openid'))
+    // console.log(app.globalData.phoneNumber)
 
     // if ((wx.getStorageSync('openid')) == '') {
     //   if (app.globalData.openid && app.globalData.openid != '') {
@@ -246,6 +248,7 @@ Page({
 
   //检测用户是否绑定手机号
   checkPhone() {
+    var that =this
     wx.request({
       url: 'https://wx.bjjy.com/checkbindmobile',
       data: {
@@ -262,6 +265,10 @@ Page({
         if (res.data.msg == "1") {
           console.log("---------------已经绑定手机号---------------------")
           app.globalData.isBindingPhone = true;
+          app.globalData.phoneNumber = res.data.mobile
+          that.setData({
+            phoneNumber: res.data.mobile
+          })
         } else {
           console.log("---------------未绑定手机号---------------------")
           app.globalData.isBindingPhone = false;
@@ -292,9 +299,13 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
           },
         })
       }
@@ -333,9 +344,13 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
           },
         })
       }
@@ -374,9 +389,13 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
           },
         })
       }
@@ -416,9 +435,13 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
           },
         })
       }
@@ -459,9 +482,13 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
           },
         })
       }
@@ -502,9 +529,13 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
           },
         })
       }

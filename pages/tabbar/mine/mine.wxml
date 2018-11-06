@@ -14,7 +14,7 @@
         </view>
         <view class='userInformation'>
           <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-          <text class='userinfo_phone'>177****3115</text>
+          <text class='userinfo_phone'>{{phoneNumber}}</text>
         </view>
       </view>
     </block>

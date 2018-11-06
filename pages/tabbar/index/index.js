@@ -193,9 +193,14 @@ Page({
           cancelText: '取消',
           confirmText: '确定',
           success: function(res) {
-            wx.navigateTo({
-              url: '/pages/phone/phone',
-            })
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+              
+            }
+            
           },
         })
       }
