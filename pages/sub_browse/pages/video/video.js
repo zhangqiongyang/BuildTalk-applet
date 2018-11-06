@@ -73,6 +73,7 @@ Page({
     var article_id = options.article_id;
 
     console.log(article_id)
+    console.log(wx.getStorageSync('openid'))
     this.setData({
       article_id: article_id
     })
@@ -281,7 +282,9 @@ Page({
   },
 
 
-  onShareAppMessage() {},
+  onShareAppMessage() {
+
+  },
 
 
   /**
@@ -353,7 +356,45 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function(res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '建谈' + that.data.articleinfo.article_title,
+      path: "/pages/sub_browse/pages/video/video?article_id=" + that.data.article_id,
+      // success: function (res) {
+      //   // 转发成功  
+      //   var shareTickets = res.shareTickets;
+      //   var shareTicket = shareTickets;
+      //   wx.getShareInfo({
+      //     shareTicket: shareTicket,
+      //     success: function (res) {
+      //       console.log('success');
+      //       console.log(res);
+      //       //console.log(res);  
+      //       wx.showToast({
+      //         title: '转发成功',
+      //         duration: 5000
+      //       })
+      //     },
+      //     fail: function (res) {
+      //       console.log('fail');
+      //       console.log(res);
+      //       wx.showToast({
+      //         title: 'fail:' + res.errMsg,
+      //         duration: 5000
+      //       })
+      //     }
+      //   });
+      // },
+      // fail: function (res) {
+      //   // 转发失败  
+      // }  
+    }
 
+    
   }
 })

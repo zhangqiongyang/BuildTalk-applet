@@ -4,22 +4,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    article: ['lalallalalal', '/image/index1.jpg', 'asdfas'],
     mode: true,
     order: true,
     articlelist: null,
     toView: 'inToView5',
-
     curState : 0,
     netState : 0
-
   },
 
 
 
 
   // 切换列表模式与图文模式
-  changMode: function() {
+  changMode: function(event) {
+    // var that = this
+    // var mode = event.currentTarget.dataset.mode
+    // if (mode == "list"){
+    //   that.setData({
+    //     mode: true
+    //   })
+    //   console.log('1')
+    // }else{
+    //   that.setData({
+    //     mode: false
+    //   })
+    //   console.log('2')      
+    // }
     this.setData({
       mode: !this.data.mode
     })
@@ -45,9 +55,9 @@ Page({
     var article_id = event.currentTarget.dataset.articleid,
       audio_id = event.currentTarget.dataset.audioid,
       is_audition = event.currentTarget.dataset.is_audition;
-    console.log(article_id)
-    console.log(audio_id)
-    console.log(is_audition)
+    // console.log(article_id)
+    // console.log(audio_id)
+    // console.log(is_audition)
     if (this.data.curState == '1') {
       if (audio_id) {
         console.log('--------------跳转到音频文章-------------')

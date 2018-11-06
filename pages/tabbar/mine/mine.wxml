@@ -160,6 +160,19 @@
           <image src='/image/more.png'></image>
         </view>
       </view>
+
+
+      <view class='accountItem'>
+        <view class='accountContent'>
+          <view class='accountImg'>
+            <image src='/image/mine_set.png'></image>
+          </view>
+          <text class='accountName'>用户反馈</text>
+        </view>
+        <view class='accountInfo'>
+          <image src='/image/more.png'></image>
+        </view>
+      </view>
     </block>
   </view>
 

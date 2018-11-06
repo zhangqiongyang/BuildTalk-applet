@@ -158,6 +158,19 @@ App({
 
 
 
+
+    //获取用户转发信息
+    // wx.getShareInfo({
+    //   shareTicket: 'a',
+    //   success: function(res) {
+    //     console.log('获取转发信息')
+    //     console.log(res)
+    //   },
+    //   fail: function(res) {},
+    //   complete: function(res) {},
+    // })
+
+
   },
   globalData: {
     userInfo: '',

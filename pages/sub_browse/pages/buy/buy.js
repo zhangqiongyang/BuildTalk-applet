@@ -54,8 +54,8 @@ Page({
     this.getAddress();
 
 
-    console.log(app.globalData)
-    console.log(app.globalData.userInfo)
+    // console.log(app.globalData)
+    // console.log(app.globalData.userInfo)
     this.setData({
       userInfo: app.globalData.userInfo
     })

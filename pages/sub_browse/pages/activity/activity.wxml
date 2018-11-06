@@ -26,9 +26,9 @@
 
 
   <block wx:for='{{authorList}}' wx:key='key'>
-    <view class='authorItem'>
-      <image src='{{item.authorImg}}'></image>
-      <view>
+    <view class='authorItem' bindtap='jumpToArticle' data-video_id='{{item.article_id}}'>
+      <image src='{{item.authorImg}}' mode='aspectFill'></image>
+      <view class='articleInfo'>
         <text class='articleName'>{{item.articleName}}</text>
         <view class='authorInfo'>
           <text class='authorText'>{{item.authorName}}</text>
@@ -51,7 +51,11 @@
 
 
 
-
+  <view class='share'>
+    <button class='activityShare' open-type='share'>
+      <image src='/image/acticle_share.png'></image>
+    </button>
+  </view>
 
 
 
