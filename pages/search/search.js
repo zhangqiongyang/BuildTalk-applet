@@ -259,22 +259,38 @@ Page({
     var course_id = event.currentTarget.dataset.courseid;
 
     console.log(course_id)
-
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
     if (app.globalData.isLogin) {
-
-      wx: wx.navigateTo({
-        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-      })
-
-    }
-    else {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx: wx.navigateTo({
+          url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+        })
+      }
+      else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
       wx.showModal({
         title: '未登录',
         content: '请先登录',
         showCancel: true,
         cancelText: '取消',
         confirmText: '确定',
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: '/pages/tabbar/mine/mine',
           })

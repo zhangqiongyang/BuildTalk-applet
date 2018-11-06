@@ -26,7 +26,7 @@
 
 
   <block wx:for='{{authorList}}' wx:key='key'>
-    <view class='authorItem' bindtap='jumpToArticle' data-video_id='{{item.article_id}}'>
+    <view class='authorItem' bindtap='jumpToArticle' data-article_id='{{item.article_id}}'>
       <image src='{{item.authorImg}}' mode='aspectFill'></image>
       <view class='articleInfo'>
         <text class='articleName'>{{item.articleName}}</text>

@@ -44,46 +44,66 @@ Page({
     console.log(article_price)
 
 
-
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
     if (app.globalData.isLogin) {
-      //判断文章是否免费
-      //免费直接观看
-      //付费再进行下一步判断
-      if (article_price == '0.00') {
-        wx.navigateTo({
-          url: "/pages/sub_browse/pages/article/article?article_id=" + article_id,
-        })
-      } else {
 
-        //查询用户当前文章是否购买
-        // 已购买可以直接观看，根据article_id跳转到当前文章页
-        // 未购买跳转到购买页面
-        wx.request({
-          url: 'https://wx.bjjy.com/searchbuyarticle',
-          data: {
-            'openid': wx.getStorageSync('openid'),
-            'article_id': article_id
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
-          dataType: 'json',
-          responseType: 'text',
+
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        //判断文章是否免费
+        //免费直接观看
+        //付费再进行下一步判断
+        if (article_price == '0.00') {
+          wx.navigateTo({
+            url: "/pages/sub_browse/pages/article/article?article_id=" + article_id,
+          })
+        } else {
+
+          //查询用户当前文章是否购买
+          // 已购买可以直接观看，根据article_id跳转到当前文章页
+          // 未购买跳转到购买页面
+          wx.request({
+            url: 'https://wx.bjjy.com/searchbuyarticle',
+            data: {
+              'openid': wx.getStorageSync('openid'),
+              'article_id': article_id
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST',
+            dataType: 'json',
+            responseType: 'text',
+            success: function(res) {
+              console.log('------------这里是res--------------')
+              console.log(res)
+              if (res.data.msg == '1') {
+                console.log('---------已经购买了------------')
+                wx.navigateTo({
+                  url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+                })
+              } else {
+                console.log('---------还未购买------------')
+                wx.navigateTo({
+                  url: "/pages/sub_browse/pages/buy/buy?article_id=" + article_id
+                })
+              }
+            },
+          })
+        }
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
           success: function(res) {
-            console.log('------------这里是res--------------')
-            console.log(res)
-            if (res.data.msg == '1') {
-              console.log('---------已经购买了------------')
-              wx.navigateTo({
-                url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
-              })
-            } else {
-              console.log('---------还未购买------------')
-              wx.navigateTo({
-                url: "/pages/sub_browse/pages/buy/buy?article_id=" + article_id
-              })
-            }
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
           },
         })
       }
@@ -118,21 +138,41 @@ Page({
     // console.log(event);
     var course_id = event.currentTarget.dataset.course_id;
     // console.log(course_id)
+
+
+
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
     if (app.globalData.isLogin) {
-
-      wx: wx.navigateTo({
-        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-      })
-
-    }
-    else {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx: wx.navigateTo({
+          url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+        })
+      }
+      else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
       wx.showModal({
         title: '未登录',
         content: '请先登录',
         showCancel: true,
         cancelText: '取消',
         confirmText: '确定',
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: '/pages/tabbar/mine/mine',
           })

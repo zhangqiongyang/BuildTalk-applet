@@ -51,10 +51,9 @@ Page({
     //     bookPrice: '43'
     //   }
     // ],
-    hotItem: [
-      {
+    hotItem: [{
         image: '/image/activity.png',
-        label:'建筑互联网大会'
+        label: '建筑互联网大会'
       },
       {
         image: '/image/hotTopic.jpg',
@@ -133,7 +132,7 @@ Page({
 
 
   // 轮播图跳转到相应页面
-  jumpToActivityBanner(event){
+  jumpToActivityBanner(event) {
     console.log(event)
     var id = event.currentTarget.dataset.id;
 
@@ -176,22 +175,40 @@ Page({
     // console.log(event);
 
     var course_id = event.currentTarget.dataset.courseid;
-
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
     if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx: wx.navigateTo({
+          url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
+        })
+      }
+      else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
 
-      wx: wx.navigateTo({
-        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-      })
 
-    }
-    else {
+    } else {
       wx.showModal({
         title: '未登录',
         content: '请先登录',
         showCancel: true,
         cancelText: '取消',
         confirmText: '确定',
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: '/pages/tabbar/mine/mine',
           })
@@ -252,7 +269,7 @@ Page({
 
 
   // 跳转到作者相应页面
-  jumpToAuthor(event){
+  jumpToAuthor(event) {
     // console.log(event)
     var author_id = event.currentTarget.dataset.author_id
 
@@ -264,7 +281,7 @@ Page({
 
 
   // 跳转到作者标签搜索页
-  jumpToSearchLabel(event){
+  jumpToSearchLabel(event) {
     // console.log('-------------标签--------------------')
     // console.log(event)
     var label = event.currentTarget.dataset.label
@@ -278,11 +295,11 @@ Page({
 
 
   // 跳转到热点专题相应页面
-  jumpToActivity(event){
+  jumpToActivity(event) {
     // console.log(event)
     var label = event.currentTarget.dataset.label;
 
-    if(label == '建筑互联网大会'){
+    if (label == '建筑互联网大会') {
       wx.navigateTo({
         url: '/pages/sub_browse/pages/activity/activity',
       })
@@ -356,7 +373,7 @@ Page({
       url: 'https://wx.bjjy.com/searchrecommendauthor',
       data: '',
       header: {
-        'content-type': 'application/x-www-form-urlencoded'        
+        'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
       dataType: 'json',

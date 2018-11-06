@@ -147,6 +147,8 @@ App({
 
 
 
+
+
     // 获取屏幕高度
     wx.getSystemInfo({
       success: function (res) {
@@ -181,6 +183,7 @@ App({
       consignee : ''
     },
     isLogin:null,
+    isBindingPhone:null,
     windowHeight:''
   }
 })

@@ -42,6 +42,7 @@ Page({
 
   // 表单提交
   formSubmit(event){
+    console.log(event)
     let that = this;
     let formData = event.detail.value,
         errMsg = '';
@@ -64,7 +65,7 @@ Page({
 
 
     // 验证手机号验证码
-
+    this.checkCode()
 
 
 
@@ -85,7 +86,11 @@ Page({
       return false
     }
     this.timer();
-    //获取验证码接口
+
+
+
+    //调用发送短信接口
+    this.sendSms();
 
 
 
@@ -182,5 +187,81 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+
+
+//网络请求接口
+//
+//
+//
+//
+  //发送短信接口
+  sendSms(){
+    wx.request({
+      url: 'https://wx.bjjy.com/sendSms',
+      data: {
+        mobile: this.data.formData.phone
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log(res)
+        if(res.data.msg == '0'){
+          console.log("--------------短信发送成功-----------------")
+          util._showToast("短信发送成功")
+        }else{
+          console.log("--------------短信发送失败-----------------")
+          util._showToast("短信发送失败")
+        }
+      }
+    })
+  },
+
+
+
+
+  //获取验证码接口
+  checkCode(){
+    wx.request({
+      url: 'https://wx.bjjy.com/checkcodevalid',
+      data: {
+        mobile: this.data.formData.phone,
+        code: this.data.formData.code,
+        openid:wx.getStorageSync("openid")
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log(res)
+        if(res.data.msg == "0"){
+          console.log("---------------验证码正确---------------")
+          util._showToast("成功绑定手机号")
+          app.globalData.isBindingPhone = true;
+          wx.navigateBack({
+            delta: 1,
+          })
+        }else if(res.data.msg == "1"){
+          console.log("---------------超时---------------")
+          util._showToast("超时")
+        } else if (res.data.msg == "2"){
+          console.log("---------------验证码错误---------------")
+          util._showToast("验证码错误")
+        } else{
+          console.log("---------------其他错误---------------")
+          util._showToast("其他错误")
+        }
+      }
+    })
   }
+
+
 })

@@ -47,10 +47,10 @@ Page({
       }
     ],
     mineList: [
-    // {
-    //     mineImg: '/image/mine_note.png',
-    //     mineName: '我的笔记'
-    //   },
+      // {
+      //     mineImg: '/image/mine_note.png',
+      //     mineName: '我的笔记'
+      //   },
       {
         mineImg: '/image/mine_message.png',
         mineName: '我的留言'
@@ -233,14 +233,281 @@ Page({
         })
       }
     }
+
+    this.checkPhone()
+
+
+
+
   },
 
 
+
+
+  //检测用户是否绑定手机号
+  checkPhone() {
+    wx.request({
+      url: 'https://wx.bjjy.com/checkbindmobile',
+      data: {
+        openid: wx.getStorageSync("openid")
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log(res)
+        if (res.data.msg == "1") {
+          console.log("---------------已经绑定手机号---------------------")
+          app.globalData.isBindingPhone = true;
+        } else {
+          console.log("---------------未绑定手机号---------------------")
+          app.globalData.isBindingPhone = false;
+        }
+      }
+    })
+  },
+
+
+
+
+
   jumpToAddress() {
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
     if (app.globalData.isLogin) {
-      wx.navigateTo({
-        url: "/pages/sub_personalCenter/pages/address/address",
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: "/pages/sub_personalCenter/pages/address/address",
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function(res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        }
       })
+    }
+
+  },
+
+  jumpToAlreadyBought() {
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: "/pages/sub_personalCenter/pages/alreadyBought/alreadyBought",
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function(res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+
+  },
+
+  jumpTogiftCertificate() {
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: "/pages/sub_personalCenter/pages/giftCertificate/giftCertificate",
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function(res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+
+  },
+
+
+  jumpToInviteFriends() {
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: "/pages/sub_personalCenter/pages/inviteFriends/inviteFriends",
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function(res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+
+  },
+
+
+
+  jumpToMyMsg() {
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: "/pages/sub_personalCenter/pages/myMsg/myMsg",
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function(res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+
+  },
+
+
+
+  jumpToFeedback() {
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: "/pages/sub_personalCenter/pages/feedback/feedback",
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function(res) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          },
+        })
+      }
     } else {
       wx.showModal({
         title: '未登录',
@@ -255,123 +522,6 @@ Page({
         },
         fail: function(res) {},
         complete: function(res) {},
-      })
-    }
-
-  },
-
-  jumpToAlreadyBought() {
-    if (app.globalData.isLogin) {
-      wx.navigateTo({
-        url: "/pages/sub_personalCenter/pages/alreadyBought/alreadyBought",
-      })
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-
-  },
-
-  jumpTogiftCertificate() {
-    if (app.globalData.isLogin) {
-      wx.navigateTo({
-        url: "/pages/sub_personalCenter/pages/giftCertificate/giftCertificate",
-      })
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-
-  },
-
-
-  jumpToInviteFriends() {
-    if (app.globalData.isLogin) {
-      wx.navigateTo({
-        url: "/pages/sub_personalCenter/pages/inviteFriends/inviteFriends",
-      })
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-
-  },
-
-
-
-  jumpToMyMsg() {
-    if (app.globalData.isLogin) {
-      wx.navigateTo({
-        url: "/pages/sub_personalCenter/pages/myMsg/myMsg",
-      })
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-
-  },
-
-
-
-  jumpToFeedback() {
-    if (app.globalData.isLogin) {
-      wx.navigateTo({
-        url: "/pages/sub_personalCenter/pages/feedback/feedback",
-      })
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-        fail: function (res) { },
-        complete: function (res) { },
       })
     }
 
