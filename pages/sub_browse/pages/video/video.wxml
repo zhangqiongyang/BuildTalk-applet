@@ -1,14 +1,14 @@
 <!--pages/video/video.wxml-->
 
-<import src="/wxParse/wxParse.wxml"/>
+<import src="/wxParse/wxParse.wxml" />
 
 <view>
 
 
   <!-- 视频 -->
-  <view>
-    <video id="myVideo" class='video' src="{{articleinfo.video_url}}" binderror="videoErrorCallback" controls custom-cache="{{false}}"></video>
-  </view>
+  <video id="myVideo" class='video' src="{{articleinfo.video_url}}" binderror="videoErrorCallback" controls custom-cache="{{false}}">
+    <cover-view wx:if='{{!buy}}' class='mask' bindtap='jumpToBuy'>解锁当前课程</cover-view>
+  </video>
 
 
 
@@ -21,7 +21,7 @@
     <view class='articleTitle'>
       <text class='article_title'>{{articleinfo.article_title}}</text>
       <view class='article_articleInfo'>
-        <image class='article_authorImg' src='/image/video_authorImg.png'></image>
+        <image class='article_authorImg' src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
         <view class='article_authorInfo'>
           <text class='article_author'>{{authorinfo.author_name}}</text>
           <text class='article_time'>{{articleinfo.publish_time}}</text>
@@ -33,46 +33,46 @@
 
 
     <!-- 文章主体 -->
-  <view class='articleContent'>
-    <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
-  </view>
+    <view class='articleContent'>
+      <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
 
 
 
 
 
     <!-- 精选留言 -->
-   <view class='articleMessage'>
-    <view class='msgTitle'>
-      <image class='article_msg_line' src='/image/article_msg_line.png'></image>
-      <text>精选留言</text>
-      <image class='article_msg_line' src='/image/article_msg_line.png'></image>      
-    </view>
-    <block wx:for='{{guestbookinfo}}' wx:for-index='key' wx:key='key'>
-      <view class='msgContent'>
-        <view class='msgUserImg'>
-          <image src='{{item.headimage}}'></image>
-        </view>
-        <view class='msgText'>
-          <view class='msgHead'>
-            <text class='msgUserName'>{{item.nickname}}</text>
-            <view class='msgLikeGroup' bindtap='msglike'>
-              <!-- <image class='msgLike' src='/image/article_transmit.png'></image> -->
-              <image wx:if="{{item.is_valid=='0'}}" bindtap='msglike' class='msgLike' src='/image/article_msg_like_hover.png' data-key='{{key}}' data-guestbookid='{{item.guestbook_id}}'></image>
-              <image wx:else class='msgLike' bindtap='msglike' src='/image/article_msg_like.png' data-key='{{key}}' data-guestbookid='{{item.guestbook_id}}'></image>
-              <text class='likeNum'>{{item.countpraise}}</text>
-            </view>
-          </view>
-          <text class='msg'>{{item.content}}</text>
-          <text class='msgTime'>{{item.guestbook_time}}</text>
-        </view>
+    <view class='articleMessage'>
+      <view class='msgTitle'>
+        <image class='article_msg_line' src='/image/article_msg_line.png'></image>
+        <text>精选留言</text>
+        <image class='article_msg_line' src='/image/article_msg_line.png'></image>
       </view>
-    </block>
-  </view>
+      <block wx:for='{{guestbookinfo}}' wx:for-index='key' wx:key='key'>
+        <view class='msgContent'>
+          <view class='msgUserImg'>
+            <image src='{{item.headimage}}'></image>
+          </view>
+          <view class='msgText'>
+            <view class='msgHead'>
+              <text class='msgUserName'>{{item.nickname}}</text>
+              <view class='msgLikeGroup' bindtap='msglike'>
+                <!-- <image class='msgLike' src='/image/article_transmit.png'></image> -->
+                <image wx:if="{{item.is_valid=='0'}}" bindtap='msglike' class='msgLike' src='/image/article_msg_like_hover.png' data-key='{{key}}' data-guestbookid='{{item.guestbook_id}}'></image>
+                <image wx:else class='msgLike' bindtap='msglike' src='/image/article_msg_like.png' data-key='{{key}}' data-guestbookid='{{item.guestbook_id}}'></image>
+                <text class='likeNum'>{{item.countpraise}}</text>
+              </view>
+            </view>
+            <text class='msg'>{{item.content}}</text>
+            <text class='msgTime'>{{item.guestbook_time}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
 
 
 
-  
+
   </scroll-view>
 
 

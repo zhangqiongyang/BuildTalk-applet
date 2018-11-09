@@ -31,7 +31,9 @@
   background-color: #fa8919;
   border-radius: 20%;
 }
-
+.courseListBox{
+  white-space: nowrap;
+}
 .courseList {
   padding: 0 32rpx;
   border-bottom: 2px solid #f4f4f4;

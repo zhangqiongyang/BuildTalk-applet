@@ -4,7 +4,7 @@
 
   <!-- 列表首图 -->
   <view class='listHeadImg'>
-    <image src='/image/index2.jpg'></image>
+    <image src='{{courseinfo.coursepic_url}}'></image>
   </view>
 
 
@@ -12,23 +12,23 @@
   <!-- 列表导航 -->
   <view class='listNav'>
     <view class='navContent'>
-      <view class='navListOrder' bindtap='changeOrder'>
-        <view class='navListOrderImgBox'>
-          <!-- <view class='navListOrderImg'> -->
-          <image class='navListOrderImg' src='/image/list_order.png'></image>
-          <!-- </view> -->
-        </view>
+      <!-- <view class='navListOrder' bindtap='changeOrder'>
+        <view class='navListOrderImgBox'> -->
+      <!-- <view class='navListOrderImg'> -->
+      <!-- <image class='navListOrderImg' src='/image/list_order.png'></image> -->
+      <!-- </view> -->
+      <!-- </view>
         <text class='navListOrderText' wx:if='{{order==true}}'>倒序</text>
         <text class='navListOrderText' wx:if='{{order==false}}'>正序</text>
-      </view>
+      </view> -->
       <!-- <text style='padding-top: 20rpx;padding-bottom: 20rpx;'>|</text> -->
-      <text class='navContentText'>已更新{{articleLen}}篇文章</text>
+      <text class='navContentText'>已更新{{articleLen}}讲课程</text>
     </view>
-    <view wx:if='{{mode==true}}' class='navPattern' bindtap='changMode'  data-mode='list'>
+    <view wx:if='{{mode==true}}' class='navPattern' bindtap='changMode' data-mode='list'>
       <image wx:if='{{mode==true}}' class='navPatternImg' src='/image/list_list.png'></image>
-      <text wx:if='{{mode==true}}' class='navPatternText'  data-mode='list'>列表模式</text>
+      <text wx:if='{{mode==true}}' class='navPatternText' data-mode='list'>列表模式</text>
     </view>
-    <view wx:if='{{mode==false}}' class='navPattern' bindtap='changMode'  data-mode='image'>
+    <view wx:if='{{mode==false}}' class='navPattern' bindtap='changMode' data-mode='image'>
       <image wx:if='{{mode==false}}' class='navPatternImg' src='/image/list_image.png'></image>
       <text wx:if='{{mode==false}}' class='navPatternText' data-mode='image'>图文模式</text>
     </view>
@@ -63,7 +63,7 @@
 
   <!-- 图文模式内容 -->
   <!-- <scroll-view scroll-y scroll-into-view='{{toView}}' scroll-with-animation style='height:1000rpx;' wx:if='{{mode==false}}' class='imageTextMode'> -->
-    <view wx:if='{{mode==false}}' class='imageTextMode'>
+  <view wx:if='{{mode==false}}' class='imageTextMode'>
     <block wx:for='{{articlelist}}' wx:key='key'>
       <view class='imageTextModeList' id='{{" inToView "+item.article_id}}' bindtap='jumpToArticle' data-articleid='{{item.article_id}}' data-audioid='{{item.audio_id}}' data-is_audition='{{item.is_audition}}'>
         <view class='listModeContent'>
@@ -83,15 +83,26 @@
           <text>{{item.article_desc}}</text>
         </view>
         <view class='imageTextToFull'>
-          <text>阅读全文</text>
+          <text>查看</text>
           <image src='/image/list_more.png'></image>
         </view>
-        
+
       </view>
     </block>
-    </view>
+  </view>
   <!-- </scroll-view> -->
 
 
+
+  <view wx:if="{{platform !='ios'}}">
+    <view wx:if="{{!isBuy}}" class='buy' bindtap='jumpToBuy'>
+      <text>限时 ￥{{courseinfo.course_money}}</text>
+      <text class='originalPrice'> ￥{{courseinfo.original_price}}</text>
+    </view>
+
+  </view>
+  <view wx:else>
+    <view wx:if="{{!isBuy}}" class='buy'>由于相关规范，iOS用户暂不可在小程序内订阅</view>
+  </view>
 
 </view>

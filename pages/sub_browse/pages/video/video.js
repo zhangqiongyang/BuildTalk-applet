@@ -1,5 +1,6 @@
 // pages/video/video.js
 
+const app = getApp();
 
 var WxParse = require('../../../../wxParse/wxParse.js');
 
@@ -7,35 +8,47 @@ Page({
 
   /**
    * 页面的初始数据
+   * arcData:当前页面数据
+   * articleinfo
+   * authorinfo
+   * content
+   * buy:用户是否已购
    */
   data: {
-    // windowHeight:'',
+    platform: app.globalData.platform,
+    arcData: null,
+    articleinfo: null,
+    authorinfo: null,
+    buy: false,
 
-    guestbookinfo: [{
-        headimage: '/image/teacher.jpg',
-        nickname: '小地瓜',
-        is_valid: '0',
-        countpraise: '10',
-        content: '写的很好',
-        guestbook_time: '2018-09-28'
-      },
-      {
-        headimage: '/image/teacher.jpg',
-        nickname: '小地瓜',
-        is_valid: '0',
-        countpraise: '10',
-        content: '啦啦啦',
-        guestbook_time: '2018-09-28'
-      },
-      {
-        headimage: '/image/teacher.jpg',
-        nickname: '小地瓜',
-        is_valid: '0',
-        countpraise: '10',
-        content: '哈哈哈',
-        guestbook_time: '2018-09-28'
-      }
-    ]
+
+    // windowHeight:'',
+    course_id: '',
+    // guestbookinfo: [{
+    //     headimage: '/image/teacher.jpg',
+    //     nickname: '小地瓜',
+    //     is_valid: '0',
+    //     countpraise: '10',
+    //     content: '写的很好',
+    //     guestbook_time: '2018-09-28'
+    //   },
+    //   {
+    //     headimage: '/image/teacher.jpg',
+    //     nickname: '小地瓜',
+    //     is_valid: '0',
+    //     countpraise: '10',
+    //     content: '啦啦啦',
+    //     guestbook_time: '2018-09-28'
+    //   },
+    //   {
+    //     headimage: '/image/teacher.jpg',
+    //     nickname: '小地瓜',
+    //     is_valid: '0',
+    //     countpraise: '10',
+    //     content: '哈哈哈',
+    //     guestbook_time: '2018-09-28'
+    //   }
+    // ]
   },
 
   /**
@@ -63,7 +76,6 @@ Page({
 
 
 
-
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -78,33 +90,14 @@ Page({
       article_id: article_id
     })
 
-
-    // 获取文章数据
-    wx.request({
-      url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
-      data: {
-        'article_id': article_id,
-        'openid': wx.getStorageSync('openid'),
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      //dataType: 'json',
-      //responseType: 'text',
-      success: function(res) {
-        console.log('-------------文章数据---------------')
-        console.log(res)
-        that.setData({
-          articleinfo: res.data.articleinfo,
-          authorinfo: res.data.authorinfo,
-        })
-        WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
-      },
-      fail: function(res) {
-        console.log('-------------失败啦---------------')
-      },
+    // 请求当前文章内容
+    wx.showToast({
+      title: '请等待',
+      icon: 'loading',
+      mask: true,
     })
+    that.requestArc();
+
 
     // 获取留言数据
     wx.request({
@@ -131,6 +124,32 @@ Page({
       },
     })
 
+
+
+
+    //上传用户浏览信息
+    wx.request({
+      url: 'https://wx.bjjy.com/saveBrowseRecord',
+      data: {
+        openid: wx.getStorageSync("openid"),
+        article_id: article_id,
+        course_id: this.data.course_id
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log(res)
+        if (res.data.msg == "0") {
+          console.log("-------------浏览记录保存成功---------------")
+        } else {
+          console.log("-------------浏览记录保存失败---------------")
+        }
+      }
+    })
 
   },
 
@@ -282,6 +301,53 @@ Page({
   },
 
 
+// 跳转到购买页
+
+  jumpToBuy() {
+    var that =this
+    if (this.data.platform == 'ios'){
+      wx.showModal({
+        content: '由于相关规范，iOS用户暂不可在小程序内订阅',
+        showCancel: false,
+        confirmText: '确定',
+        success: function(res) {}
+
+      })
+    }else{
+      wx.showModal({
+        // title: '购买',
+        content: '是否购买',
+        showCancel: true,
+        cancelText: '取消',
+        // cancelColor: '',
+        confirmText: '确定',
+        // confirmColor: '',
+        success: function (res) {
+          console.log(res)
+          if (res.confirm) {
+            console.log('用户点击确定')
+            // 判断是单文还是课程中的文章
+            // course_id = 0为单文
+            if (that.data.articleinfo.course_id == "0") {
+              wx.navigateTo({
+                url: "/pages/sub_browse/pages/buy/buy?article_id=" + that.data.articleinfo.article_id
+              })
+            } else {
+              wx.navigateTo({
+                url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.articleinfo.course_id
+              })
+            }
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+
+        }
+      })
+    }
+    
+   
+  },
+
   onShareAppMessage() {
 
   },
@@ -299,11 +365,20 @@ Page({
    */
   onShow: function() {
     var that = this;
+
+    // if (that.data.buy && that.data.arcData != null && that.data.articleinfo == null) {
+    //   that.setData({
+    //     articleinfo: that.data.arcData.articleinfo,
+    //     authorinfo: that.data.arcData.authorinfo,
+    //   })
+    //   WxParse.wxParse('content', 'html', that.data.arcData.content, that, 0)
+    // }
+
     // 获取留言数据
     wx.request({
       url: 'https://wx.bjjy.com/orderbyguestbook',
       data: {
-        'article_id': this.data.article_id,
+        'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
       },
       header: {
@@ -395,6 +470,109 @@ Page({
       // }  
     }
 
-    
+
+  },
+
+  /**
+   * 请求服务当前文章信息
+   * 
+   */
+  requestArc: function() {
+    var that = this
+    // 获取文章数据
+    wx.request({
+      url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
+      data: {
+        'article_id': that.data.article_id,
+        'openid': wx.getStorageSync('openid'),
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      //dataType: 'json',
+      //responseType: 'text',
+      success: function(res) {
+        console.log('-------------文章数据---------------')
+        console.log(res)
+
+
+        //判断是否登录
+        //如果登录，进行下一步判断，如果未登录，引导用户先登录
+        if (app.globalData.isLogin) {
+
+
+          /**
+           * 无论用户是否购买，先进行赋值，在onshow时，判断用户是否购买，
+           * 无购买，不对字段进行使用 
+           * 
+           */
+          that.setData({
+            arcData: res.data,
+          })
+
+
+          // 判断该文章是否为试读课程
+          //is_audition为1则为试读课程，课程可读，进行赋值操作
+          //is_audition为1则为非试读课程，进行下一步判断
+          if (res.data.articleinfo.is_audition == '1') {
+            that.setData({
+              buy: true,
+              articleinfo: res.data.articleinfo,
+              authorinfo: res.data.authorinfo,
+            })
+            WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
+          } else {
+            that.setData({
+              articleinfo: res.data.articleinfo,
+              authorinfo: res.data.authorinfo,
+            })
+            WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
+
+            //判断用户是否购买
+            //msg=1 代表已购买
+            //msg=0 代表未购买
+            if (res.data.msg == "1") {
+              that.setData({
+                buy: true,
+              })
+            } else {
+              // 跳转到购买页
+              // 判断是单文还是课程中的文章
+              // course_id = 0为单文
+              // if (res.data.articleinfo.course_id == "0") {
+              //   wx.navigateTo({
+              //     url: "/pages/sub_browse/pages/buy/buy?article_id=" + res.data.articleinfo.article_id
+              //   })
+              // } else {
+              //   wx.navigateTo({
+              //     url: "/pages/sub_browse/pages/buy/buy?course_id=" + res.data.articleinfo.course_id
+              //   })
+              // }
+
+            }
+          }
+        } else {
+          wx.showModal({
+            title: '未登录',
+            content: '请先登录',
+            showCancel: true,
+            cancelText: '取消',
+            confirmText: '确定',
+            success: function(res) {
+              wx.switchTab({
+                url: '/pages/tabbar/mine/mine',
+              })
+            },
+          })
+        }
+
+        wx.hideToast();
+      },
+      fail: function(res) {
+        console.log('-------------失败啦---------------')
+      },
+    })
   }
+
 })

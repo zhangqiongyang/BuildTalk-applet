@@ -10,10 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userInfo: '',
+    userInfo: app.globalData.userInfo,
     isHaveAddress: true,
     recevinginfo: '',
-    isArticle: null
+    isArticle: null,
+    phoneNumber: app.globalData.phoneNumber,
   },
 
   /**
@@ -24,6 +25,9 @@ Page({
 
     // 获取上层页面传的参数
     console.log(options);
+    console.log(app.globalData.phoneNumber)
+    console.log(app.globalData.isBindingPhone)
+    console.log(app.globalData.userInfo)
 
 
     if (options.course_id) {
@@ -57,7 +61,9 @@ Page({
     // console.log(app.globalData)
     // console.log(app.globalData.userInfo)
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      phoneNumber: app.globalData.phoneNumber
+
     })
     // console.log('------------userInfo-------------' + this.data.userInfo)
 
@@ -75,7 +81,12 @@ Page({
 
 
 
-
+  //跳转到用户反馈（客服）
+  jumpToFeedback() {
+    wx.navigateTo({
+      url: '/pages/sub_personalCenter/pages/feedback/feedback'
+    })
+  },
 
 
 
@@ -186,7 +197,8 @@ Page({
                       var pages = getCurrentPages();
                       var prevPage = pages[pages.length - 2];
                       prevPage.setData({
-                        netState: '1'
+                        netState: '1',
+                        buy:true,
                       })
                       prevPage.onShow();
                       wx.navigateBack({
@@ -306,6 +318,7 @@ Page({
                     data: {
                       order_id: that.data.order_id,
                       pay_amount: that.data.articleinfo.article_price,
+                      article_id: that.data.article_id
                     },
                     header: {
                       'content-type': 'application/x-www-form-urlencoded'
@@ -317,9 +330,21 @@ Page({
                       console.log('----------修改订单状态成功了------------')
 
                       //跳转到相应页面
-                      wx.redirectTo({
-                        url: "/pages/sub_browse/pages/article/article?article_id=" + that.data.articleinfo.article_id
+                      // wx.redirectTo({
+                      //   url: "/pages/sub_browse/pages/article/article?article_id=" + that.data.articleinfo.article_id
+                      // })
+
+                      var pages = getCurrentPages();
+                      var prevPage = pages[pages.length - 2];
+                      prevPage.setData({
+                          buy:true,                        
                       })
+                      prevPage.onShow();
+                      wx.navigateBack({
+                        delta: 1,
+                      })
+                      
+                      
 
                     },
                     fail: function(res) {},
@@ -375,9 +400,6 @@ Page({
    */
   onShow: function() {
     var that = this;
-    console.log('------------获取全局变量-------------')
-    console.log(app.globalData.recevinginfo)
-
 
     // 获取收货地址信息
     this.getAddress();

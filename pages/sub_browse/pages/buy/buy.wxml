@@ -7,23 +7,29 @@
     <view class='canvas_content'>
       <view class='canvas_userInfo'>
         <text class='userName'>{{userInfo.nickName}}</text>
-        <text class='phone'>17778213115</text>
+        <text class='phone'>{{phoneNumber}}</text>
         <text class='welcome'>《{{isArticle?articleinfo.article_title:courseinfo.course_name}}》</text>
       </view>
       <view class='cost'>
         <text class='cost_text'>费用</text>
-        <text class='price'>￥{{isArticle?articleinfo.article_price:courseinfo.course_money}}</text>
+        <view>
+          <text class='price'>￥{{isArticle?articleinfo.article_price:courseinfo.course_money}}</text>
+          <text class='originalPrice'> ￥{{isArticle?articleinfo.original_price:courseinfo.original_price}}</text>
+        </view>
+
+
       </view>
       <view class='canvas_con'>
-        <text>包含课程视频的U盘将尽快发出</text>
-        <text>快递统一顺丰包邮</text>
-        <text>如有疑问可联系客服</text>
+        <!-- <text>包含课程视频的U盘将尽快发出</text>
+        <text>快递统一顺丰包邮</text> -->
+        <text>如有疑问可</text>
+        <text id='color' bindtap='jumpToFeedback'>联系客服</text>
         <!-- <text>社员有效期至2019年10月09号</text>
         <text>社员有效期至2019年10月09号</text>
         <text>社员有效期至2019年10月09号</text> -->
       </view>
       <view class='courseInfo'>
-        <image class='' src='/image/index1.jpg'></image>
+        <image class='' src='http://wx.bjjy.com/static/image/logo.png'></image>
         <view class='courseName'>
           <text>jiantan</text>
           <text>建谈</text>

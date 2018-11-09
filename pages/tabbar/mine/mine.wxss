@@ -64,6 +64,7 @@
   display: flex;
   /* align-items: center; */
   justify-content: space-between;
+  position: relative;
 }
 .accountContent{
   width: 50%;
@@ -104,4 +105,13 @@
 }
 .accountNumberColor{
  color: #F86161;
+}
+
+.index_service_button{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  width: 100%;
+  height: 88rpx;
 }

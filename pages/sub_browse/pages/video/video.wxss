@@ -1,139 +1,168 @@
 /* pages/video/video.wxss */
 @import "/wxParse/wxParse.wxss";
-view{
+
+view {
   overflow: visible;
 }
 
-
-
 /* video */
-.video{
+
+
+.video {
   width: 100%;
   height: 420rpx;
 }
 
+.mask {
+  width: 100%;
+  height: 420rpx;
+  background-color: #00000099;
+  color: #fff;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  line-height: 560rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
 
-
-
-.videoContent{
+.videoContent {
   /* padding: 0 30rpx 0 30rpx; */
   width: 100%;
 }
 
 /* 文章标题 */
-.articleTitle{
+
+.articleTitle {
   padding: 0 30rpx 0 30rpx;
 }
-.article_title{
+
+.article_title {
   font-size: 44rpx;
   display: block;
   padding: 38rpx 0 68rpx 0;
 }
 
-.article_articleInfo{
+.article_articleInfo {
   display: flex;
   flex-direction: row;
 }
-.article_authorInfo{
+
+.article_authorInfo {
   display: flex;
   flex-direction: column;
   padding-left: 20rpx;
 }
-.article_time{
+
+.article_time {
   display: inline-block;
   font-size: 20rpx;
   color: #999;
-  padding-top:12rpx; 
+  padding-top: 12rpx;
 }
-.article_author{
+
+.article_author {
   font-size: 26rpx;
 }
-.article_authorImg{
+
+.article_authorImg {
   width: 60rpx;
   height: 60rpx;
   border-radius: 50%;
 }
 
 /* 文章主体 */
-.articleContent{
+
+.articleContent {
   padding: 40rpx 30rpx;
   font-size: 32rpx;
   color: #353535;
 }
-.articleContent text{
+
+.articleContent text {
   font-size: 32rpx;
   color: #353535;
 }
 
-
 /* 精选留言 */
-.articleMessage{
-  margin-top:70rpx; 
+
+.articleMessage {
+  margin-top: 70rpx;
   padding-bottom: 98rpx;
   display: flex;
   flex-direction: column;
   background-color: #fff;
 }
 
-.msgTitle{
+.msgTitle {
   height: 110rpx;
   text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.msgTitle text{
+
+.msgTitle text {
   text-align: center;
   font-size: 34rpx;
 }
-.article_msg_line{
+
+.article_msg_line {
   width: 280rpx;
   height: 1px;
 }
-.msgContent{
+
+.msgContent {
   padding: 20rpx 30rpx 40rpx 30rpx;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid #eaeaea;
 }
-.msgUserImg{
-  width:60rpx;
+
+.msgUserImg {
+  width: 60rpx;
   height: 60rpx;
   /* float: left; */
 }
-.msgUserImg image{
-  width:60rpx;
+
+.msgUserImg image {
+  width: 60rpx;
   height: 60rpx;
   border-radius: 50%;
 }
-.msgText{
+
+.msgText {
   /* float: left; */
   padding-left: 20rpx;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.msgHead{
+
+.msgHead {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 }
-.msgUserName{
+
+.msgUserName {
   font-size: 26rpx;
   padding-top: 10rpx;
 }
-.msg{
+
+.msg {
   color: #666;
   font-size: 22rpx;
   /* padding-top: 34rpx; */
 }
-.msgTime{
-  color: #AFAFAF;
+
+.msgTime {
+  color: #afafaf;
   font-size: 20rpx;
   padding-top: 18rpx;
 }
-.msgLikeGroup{
+
+.msgLikeGroup {
   /* float: right; */
   width: 100rpx;
   height: 100%;
@@ -143,52 +172,56 @@ view{
   justify-content: flex-end;
   padding-bottom: 34rpx;
 }
-.msgLike{
-  /* padding-top: 10rpx; */
-  /* padding-right: 30rpx; */
+
+.msgLike {
+  /* padding-top: 10rpx; *//* padding-right: 30rpx; */
   padding-right: 20rpx;
   width: 22rpx;
   height: 22rpx;
 }
-.likeNum{
+
+.likeNum {
   color: #666;
   /* font-size: 30rpx; */
   font-size: 22rpx;
 }
 
-
-
-
-
 /* tabbar */
-.articleTabbar{
+
+.articleTabbar {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #fff;
 }
-.tabbarList{
+
+.tabbarList {
   width: 33%;
   display: inline-block;
   text-align: center;
 }
-.tabbarList image{
+
+.tabbarList image {
   width: 40rpx;
   height: 40rpx;
   padding-top: 12rpx;
 }
-.tabbarText{
+
+.tabbarText {
   display: block;
   color: #888;
   font-size: 22rpx;
 }
+
 /* .acticleShare{
   border: none;
 } */
+
 button::after {
   border: none;
 }
+
 button {
   background-color: #fff;
   height: 86rpx;
@@ -196,7 +229,8 @@ button {
   line-height: 37rpx;
   position: none;
 }
+
 .button-hover {
-  color:rgb(0, 0, 0);
-  background-color:#fff;
+  color: rgb(0, 0, 0);
+  background-color: #fff;
 }

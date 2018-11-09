@@ -4,9 +4,10 @@ var WxParse = require('../../../../wxParse/wxParse.js');
 Page({
   data: {
     isplay: false, //是否播放
-    isHaveAudio:false, //是否含有音频
+    isHaveAudio: false, //是否含有音频
     a: '',
-    articleinfo: ''
+    articleinfo: '',
+    course_id: ''
   },
 
 
@@ -33,7 +34,6 @@ Page({
 
 
 
-
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -41,10 +41,14 @@ Page({
 
     //获取上层传输数据
     var article_id = options.article_id;
-    console.log(article_id)
+    console.log("文章id" + article_id)
+    console.log(wx.getStorageSync('openid'))
     this.setData({
       article_id: article_id
     })
+
+
+
     // 获取文章数据
     wx.request({
       url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
@@ -61,18 +65,75 @@ Page({
       success: function(res) {
         console.log('-------------文章数据---------------')
         console.log(res)
-        //判断是否含有音频
-        if (res.data.articleinfo.audio_id){
-          that.setData({
-            isHaveAudio: true
+
+        //判断是否登录
+        //如果登录，进行下一步判断，如果未登录，引导用户先登录
+        if (app.globalData.isLogin) {
+
+
+          //判断该课程是否为试听
+          //
+
+
+
+          //判断用户是否购买
+          //msg=1 代表已购买
+          //msg=0 代表未购买
+          if (res.data.msg == "1") {
+
+
+            //判断是否含有音频
+            if (res.data.articleinfo.audio_id) {
+              that.setData({
+                isHaveAudio: true
+              })
+            }
+            that.setData({
+              articleinfo: res.data.articleinfo,
+              authorinfo: res.data.authorinfo,
+            })
+            myaudio.src = res.data.articleinfo.audio_url;
+            WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
+          } else {
+            // 跳转到购买页
+            // 判断是单文还是课程中的文章
+            // course_id = 0为单文
+            if (res.data.articleinfo.course_id == "0") {
+              wx.navigateTo({
+                url: "/pages/sub_browse/pages/buy/buy?article_id=" + res.data.article_id
+              })
+            } else {
+              wx.navigateTo({
+                url: "/pages/sub_browse/pages/buy/buy?course_id=" + res.data.course_id
+              })
+            }
+            //判断是否含有音频
+            if (res.data.articleinfo.audio_id) {
+              that.setData({
+                isHaveAudio: true
+              })
+            }
+            that.setData({
+              articleinfo: res.data.articleinfo,
+              authorinfo: res.data.authorinfo,
+            })
+            myaudio.src = res.data.articleinfo.audio_url;
+            WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
+          }
+        } else {
+          wx.showModal({
+            title: '未登录',
+            content: '请先登录',
+            showCancel: true,
+            cancelText: '取消',
+            confirmText: '确定',
+            success: function(res) {
+              wx.switchTab({
+                url: '/pages/tabbar/mine/mine',
+              })
+            },
           })
         }
-        that.setData({
-          articleinfo: res.data.articleinfo,
-          authorinfo : res.data.authorinfo,
-        })
-        myaudio.src = res.data.articleinfo.audio_url;
-        WxParse.wxParse('content', 'html', res.data.articleinfo.content,that,0)
       },
       fail: function(res) {
         console.log('-------------失败啦---------------')
@@ -104,6 +165,32 @@ Page({
       },
     })
 
+
+
+
+    //上传用户浏览信息
+    wx.request({
+      url: 'https://wx.bjjy.com/saveBrowseRecord',
+      data: {
+        openid: wx.getStorageSync("openid"),
+        article_id: article_id,
+        course_id: this.data.course_id
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log(res)
+        if (res.data.msg == "0") {
+          console.log("-------------浏览记录保存成功---------------")
+        } else {
+          console.log("-------------浏览记录保存失败---------------")
+        }
+      }
+    })
 
   },
 
@@ -298,7 +385,7 @@ Page({
 
 
 
-  onShow(){
+  onShow() {
     var that = this;
     // 获取留言数据
     wx.request({
@@ -313,14 +400,14 @@ Page({
       method: 'POST',
       //dataType: 'json',
       //responseType: 'text',
-      success: function (res) {
+      success: function(res) {
         console.log('--------------留言数据-------------')
         console.log(res)
         that.setData({
           guestbookinfo: res.data.guestbookinfo
         })
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log('failed')
       },
     })
@@ -329,138 +416,139 @@ Page({
 
   // 分享到朋友圈
   // 下载小程序码到本地，拿到临时路径
-//   onShow:function(){
-//     var that = this;
-//     console.log('--------------------这里是app.globalData.userInfo.avatarUrl----------------------------')
-//     console.log(app.globalData.userInfo.avatarUrl)
-//     wx.downloadFile({
-//       url: app.globalData.userInfo.avatarUrl,
-//       success: function(res) {
-//         console.log('--------------------这里是downloadFile的res--------------------')
-//         console.log(res)
-//         // 缓存头像图片
-//         that.setData({
-//           portrait_temp:res.tempFilePath
-//         })
-//       },
-//     })
-//     console.log('-------------这里是qrcode--------------')
-//     console.log(this.data.qrcode)
-//     wx.downloadFile({
-//       url: this.data.qrcode,
-//       success: function(res) {
-//         console.log('------------这里是res----------------')
-//         console.log(res)
-//       },
-//     })
-
-
-    
-//   },
+  //   onShow:function(){
+  //     var that = this;
+  //     console.log('--------------------这里是app.globalData.userInfo.avatarUrl----------------------------')
+  //     console.log(app.globalData.userInfo.avatarUrl)
+  //     wx.downloadFile({
+  //       url: app.globalData.userInfo.avatarUrl,
+  //       success: function(res) {
+  //         console.log('--------------------这里是downloadFile的res--------------------')
+  //         console.log(res)
+  //         // 缓存头像图片
+  //         that.setData({
+  //           portrait_temp:res.tempFilePath
+  //         })
+  //       },
+  //     })
+  //     console.log('-------------这里是qrcode--------------')
+  //     console.log(this.data.qrcode)
+  //     wx.downloadFile({
+  //       url: this.data.qrcode,
+  //       success: function(res) {
+  //         console.log('------------这里是res----------------')
+  //         console.log(res)
+  //       },
+  //     })
 
 
 
-//   pengyouquan(){
-//     wx.downloadFile({
-//       url: app.globalData.userInfo.avatarUrl,
-//       success: function (res1) {
-
-//         //缓存头像图片
-//         that.setData({
-//           portrait_temp: res1.tempFilePath
-//         })
-//         //缓存canvas绘制小程序二维码
-//         wx.downloadFile({
-//           url: that.data.qrcode,
-//           success: function (res2) {
-//             console.log('二维码：' + res2.tempFilePath)
-//             //缓存二维码
-//             that.setData({
-//               qrcode_temp: res2.tempFilePath
-//             })
-//             console.log('开始绘制图片')
-//             that.drawImage();
-//             wx.hideLoading();
-//             setTimeout(function () {
-//               that.canvasToImage()
-//             }, 200)
-//           }
-//         })
-//       }
-//     })
-//   },
-
-
-// drawImage() {
-//     //绘制canvas图片
-//     var that = this
-//     const ctx = wx.createCanvasContext('myCanvas')
-//     var bgPath = '../../../images/share_bg.png'
-//     var portraitPath = that.data.portrait_temp
-//     var hostNickname = app.globalData.userInfo.nickName
-
-//     var qrPath = that.data.qrcode_temp
-//     var windowWidth = that.data.windowWidth
-//     that.setData({
-//       scale: 1.6
-//     })
-//     //绘制背景图片
-//     ctx.drawImage(bgPath, 0, 0, windowWidth, that.data.scale * windowWidth)
-
-//     //绘制头像
-//     ctx.save()
-//     ctx.beginPath()
-//     ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
-//     ctx.clip()
-//     ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
-//     ctx.restore()
-//     //绘制第一段文本
-//     ctx.setFillStyle('#ffffff')
-//     ctx.setFontSize(0.037 * windowWidth)
-//     ctx.setTextAlign('center')
-//     ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
-//     //绘制第二段文本
-//     ctx.setFillStyle('#ffffff')
-//     ctx.setFontSize(0.037 * windowWidth)
-//     ctx.setTextAlign('center')
-//     ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
-//     //绘制二维码
-//     ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
-//     //绘制第三段文本
-//     ctx.setFillStyle('#ffffff')
-//     ctx.setFontSize(0.037 * windowWidth)
-//     ctx.setTextAlign('center')
-//     ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
-//     ctx.draw();
-//   },
+  //   },
 
 
 
+  //   pengyouquan(){
+  //     wx.downloadFile({
+  //       url: app.globalData.userInfo.avatarUrl,
+  //       success: function (res1) {
+
+  //         //缓存头像图片
+  //         that.setData({
+  //           portrait_temp: res1.tempFilePath
+  //         })
+  //         //缓存canvas绘制小程序二维码
+  //         wx.downloadFile({
+  //           url: that.data.qrcode,
+  //           success: function (res2) {
+  //             console.log('二维码：' + res2.tempFilePath)
+  //             //缓存二维码
+  //             that.setData({
+  //               qrcode_temp: res2.tempFilePath
+  //             })
+  //             console.log('开始绘制图片')
+  //             that.drawImage();
+  //             wx.hideLoading();
+  //             setTimeout(function () {
+  //               that.canvasToImage()
+  //             }, 200)
+  //           }
+  //         })
+  //       }
+  //     })
+  //   },
 
 
-//   canvasToImage() {
-//     var that = this
-//         wx.canvasToTempFilePath({
-//       x: 0,
-//       y: 0,
-//       width: that.data.windowWidth,
-//       height: that.data.windowWidth * that.data.scale,
-//       destWidth: that.data.windowWidth * 4,
-//       destHeight: that.data.windowWidth * 4 * that.data.scale,
-//       canvasId: 'myCanvas',
-//       success: function (res) {
-//         console.log('朋友圈分享图生成成功:' + res.tempFilePath)
-//         wx.previewImage({
-//           current: res.tempFilePath, // 当前显示图片的http链接
-//           urls: [res.tempFilePath] // 需要预览的图片http链接列表
-//         })
-//       },
-//       fail: function (err) {
-//         console.log('失败')
-//         console.log(err)
-//       }
-//     })
-//   },
+  // drawImage() {
+  //     //绘制canvas图片
+  //     var that = this
+  //     const ctx = wx.createCanvasContext('myCanvas')
+  //     var bgPath = '../../../images/share_bg.png'
+  //     var portraitPath = that.data.portrait_temp
+  //     var hostNickname = app.globalData.userInfo.nickName
+
+  //     var qrPath = that.data.qrcode_temp
+  //     var windowWidth = that.data.windowWidth
+  //     that.setData({
+  //       scale: 1.6
+  //     })
+  //     //绘制背景图片
+  //     ctx.drawImage(bgPath, 0, 0, windowWidth, that.data.scale * windowWidth)
+
+  //     //绘制头像
+  //     ctx.save()
+  //     ctx.beginPath()
+  //     ctx.arc(windowWidth / 2, 0.32 * windowWidth, 0.15 * windowWidth, 0, 2 * Math.PI)
+  //     ctx.clip()
+  //     ctx.drawImage(portraitPath, 0.7 * windowWidth / 2, 0.17 * windowWidth, 0.3 * windowWidth, 0.3 * windowWidth)
+  //     ctx.restore()
+  //     //绘制第一段文本
+  //     ctx.setFillStyle('#ffffff')
+  //     ctx.setFontSize(0.037 * windowWidth)
+  //     ctx.setTextAlign('center')
+  //     ctx.fillText(hostNickname + ' 正在参加疯狂红包活动', windowWidth / 2, 0.52 * windowWidth)
+  //     //绘制第二段文本
+  //     ctx.setFillStyle('#ffffff')
+  //     ctx.setFontSize(0.037 * windowWidth)
+  //     ctx.setTextAlign('center')
+  //     ctx.fillText('邀请你一起来领券抢红包啦~', windowWidth / 2, 0.57 * windowWidth)
+  //     //绘制二维码
+  //     ctx.drawImage(qrPath, 0.64 * windowWidth / 2, 0.75 * windowWidth, 0.36 * windowWidth, 0.36 * windowWidth)
+  //     //绘制第三段文本
+  //     ctx.setFillStyle('#ffffff')
+  //     ctx.setFontSize(0.037 * windowWidth)
+  //     ctx.setTextAlign('center')
+  //     ctx.fillText('长按二维码领红包', windowWidth / 2, 1.36 * windowWidth)
+  //     ctx.draw();
+  //   },
+
+
+
+
+
+  //   canvasToImage() {
+  //     var that = this
+  //         wx.canvasToTempFilePath({
+  //       x: 0,
+  //       y: 0,
+  //       width: that.data.windowWidth,
+  //       height: that.data.windowWidth * that.data.scale,
+  //       destWidth: that.data.windowWidth * 4,
+  //       destHeight: that.data.windowWidth * 4 * that.data.scale,
+  //       canvasId: 'myCanvas',
+  //       success: function (res) {
+  //         console.log('朋友圈分享图生成成功:' + res.tempFilePath)
+  //         wx.previewImage({
+  //           current: res.tempFilePath, // 当前显示图片的http链接
+  //           urls: [res.tempFilePath] // 需要预览的图片http链接列表
+  //         })
+  //       },
+  //       fail: function (err) {
+  //         console.log('失败')
+  //         console.log(err)
+  //       }
+  //     })
+  //   },
+
 
 
 })

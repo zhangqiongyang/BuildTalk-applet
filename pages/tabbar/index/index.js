@@ -8,6 +8,7 @@ Page({
     autoplay: true,
     interval: 5000,
     duration: 500,
+    platform:app.globalData.platform,
     articleinfo: '',
     // newsList: [
     //   '技术交流 | 装配式铝模板施工工法',
@@ -55,22 +56,22 @@ Page({
         image: '/image/activity.png',
         label: '建筑互联网大会'
       },
-      {
-        image: '/image/hotTopic.jpg',
-        label: '热点'
-      },
-      {
-        image: '/image/hotTopic.jpg',
-        label: '热点'
-      },
-      {
-        image: '/image/hotTopic.jpg',
-        label: '热点'
-      },
-      {
-        image: '/image/hotTopic.jpg',
-        label: '热点'
-      },
+      // {
+      //   image: '/image/hotTopic.jpg',
+      //   label: '热点'
+      // },
+      // {
+      //   image: '/image/hotTopic.jpg',
+      //   label: '热点'
+      // },
+      // {
+      //   image: '/image/hotTopic.jpg',
+      //   label: '热点'
+      // },
+      // {
+      //   image: '/image/hotTopic.jpg',
+      //   label: '热点'
+      // },
     ],
     // hotItem: [
     //   '/image/activity.png',
@@ -319,7 +320,8 @@ Page({
     console.log('----------index 打印openid-------------')
     console.log(wx.getStorageSync('openid'))
 
-
+    console.log('系统信息')
+    console.log(this.data.platform)
 
 
     // 查询首页推荐轮播图

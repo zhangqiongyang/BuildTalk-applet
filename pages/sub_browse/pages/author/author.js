@@ -12,7 +12,8 @@ Page({
     articleinfo: '',
     courseinfo: '',
     isHaveArticle: null,
-    isHaveCoruse: null
+    isHaveCoruse: null,
+    platform: app.globalData.platform    
   },
 
 
@@ -31,6 +32,15 @@ Page({
       })
     }
     // console.log(this.data.isArticle)
+  },
+
+
+
+  //跳转到用户反馈（客服）
+  jumpToFeedback() {
+    wx.navigateTo({
+      url: '/pages/sub_personalCenter/pages/feedback/feedback'
+    })
   },
 
 
@@ -79,17 +89,25 @@ Page({
             success: function(res) {
               console.log('------------这里是res--------------')
               console.log(res)
-              if (res.data.msg == '1') {
-                console.log('---------已经购买了------------')
-                wx.navigateTo({
-                  url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
-                })
-              } else {
-                console.log('---------还未购买------------')
-                wx.navigateTo({
-                  url: "/pages/sub_browse/pages/buy/buy?article_id=" + article_id
-                })
-              }
+              // if (res.data.msg == '1') {
+              //   console.log('---------已经购买了------------')
+                if (res.data.articleinfo.audio_id) {
+                  console.log('--------------跳转到音频文章-------------')
+                  wx.navigateTo({
+                    url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+                  })
+                } else {
+                  console.log('--------------跳转到视频文章-------------')
+                  wx.navigateTo({
+                    url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
+                  })
+                }
+              // } else {
+              //   console.log('---------还未购买------------')
+              //   wx.navigateTo({
+              //     url: "/pages/sub_browse/pages/buy/buy?article_id=" + article_id
+              //   })
+              // }
             },
           })
         }
@@ -248,7 +266,11 @@ Page({
     var author_id = options.author_id;
     console.log(author_id)
 
-
+    wx.showToast({
+      title: '正在加载',
+      icon: 'loading',
+      duration: 5000
+    })
 
     // 查询作者信息接口
     wx.request({
@@ -329,9 +351,11 @@ Page({
           // console.log(that.data.articleinfo)
           console.log('-----------全部都有----------')
         }
-
+      wx.hideToast();
       },
-      fail: function(res) {},
+      fail: function(res) {
+        wx.hideToast();
+      },
     })
 
   },

@@ -9,9 +9,9 @@
           <view class='myMessageImage' bindtap='myMsgDel' data-guestbook_id='{{item.guestbook_id}}'>
             <image src='/image/myMsg_delete.png'></image>
           </view>
-          <button open-type='share'>
+          <!-- <button open-type='share'>
             <image src='/image/myMsg_share.png'></image>
-          </button>
+          </button> -->
         </view>
         <view class='myMsgTextBox'>
           <text class='myMsgText'>{{guestbookinfo.content}}</text>
@@ -24,21 +24,21 @@
 
 
       <view class='authorMsg'>
-        <view class='article' bindtap='jumpToArticle' data-article_id='{{guestbookinfo.article_id}}'>
+        <view class='article' bindtap='jumpToArticle' data-article_id='{{guestbookinfo.article_id}}'  data-audio_id='{{item.audio_id}}'>
           <image src='/image/myMsg_book.png'></image>
-          <text>第{{guestbookinfo.article_number}}讲</text>
-          <text>|</text>
+          <!-- <text>第{{guestbookinfo.article_number}}讲</text>
+          <text>|</text> -->
           <text>{{guestbookinfo.article_title}}</text>
           <text class='right'>></text>
         </view>
-        <view class='authorMessage'>
+        <!-- <view class='authorMessage'>
           <view class='authorReply'>
             <view class='line'></view>
             <text class='myMsgInfo'>作者回复</text>
           </view>
           <text class='authorMsgText'>{{guestbookinfo.author_reply}}</text>
           <text class='authorMsgTime'>回复于·{{guestbookinfo.reply_time}}</text>
-        </view>
+        </view> -->
       </view>
 
     </view>

@@ -13,6 +13,7 @@ Page({
     history: true,
     keyword: '',
     value: '',
+    platform: app.globalData.platform,
   },
 
 

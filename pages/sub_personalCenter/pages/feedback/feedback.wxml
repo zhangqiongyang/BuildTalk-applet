@@ -1,13 +1,13 @@
 <!-- 用户反馈 -->
 
-<view class='background'>
+<view class='background' style='height:{{windowHeight+"px"}}'>
 
 
 
   <!-- 写反馈 -->
-  <view>
+  <!-- <view> -->
     <!-- <form> -->
-      <view class='msgTextareaCon'>
+      <!-- <view class='msgTextareaCon'>
         <textarea class='msgTextarea' placeholder='{{placeholder}}' placeholder-class='msgPlaceholder' maxlength='{{maxlength}}' auto-focus show-confirm-bar bindinput='bindWordLimit' value='{{value}}'></textarea>
         <text class='currentNoteLen'>{{currentNoteLen}}/{{maxlength}}个字</text>
       </view>
@@ -24,13 +24,13 @@
       </view>
       <view>
         <view class='msgBtn' bindtap='msgSubmit'>提交</view>
-      </view>
+      </view> -->
     <!-- </form> -->
-  </view>
+  <!-- </view> -->
 
 
   <!-- 我的反馈 -->
-  <view class='myMsg'>
+  <!-- <view class='myMsg'>
     <view class='myMsgTitle'>
       <text>我的反馈</text>
     </view>
@@ -51,8 +51,11 @@
         </view></view>
       </view>
     </block>
+  </view> -->
+
+  <view class='feesBackTemporary' style='height:{{windowHeight+"px"}}'>
+    <text>工作时间 09:00-18:00</text>
+    <button open-type='contact' class='service_button'>联系客服</button>
   </view>
 
-
-
-</view>
+</view> 

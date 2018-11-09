@@ -134,6 +134,9 @@ Page({
         }
       })
     }
+
+
+    this.checkPhone()
   },
 
 
@@ -558,6 +561,15 @@ Page({
 
   },
 
+
+
+
+  // 拨打电话
+  call(){
+    wx.makePhoneCall({
+      phoneNumber: '12356789' //仅为示例，并非真实的电话号码
+    })
+  },
 
 
   /**

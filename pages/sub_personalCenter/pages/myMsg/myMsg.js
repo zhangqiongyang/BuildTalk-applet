@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isHaveMsg:false
+    isHaveMsg:false,
+    // isHaveReply:false
   },
 
   /**
@@ -39,10 +40,17 @@ Page({
       success: function(res) {
         console.log('-----------------留言信息--------------------')
         console.log(res)
-        that.setData({
-          guestbookinfo: res.data.guestbookinfo,
-          isHaveMsg:true
-        })
+        if (res.data.guestbookinfo.length == '0'){
+          that.setData({
+            isHaveMsg: false
+          })
+        }else{
+          that.setData({
+            guestbookinfo: res.data.guestbookinfo,
+            isHaveMsg: true
+          })
+        }
+        
       },
       fail: function(res) {},
     })
@@ -62,12 +70,21 @@ Page({
 
   // 跳转到留言相应文章
   jumpToArticle(event) {
-    // console.log(event)
-    var article_id = event.currentTarget.dataset.article_id;
+    console.log(event)
+    var article_id = event.currentTarget.dataset.article_id,
+      audio_id = event.currentTarget.dataset.audio_id
 
-    wx.navigateTo({
-      url: '/pages/sub_browse/pages/article/article?article_id=' + article_id,
-    })
+    if (audio_id) {
+      console.log('--------------跳转到音频文章-------------')
+      wx.navigateTo({
+        url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+      })
+    } else {
+      console.log('--------------跳转到视频文章-------------')
+      wx.navigateTo({
+        url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
+      })
+    }
   },
 
 

@@ -1,9 +1,12 @@
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    windowHeight: app.globalData.windowHeight + 48,    
     placeholder: '由作者筛选后的优质留言将会公开显示，欢迎踊跃留言',
     maxlength: '2000',
     value: '',
@@ -319,6 +322,8 @@ Page({
       },
     })
   },
+
+
 
 
 

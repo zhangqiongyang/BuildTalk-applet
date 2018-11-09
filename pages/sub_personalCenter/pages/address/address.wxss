@@ -34,7 +34,7 @@
 
 .submitBtn{
   margin: 82rpx 44rpx 0 44rpx;
-  background-color: #ff5a05;
+  background-color: #7EBBF4;
   color: #fff;
   font-size: 30rpx;
   height: 78rpx;

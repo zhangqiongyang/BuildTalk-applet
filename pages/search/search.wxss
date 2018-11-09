@@ -237,13 +237,19 @@ view {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .s_listPriceGroupText {
   color: #888;
   font-size: 22rpx;
 }
-
+.boutique_priceItem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+    line-height: 30rpx;
+}
 .s_listPrice {
   color: #ff5a05;
 }
@@ -253,4 +259,22 @@ view {
   font-size: 30rpx;
   text-align: center;
   padding-top: 100rpx;
+}
+
+
+
+.boutique_priceBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.boutique_price {
+  font-size: 26rpx;
+  color: #f86161;
+}
+
+.boutique_num {
+  font-size: 20rpx;
+  color: #afafaf;
+  line-height: 40rpx;
 }

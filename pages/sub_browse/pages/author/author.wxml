@@ -2,7 +2,7 @@
 <view>
 
   <view class='authorInfo'>
-    <image src='{{authorinfo.author_pic}}'></image>
+    <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
     <view class='authorText'>
       <text class='authorName'>{{authorinfo.author_name}}</text>
       <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
@@ -40,9 +40,16 @@
               <text>{{index + 1}}</text>
             </view>
             <view class='articleContent'>
-              <text wx:if="{{item.isFree}}" class='articlePrice'>免费</text>
-              <text wx:else class='articlePrice'>￥{{item.article_price}}</text>
-              
+
+              <view wx:if="{{platform !='ios'}}">
+                <text wx:if="{{item.isFree}}" class='articlePrice'>免费</text>
+                <view wx:else>
+                  <text class='originalPrice'> ￥{{item.original_price}}</text>
+                  <text class='articlePrice'>￥{{item.article_price}}</text>
+
+                </view>
+              </view>
+
               <text class='articleName'>{{item.article_title}}</text>
               <view class='articleImage'>
                 <image src='{{item.article_pic}}' mode='aspectFill'></image>
@@ -77,8 +84,12 @@
           <view class='author_line'></view>
         </view>
 
-        <text>1.本系列共{{articleinfo.length}}篇文章，剩余内容将逐步上线,可永久阅读;</text>
-        <text>2.在阅读过程中，如有任何问题,请邮件联系:xxxxxxx@bjjy.com</text>
+        <text>1.本系列共{{articleinfo.length}}篇文章，剩余内容将逐步上线;</text>
+        <view>
+          <text>2.在阅读过程中，如有任何问题，请</text>
+          <text id='jumpToFeedback' bindtap='jumpToFeedback'>联系客服</text>
+        </view>
+
       </view>
     </view>
     <view wx:if='{{!isHaveArticle}}' class='none'>
@@ -122,8 +133,14 @@
             </view> -->
           <view class='underline'></view>
           <view class='s_listPriceGroup'>
-            <text class='s_listPrice'>预售￥{{item.course_money}}/{{item.coursenum}}期</text>
-            <text class='s_listPriceGroupText'>8856人购买</text>
+            <view class='boutique_priceItem'>
+              <view wx:if="{{platform !='ios'}}" class='boutique_priceItem'>
+                <text class='s_listPrice'>￥{{item.course_money}}</text>
+                <text class='s_listPrice'>/</text>
+              </view>
+              <text class='s_listPrice'>{{item.countcourse}}讲</text>
+            </view>
+            <text class='s_listPriceGroupText'>{{item.coursebuynum}}人购买</text>
             <text class='s_listPriceGroupText'>{{item.updatetime}}</text>
           </view>
         </view>

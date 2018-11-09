@@ -45,7 +45,7 @@
 }
 
 .welcome {
-  font-size: 26rpx;
+  font-size: 40rpx;
   color: #000;
 }
 
@@ -67,12 +67,21 @@
   color: #d7ab70;
 }
 
-.canvas_con {
-  padding-top: 58rpx;
-  display: flex;
-  flex-direction: column;
+.originalPrice{ 
+  font-size: 20rpx;
+  text-decoration: line-through;
+  color: #999;
 }
 
+.canvas_con {
+  padding-top: 58rpx;
+  /* display: flex;
+  flex-direction: column; */
+}
+#color{
+  font-weight: bold;
+  color: #7EBBF4;
+}
 .canvas_con text {
   padding-bottom: 26rpx;
   font-size: 24rpx;

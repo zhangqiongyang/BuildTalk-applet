@@ -11,7 +11,7 @@
       <view>
         <view class='s_listTeacherInfo'>
           <view class='s_listTeacherImg'>
-            <image src='{{item.author_pic}}'></image>
+            <image src='{{item.author_pic}}' mode='aspectFill'></image>
           </view>
           <view class='s_listTeacherCon'>
             <!-- <view class='s_listTeacherName'>
@@ -28,7 +28,8 @@
         <view class='underline'></view>
         <view class='labelBox'>
             <block wx:for='{{item.sign}}' wx:key='key'>
-              <text class='label' catchtap='jumpToSearchLabel' data-label='{{item}}'>{{item}}</text>
+              <text class='label' data-label='{{item}}'>{{item}}</text>
+              <!-- <text class='label' catchtap='jumpToSearchLabel' data-label='{{item}}'>{{item}}</text>               -->
             </block>
           </view>
         <!-- <view class='s_listCourseInfo'>

@@ -147,15 +147,55 @@ App({
 
 
 
+    wx.getSystemInfo({
+      success: function (res) {
+        that.globalData.platform =res.platform
+        // if (res.platform == "devtools") {
+        //               PC
+        // } else if (res.platform == "ios") {
+        //               IOS
+        // } else if (res.platform == "android") {
+        //               android
+        // }
+      }
+    })
+
+
+
 
 
     // 获取屏幕高度
     wx.getSystemInfo({
       success: function (res) {
         that.globalData.windowHeight = res.windowHeight
+      }
+    })
+
+
+
+//检测用户是否绑定手机号
+    wx.request({
+      url: 'https://wx.bjjy.com/checkbindmobile',
+      data: {
+        openid: wx.getStorageSync("openid")
       },
-      fail: function (res) { },
-      complete: function (res) { },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (res) {
+        console.log(res)
+        if (res.data.msg == "1") {
+          console.log("---------------已经绑定手机号---------------------")
+          that.globalData.isBindingPhone = true;
+          that.globalData.phoneNumber = res.data.mobile
+        } else {
+          console.log("---------------未绑定手机号---------------------")
+          that.globalData.isBindingPhone = false;
+        }
+      }
     })
 
 
@@ -185,6 +225,7 @@ App({
     isLogin:null,
     isBindingPhone:null,
     phoneNumber:'',
-    windowHeight:''
+    windowHeight:'',
+    platform:''
   }
 })

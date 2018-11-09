@@ -106,8 +106,19 @@
   color: red;
   font-size: 48rpx;
   float: right;
-  padding-right: 60rpx;
-  padding-top: 20rpx;
+  /* padding-right: 60rpx;
+  padding-top: 20rpx; */
+}
+
+.originalPrice{ 
+  float: right;
+  font-size: 20rpx;
+   color: #999;
+  text-decoration: line-through;
+  padding-left: 10rpx;
+  /* padding-top: 5rpx; */
+  padding-right: 30rpx;
+  padding-top: 30rpx;
 }
 
 .articleName{
@@ -240,7 +251,7 @@
   line-height: 44rpx;
   font-size: 26rpx;
   color: #888;
-  display: block;
+  /* display: block; */
 }
 
 .none{
@@ -375,6 +386,14 @@
 .s_listPrice{
   color: #ff5a05;
 }
+.boutique_priceItem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+    line-height: 30rpx;
+}
+
+
 
 
 .search_none{
@@ -384,3 +403,7 @@
   padding-top: 100rpx;
 }
 
+#jumpToFeedback{
+  font-weight: bold;
+  color: #7EBBF4;
+}

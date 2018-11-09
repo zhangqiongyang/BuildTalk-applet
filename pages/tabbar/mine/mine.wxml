@@ -24,7 +24,7 @@
 
   <!-- 账户 -->
 
-  <view class='accountItem account'>
+  <!-- <view class='accountItem account'>
     <view class='accountContent'>
       <view class='accountImg'>
         <image src='/image/mine_account.png'></image>
@@ -35,7 +35,7 @@
       <text class='accountNumber accountNumberColor'>0.00</text>
       <image src='/image/more.png'></image>
     </view>
-  </view>
+  </view> -->
 
 
 
@@ -76,7 +76,7 @@
 
 
 
-    <view class='accountItem' bindtap='jumpTogiftCertificate'>
+    <!-- <view class='accountItem' bindtap='jumpTogiftCertificate'>
       <view class='accountContent'>
         <view class='accountImg'>
           <image src='/image/mine_giftCertificate.png'></image>
@@ -87,7 +87,7 @@
         <text class='accountNumber accountNumberColor'>1</text>
         <image src='/image/more.png'></image>
       </view>
-    </view>
+    </view> -->
 
 
 
@@ -106,7 +106,7 @@
 
 
 
-
+    <!-- 
     <view class='accountItem' bindtap='jumpToInviteFriends'>
       <view class='accountContent'>
         <view class='accountImg'>
@@ -120,7 +120,7 @@
         <text class='accountNumber'>元</text>
         <image src='/image/more.png'></image>
       </view>
-    </view>
+    </view> -->
 
 
   </view>
@@ -142,30 +142,34 @@
         </view>
       </view>
     </block>
+    <!-- <view class='accountItem'> -->
     <view class='accountItem' bindtap='jumpToFeedback'>
-        <view class='accountContent'>
-          <view class='accountImg'>
-            <image src='/image/mine_set.png'></image>
-          </view>
-          <text class='accountName'>用户反馈</text>
+    
+      <view class='accountContent'>
+        <view class='accountImg'>
+          <image src='/image/mine_note.png'></image>
         </view>
-        <view class='accountInfo'>
-          <image src='/image/more.png'></image>
-        </view>
+        <text class='accountName'>用户反馈</text>
       </view>
+      <view class='accountInfo'>
+        <image src='/image/more.png'></image>
+      </view>
+
+      <!-- <button open-type='contact' class='index_service_button accountItem'></button> -->
+    </view>
   </view>
 
 
 
   <!-- 设置 -->
-  <view class='mineAccount'>
+  <!-- <view class='mineAccount'>
     <block>
-      <view class='accountItem'>
+      <view class='accountItem' bindtap='call'>
         <view class='accountContent'>
           <view class='accountImg'>
             <image src='/image/mine_set.png'></image>
           </view>
-          <text class='accountName'>设置</text>
+          <text class='accountName'>电话12345678</text>
         </view>
         <view class='accountInfo'>
           <image src='/image/more.png'></image>
@@ -173,9 +177,9 @@
       </view>
 
 
-      
+
     </block>
-  </view>
+  </view> -->
 
 
 

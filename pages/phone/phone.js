@@ -227,6 +227,7 @@ Page({
 
   //获取验证码接口
   checkCode(){
+    var that = this
     wx.request({
       url: 'https://wx.bjjy.com/checkcodevalid',
       data: {

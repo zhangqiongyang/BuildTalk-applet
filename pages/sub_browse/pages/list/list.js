@@ -1,3 +1,5 @@
+var app = getApp();
+
 Page({
 
   /**
@@ -7,9 +9,12 @@ Page({
     mode: true,
     order: true,
     articlelist: null,
+    articlelist_temporary: null,
     toView: 'inToView5',
-    curState : 0,
-    netState : 0
+    curState: 0,
+    netState: 0,
+    // isBuy: null,
+    platform: app.globalData.platform
   },
 
 
@@ -45,6 +50,14 @@ Page({
     })
   },
 
+
+
+  //跳转到购买页面
+  jumpToBuy() {
+    wx.navigateTo({
+      url: "/pages/sub_browse/pages/buy/buy?course_id=" + this.data.course_id
+    })
+  },
 
 
 
@@ -85,9 +98,26 @@ Page({
         }
       } else {
         console.log('---------还未购买------------')
-        wx.navigateTo({
-          url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.course_id
+        wx.showModal({
+          // title: '',
+          content: '请先购买课程解锁',
+          showCancel: false,
+          // cancelText: '取消',
+          // cancelColor: '',
+          confirmText: '确定',
+          // confirmColor: '',
+          success: function(res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+              // wx.navigateTo({
+              //   url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.course_id
+              // })
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
         })
+
       }
 
     }
@@ -116,8 +146,10 @@ Page({
     console.log(wx.getStorageSync('openid'))
     console.log('---------------------获取上层页面传的参数-------------------------')
     var that = this;
+    //获取课程列表信息
     this.getCourseListInfo();
-
+    //获取上次浏览记录信息
+    this.getbrowseRecord();
   },
 
   /**
@@ -134,11 +166,11 @@ Page({
     var that = this;
     console.log('------------list onShow-------------')
     // this.getCourseListInfo();
-    
-    if(this.data.curState != this.data.netState){
+
+    if (this.data.curState != this.data.netState) {
       this.data.curState = this.data.netState;
 
-      if (this.data.curState == '1'){
+      if (this.data.curState == '1') {
         // 修改数据
         if (this.data.articlelist.length >= 5) {
           for (var i = 0; i < 5; i++) {
@@ -154,6 +186,9 @@ Page({
           })
         }
       }
+      that.setData({
+        isBuy: true,
+      })
     }
 
 
@@ -207,7 +242,14 @@ Page({
 
 
   //获取课程列表数据
-  getCourseListInfo(){
+  getCourseListInfo() {
+
+    wx.showToast({
+      title: '正在加载',
+      icon: 'loading',
+      duration: 5000
+    })
+
     var that = this;
     //获取课程列表数据接口
     wx.request({
@@ -222,20 +264,21 @@ Page({
       method: 'POST',
       dataType: 'json',
       responseType: 'text',
-      success: function (res) {
+      success: function(res) {
         console.log('-------------课程列表数据---------------')
         console.log(res)
         //判断是否购买
         //msg=1代表已购买，msg=0代表未购买
         //已购买正常添加课程列表数据
         //未购买，将课程前五节isAudition设为true，反之false
-
+        // @articlelist_temporary :  
         that.setData({
-          articlelist: res.data.articlelist,
+          articlelist_temporary: res.data.articlelist,
           articleLen: res.data.articlelist.length,
+          courseinfo: res.data.courseinfo,
           course_id: res.data.courseinfo.course_id,
           curState: res.data.msg,
-          netState : res.data.msg
+          netState: res.data.msg
         })
 
 
@@ -243,37 +286,63 @@ Page({
           that.setData({
             isBuy: true,
           })
-        } else {
-          that.setData({
-            isBuy: false
-          })
           if (res.data.articlelist.length >= 5) {
             for (var i = 0; i < 5; i++) {
-              var is_audition = 'articlelist[' + i + '].is_audition';
+              var is_audition = 'articlelist_temporary[' + i + '].is_audition';
               that.setData({
-                [is_audition]: '1'
+                [is_audition]: 0
               })
             }
           } else {
             that.setData({
-              'articlelist[0].is_audition': '1'
+              'articlelist_temporary[0].is_audition': 0
             })
           }
-
+        } else {
+          that.setData({
+            isBuy: false
+          })
         }
+
+        that.setData({
+          articlelist: that.data.articlelist_temporary,
+        })
+
 
         //两个状态值赋值
 
-        console.log(that.data.articlelist)
-
+      wx.hideToast();
       },
-      fail: function (res) {
+      fail: function(res) {
+        wx.hideToast();
         console.log('-------------失败啦---------------')
       },
 
     })
-  }
+  },
 
+
+
+  //获取浏览记录
+  getbrowseRecord() {
+    wx.request({
+      url: 'https://wx.bjjy.com/getbrowseRecord',
+      data: {
+        openid: wx.getStorageSync("openid")
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log("-------------获取到用户上次浏览的记录了-----------------")
+        console.log(res)
+
+      }
+    })
+  }
 
 
 })

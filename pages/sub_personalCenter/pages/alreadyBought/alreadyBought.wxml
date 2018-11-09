@@ -3,9 +3,9 @@
 
 
   <scroll-view scroll-x class='titleBar'>
-    <view class='classify {{currentTab=="0"?"active":""}}' data-current='0' bindtap='swichNav'>全部</view>
-    <view class='classify {{currentTab=="1"?"active":""}}' data-current='1' bindtap='swichNav'>课程</view>
-    <view class='classify {{currentTab=="2"?"active":""}}' data-current='2' bindtap='swichNav'>文章</view>
+    <!-- <view class='classify {{currentTab=="0"?"active":""}}' data-current='0' bindtap='swichNav'>全部</view> -->
+    <view class='classify {{currentTab=="0"?"active":""}}' data-current='0' bindtap='swichNav'>课程</view>
+    <view class='classify {{currentTab=="1"?"active":""}}' data-current='1' bindtap='swichNav'>文章</view>
     <!-- <view class='underline'></view> -->
   </scroll-view>
 
@@ -13,10 +13,10 @@
 
   <!-- 选项卡内容 -->
   <swiper current='{{currentTab}}' class='swiper' bindchange='bindChange' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>
-
+<!-- <swiper current='{{currentTab}}' class='swiper' bindchange='bindChange'> -->
     
     <!-- 全部选项卡 -->
-    <swiper-item>
+    <!-- <swiper-item>
       <view class='courseList'>
         <view class='title'>全部</view>
         <block wx:for='{{alreadyinfo}}' wx:key='key'>
@@ -43,7 +43,7 @@
           </view>
         </block>
       </view>
-    </swiper-item>
+    </swiper-item> -->
 
     
     
@@ -52,23 +52,24 @@
     
     <!-- 课程选项卡 -->
     <swiper-item>
+    <scroll-view scroll-y class='courseListBox' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>
       <view class='courseList'>
         <view class='title'>课程</view>
-        <block wx:for='{{alreadyinfo}}' wx:key='key'>
+        <block wx:for='{{coursebuyinfo}}' wx:key='key'>
           <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
             <view class='course'>
               <image src='{{item.pic_url}}'></image>
               <view class='courseInfo'>
                 <text class='courseName'>{{item.course_name}}</text>
-                <text class='courseDate'>课程描述</text>
+                <text class='courseDate'>{{item.course_desc}}</text>
                 <text class='courseDate'>{{item.updatetime}}</text>
-                <view class='courseNumber'>
+                <!-- <view class='courseNumber'>
                   <text class='courseAlreadyLearnText'>已更新{{item.courseNumber}}讲</text>
                   <text class='courseAlreadyLearnText'>|</text>
                   <text class='courseAlreadyLearnText'>已学习</text>
                   <text class='courseAlreadyLearn'>{{item.courseAlreadyLearn}}</text>
                   <text class='courseAlreadyLearnText'>讲</text>
-                </view>
+                </view> -->
               </view>
               <view class='starToLearn'>
                 <image src='/image/alreadyBought_play.png'></image>
@@ -78,21 +79,23 @@
           </view>
         </block>
       </view>
+      </scroll-view>
     </swiper-item>
 
 
 
     <!-- 文章选项卡 -->
     <swiper-item>
+    <scroll-view scroll-y class='courseListBox' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>    
       <view class='courseList'>
         <view class='title'>文章</view>
-        <block wx:for='{{alreadyinfo}}' wx:key='key'>
-          <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
+        <block wx:for='{{articlebuyinfo}}' wx:key='key'>
+          <view class='courseItem' bindtap='jumpToArticle' data-article_id='{{item.article_id}}' data-audio_id='{{item.audio_id}}'>
             <view class='course'>
-              <image src='{{item.pic_url}}'></image>
+              <image src='{{item.article_pic}}'></image>
               <view class='courseInfo'>
-                <text class='courseName'>文章标题{{item.course_name}}</text>
-                <text class='courseDate'>课程描述</text>
+                <text class='courseName'>{{item.article_title}}</text>
+                <text class='courseDate'>{{item.desc}}</text>
                 <!-- <text class='courseDate'>{{item.updatetime}}</text> -->
                 <!-- <view class='courseNumber'>
                   <text class='courseAlreadyLearnText'>已更新{{item.courseNumber}}讲</text>
@@ -110,6 +113,8 @@
           </view>
         </block>
       </view>
+      </scroll-view>
+      
     </swiper-item>
 
   </swiper>

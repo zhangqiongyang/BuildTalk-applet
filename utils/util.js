@@ -66,6 +66,11 @@ function delHtmlTag(str) {
 
 
 
+//上传多张图片
+function upLoadImg(data){
+  var that = this
+}
+
 
 
 module.exports = {
