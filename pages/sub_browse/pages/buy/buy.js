@@ -75,7 +75,7 @@ Page({
 
   jumpToAddress() {
     wx.navigateTo({
-      url: '/pages/sub_browse/pages/address/address',
+      url: '/pages/sub_personalCenter/pages/address/address',
     })
   },
 
@@ -99,6 +99,8 @@ Page({
     // console.log(wx.getStorageSync('openid'))
     // console.log(this.data.courseinfo.course_name)
     // console.log(this.data.courseinfo.course_id)
+
+    if (this.isHaveAddress){
 
 
 
@@ -383,7 +385,13 @@ Page({
 
     }
 
-
+    }else{
+      wx.showModal({
+        title: '请填写收货地址',
+        content: '',
+        showCancel:false,
+      })
+    }
 
 
 
