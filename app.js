@@ -1,7 +1,6 @@
 //app.js
 
-const util = require('/utils/util.js')
-
+const util = require('/utils/util.js');
 App({
   onLaunch: function() {
     // 展示本地存储能力
@@ -22,6 +21,8 @@ App({
 
         wx.login({
           success: function(res) {
+            console.log('-----------wx.login.res----------')
+            console.log(res)
             if (res.code) {
               wx.request({
                 url: 'https://wx.bjjy.com/getloginopenid',
@@ -33,8 +34,10 @@ App({
                 },
                 method: 'POST',
                 success: function(res) {
+                 
                   that.globalData.openid = res.data.openid
-                  console.log('-------res.data的值是---------')
+                  console.log('-------通过code换取的res---------')
+                  console.log(res)
                  // console.log(res.data.openid)
                   wx.setStorageSync('openid', res.data.openid)
                   // if(res.Status == 'SUCCESS' && res.)
@@ -70,6 +73,11 @@ App({
 
           wx.getUserInfo({
             success: res => {
+              console.log('-------wx.getUserInfo.res---------')
+              console.log(res)
+             
+
+
               // 可以将 res 发送给后台解码出 unionId
               console.log('----------res.userInfo---------'+res.userInfo)
               this.globalData.userInfo = res.userInfo
@@ -92,7 +100,6 @@ App({
                     console.log('-------------上传用户的头像和昵称到数据库了(app.js)-----------------')
                     console.log(wx.getStorageSync('openid'))
                     console.log('---------------------------')
-
                   },
                   fail: function(res) {
                     console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
@@ -116,8 +123,17 @@ App({
                   console.log(res)
                   console.log(res.data)
                   console.log(res.data.returncode)
+                  console.log('------------app.js解密获取openid---------------')
                   console.log(JSON.parse(res.data.returndata).openId)
+                  console.log('------------app.js解密获取unionid---------------')                  
+                  console.log(JSON.parse(res.data.returndata).unionId)
 
+
+                  var unionId = JSON.parse(res.data.returndata).unionId
+                  wx.setStorageSync('unionId', unionId)
+                  that.globalData.unionId = unionId
+                  // console.log(unionId)
+                  console.log(wx.getStorageSync('unionId'))
                   //console.log('----------成功返回数据回数据app.js-----------')
                   console.log(res)
                   var userInfo = JSON.parse(res.data.returndata)
@@ -217,6 +233,7 @@ App({
   globalData: {
     userInfo: '',
     openid: '',
+    unionId:'',
     recevinginfo:{
       telephone :'',
       address : '',

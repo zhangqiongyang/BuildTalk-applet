@@ -2,6 +2,7 @@
 
 var app = getApp();
 const util = require('../../../../utils/util.js')
+const api = require('../../../../utils/api.js');
 
 
 Page({
@@ -81,7 +82,8 @@ Page({
       console.log(wx.getStorageSync('openid'))
 
       wx.request({
-        url: 'https://wx.bjjy.com/saveRecevingAddress',
+        // url: 'https://wx.bjjy.com/saveRecevingAddress',
+        url: api.API_UPLOADADDRESS,        
         data: {
           'openid': wx.getStorageSync('openid'),
           'consignee': that.data.recevinginfo.consignee,
@@ -155,11 +157,12 @@ Page({
     var that = this;
 
 
-    this.updateData();
+    // this.updateData();
 
     // 获取收货地址信息
     wx.request({
-      url: 'https://wx.bjjy.com/searchRecevingAddress',
+      // url: 'https://wx.bjjy.com/searchRecevingAddress',
+      url: api.API_GETADDRESS,
       data: {
         'openid': wx.getStorageSync('openid')
       },

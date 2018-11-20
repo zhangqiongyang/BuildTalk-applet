@@ -1,7 +1,7 @@
 // pages/author/author.js
 
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 Page({
 
   /**
@@ -75,7 +75,8 @@ Page({
           // 已购买可以直接观看，根据article_id跳转到当前文章页
           // 未购买跳转到购买页面
           wx.request({
-            url: 'https://wx.bjjy.com/searchbuyarticle',
+            // url: 'https://wx.bjjy.com/searchbuyarticle',
+            url: api.API_SEARCHBUYARTICLE,            
             data: {
               'openid': wx.getStorageSync('openid'),
               'article_id': article_id
@@ -274,7 +275,8 @@ Page({
 
     // 查询作者信息接口
     wx.request({
-      url: 'https://wx.bjjy.com/getauthorarticle',
+      // url: 'https://wx.bjjy.com/getauthorarticle',
+      url: api.API_GETAUTHORINFO,
       data: {
         author_id: author_id
       },

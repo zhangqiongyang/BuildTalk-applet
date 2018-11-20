@@ -1,4 +1,5 @@
 // pages/inviteRules/inviteRules.js
+const api = require('../../../../utils/api.js');
 Page({
 
   /**

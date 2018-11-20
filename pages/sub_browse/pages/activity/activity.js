@@ -1,6 +1,6 @@
 // pages/activity/activity.js
 const app = getApp();
-
+const api = require('../../../../utils/api.js');
 Page({
 
   /**

@@ -1,8 +1,6 @@
 const app = getApp()
 const util = require('../../../utils/util.js')
-// console.log(app)
-// console.log('----------12334-----')
-// console.log(app.globalData.openid)
+const api = require('../../../utils/api.js');
 
 Page({
 
@@ -215,11 +213,13 @@ Page({
       //上传用户的头像和昵称到数据库
       if (!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
         wx.request({
-          url: 'https://wx.bjjy.com/operateuser',
+          // url: 'https://wx.bjjy.com/operateuser',
+          url: api.API_MINEUPLOADINFO,          
           data: {
             'wx_openid': wx.getStorageSync('openid'),
             'nickname': that.data.userInfo.nickName,
-            'headimage': that.data.userInfo.avatarUrl
+            'headimage': that.data.userInfo.avatarUrl,
+            unionid: wx.getStorageSync('unionId')
           },
           header: {
             'content-type': 'application/x-www-form-urlencoded'
@@ -253,9 +253,11 @@ Page({
   checkPhone() {
     var that =this
     wx.request({
-      url: 'https://wx.bjjy.com/checkbindmobile',
+      // url: 'https://wx.bjjy.com/checkbindmobile',
+      url: api.API_CHECKPHONE,      
       data: {
-        openid: wx.getStorageSync("openid")
+        openid: wx.getStorageSync("openid"),
+        unionid:wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

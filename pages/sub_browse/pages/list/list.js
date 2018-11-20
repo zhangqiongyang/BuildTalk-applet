@@ -1,5 +1,5 @@
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 Page({
 
   /**
@@ -43,7 +43,7 @@ Page({
 
 
 
-  // 切换列表模式与图文模式
+  // 切换正序倒序
   changeOrder: function() {
     this.setData({
       order: !this.data.order
@@ -253,7 +253,8 @@ Page({
     var that = this;
     //获取课程列表数据接口
     wx.request({
-      url: 'https://wx.bjjy.com/courselistinfo',
+      // url: 'https://wx.bjjy.com/courselistinfo',
+      url: api.API_COURSERINFO,
       data: {
         'course_id': this.data.course_id,
         'openid': wx.getStorageSync('openid')
@@ -326,7 +327,8 @@ Page({
   //获取浏览记录
   getbrowseRecord() {
     wx.request({
-      url: 'https://wx.bjjy.com/getbrowseRecord',
+      // url: 'https://wx.bjjy.com/getbrowseRecord',
+      url: api.API_GETTRACE,
       data: {
         openid: wx.getStorageSync("openid")
       },

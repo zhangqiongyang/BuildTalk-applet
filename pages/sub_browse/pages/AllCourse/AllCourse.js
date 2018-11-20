@@ -3,7 +3,7 @@
 
 
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 
 
 
@@ -36,7 +36,8 @@ Page({
 
 
     wx.request({
-      url: 'https://wx.bjjy.com/getrecommend',
+      // url: 'https://wx.bjjy.com/getrecommend',
+      url: api.API_ALLCOURSE,      
       data: '',
       header: {
         'content-type': 'application/x-www-form-urlencoded'

@@ -1,4 +1,5 @@
 // pages/alreadyBought/alreadyBought.js
+const api = require('../../../../utils/api.js');
 Page({
 
   /**
@@ -87,7 +88,8 @@ Page({
 
     // 获取已购课程信息接口
     wx.request({
-      url: 'https://wx.bjjy.com/alreadybuy',
+      // url: 'https://wx.bjjy.com/alreadybuy',
+      url: api.API_ALREADYBUY,      
       data: {
         openid : wx.getStorageSync('openid')
       },

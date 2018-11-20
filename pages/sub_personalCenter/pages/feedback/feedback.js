@@ -1,5 +1,5 @@
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 Page({
 
   /**
@@ -185,6 +185,7 @@ Page({
   //   var that = this;
   //   wx.request({
   //     url: 'https://wx.bjjy.com/saveguestbook',
+  //     url: api.API_UPLOADMSG,
   //     data: {
   //       'wx_openid': wx.getStorageSync('openid'),
   //       'article_id': that.data.article_id,
@@ -257,7 +258,8 @@ Page({
   delMsg: function () {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/deleteguestbook',
+      // url: 'https://wx.bjjy.com/deleteguestbook',
+      url: api.API_DELETEMSG,      
       data: {
         'openid': wx.getStorageSync('openid'),
         'guestbook_id': that.data.guestbook_id
@@ -299,7 +301,8 @@ Page({
   getMsg: function () {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/getguestbookbyopenid',
+      // url: 'https://wx.bjjy.com/getguestbookbyopenid',
+      url: api.API_GETMSG,      
       data: {
         'openid': wx.getStorageSync('openid'),
         'article_id': that.data.article_id,

@@ -3,7 +3,7 @@
 
 
 var app = getApp();
-
+const api = require('../../../utils/api.js');
 
 
 
@@ -36,7 +36,8 @@ Page({
 
     // 获取所有作者的信息
     wx.request({
-      url: 'https://wx.bjjy.com/searchallauthor',
+      // url: 'https://wx.bjjy.com/searchallauthor',
+      url: api.API_ALLAUTHOR,      
       data: '',
       header: {
         'content-type': 'application/x-www-form-urlencoded'

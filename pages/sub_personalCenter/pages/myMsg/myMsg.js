@@ -1,4 +1,5 @@
 // pages/myMsg/myMsg.js
+const api = require('../../../../utils/api.js');
 Page({
 
   /**
@@ -23,11 +24,12 @@ Page({
 
 
 
-  // 获取留言信息接口
+  // 获取我的留言信息接口
   getMsg() {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/myguestbook',
+      // url: 'https://wx.bjjy.com/myguestbook',
+      url: api.API_GETMYMSG,
       data: {
         openid: wx.getStorageSync('openid')
       },
@@ -118,7 +120,8 @@ Page({
   delMsg: function() {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/deleteguestbook',
+      // url: 'https://wx.bjjy.com/deleteguestbook',
+      url: api.API_DELETEMSG,
       data: {
         'openid': wx.getStorageSync('openid'),
         'guestbook_id': that.data.guestbook_id

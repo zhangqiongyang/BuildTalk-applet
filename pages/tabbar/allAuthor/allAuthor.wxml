@@ -44,9 +44,9 @@
         <!-- </view> -->
 
       </view>
-      <view class='S-listImg'>
+      <!-- <view class='S-listImg'>
         <image src='{{item.coursepic_url}}'></image>
-      </view>
+      </view> -->
     </view>
     <!-- <view class='s_listArticle'>
               <text class='s_listArticleId'>第{{item.article_id}}讲</text> -->

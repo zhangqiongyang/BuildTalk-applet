@@ -1,7 +1,7 @@
 // pages/inviteFriends/inviteFriends.js
 
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 Page({
 
   /**

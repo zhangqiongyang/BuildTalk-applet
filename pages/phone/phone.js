@@ -12,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: app.globalData.windowHeight + 48,
     isGetCode: false,
     countDown:'300',
     btnText:'获取验证码',

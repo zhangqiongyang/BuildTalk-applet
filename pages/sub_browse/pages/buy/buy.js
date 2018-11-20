@@ -2,7 +2,7 @@
 
 
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 
 Page({
 
@@ -105,7 +105,8 @@ Page({
     if (that.data.msg == '0') {
       //查询订单号
       wx.request({
-        url: 'https://wx.bjjy.com/iscreateorder',
+        // url: 'https://wx.bjjy.com/iscreateorder',
+        url: api.API_SEARCHORDER,
         data: {
           msg: that.data.msg,
           course_id: that.data.courseinfo.course_id,
@@ -129,7 +130,8 @@ Page({
 
           // 生成订单接口
           wx.request({
-            url: 'https://wx.bjjy.com/unifiedorderhandle',
+            // url: 'https://wx.bjjy.com/unifiedorderhandle',
+            url: api.API_CREATORDER,            
             data: {
               msg: that.data.msg,
               order_id: that.data.order_id,
@@ -175,7 +177,8 @@ Page({
 
                   //修改订单状态接口
                   wx.request({
-                    url: 'https://wx.bjjy.com/updateorderstatus',
+                    // url: 'https://wx.bjjy.com/updateorderstatus',
+                    url: api.API_CHANGEORDERINFO,                    
                     data: {
                       order_id: that.data.order_id,
                       pay_amount: that.data.courseinfo.course_money,
@@ -238,7 +241,8 @@ Page({
       console.log(wx.getStorageSync('openid'))
       //查询订单号
       wx.request({
-        url: 'https://wx.bjjy.com/iscreateorder',
+        // url: 'https://wx.bjjy.com/iscreateorder',
+        url: api.API_SEARCHORDER,
         data: {
           msg: that.data.msg,
           article_id: that.data.articleinfo.article_id,
@@ -268,7 +272,8 @@ Page({
           console.log(that.data.msg)
           // 生成订单接口
           wx.request({
-            url: 'https://wx.bjjy.com/unifiedorderhandle',
+            // url: 'https://wx.bjjy.com/unifiedorderhandle',
+            url: api.API_CREATORDER,
             data: {
               msg: that.data.msg,
               order_id: that.data.order_id,
@@ -314,7 +319,8 @@ Page({
 
                   //修改订单状态接口
                   wx.request({
-                    url: 'https://wx.bjjy.com/updateorderstatus',
+                    // url: 'https://wx.bjjy.com/updateorderstatus',
+                    url: api.API_CHANGEORDERINFO,
                     data: {
                       order_id: that.data.order_id,
                       pay_amount: that.data.articleinfo.article_price,
@@ -457,7 +463,8 @@ Page({
   getCourseInfo() {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/courselistinfo',
+      // url: 'https://wx.bjjy.com/courselistinfo',
+      url: api.API_COURSERINFO,      
       data: {
         'course_id': this.data.course_id,
         'openid': wx.getStorageSync('openid')
@@ -491,7 +498,8 @@ Page({
     console.log('article_id' + this.data.article_id)
     console.log(wx.getStorageSync('openid'))
     wx.request({
-      url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
+      // url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
+      url: api.API_GETARTICLEINFO,      
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
@@ -525,7 +533,8 @@ Page({
   getAddress() {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/searchRecevingAddress',
+      // url: 'https://wx.bjjy.com/searchRecevingAddress',
+      url: api.API_GETADDRESS,
       data: {
         'openid': wx.getStorageSync('openid')
       },

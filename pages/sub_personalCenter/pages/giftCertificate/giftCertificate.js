@@ -2,7 +2,7 @@
 
 
 var app = getApp();
-
+const api = require('../../../../utils/api.js');
 Page({
 
   /**

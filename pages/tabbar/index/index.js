@@ -1,6 +1,5 @@
 var app = getApp();
-
-
+const api = require('../../../utils/api.js');
 Page({
   data: {
     info: '123',
@@ -326,7 +325,9 @@ Page({
 
     // 查询首页推荐轮播图
     wx.request({
-      url: 'https://wx.bjjy.com/getindexpic',
+      // url: 'https://wx.bjjy.com/getindexpic',
+      url: api.API_INDEXPIC,
+
       data: {},
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -352,7 +353,7 @@ Page({
     // 查询首页上精品推荐的课程接口
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/getindexinfo',
+      url: api.API_INDEXCOURSE,
       data: {
 
       },
@@ -377,7 +378,7 @@ Page({
 
     // 获取推荐作者信息接口
     wx.request({
-      url: 'https://wx.bjjy.com/searchrecommendauthor',
+      url: api.API_INDEXAUTHOR,
       data: '',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -419,6 +420,13 @@ Page({
     //   complete: function (res) { },
     // })
   },
+  
+  
+  
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage(){
 
-
+  }
 })

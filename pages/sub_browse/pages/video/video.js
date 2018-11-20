@@ -1,7 +1,7 @@
 // pages/video/video.js
 
 const app = getApp();
-
+const api = require('../../../../utils/api.js');
 var WxParse = require('../../../../wxParse/wxParse.js');
 
 Page({
@@ -101,7 +101,8 @@ Page({
 
     // 获取留言数据
     wx.request({
-      url: 'https://wx.bjjy.com/orderbyguestbook',
+      // url: 'https://wx.bjjy.com/orderbyguestbook',
+      url: api.API_GETARTICLEMSG,
       data: {
         'article_id': article_id,
         'openid': wx.getStorageSync('openid'),
@@ -129,7 +130,8 @@ Page({
 
     //上传用户浏览信息
     wx.request({
-      url: 'https://wx.bjjy.com/saveBrowseRecord',
+      // url: 'https://wx.bjjy.com/saveBrowseRecord',
+      url: api.API_UPLOADTRACE,
       data: {
         openid: wx.getStorageSync("openid"),
         article_id: article_id,
@@ -253,7 +255,8 @@ Page({
   // 留言点赞上传接口
   msgLikeUpload: function() {
     wx.request({
-      url: 'https://wx.bjjy.com/updateguestbook',
+      // url: 'https://wx.bjjy.com/updateguestbook',
+      url: api.API_UPLOADMSGLIKE,
       data: {
         'num': this.data.a,
         'guestbook_id': this.data.b,
@@ -280,7 +283,8 @@ Page({
   // 文章收藏信息上传接口
   artLikeUpload: function() {
     wx.request({
-      url: 'https://wx.bjjy.com/collectarticle',
+      // url: 'https://wx.bjjy.com/collectarticle',
+      url: api.API_UPLOADARTICLLIKE,      
       data: {
         'article_id': this.data.articleinfo.article_id,
         'openid': wx.getStorageSync('openid')
@@ -376,7 +380,8 @@ Page({
 
     // 获取留言数据
     wx.request({
-      url: 'https://wx.bjjy.com/orderbyguestbook',
+      // url: 'https://wx.bjjy.com/orderbyguestbook',
+      url: api.API_GETARTICLEMSG,      
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
@@ -438,7 +443,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '建谈' + that.data.articleinfo.article_title,
+      title: that.data.articleinfo.article_title,
       path: "/pages/sub_browse/pages/video/video?article_id=" + that.data.article_id,
       // success: function (res) {
       //   // 转发成功  
@@ -481,7 +486,8 @@ Page({
     var that = this
     // 获取文章数据
     wx.request({
-      url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
+      // url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
+      url: api.API_GETARTICLEINFO,      
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
