@@ -92,7 +92,8 @@ Page({
     //     url: 'https://wx.bjjy.com/courselistinfo',
     //     data: {
     //       'openid': wx.getStorageSync('openid'),
-    //       'course_id': course_id
+    //       'course_id': course_id,
+   // unionid: wx.getStorageSync('unionId')
     //     },
     //     header: {
     //       'content-type': 'application/x-www-form-urlencoded'

@@ -80,6 +80,7 @@ Page({
       url: api.API_UPLOADMSG,      
       data: {
         'wx_openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId'),
         'article_id': that.data.article_id,
         'content': that.data.value
       },
@@ -154,6 +155,7 @@ Page({
       url: api.API_DELETEMSG,
       data: {
         'openid':wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId'),
         'guestbook_id': that.data.guestbook_id
       },
       header: {
@@ -197,6 +199,7 @@ Page({
       url: api.API_GETMSG,      
       data: {
         'openid':wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId'),
         'article_id': that.data.article_id,
       },
       header: {

@@ -59,7 +59,8 @@ Page({
     wx.request({
       url: 'https://wx.bjjy.com/getSearchHistory',
       data: {
-        'openid': wx.getStorageSync('openid')
+        'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -139,7 +140,8 @@ Page({
         url: 'https://wx.bjjy.com/searchkeywords',
         data: {
           'keyword': key,
-          'openid': wx.getStorageSync('openid')
+          'openid': wx.getStorageSync('openid'),
+          unionid: wx.getStorageSync('unionId')
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -310,7 +312,8 @@ Page({
     //     url: 'https://wx.bjjy.com/courselistinfo',
     //     data: {
     //       'openid': wx.getStorageSync('openid'),
-    //       'course_id': course_id
+    //       'course_id': course_id,
+    //unionid: wx.getStorageSync('unionId')
     //     },
     //     header: {
     //       'content-type': 'application/x-www-form-urlencoded'
@@ -416,6 +419,7 @@ Page({
       data: {
         'openid': wx.getStorageSync('openid'),
         'keyword': that.data.keyword,
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

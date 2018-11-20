@@ -257,7 +257,8 @@ Page({
       url: api.API_COURSERINFO,
       data: {
         'course_id': this.data.course_id,
-        'openid': wx.getStorageSync('openid')
+        'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -330,7 +331,8 @@ Page({
       // url: 'https://wx.bjjy.com/getbrowseRecord',
       url: api.API_GETTRACE,
       data: {
-        openid: wx.getStorageSync("openid")
+        openid: wx.getStorageSync("openid"),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

@@ -31,7 +31,8 @@ Page({
       // url: 'https://wx.bjjy.com/myguestbook',
       url: api.API_GETMYMSG,
       data: {
-        openid: wx.getStorageSync('openid')
+        openid: wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -124,6 +125,7 @@ Page({
       url: api.API_DELETEMSG,
       data: {
         'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId'),
         'guestbook_id': that.data.guestbook_id
       },
       header: {

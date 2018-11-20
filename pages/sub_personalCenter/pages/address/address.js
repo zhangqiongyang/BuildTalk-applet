@@ -86,6 +86,7 @@ Page({
         url: api.API_UPLOADADDRESS,        
         data: {
           'openid': wx.getStorageSync('openid'),
+          unionid: wx.getStorageSync('unionId'),
           'consignee': that.data.recevinginfo.consignee,
           'telephone': that.data.recevinginfo.telephone,
           'address': that.data.recevinginfo.address
@@ -164,7 +165,8 @@ Page({
       // url: 'https://wx.bjjy.com/searchRecevingAddress',
       url: api.API_GETADDRESS,
       data: {
-        'openid': wx.getStorageSync('openid')
+        'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

@@ -211,12 +211,13 @@ Page({
 
 
       //上传用户的头像和昵称到数据库
-      if (!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
+      if (!util.isEmpty(wx.getStorageSync('unionId')) &&!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
         wx.request({
           // url: 'https://wx.bjjy.com/operateuser',
           url: api.API_MINEUPLOADINFO,          
           data: {
             'wx_openid': wx.getStorageSync('openid'),
+            unionid: wx.getStorageSync('unionId'),
             'nickname': that.data.userInfo.nickName,
             'headimage': that.data.userInfo.avatarUrl,
             unionid: wx.getStorageSync('unionId')

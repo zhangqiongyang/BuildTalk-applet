@@ -112,7 +112,8 @@ Page({
         data: {
           msg: that.data.msg,
           course_id: that.data.courseinfo.course_id,
-          openid: wx.getStorageSync('openid')
+          openid: wx.getStorageSync('openid'),
+          unionid: wx.getStorageSync('unionId')
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -138,6 +139,7 @@ Page({
               msg: that.data.msg,
               order_id: that.data.order_id,
               openid: wx.getStorageSync('openid'),
+              unionid: wx.getStorageSync('unionId'),
               order_price: that.data.courseinfo.course_money,
               order_name: that.data.courseinfo.course_name,
               course_id: that.data.courseinfo.course_id,
@@ -248,7 +250,8 @@ Page({
         data: {
           msg: that.data.msg,
           article_id: that.data.articleinfo.article_id,
-          openid: wx.getStorageSync('openid')
+          openid: wx.getStorageSync('openid'),
+          unionid: wx.getStorageSync('unionId')
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -280,6 +283,7 @@ Page({
               msg: that.data.msg,
               order_id: that.data.order_id,
               openid: wx.getStorageSync('openid'),
+              unionid: wx.getStorageSync('unionId'),
               order_price: that.data.articleinfo.article_price,
               order_name: that.data.articleinfo.article_title,
               article_id: that.data.articleinfo.article_id,
@@ -475,7 +479,8 @@ Page({
       url: api.API_COURSERINFO,      
       data: {
         'course_id': this.data.course_id,
-        'openid': wx.getStorageSync('openid')
+        'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -511,6 +516,7 @@ Page({
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -544,7 +550,8 @@ Page({
       // url: 'https://wx.bjjy.com/searchRecevingAddress',
       url: api.API_GETADDRESS,
       data: {
-        'openid': wx.getStorageSync('openid')
+        'openid': wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

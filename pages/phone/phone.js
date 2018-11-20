@@ -233,7 +233,8 @@ Page({
       data: {
         mobile: this.data.formData.phone,
         code: this.data.formData.code,
-        openid:wx.getStorageSync("openid")
+        openid:wx.getStorageSync("openid"),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

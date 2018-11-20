@@ -84,14 +84,15 @@ Page({
     })
 
 
-
+    console.log(wx.getStorageSync('unionId'))
 
     // 获取已购课程信息接口
     wx.request({
       // url: 'https://wx.bjjy.com/alreadybuy',
       url: api.API_ALREADYBUY,      
       data: {
-        openid : wx.getStorageSync('openid')
+        openid : wx.getStorageSync('openid'),
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
