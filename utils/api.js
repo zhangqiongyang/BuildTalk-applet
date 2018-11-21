@@ -43,9 +43,10 @@ module.exports = {
 
   API_GETTRACE: base + "/getbrowseRecord", //获取浏览记录
   
-  API_SEARCHORDER: base + "/iscreateorder", //查询订单号
-  API_SEARCHORDER: base + "/iscreateorder", //查询订单号
+  API_SENDCODE: base + "/sendSms", //发送短信接口
+  API_GETCODE: base + "/checkcodevalid", //获取验证码接口
 
-  API_SEARCHORDER: base + "/iscreateorder", //查询订单号
-
+  API_GETHISTORY: base + "/getSearchHistory", // 查询历史记录接口
+  API_SEARCH: base + "/searchkeywords", //搜索接口
+  API_DELETEHISTORY: base + "/deleteSearchHistory", //删除历史纪录接口
 }

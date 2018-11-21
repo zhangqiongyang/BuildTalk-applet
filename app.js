@@ -101,6 +101,7 @@ App({
                     console.log('-------------上传用户的头像和昵称到数据库了(app.js)-----------------')
                     console.log(wx.getStorageSync('openid'))
                     console.log('---------------------------')
+                    // console.log(res)
                   },
                   fail: function(res) {
                     console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
@@ -135,7 +136,7 @@ App({
                   wx.setStorageSync('unionId', unionId)
                   that.globalData.unionId = unionId
                   // console.log(unionId)
-                  console.log(wx.getStorageSync('unionId'))
+                  // console.log(wx.getStorageSync('unionId'))
                   //console.log('----------成功返回数据回数据app.js-----------')
                   console.log(res)
                   var userInfo = JSON.parse(res.data.returndata)

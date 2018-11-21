@@ -3,6 +3,7 @@
 var app = getApp();
 var WxParse = require('../../wxParse/wxParse.js');
 const util = require('../../utils/util.js')
+const api = require('../../utils/api.js')
 
 Page({
 
@@ -57,7 +58,8 @@ Page({
   selectHistoryPort: function() {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/getSearchHistory',
+      // url: 'https://wx.bjjy.com/getSearchHistory',
+      url: api.API_GETHISTORY,      
       data: {
         'openid': wx.getStorageSync('openid'),
         unionid: wx.getStorageSync('unionId')
@@ -137,7 +139,8 @@ Page({
       // 搜索接口
       var that = this;
       wx.request({
-        url: 'https://wx.bjjy.com/searchkeywords',
+        // url: 'https://wx.bjjy.com/searchkeywords',
+        url: api.API_SEARCH,        
         data: {
           'keyword': key,
           'openid': wx.getStorageSync('openid'),
@@ -415,7 +418,8 @@ Page({
   delHistoryPort: function() {
     var that = this;
     wx.request({
-      url: 'https://wx.bjjy.com/deleteSearchHistory',
+      // url: 'https://wx.bjjy.com/deleteSearchHistory',
+      url: api.API_DELETEHISTORY,      
       data: {
         'openid': wx.getStorageSync('openid'),
         'keyword': that.data.keyword,

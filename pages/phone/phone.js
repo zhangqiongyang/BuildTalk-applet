@@ -2,7 +2,7 @@
 
 var app = getApp();
 const util = require('../../utils/util.js')
-
+const api = require('../../utils/api.js')
 
 const phoneRexp = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
 
@@ -122,7 +122,7 @@ Page({
         that.setData({
           isGetCode:false,
           btnText:'重新获取',
-          countDown:'60'
+          countDown:'300'
         })
       }
     },1000)
@@ -199,7 +199,8 @@ Page({
   //发送短信接口
   sendSms(){
     wx.request({
-      url: 'https://wx.bjjy.com/sendSms',
+      // url: 'https://wx.bjjy.com/sendSms',
+      url: api.API_SENDCODE,      
       data: {
         mobile: this.data.formData.phone
       },
@@ -229,7 +230,8 @@ Page({
   checkCode(){
     var that = this
     wx.request({
-      url: 'https://wx.bjjy.com/checkcodevalid',
+      // url: 'https://wx.bjjy.com/checkcodevalid',
+      url: api.API_GETCODE,      
       data: {
         mobile: this.data.formData.phone,
         code: this.data.formData.code,
