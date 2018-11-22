@@ -113,6 +113,7 @@ Page({
           msg: that.data.msg,
           course_id: that.data.courseinfo.course_id,
           openid: wx.getStorageSync('openid'),
+          source: 'xcx',
           unionid: wx.getStorageSync('unionId')
         },
         header: {
@@ -139,6 +140,7 @@ Page({
               msg: that.data.msg,
               order_id: that.data.order_id,
               openid: wx.getStorageSync('openid'),
+              source: 'xcx',
               unionid: wx.getStorageSync('unionId'),
               order_price: that.data.courseinfo.course_money,
               order_name: that.data.courseinfo.course_name,
@@ -251,6 +253,7 @@ Page({
           msg: that.data.msg,
           article_id: that.data.articleinfo.article_id,
           openid: wx.getStorageSync('openid'),
+          source: 'xcx',
           unionid: wx.getStorageSync('unionId')
         },
         header: {
@@ -283,6 +286,7 @@ Page({
               msg: that.data.msg,
               order_id: that.data.order_id,
               openid: wx.getStorageSync('openid'),
+              source: 'xcx',
               unionid: wx.getStorageSync('unionId'),
               order_price: that.data.articleinfo.article_price,
               order_name: that.data.articleinfo.article_title,
@@ -480,6 +484,7 @@ Page({
       data: {
         'course_id': this.data.course_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -516,6 +521,7 @@ Page({
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -551,6 +557,7 @@ Page({
       url: api.API_GETADDRESS,
       data: {
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {

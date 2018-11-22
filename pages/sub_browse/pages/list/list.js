@@ -258,6 +258,7 @@ Page({
       data: {
         'course_id': this.data.course_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -332,6 +333,7 @@ Page({
       url: api.API_GETTRACE,
       data: {
         openid: wx.getStorageSync("openid"),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {

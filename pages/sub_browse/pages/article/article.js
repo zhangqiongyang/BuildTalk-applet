@@ -57,6 +57,7 @@ Page({
       data: {
         'article_id': article_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -150,6 +151,7 @@ Page({
       data: {
         'article_id': article_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -179,6 +181,7 @@ Page({
       url: api.API_UPLOADTRACE,      
       data: {
         openid: wx.getStorageSync("openid"),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId'),
         article_id: article_id,
         course_id: this.data.course_id
@@ -345,6 +348,7 @@ Page({
         'num': this.data.a,
         'guestbook_id': this.data.b,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -373,6 +377,7 @@ Page({
       data: {
         'article_id': this.data.articleinfo.article_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -405,6 +410,7 @@ Page({
       data: {
         'article_id': this.data.article_id,
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {

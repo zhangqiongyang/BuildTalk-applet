@@ -92,6 +92,7 @@ Page({
       url: api.API_ALREADYBUY,      
       data: {
         openid : wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {

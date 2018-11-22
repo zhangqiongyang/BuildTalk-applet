@@ -86,6 +86,7 @@ Page({
         url: api.API_UPLOADADDRESS,        
         data: {
           'openid': wx.getStorageSync('openid'),
+          source: 'xcx',
           unionid: wx.getStorageSync('unionId'),
           'consignee': that.data.recevinginfo.consignee,
           'telephone': that.data.recevinginfo.telephone,
@@ -166,6 +167,7 @@ Page({
       url: api.API_GETADDRESS,
       data: {
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {

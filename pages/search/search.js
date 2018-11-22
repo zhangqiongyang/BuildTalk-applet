@@ -62,6 +62,7 @@ Page({
       url: api.API_GETHISTORY,      
       data: {
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId')
       },
       header: {
@@ -144,6 +145,7 @@ Page({
         data: {
           'keyword': key,
           'openid': wx.getStorageSync('openid'),
+          source: 'xcx',
           unionid: wx.getStorageSync('unionId')
         },
         header: {
@@ -315,6 +317,7 @@ Page({
     //     url: 'https://wx.bjjy.com/courselistinfo',
     //     data: {
     //       'openid': wx.getStorageSync('openid'),
+    //source: 'xcx',
     //       'course_id': course_id,
     //unionid: wx.getStorageSync('unionId')
     //     },
@@ -422,6 +425,7 @@ Page({
       url: api.API_DELETEHISTORY,      
       data: {
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         'keyword': that.data.keyword,
         unionid: wx.getStorageSync('unionId')
       },

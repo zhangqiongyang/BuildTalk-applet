@@ -1,6 +1,8 @@
 //app.js
 
 const util = require('/utils/util.js');
+const api = require('/utils/api.js');
+
 App({
   onLaunch: function() {
     // 展示本地存储能力
@@ -25,7 +27,8 @@ App({
             console.log(res)
             if (res.code) {
               wx.request({
-                url: 'https://wx.bjjy.com/getloginopenid',
+                // url: 'https://wx.bjjy.com/getloginopenid',
+                url: api.API_GETOPENID,                
                 data: {
                   code: res.code
                 },
@@ -82,11 +85,13 @@ App({
               console.log('----------res.userInfo---------'+res.userInfo)
               this.globalData.userInfo = res.userInfo
               //上传用户的头像和昵称到数据库
-              if (!util.isEmpty(wx.getStorageSync('unionId')) &&!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(this.globalData.userInfo.nickName) && !util.isEmpty(this.globalData.userInfo.avatarUrl)) {
+              if (!util.isEmpty(wx.getStorageSync('unionId')) &&!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(this.globalData.userInfo.nickName) && !util.isEmpty(this.globalData.userInfo.avatarUrl)) {          
                 wx.request({
-                  url: 'https://wx.bjjy.com/operateuser',
+                  // url: 'https://wx.bjjy.com/operateuser',
+                  url: api.API_MINEUPLOADINFO,                  
                   data: {
                     unionid: wx.getStorageSync('unionId'),
+                    source:'xcx',
                     'wx_openid': wx.getStorageSync('openid'),
                     'nickname': this.globalData.userInfo.nickName,
                     'headimage': this.globalData.userInfo.avatarUrl
@@ -101,7 +106,7 @@ App({
                     console.log('-------------上传用户的头像和昵称到数据库了(app.js)-----------------')
                     console.log(wx.getStorageSync('openid'))
                     console.log('---------------------------')
-                    // console.log(res)
+                    console.log(res)
                   },
                   fail: function(res) {
                     console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
@@ -110,11 +115,13 @@ App({
               }
               //获取用户加密信息
               wx.request({
-                url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
+                // url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
+                url: api.API_GETENCRYPTEDDATA,                
                 data: {
                   encryptedData: res.encryptedData,
                   iv: res.iv,
                   openid: wx.getStorageSync('openid'),
+                  source: 'xcx',
                   unionid: wx.getStorageSync('unionId')
                 },
                 header: {
@@ -194,9 +201,12 @@ App({
 
 //检测用户是否绑定手机号
     wx.request({
-      url: 'https://wx.bjjy.com/checkbindmobile',
+      // url: 'https://wx.bjjy.com/checkbindmobile',
+      url: api.API_CHECKPHONE,      
       data: {
-        openid: wx.getStorageSync("openid")
+        openid: wx.getStorageSync("openid"),
+        source: 'xcx',
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

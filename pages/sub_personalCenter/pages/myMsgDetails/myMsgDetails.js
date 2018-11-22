@@ -105,6 +105,7 @@ Page({
       url: api.API_DELETEMSG,
       data: {
         'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
         unionid: wx.getStorageSync('unionId'),
         'guestbook_id': that.data.guestbook_id
       },

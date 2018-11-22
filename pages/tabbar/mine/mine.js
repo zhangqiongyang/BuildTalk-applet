@@ -217,6 +217,7 @@ Page({
           url: api.API_MINEUPLOADINFO,          
           data: {
             'wx_openid': wx.getStorageSync('openid'),
+            source: 'xcx',
             unionid: wx.getStorageSync('unionId'),
             'nickname': that.data.userInfo.nickName,
             'headimage': that.data.userInfo.avatarUrl,
@@ -258,6 +259,7 @@ Page({
       url: api.API_CHECKPHONE,      
       data: {
         openid: wx.getStorageSync("openid"),
+        source: 'xcx',
         unionid:wx.getStorageSync('unionId')
       },
       header: {

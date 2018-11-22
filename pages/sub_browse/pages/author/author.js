@@ -79,6 +79,7 @@ Page({
             url: api.API_SEARCHBUYARTICLE,            
             data: {
               'openid': wx.getStorageSync('openid'),
+              source: 'xcx',
               'article_id': article_id,
               unionid: wx.getStorageSync('unionId')
             },
@@ -213,6 +214,7 @@ Page({
     //     url: 'https://wx.bjjy.com/courselistinfo',
     //     data: {
     //       'openid': wx.getStorageSync('openid'),
+    // source: 'xcx',
     //       'course_id': course_id,
     //unionid: wx.getStorageSync('unionId')
     //     },
