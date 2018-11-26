@@ -108,11 +108,48 @@ Page({
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回.
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-        console.log(res.userInfo)
-        console.log(app.globalData.userInfo.nickName)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+        // console.log(res.userInfo)
+        // console.log(app.globalData.userInfo.nickName)
+        // this.setData({
+        //   userInfo: res.userInfo,
+        //   hasUserInfo: true
+        // })
+        wx.request({
+          url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
+          data: {
+            openid: wx.getStorageSync('openid'),
+            //openid:'oDpcQ5YZXI7gOzUmOCvMnLiQ6Wkg',
+            encryptedData: res.encryptedData,
+            iv: res.iv
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success: function(re) {
+            console.log('--------12------')
+            console.log(re)
+            console.log('--------34--------')
+            var userInfo = JSON.parse(re.data.returndata)
+            console.log(userInfo)
+            wx.setStorageSync('unionid', userInfo.unionId)
+            //console.log(userInfo.openId)
+            that.setData({
+              userInfo: userInfo,
+              openid: userInfo.openId,
+              hasUserInfo: true
+            })
+            //console.log('----------成功返回数据-------')
+            //var userInfo = JSON.parse(res.data.returndata)
+            //console.log(userInfo)
+            console.log('--------返回数据结束12-------')
+          },
+          fail: function() {
+            console.log('------------数据失败---')
+          },
+          complete: function() {
+            console.log('执行啦执行拉')
+          }
         })
       }
     } else {
@@ -149,15 +186,13 @@ Page({
 
 
 
-  getUserInfo: function(res) {
+  getUserInfo: function(e) {
     var that = this;
     console.log('==============res=============')
-    console.log(res)
-    console.log(res.detail)
-    console.log(res.detail.userInfo)
+    console.log(e)
 
 
-    app.globalData.userInfo = res.detail.userInfo
+    app.globalData.userInfo = e.detail.userInfo
 
 
 
@@ -182,7 +217,7 @@ Page({
     // })
     console.log(app.globalData.userInfo)
 
-    if (res.detail.errMsg == "getUserInfo:fail auth deny") {
+    if (e.detail.errMsg == "getUserInfo:fail auth deny") {
       app.globalData.isLogin = false
       that.setData({
         hasUserInfo: false
@@ -192,7 +227,7 @@ Page({
 
 
       that.setData({
-        userInfo: res.detail.userInfo,
+        userInfo: e.detail.userInfo,
         hasUserInfo: true
       })
 
@@ -208,39 +243,62 @@ Page({
 
       console.log(this.data.userInfo.nickName)
 
+      wx.request({
+        url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
+        data: {
+          openid: wx.getStorageSync('openid'),
+          //openid: 'oDpcQ5YZXI7gOzUmOCvMnLiQ6Wkg',
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        success: function(re) {
+          var userInfo = JSON.parse(re.data.returndata)
+          console.log(userInfo)
+          wx.setStorageSync('unionid', userInfo.unionId)
 
+          //上传用户的头像和昵称到数据库
+          if (!util.isEmpty(wx.getStorageSync('unionId')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
+            wx.request({
+              // url: 'https://wx.bjjy.com/operateuser',
+              url: api.API_MINEUPLOADINFO,
+              data: {
+                'wx_openid': wx.getStorageSync('openid'),
+                source: 'xcx',
+                unionid: wx.getStorageSync('unionId'),
+                'nickname': that.data.userInfo.nickName,
+                'headimage': that.data.userInfo.avatarUrl,
+                unionid: wx.getStorageSync('unionId')
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              dataType: 'json',
+              responseType: 'text',
+              success: function(res) {
+                console.log('-------------上传用户的头像和昵称到数据库了(mine.js)-----------------')
+                console.log(wx.getStorageSync('openid'))
+                console.log('---------------------------')
+              },
+              fail: function(res) {
+                console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
+              },
+            })
+          }
+        },
 
-      //上传用户的头像和昵称到数据库
-      if (!util.isEmpty(wx.getStorageSync('unionId')) &&!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
-        wx.request({
-          // url: 'https://wx.bjjy.com/operateuser',
-          url: api.API_MINEUPLOADINFO,          
-          data: {
-            'wx_openid': wx.getStorageSync('openid'),
-            source: 'xcx',
-            unionid: wx.getStorageSync('unionId'),
-            'nickname': that.data.userInfo.nickName,
-            'headimage': that.data.userInfo.avatarUrl,
-            unionid: wx.getStorageSync('unionId')
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
-          dataType: 'json',
-          responseType: 'text',
-          success: function(res) {
-            console.log('-------------上传用户的头像和昵称到数据库了(mine.js)-----------------')
-            console.log(wx.getStorageSync('openid'))
-            console.log('---------------------------')
-          },
-          fail: function(res) {
-            console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
-          },
-        })
-      }
+        fail: function() {
+          console.log('------------数据失败---')
+        },
+        complete: function() {
+          console.log('执行啦执行拉')
+        }
+      })
     }
-
     this.checkPhone()
 
 
@@ -253,14 +311,14 @@ Page({
 
   //检测用户是否绑定手机号
   checkPhone() {
-    var that =this
+    var that = this
     wx.request({
       // url: 'https://wx.bjjy.com/checkbindmobile',
-      url: api.API_CHECKPHONE,      
+      url: api.API_CHECKPHONE,
       data: {
         openid: wx.getStorageSync("openid"),
         source: 'xcx',
-        unionid:wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionId')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -570,7 +628,7 @@ Page({
 
 
   // 拨打电话
-  call(){
+  call() {
     wx.makePhoneCall({
       phoneNumber: '12356789' //仅为示例，并非真实的电话号码
     })
@@ -595,7 +653,35 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (wx.getStorageSync('unionid') != '') {
 
+      wx.request({
+        url: 'https://wx.bjjy.com/adduserManage',
+        data: {
+          openid: wx.getStorageSync('openid'),
+          unionid: wx.getStorageSync('unionid')
+        },
+        header: {
+
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        success: function(res) {
+
+          console.log(res.data)
+          console.log('成功')
+        },
+        fail: function() {
+
+          console.log('失败')
+        },
+        complete: function() {
+
+          console.log('onshow的方法执行')
+        }
+      })
+    }
+    //console.log(app.globalData)
   },
 
   /**

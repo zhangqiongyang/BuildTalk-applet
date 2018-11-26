@@ -12,12 +12,12 @@ App({
 
     //登录
     var that = this;
-    wx.checkSession({
-      success: function() {
-        console.log('session_key未过期，并且在本生命周期一直有效')
-      },
-      fail: function() {
-        console.log('session_key已过期，请重新获取')
+    // wx.checkSession({
+    //   success: function() {
+    //     console.log('session_key未过期，并且在本生命周期一直有效')
+    //   },
+    //   fail: function() {
+    //     console.log('session_key已过期，请重新获取')
 
 
 
@@ -60,8 +60,8 @@ App({
             }
           }
         })
-      }
-    })
+    //   }
+    // })
 
 
 
@@ -84,35 +84,7 @@ App({
               // 可以将 res 发送给后台解码出 unionId
               console.log('----------res.userInfo---------'+res.userInfo)
               this.globalData.userInfo = res.userInfo
-              //上传用户的头像和昵称到数据库
-              if (!util.isEmpty(wx.getStorageSync('unionId')) &&!util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(this.globalData.userInfo.nickName) && !util.isEmpty(this.globalData.userInfo.avatarUrl)) {          
-                wx.request({
-                  // url: 'https://wx.bjjy.com/operateuser',
-                  url: api.API_MINEUPLOADINFO,                  
-                  data: {
-                    unionid: wx.getStorageSync('unionId'),
-                    source:'xcx',
-                    'wx_openid': wx.getStorageSync('openid'),
-                    'nickname': this.globalData.userInfo.nickName,
-                    'headimage': this.globalData.userInfo.avatarUrl
-                  },
-                  header: {
-                    'content-type': 'application/x-www-form-urlencoded'
-                  },
-                  method: 'POST',
-                  dataType: 'json',
-                  responseType: 'text',
-                  success: function(res) {
-                    console.log('-------------上传用户的头像和昵称到数据库了(app.js)-----------------')
-                    console.log(wx.getStorageSync('openid'))
-                    console.log('---------------------------')
-                    console.log(res)
-                  },
-                  fail: function(res) {
-                    console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
-                  },
-                })
-              }
+              
               //获取用户加密信息
               wx.request({
                 // url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
@@ -151,6 +123,37 @@ App({
                   console.log(userInfo)
                   //console.log('--------返回数据结束据结束app.js-----------')
 
+
+
+                  //上传用户的头像和昵称到数据库
+                  if (!util.isEmpty(wx.getStorageSync('unionId')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.globalData.userInfo.nickName) && !util.isEmpty(that.globalData.userInfo.avatarUrl)) {
+                    wx.request({
+                      // url: 'https://wx.bjjy.com/operateuser',
+                      url: api.API_MINEUPLOADINFO,
+                      data: {
+                        unionid: wx.getStorageSync('unionId'),
+                        source: 'xcx',
+                        'wx_openid': wx.getStorageSync('openid'),
+                        'nickname': that.globalData.userInfo.nickName,
+                        'headimage': that.globalData.userInfo.avatarUrl
+                      },
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                      },
+                      method: 'POST',
+                      dataType: 'json',
+                      responseType: 'text',
+                      success: function (res) {
+                        console.log('-------------上传用户的头像和昵称到数据库了(app.js)-----------------')
+                        console.log(wx.getStorageSync('openid'))
+                        console.log('---------------------------')
+                        console.log(res)
+                      },
+                      fail: function (res) {
+                        console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
+                      },
+                    })
+                  }
                 },
                 fail: function() {
                   console.log('------------数据失败---')

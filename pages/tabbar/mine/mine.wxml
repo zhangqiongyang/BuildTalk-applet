@@ -10,7 +10,7 @@
       <image class='userBg' src='/image/mine_background.png'></image>
       <view class='userContent'>
         <view class='headPortrait'>
-          <image bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+          <image src="{{userInfo.avatarUrl}}" mode="cover"></image>
         </view>
         <view class='userInformation'>
           <text class="userinfo-nickname">{{userInfo.nickName}}</text>
