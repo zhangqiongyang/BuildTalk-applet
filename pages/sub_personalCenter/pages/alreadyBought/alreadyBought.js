@@ -26,17 +26,17 @@ Page({
     console.log(event)
     var article_id = event.currentTarget.dataset.article_id;
     var audio_id = event.currentTarget.dataset.audio_id;    
-    if (audio_id) {
-      console.log('--------------跳转到音频文章-------------')
-      wx.navigateTo({
-        url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
-      })
-    } else {
+    // if (audio_id) {
+    //   console.log('--------------跳转到音频文章-------------')
+    //   wx.navigateTo({
+    //     url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+    //   })
+    // } else {
       console.log('--------------跳转到视频文章-------------')
       wx.navigateTo({
         url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
       })
-    }
+    // }
   },
 
 

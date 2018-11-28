@@ -8,6 +8,16 @@
     <view class='S-list' bindtap='jumpToArticle' data-courseid='{{item.course_id}}'>
       <view class='s_listCon'>
         <view>
+          <view class='s_listCourseInfo'>
+            <text>{{item.course_name}}</text>
+            <text class='s_listCourseSynopsis'>{{item.course_desc}}</text>
+            <!-- <view class='s_listCourseName'>
+            <template is="wxParse" data="{{wxParseData:item.course_name.nodes}}" />
+          </view>
+          <view class='s_listCourseSynopsis'>
+            <template is="wxParse" data="{{wxParseData:item.course_desc.nodes}}" />
+          </view> -->
+          </view>
           <view class='s_listTeacherInfo'>
             <view class='s_listTeacherImg'>
               <image src='{{item.author_pic}}' mode='aspectFill'></image>
@@ -20,19 +30,11 @@
               <template is="wxParse" data="{{wxParseData:item.author_desc.nodes}}" />
             </view> -->
               <text class='s_listTeacherName'>{{item.author_name}}</text>
+              <image src='/image/allCourse_line.png'></image>
               <text class='s_listTeacherPosition'>{{item.author_desc}}</text>
             </view>
           </view>
-          <view class='s_listCourseInfo'>
-            <text>{{item.course_name}}</text>
-            <text class='s_listCourseSynopsis'>{{item.course_desc}}</text>
-            <!-- <view class='s_listCourseName'>
-            <template is="wxParse" data="{{wxParseData:item.course_name.nodes}}" />
-          </view>
-          <view class='s_listCourseSynopsis'>
-            <template is="wxParse" data="{{wxParseData:item.course_desc.nodes}}" />
-          </view> -->
-          </view>
+
 
         </view>
         <view class='S-listImg'>
@@ -44,7 +46,7 @@
       <!-- <text class='s_listArticleName'>伟大的建筑</text> -->
       <!-- <template is="wxParse" data="{{wxParseData:item.article_name.nodes}}"/>
             </view> -->
-      <view class='underline'></view>
+      <!-- <view class='underline'></view> -->
       <view class='s_listPriceGroup'>
         <view class='boutique_priceItem'>
           <view wx:if="{{platform !='ios'}}" class='boutique_priceItem'>
@@ -52,9 +54,11 @@
             <text class='s_listPrice'>/</text>
           </view>
           <text class='s_listPrice'>{{item.countcourse}}讲</text>
+          <text class='s_listPriceGroupText' style='padding-left:30rpx;'>{{item.updatetime}}</text>
+          
         </view>
-        <text class='s_listPriceGroupText'>{{item.coursebuynum}}人购买</text>
-        <text class='s_listPriceGroupText'>{{item.updatetime}}</text>
+
+        <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人购买</text>
       </view>
     </view>
   </block>

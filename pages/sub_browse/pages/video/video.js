@@ -3,6 +3,8 @@
 const app = getApp();
 const api = require('../../../../utils/api.js');
 var WxParse = require('../../../../wxParse/wxParse.js');
+const myaudio = wx.createInnerAudioContext();
+
 
 Page({
 
@@ -20,35 +22,10 @@ Page({
     articleinfo: null,
     authorinfo: null,
     buy: false,
-
-
-    // windowHeight:'',
+    isplay: false, //是否播放
+    isHaveAudio: false, //是否含有音频
+    isHaveVideo: false, //是否含有视频
     course_id: '',
-    // guestbookinfo: [{
-    //     headimage: '/image/teacher.jpg',
-    //     nickname: '小地瓜',
-    //     is_valid: '0',
-    //     countpraise: '10',
-    //     content: '写的很好',
-    //     guestbook_time: '2018-09-28'
-    //   },
-    //   {
-    //     headimage: '/image/teacher.jpg',
-    //     nickname: '小地瓜',
-    //     is_valid: '0',
-    //     countpraise: '10',
-    //     content: '啦啦啦',
-    //     guestbook_time: '2018-09-28'
-    //   },
-    //   {
-    //     headimage: '/image/teacher.jpg',
-    //     nickname: '小地瓜',
-    //     is_valid: '0',
-    //     countpraise: '10',
-    //     content: '哈哈哈',
-    //     guestbook_time: '2018-09-28'
-    //   }
-    // ]
   },
 
   /**
@@ -159,6 +136,22 @@ Page({
 
   },
 
+  // 音频播放器
+  //播放
+  play: function () {
+    myaudio.play();
+    console.log(myaudio.duration);
+    this.setData({
+      isplay: true
+    });
+  },
+  // 停止
+  stop: function () {
+    myaudio.pause();
+    this.setData({
+      isplay: false
+    });
+  },
 
 
 
@@ -290,7 +283,7 @@ Page({
   artLikeUpload: function() {
     wx.request({
       // url: 'https://wx.bjjy.com/collectarticle',
-      url: api.API_UPLOADARTICLLIKE,      
+      url: api.API_UPLOADARTICLLIKE,
       data: {
         'article_id': this.data.articleinfo.article_id,
         'openid': wx.getStorageSync('openid'),
@@ -313,11 +306,11 @@ Page({
   },
 
 
-// 跳转到购买页
+  // 跳转到购买页
 
   jumpToBuy() {
-    var that =this
-    if (this.data.platform == 'ios'){
+    var that = this
+    if (this.data.platform == 'ios') {
       wx.showModal({
         content: '由于相关规范，iOS用户暂不可在小程序内订阅',
         showCancel: false,
@@ -325,7 +318,7 @@ Page({
         success: function(res) {}
 
       })
-    }else{
+    } else {
       wx.showModal({
         // title: '购买',
         content: '是否购买',
@@ -334,7 +327,7 @@ Page({
         // cancelColor: '',
         confirmText: '确定',
         // confirmColor: '',
-        success: function (res) {
+        success: function(res) {
           console.log(res)
           if (res.confirm) {
             console.log('用户点击确定')
@@ -356,8 +349,8 @@ Page({
         }
       })
     }
-    
-   
+
+
   },
 
   onShareAppMessage() {
@@ -389,7 +382,7 @@ Page({
     // 获取留言数据
     wx.request({
       // url: 'https://wx.bjjy.com/orderbyguestbook',
-      url: api.API_GETARTICLEMSG,      
+      url: api.API_GETARTICLEMSG,
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
@@ -497,7 +490,7 @@ Page({
     // 获取文章数据
     wx.request({
       // url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
-      url: api.API_GETARTICLEINFO,      
+      url: api.API_GETARTICLEINFO,
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
@@ -520,6 +513,21 @@ Page({
         if (app.globalData.isLogin) {
 
 
+          //判断是否含有音频和视频
+          //根据是否有audio_id来判断是否含有音频，如果有audio_id则含有音频，isHaveAudio为true,如果没有则不含有音频，isHaveAudio为false,
+          //根据是否有video_id来判断是否含有视频，如果有video_id则含有视频，isHaveVideo为true,如果没有则不含有视频，isHaveVideo为false,
+          if (res.data.articleinfo.audio_id) {
+            console.log('------含有音频---------')
+            that.setData({
+              isHaveAudio: true,
+            })
+          }
+          if (res.data.articleinfo.video_id) {
+            console.log('------含有视频---------')            
+            that.setData({
+              isHaveVideo: true
+            })
+          }
           /**
            * 无论用户是否购买，先进行赋值，在onshow时，判断用户是否购买，
            * 无购买，不对字段进行使用 
@@ -539,12 +547,14 @@ Page({
               articleinfo: res.data.articleinfo,
               authorinfo: res.data.authorinfo,
             })
+            myaudio.src = res.data.articleinfo.audio_url;
             WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
           } else {
             that.setData({
               articleinfo: res.data.articleinfo,
               authorinfo: res.data.authorinfo,
             })
+            myaudio.src = res.data.articleinfo.audio_url;
             WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
 
             //判断用户是否购买
@@ -555,21 +565,11 @@ Page({
                 buy: true,
               })
             } else {
-              // 跳转到购买页
-              // 判断是单文还是课程中的文章
-              // course_id = 0为单文
-              // if (res.data.articleinfo.course_id == "0") {
-              //   wx.navigateTo({
-              //     url: "/pages/sub_browse/pages/buy/buy?article_id=" + res.data.articleinfo.article_id
-              //   })
-              // } else {
-              //   wx.navigateTo({
-              //     url: "/pages/sub_browse/pages/buy/buy?course_id=" + res.data.articleinfo.course_id
-              //   })
-              // }
 
             }
           }
+
+
         } else {
           wx.showModal({
             title: '未登录',

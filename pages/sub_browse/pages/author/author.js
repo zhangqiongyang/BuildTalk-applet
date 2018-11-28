@@ -67,7 +67,7 @@ Page({
         //付费再进行下一步判断
         if (article_price == '0.00') {
           wx.navigateTo({
-            url: "/pages/sub_browse/pages/article/article?article_id=" + article_id,
+            url: "/pages/sub_browse/pages/video/video?article_id=" + article_id,
           })
         } else {
 
@@ -94,17 +94,17 @@ Page({
               console.log(res)
               // if (res.data.msg == '1') {
               //   console.log('---------已经购买了------------')
-                if (res.data.articleinfo.audio_id) {
-                  console.log('--------------跳转到音频文章-------------')
-                  wx.navigateTo({
-                    url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
-                  })
-                } else {
+                // if (res.data.articleinfo.audio_id) {
+                //   console.log('--------------跳转到音频文章-------------')
+                //   wx.navigateTo({
+                //     url: "/pages/sub_browse/pages/article/article?article_id=" + article_id
+                //   })
+                // } else {
                   console.log('--------------跳转到视频文章-------------')
                   wx.navigateTo({
                     url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
                   })
-                }
+                // }
               // } else {
               //   console.log('---------还未购买------------')
               //   wx.navigateTo({

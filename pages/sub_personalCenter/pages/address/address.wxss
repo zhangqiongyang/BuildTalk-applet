@@ -1,28 +1,44 @@
 /* pages/address/address.wxss */
+.background{
+  padding-top: 1px;
+}
 .form{
   background-color:#fff; 
-  padding: 0 22rpx;
+  /* padding: 0 22rpx; */
+  margin-top: 30rpx;
 }
 .form input{
-  height: 100rpx;
+  height: 88rpx;
   width: 100%;
   font-size: 26rpx;
-  color: #666;
+  color: #333;
 }
 .form textarea{
   width: 100%;
-  height: 148rpx;
+  height: 134rpx;
   padding: 22rpx 0;
   box-sizing: border-box;
-    font-size: 26rpx;
-  color: #666;
+  font-size: 26rpx;
+  color: #333;
 }
 .placeholder{
   font-size: 26rpx;
-  color: #999;
+  color: #333333;
+}
+.placeholder_active{
+  color: #FB670E; 
 }
 .formList{
-  border-bottom: 1px solid #e6e7eb;
+  border-bottom: 1px solid #EAEAEA;
+  /* height: 88rpx; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.formList image{
+  width: 44rpx;
+  height: 44rpx;
+  padding: 22rpx 20rpx 22rpx 30rpx;
 }
 .verifyInfo{
   font-size: 24rpx;
@@ -33,12 +49,14 @@
 
 
 .submitBtn{
-  margin: 82rpx 44rpx 0 44rpx;
+  /* margin: 82rpx 44rpx 0 44rpx; */
+  margin: 60rpx auto 0 auto;
   background-color: #7EBBF4;
   color: #fff;
   font-size: 30rpx;
-  height: 78rpx;
-  border-radius: 8px;
+  width: 690rpx;
+  height: 80rpx;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

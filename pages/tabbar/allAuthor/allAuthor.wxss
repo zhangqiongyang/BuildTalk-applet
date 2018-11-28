@@ -6,67 +6,74 @@
 }
 .S-list{
   background-color: #fff;
-  margin-bottom: 18rpx;
-  padding: 38rpx 36rpx 20rpx 24rpx;
-}
-.s_listCon{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  margin-bottom: 10rpx;
+  padding: 30rpx 30rpx 10rpx 30rpx;
 }
 
 
 .s_listTeacherInfo {
   display: flex;
   flex-direction: row;
-  width: 470rpx;
+  /* width: 470rpx;
   padding-bottom: 18rpx;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8; */
 }
 .s_listTeacherImg{
-  width: 68rpx;
-  height: 68rpx;
-  border: 1px solid #ff5d0a;
-  border-radius: 50%;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 10px;
+  padding-right: 30rpx;
 }
 .s_listTeacherImg image{
-  width: 68rpx;
-  height: 68rpx;
-  border-radius: 50%;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 10px;
 }
 .s_listTeacherCon{
   display: flex;
-  flex-direction: column;
-  padding-left: 18rpx;
+  flex-direction: row;
+  align-items: center;
+  /* padding-left: 18rpx; */
+}
+.s_listTeacherCon image{
+  width: 1px;
+  height: 20px;
+  padding: 0 20rpx;
 }
 .s_listTeacherName{
-  font-size: 26rpx;
+  font-size: 36rpx;
 }
 .s_listTeacherPosition{
-  font-size: 26rpx;
-  color: #888;
+  font-size: 24rpx;
+  color: #999;
 }
 
 
 
 
 .labelBox{
-  /* padding-top: 10rpx; */
+  padding-top: 30rpx;
   display: flex;
   flex-direction: row;
+  margin-left:-10rpx; 
+  /* white-space: nowrap; */
+  /* word-break: break-all; */
+  flex-wrap: wrap;
+  /* margin-bottom: 10rpx; */
 }
 .label{
-  font-size: 26rpx;
-  color: #888;
-  background-color: #dfdede;
+  font-size: 24rpx;
+  color: #333;
+  background-color: #F8F8F8;
   /* width: 100rpx; */
-  padding: 0 10rpx;
+  padding: 20rpx 50rpx;
   margin:0 10rpx; 
-  height: 40rpx;
-  border-radius: 20px;
+  /* height: 40rpx; */
+  border-radius: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20rpx;
 }
 
 
@@ -88,11 +95,11 @@
 
 
 .s_authorInfo{
-  font-size: 22rpx;
-  color: #888;
-  padding: 20rpx 30rpx 0 0;
+  font-size: 24rpx;
+  color: #333;
+  padding-top: 28rpx;
   display: -webkit-box;
-    line-height: 40rpx;
+    line-height: 36rpx;
     word-break: break-all;
     -webkit-box-orient: vertical;
     -webkit-line-clamp:2;

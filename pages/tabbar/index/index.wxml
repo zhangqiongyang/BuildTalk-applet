@@ -115,32 +115,23 @@
           <image src='{{item.author_pic}}' mode='aspectFill'></image>
         </view>
         <view class='courseContent'>
-          <!-- <view class='courseNameBox'>
-            <text class='courseName'>{{item.course_name}}</text>
-            <text class='coursePrice'>￥{{item.course_money}}</text>
-          </view>
-          <text class='CourseIntroduce'>{{item.course_desc}}</text>
-          <view class='courseTimeAndPrice'>
-            <text class='courseTime'>{{item.course_hour}}课时·约{{item.course_time}}分钟</text>
-
-          </view> -->
           <view class='teacherInformation'>
             <text class='teacherName'>{{item.author_name}}</text>
-            <!-- <text class='teacherPosition'>|</text> -->
+            <image src='/image/allAuthor_line.png'></image>            
             <text class='teacherPosition'>{{item.author_desc}}</text>
           </view>
-
-
+          <view class='s_authorInfo'>{{item.author_intro}}</view>
           <view class='labelBox'>
             <block wx:for='{{item.sign}}' wx:key='key'>
               <text class='label' data-label='{{item}}'>{{item}}</text>
-              <!-- <text class='label' catchtap='jumpToSearchLabel' data-label='{{item}}'>{{item}}</text> -->
+              <!-- <text class='label' catchtap='jumpToSearchLabel' data-label='{{item}}'>{{item}}</text>-->
             </block>
           </view>
         </view>
 
       </view>
     </block>
+    
   </view>
 
 

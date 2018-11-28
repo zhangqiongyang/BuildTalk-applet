@@ -10,7 +10,7 @@ view {
 .search_inputGroup {
   display: flex;
   height: 88rpx;
-  border-bottom: 1rpx solid #EAEAEA;
+  /* border-bottom: 1rpx solid #EAEAEA; */
   background-color: #fff;
   align-items: center;
   flex-direction: row;
@@ -58,7 +58,7 @@ view {
   box-sizing: border-box;
   font-size: 24rpx;
   width: 690rpx;
-  height: 56rpx;
+  height: 68rpx;
   margin-left: 30rpx;
 }
 
@@ -136,43 +136,50 @@ view {
 
 .S-list {
   background-color: #fff;
-  margin-bottom: 18rpx;
-  padding: 38rpx 36rpx 20rpx 24rpx;
+  margin-bottom: 20rpx;
+  /* padding: 38rpx 36rpx 20rpx 24rpx; */
 }
 
 .s_listCon {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+    padding: 35rpx 30rpx 30rpx 30rpx;
+  border-bottom: 1px solid #EAEAEA;
 }
 
 .s_listTeacherInfo {
   display: flex;
   flex-direction: row;
-  width: 470rpx;
-  padding-bottom: 18rpx;
-  border-bottom: 1px solid #e8e8e8;
+  align-items: center;  
+  /* width: 470rpx; */
+  padding:66rpx 0 30rpx 0;
+  /* border-bottom: 1px solid #e8e8e8; */
 }
 
 .s_listTeacherImg {
-  width: 68rpx;
-  height: 68rpx;
-  border: 1px solid #ff5d0a;
+  width: 56rpx;
+  height: 56rpx;
+  /* border: 1px solid #ff5d0a; */
   border-radius: 50%;
 }
 
 .s_listTeacherImg image {
-  width: 68rpx;
-  height: 68rpx;
+  width: 56rpx;
+  height: 56rpx;
   border-radius: 50%;
 }
 
 .s_listTeacherCon {
   display: flex;
-  flex-direction: column;
-  padding-left: 18rpx;
+  flex-direction: row;
+  padding-left: 20rpx;
 }
-
+.s_listTeacherCon image{
+  width: 1px;
+  height: 20px;
+  padding: 0 20rpx;
+}
 .s_listTeacherName {
   font-size: 26rpx;
 }
@@ -194,18 +201,20 @@ view {
 }
 
 .s_listCourseSynopsis {
-  font-size: 22rpx;
-  color: #888;
+ font-size: 24rpx;
+  color: #777;
+  padding-top: 27rpx;
 }
 
 .S-listImg {
-  width: 182rpx;
-  height: 174rpx;
+  padding-top: 90rpx;  
+  width: 146rpx;
+  height: 146rpx;
 }
 
 .S-listImg image {
-  width: 182rpx;
-  height: 174rpx;
+  width: 146rpx;
+  height: 146rpx;
 }
 
 .s_listArticle {
@@ -237,22 +246,28 @@ view {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  height: 80rpx;
+  padding: 0 30rpx;
 }
 
-.s_listPriceGroupText {
-  color: #888;
-  font-size: 22rpx;
+.s_listPriceGroupText{
+  color: #AFAFAF;
+  font-size: 20rpx;
+}
+.color{
+  color: #F86161;
 }
 .boutique_priceItem{
   display: flex;
   flex-direction: row;
   align-items: center;
-    line-height: 30rpx;
+  line-height: 30rpx;
 }
-.s_listPrice {
-  color: #ff5a05;
+.s_listPrice{
+  color: #F86161;
+  font-size: 26rpx;
 }
+
 
 .search_none {
   color: #888;

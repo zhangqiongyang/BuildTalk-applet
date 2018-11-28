@@ -11,6 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    placeholder_name:'收货人',
+    placeholder_phone:'手机号码',
+    placeholder_address:'详细地址',
     recevinginfo:'',
     isNotName: false,
     isNotPhone: false,
@@ -33,7 +36,8 @@ Page({
       console.log('-------------值不为空-------------')
       this.setData({
         isNotName: false,
-        'recevinginfo.consignee': value
+        'recevinginfo.consignee': value,
+        placeholder_name:'请输入收货人姓名'
       })
     }
     console.log('------------修改的名字-------------')
@@ -51,7 +55,8 @@ Page({
       console.log('-------------值不为空-------------')
       this.setData({
         isNotPhone: false,
-        'recevinginfo.telephone': value
+        'recevinginfo.telephone': value,
+        placeholder_phone: '请输入手机号码'
       })
     }
   },
@@ -67,7 +72,8 @@ Page({
       console.log('-------------值不为空-------------')
       this.setData({
         isNotAddress: false,
-        'recevinginfo.address': value
+        'recevinginfo.address': value,
+        placeholder_address: '请输入详细地址'        
       })
     }
   },

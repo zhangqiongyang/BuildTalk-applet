@@ -373,6 +373,7 @@ Page({
       keyword: keyword
     })
     console.log(this.data.keyword)
+    
 
     this.delHistoryPort()
 
