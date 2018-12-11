@@ -40,7 +40,7 @@
   "subpackages": [
     {
       "root": "pages/sub_personalCenter",
-      "name":"sub_personalCenter",
+      "name": "sub_personalCenter",
       "pages": [
         "pages/address/address",
         "pages/alreadyBought/alreadyBought",
@@ -62,7 +62,9 @@
         "pages/activity/activity",
         "pages/author/author",
         "pages/message/message",
-        "pages/article/article"
+        "pages/article/article",
+        "pages/allNews/allNews",
+        "pages/authorDesc/authorDesc"
       ]
     }
   ]

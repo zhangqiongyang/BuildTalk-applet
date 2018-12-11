@@ -1,87 +1,115 @@
 /* pages/author/author.wxss */
 
 /* 作者信息 */
-.authorInfo{
+
+.authorInfo {
   display: flex;
   flex-direction: row;
-  padding: 40rpx;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40rpx 0 60rpx 30rpx;
 }
-.authorInfo image{
-  width: 120rpx;
-  height: 120rpx;
-  border: 4px solid #eaeaea;
+
+.author {
+  display: flex;
+  flex-direction: row;
 }
-.authorText{
+
+.author image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 14px;
+  /* border: 4px solid #eaeaea; */
+}
+
+.authorText {
   display: flex;
   flex-direction: column;
   padding-left: 30rpx;
 }
-.authorName{
+
+.authorName {
   font-size: 36rpx;
   padding-bottom: 20rpx;
 }
 
+.authorIntroduce {
+  font-size: 24rpx;
+  color: #afafaf;
+}
+
+.checkMore {
+  width: 15rpx;
+  height: 28rpx;
+  padding-right: 40rpx;
+}
 
 /* 导航栏 */
-.nav{
-  padding: 30rpx;
+
+.nav {
+  padding: 0 30rpx;
   display: flex;
   flex-direction: row;
 }
-.navText{
-  display:flex;
-  border: 1px solid #eaeaea;
-  width: 340rpx;
-  height: 80rpx;
+
+.navText {
+  display: flex;
+  border: 1px solid #d2d2d2;
+  width: 345rpx;
+  height: 84rpx;
+  font-size: 34rpx;
   align-items: center;
   justify-content: center;
 }
 
-.active{
-  display:flex;
-  border: 1px solid #eaeaea;
-  width: 340rpx;
-  height: 80rpx;
+.active {
+  display: flex;
+  border: 1px solid #7ebbf4;
+  width: 345rpx;
+  height: 84rpx;
+  font-size: 34rpx;
   align-items: center;
   justify-content: center;
-  background-color: #10AEFF;
+  background-color: #7ebbf4;
   color: #fff;
   /* border: none; */
 }
 
 /* 精品单文 */
-.article{
-  background-color: #fdfaf3;
+
+.article {
+  background-color: #f5f5f5;
   padding-top: 56rpx;
   padding-bottom: 66rpx;
 }
-.articleItem{
+
+.articleItem {
   position: relative;
   /* width: 100%; */
-
   margin: 0 auto 78rpx auto;
-  width: 698rpx;
+  width: 690rpx;
 }
 
-.articleItemCon{
+.articleItemCon {
   background-color: #fff;
   padding-top: 1rpx;
+  border-radius: 10px;
 }
 
-.articleOrder{
+.articleOrder {
   width: 270rpx;
   height: 64rpx;
   margin: -13rpx auto 0 auto;
 }
 
-.articleOrder image{
+.articleOrder image {
   width: 270rpx;
   height: 64rpx;
   position: absolute;
   /* position: absolute; */
 }
 
-.articleOrder text{
+.articleOrder text {
   display: inline-block;
   text-align: center;
   width: 100%;
@@ -92,75 +120,87 @@
   z-index: 2;
 }
 
-.articleContent{
-  width: 698rpx;
-  /* height: 846rpx; */
-  border: 1px solid #e6e5e1;
-  border-radius: 10px;
-  padding-top: 50rpx;
-  margin-top: -54rpx;
-  padding-bottom: 60rpx;
+.articleName {
+  font-size: 34rpx;
+  padding: 30rpx;
+  font-weight: bold;
+  line-height: 36rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.articlePrice{
-  color: red;
-  font-size: 48rpx;
-  float: right;
-  /* padding-right: 60rpx;
-  padding-top: 20rpx; */
+.articleImage {
+  /* margin: 0 auto; */
+  width: 100%;
+  height: 278rpx;
+  position: relative;
 }
 
-.originalPrice{ 
-  float: right;
-  font-size: 20rpx;
-   color: #999;
-  text-decoration: line-through;
-  padding-left: 10rpx;
-  /* padding-top: 5rpx; */
-  padding-right: 30rpx;
-  padding-top: 30rpx;
-}
-
-.articleName{
-  font-size: 38rpx;
-  text-align: center;
-  padding-top: 54px;
-  padding-bottom: 50rpx;
-  margin: 0 auto;
-  width: 582rpx;
-  display: block;
-}
-
-.articleImage{
-  margin: 0 auto;
-  width: 652rpx;
-  height: 356rpx;
-}
-
-.articleImage image{
+.articleImageBack {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   width: 100%;
   height: 100%;
 }
 
-.articleCon{
-  padding-top: 30rpx;
-  margin: 0 auto;
-  display: -webkit-box;
-  width: 646rpx;
-  font-size: 28rpx;
-  line-height: 46rpx;
-  word-break: break-all;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp:4;
-  overflow: hidden;
-  text-overflow:ellipsis;
+.articleImageBoutique {
+  width: 29rpx;
+  height: 50rpx;
+  position: absolute;
+  padding-left: 20rpx;
+  top: 0;
+  left: 0;
 }
 
+.articlePriceBox {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* width: 232rpx; */
+  height: 88rpx;
+  background: rgba(0, 0, 0, 1);
+  opacity: 0.5;
+  padding-left: 24prx;
+  padding-right: 24rpx;
+  display: flex;
+  align-items: center;
+}
 
-.read{
+.articlePrice {
+  color: #f86161;
+  font-size: 48rpx;
+}
+
+.originalPrice {
+  float: right;
+  font-size: 24rpx;
+  color: #fff;
+  text-decoration: line-through;
+  padding-top: 22rpx;
+  padding-left: 14rpx;
+}
+
+.articleCon {
+  padding: 0 40rpx 30rpx 28rpx;
+  display: -webkit-box;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 36rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.read {
   width: 260rpx;
   height: 74rpx;
-  border:  1px solid #e9a130;
+  border: 1px solid #e9a130;
   background-color: #fff;
   color: #fd9606;
   border-radius: 20px;
@@ -170,12 +210,12 @@
   margin: 50rpx auto 0 auto;
 }
 
-.author_clickBox{
+.author_clickBox {
   /* padding: 20rpx; */
   width: 100%;
 }
 
-.author_clickBoxImage{
+.author_clickBoxImage {
   width: 34rpx;
   height: 30rpx;
   display: flex;
@@ -183,16 +223,16 @@
   margin: 0 auto;
 }
 
-.author_clickBoxImage image{
+.author_clickBoxImage image {
   width: 34rpx;
   height: 30rpx;
 }
 
-.author_click{
+.author_click {
   background-color: #ff9801;
   width: 688rpx;
   height: 74rpx;
-  border:  1px solid #ed9b21;
+  border: 1px solid #ed9b21;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -200,61 +240,60 @@
   margin: 30rpx auto 76rpx auto;
 }
 
-.author_click image{
+.author_click image {
   width: 46rpx;
   height: 53rpx;
 }
 
-.author_click text{
+.author_click text {
   color: #fff;
   padding-left: 20rpx;
 }
 
-.tips{
-  width: 696rpx;
+.tips {
+  width: 690rpx;
   /* height: 286rpx; */
   background-color: #fff6e4;
-  border: 2px solid #fff;
   margin: 0 auto;
-  padding: 16rpx 52rpx 32rpx 56rpx;
+  padding: 40rpx;
   box-sizing: border-box;
 }
 
-.tipsTitle{
+.tipsTitle {
   display: flex;
   flex-direction: row;
-  height: 88rpx;
+  height: 48rpx;
   justify-content: space-between;
   align-items: center;
-  line-height: 88rpx;
+  line-height: 48rpx;
 }
 
-.author_line{
-  height: 1px;
-  width: 176rpx;
-  background-color: #ffd591;
+.author_line {
+  width: 188rpx;
+  height: 2rpx;
+  background: rgba(255, 216, 154, 1);
 }
 
-.tipsTitleText{
-  background-color: #ff9a00;
-  color: #fff;
-  font-size: 28rpx;
+.tipsTitleText {
+  background-color: #FF9900;
+  color: #FFF6E4;
+  font-size: 30rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  width: 174rpx;
+  width: 172rpx;
   height: 48rpx;
 }
 
-.tips text{
-  line-height: 44rpx;
-  font-size: 26rpx;
-  color: #888;
+.tips text {
+  line-height: 36rpx;
+  font-size: 24rpx;
+  color: #666;
   /* display: block; */
 }
 
-.none{
+.none {
   font-size: 28rpx;
   color: #888;
   text-align: center;
@@ -262,23 +301,24 @@
   line-height: 400rpx;
 }
 
-
 /* 系列课程 */
 
-.course{
+.course {
   background-color: #f5f5f5;
 }
-.S-list{
+
+.S-list {
   background-color: #fff;
-  margin-bottom: 18rpx;
-  padding: 38rpx 36rpx 20rpx 24rpx;
+  margin-bottom: 20rpx;
 }
-.s_listCon{
+
+.s_listCon {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 35rpx 30rpx 30rpx 30rpx;
+  border-bottom: 1px solid #eaeaea;
 }
-
 
 .s_listTeacherInfo {
   display: flex;
@@ -287,83 +327,95 @@
   padding-bottom: 18rpx;
   border-bottom: 1px solid #e8e8e8;
 }
-.s_listTeacherImg{
+
+.s_listTeacherImg {
   width: 68rpx;
   height: 68rpx;
   border: 1px solid #ff5d0a;
   border-radius: 50%;
 }
-.s_listTeacherImg image{
+
+.s_listTeacherImg image {
   width: 68rpx;
   height: 68rpx;
   border-radius: 50%;
 }
-.s_listTeacherCon{
+
+.s_listTeacherCon {
   display: flex;
   flex-direction: column;
-  padding-left: 18rpx;
+  padding-left: 20rpx;
+  display: -webkit-box;
+  line-height: 36rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.s_listTeacherName{
+
+.s_listTeacherName {
   font-size: 26rpx;
 }
-.s_listTeacherPosition{
+
+.s_listTeacherPosition {
   font-size: 26rpx;
   color: #888;
 }
 
-
-
-
-
-.s_listCourseInfo{
+.s_listCourseInfo {
   display: flex;
   flex-direction: column;
-  /* padding-top: 26rpx; */
-}
-.s_listCourseName{
-  font-size:30rpx;
-  color:#333;
-}
-.s_listCourseSynopsis{
-  font-size: 22rpx;
-  color: #888;
-  padding-top: 20rpx;
+  padding-top: 26rpx;
 }
 
-
-
-
-.S-listImg{
-  width: 182rpx;
-  height: 174rpx;
-}
-.S-listImg image{
-  width: 182rpx;
-  height: 174rpx;
+.s_listCourseName {
+  font-size: 30rpx;
+  color: #333;
 }
 
+.s_listCourseSynopsis {
+  font-size: 24rpx;
+  color: #777;
+  padding-top: 27rpx;
+  display: -webkit-box;
+  line-height: 36rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+.S-listImg {
+  padding-top: 90rpx;
+  width: 146rpx;
+  height: 146rpx;
+}
 
+.S-listImg image {
+  width: 146rpx;
+  height: 146rpx;
+}
 
-.s_listArticle{
+.s_listArticle {
   padding-top: 28rpx;
   display: flex;
   flex-direction: row;
 }
-.s_listArticleId{
+
+.s_listArticleId {
   font-size: 26rpx;
   color: #888;
 }
-.s_listArticleName{
+
+.s_listArticleName {
   font-size: 26rpx;
   color: #888;
   padding-left: 10rpx;
 }
 
-
-
-
-.underline{
+.underline {
   background-color: #ddd;
   height: 2rpx;
   width: 22rpx;
@@ -371,39 +423,44 @@
   margin-bottom: 18rpx;
 }
 
-
-
-
-.s_listPriceGroup{
+.s_listPriceGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 80rpx;
+  padding: 0 30rpx;
 }
-.s_listPriceGroupText{
-  color: #888;
-  font-size: 22rpx;
+
+.s_listPriceGroupText {
+  color: #afafaf;
+  font-size: 20rpx;
 }
-.s_listPrice{
-  color: #ff5a05;
+
+.color {
+  color: #f86161;
 }
-.boutique_priceItem{
+
+.boutique_priceItem {
   display: flex;
   flex-direction: row;
   align-items: center;
-    line-height: 30rpx;
+  line-height: 30rpx;
 }
 
+.s_listPrice {
+  color: #f86161;
+  font-size: 26rpx;
+}
 
-
-
-.search_none{
+.search_none {
   color: #888;
   font-size: 30rpx;
   text-align: center;
   padding-top: 100rpx;
 }
 
-#jumpToFeedback{
+#jumpToFeedback {
   font-weight: bold;
-  color: #7EBBF4;
+  color: #3795ED;
+  padding-left: 4rpx;
 }

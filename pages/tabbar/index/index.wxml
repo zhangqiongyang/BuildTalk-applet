@@ -36,20 +36,25 @@
 
 
   <!-- 建谈新闻 -->
-  <!-- <view class='index_news'>
+  <view class='index_news'>
     <view class='newsNav'>
-      <text class='newsTitle'>建谈新闻</text>
-      <text class='newsAll'>查看全部></text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <text class='newsTitle'>每日一谈</text>
+      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <view  class='newsAll' bindtap='jumpToAllNews'>
+        <image src='/image/index_more.png'></image>
+      </view>
     </view>
     <view class='newsList'>
-      <block wx:for='{{newsList}}'>
-        <view>
+      <block wx:for='{{newsList}}' wx:key='key' >
+        <view class='newsCon' bindtap='jumpToNews' data-article_id='{{item.article_id}}'>
           <image class='newsListImg' src='/image/index_play.png'></image>
-          <navigator>{{item}}</navigator>
+          <text class='newsListText'>{{item.newsNumber}}</text>
+          <text class='newsListCon'>{{item.newsName}}</text>
         </view>
       </block>
     </view>
-  </view> -->
+  </view>
 
 
   <!-- 精品专栏 -->

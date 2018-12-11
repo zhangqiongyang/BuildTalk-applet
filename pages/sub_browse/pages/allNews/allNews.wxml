@@ -1,0 +1,96 @@
+<!--pages/sub_browse/pages/allNews/allNews.wxml-->
+<view>
+  <!-- 作者信息 -->
+  <view class='authorInfo' bindtap='jumpToAuthorDesc' data-author_id='{{authorinfo.author_id}}'>
+    <view class='author'>
+      <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
+      <view class='authorText'>
+        <text class='authorName'>{{authorinfo.author_name}}</text>
+        <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+      </view>
+    </view>
+    <image class='checkMore' src='/image/list_more.png'></image>
+  </view>
+
+
+  <!-- 新闻列表 -->
+  <view class='news'>
+    <view class='newsQuarter'>
+      <view class='newsTitleBox'>
+        <view class='newsTitleLeft'>
+          <image src='/image/allNewsMicrophone.png'></image>
+          <text class='newsBigTitle'>谈小建第一季</text>
+          <view class='newsAlreadyUpdated'>
+            <text>已更新</text>
+            <text class='color'>26</text>
+            <text>讲</text>
+          </view>
+        </view>
+        <image bindtap='changeFirstOpen' class='newsTitleMore' src='/image/allNewsDown.png'></image>
+      </view>
+      <view class='newsList' wx:if='{{isFirstOpen}}'>
+        <block wx:for='{{newsList}}' wx:key='key'>
+          <view class='newsItem' data-article_id='{{item.article_id}}' bindtap='jumpToArticle'>
+            <view class='newsTitle'>
+              <text>{{item.newsNum}}</text>
+              <text class='newsTitleText'>{{item.newsTitle}}</text>
+            </view>
+            <view class='newsInfo'>
+              <view class='newsDesc'>
+                <view class='newsImageBox'>
+                  <image src='/image/allNewsTime.png'></image>
+                  <text>{{item.newsTime}}</text>
+                </view>
+                <view class='newsImageBox'>
+                  <image src='/image/allNewsEye.png'></image>
+                  <text>{{item.newsLearned}}</text>
+                </view>
+              </view>
+              <!-- <view class='imageBox'>
+                <button class='imageItem' open-type='share'>
+                  <image src='/image/acticle_share.png'></image>
+                </button>
+              <view class='imageItem'>
+                <image src='/image/article_play.png'></image>
+                <text>播放</text>
+              </view>
+            </view> -->
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class='newsQuarter'>
+
+      <view class='newsTitleBox'>
+        <view class='newsTitleLeft'>
+          <image src='/image/allNewsMicrophone.png'></image>
+          <text class='newsBigTitle'>谈小建第二季</text>
+          <view class='newsAlreadyUpdated'>
+            <text>已更新</text>
+            <text class='color'>26</text>
+            <text>讲</text>
+          </view>
+        </view>
+        <image class='newsTitleMore' src='/image/allNewsDown.png'></image>
+      </view>
+    </view>
+
+    <view class='newsQuarter'>
+
+      <view class='newsTitleBox'>
+        <view class='newsTitleLeft'>
+          <image src='/image/allNewsMicrophone.png'></image>
+          <text class='newsBigTitle'>谈小建第三季</text>
+          <view class='newsAlreadyUpdated'>
+            <text>已更新</text>
+            <text class='color'>26</text>
+            <text>讲</text>
+          </view>
+        </view>
+        <image class='newsTitleMore' src='/image/allNewsDown.png'></image>
+      </view>
+    </view>
+  </view>
+
+</view>

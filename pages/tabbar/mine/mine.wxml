@@ -46,7 +46,7 @@
 
 
 
-    <view class='accountItem' bindtap='jumpToAddress'>
+    <!-- <view class='accountItem' bindtap='jumpToAddress'>
       <view class='accountContent'>
         <view class='accountImg'>
           <image src='/image/mine_adress.png'></image>
@@ -57,7 +57,7 @@
         <text class='accountNumber accountNumberColor'></text>
         <image src='/image/more.png'></image>
       </view>
-    </view>
+    </view> -->
 
 
 

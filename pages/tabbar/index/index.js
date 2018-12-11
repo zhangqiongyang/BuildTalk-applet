@@ -1,4 +1,5 @@
 var app = getApp();
+const util = require('../../../utils/util.js')
 const api = require('../../../utils/api.js');
 Page({
   data: {
@@ -9,12 +10,28 @@ Page({
     duration: 500,
     platform:app.globalData.platform,
     articleinfo: '',
-    // newsList: [
-    //   '技术交流 | 装配式铝模板施工工法',
-    //   'BIM的5项国家标准',
-    //   '当中国尊遇见BIM+FM，怎一个“爽”字了得',
-    //   'BIM技术在施工过程中如何应用？'
-    // ],
+    newsList: [
+      {
+        article_id:11,
+        newsNumber:'第一期',
+        newsName:'技术交流 | 装配式铝模板施工工法'
+      },
+      {
+        article_id: 12,
+        newsNumber: '第二期',        
+        newsName: 'BIM的5项国家标准'
+      },
+      {
+        article_id: 13,
+        newsNumber: '第三期',        
+        newsName: '当中国尊遇见BIM+FM，怎一个“爽”字了得'
+      },
+      {
+        article_id: 14,
+        newsNumber: '第四期',        
+        newsName: 'BIM技术在施工过程中如何应用？'
+      }
+    ],
     // bookList: [{
     //     bookImg: '/image/book.jpg',
     //     bookName: '《BIM建造》',
@@ -144,6 +161,13 @@ Page({
   },
 
 
+  // 跳转到查看全部新闻
+  jumpToAllNews: function () {
+    wx: wx.navigateTo({
+      url: "/pages/sub_browse/pages/allNews/allNews"
+    })
+  },
+
 
   // 跳转到查看全部课程
   jumpToAllCourse: function() {
@@ -164,7 +188,14 @@ Page({
 
 
 
-
+  //跳转到相应新闻
+  jumpToNews(event){
+    console.log(event);
+    let article_id = event.currentTarget.dataset.article_id;
+    wx.navigateTo({
+      url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
+    })
+  },
 
 
 
@@ -408,7 +439,35 @@ Page({
 
 
   onShow() {
-    // console.log(this.data.info)
+    let that =this;
+    //上传用户的头像和昵称到数据库
+    if (!util.isEmpty(wx.getStorageSync('unionId')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(app.globalData.userInfo.nickName) && !util.isEmpty(app.globalData.userInfo.avatarUrl)) {
+      wx.request({
+        // url: 'https://wx.bjjy.com/operateuser',
+        url: api.API_MINEUPLOADINFO,
+        data: {
+          source: 'xcx',
+          unionid: wx.getStorageSync('unionId'),
+          wx_openid: wx.getStorageSync('openid'),
+          nickname: app.globalData.userInfo.nickName,
+          headimage: app.globalData.userInfo.avatarUrl,
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        dataType: 'json',
+        responseType: 'text',
+        success: function (res) {
+          console.log('-------------上传用户的头像和昵称到数据库了(mine.js)-----------------')
+          console.log(wx.getStorageSync('openid'))
+          console.log('---------------------------')
+        },
+        fail: function (res) {
+          console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
+        },
+      })
+    }
   },
 
 

@@ -1,0 +1,8 @@
+<!--components/authorTitle/index.wxml-->
+<view class='authorInfo'>
+    <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
+    <view class='authorText'>
+      <text class='authorName'>{{authorinfo.author_name}}</text>
+      <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+    </view>
+</view>

@@ -79,11 +79,11 @@ Page({
       // url: 'https://wx.bjjy.com/saveguestbook',
       url: api.API_UPLOADMSG,      
       data: {
-        'wx_openid': wx.getStorageSync('openid'),
+        wx_openid: wx.getStorageSync('openid'),
         source: 'xcx',
         unionid: wx.getStorageSync('unionId'),
-        'article_id': that.data.article_id,
-        'content': that.data.value
+        article_id: that.data.article_id,
+        content: that.data.value
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -155,10 +155,10 @@ Page({
       // url: 'https://wx.bjjy.com/deleteguestbook',
       url: api.API_DELETEMSG,
       data: {
-        'openid':wx.getStorageSync('openid'),
+        openid:wx.getStorageSync('openid'),
         source: 'xcx',
         unionid: wx.getStorageSync('unionId'),
-        'guestbook_id': that.data.guestbook_id
+        guestbook_id: that.data.guestbook_id
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -200,10 +200,10 @@ Page({
       // url: 'https://wx.bjjy.com/getguestbookbyopenid',
       url: api.API_GETMSG,      
       data: {
-        'openid':wx.getStorageSync('openid'),
+        openid:wx.getStorageSync('openid'),
         source: 'xcx',
         unionid: wx.getStorageSync('unionId'),
-        'article_id': that.data.article_id,
+        article_id: that.data.article_id,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

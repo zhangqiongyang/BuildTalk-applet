@@ -100,7 +100,7 @@ Page({
     // console.log(this.data.courseinfo.course_name)
     // console.log(this.data.courseinfo.course_id)
 
-    if (this.isHaveAddress){
+    // if (this.data.isHaveAddress){
 
 
 
@@ -393,13 +393,13 @@ Page({
 
     }
 
-    }else{
-      wx.showModal({
-        title: '请填写收货地址',
-        content: '',
-        showCancel:false,
-      })
-    }
+    // }else{
+    //   wx.showModal({
+    //     title: '请填写收货地址',
+    //     content: '',
+    //     showCancel:false,
+    //   })
+    // }
 
 
 

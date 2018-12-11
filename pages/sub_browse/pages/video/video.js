@@ -17,6 +17,7 @@ Page({
    * buy:用户是否已购
    */
   data: {
+    windowHeight:app.globalData.windowHeight,
     platform: app.globalData.platform,
     arcData: null,
     articleinfo: null,
@@ -194,6 +195,7 @@ Page({
   msglike: function(event) {
     // console.log(params);
     // console.log(event)
+    let that =this;
     let key = event.currentTarget.dataset.key;
     let guestbook_id = event.currentTarget.dataset.guestbookid;
     // console.log('guestbook_id' + event.currentTarget.dataset.guestbookid);    
@@ -201,46 +203,35 @@ Page({
     let msgKey = 'guestbookinfo[' + key + '].is_valid';
     let msgnum = 'guestbookinfo[' + key + '].countpraise';
     let num = 'guestbookinfo[' + key + '].num';
-    if (this.data.guestbookinfo[key].is_valid == '0') {
-      this.setData({
-        [msgKey]: '1'
-      });
-      this.setData({
-        [msgnum]: Number(this.data.guestbookinfo[key].countpraise) - 1
-      });
-      this.setData({
-        [num]: '-1'
-      });
-      console.log(this.data.guestbookinfo[key].num);
-      this.setData({
-        a: this.data.guestbookinfo[key].num
-      });
-      this.setData({
+    // console.log(that.data.guestbookinfo[key].is_valid);
+    if (that.data.guestbookinfo[key].is_valid == '0' ) {
+      
+
+      that.setData({
+        [msgKey]: '1',
+        [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
+        [num]: '1',
         b: guestbook_id
-      })
-      console.log(this.data.b)
-      this.msgLikeUpload()
+      });
+      console.log(that.data.guestbookinfo[key].num);
+      console.log(that.data.b)
+      that.msgLikeUpload()
       //console.log(a)
+      
+
     } else {
-      this.setData({
-        [msgKey]: '0'
-      });
-      this.setData({
-        [msgnum]: Number(this.data.guestbookinfo[key].countpraise) + 1
-      });
-      this.setData({
-        [num]: '1'
-      });
-      console.log(this.data.guestbookinfo[key].num);
-      this.setData({
-        a: this.data.guestbookinfo[key].num
-      });
-      this.setData({
+
+      that.setData({
+        [msgKey]: '0',
+        [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
+        [num]: '-1',
         b: guestbook_id
-      })
-      console.log(this.data.b)
-      this.msgLikeUpload()
+      });
+      console.log(that.data.guestbookinfo[key].num);
+      console.log(that.data.b)
+      that.msgLikeUpload()
       //console.log(a)
+    
     }
 
 
@@ -251,11 +242,14 @@ Page({
 
   // 留言点赞上传接口
   msgLikeUpload: function() {
+    // console.log(this.data.b)
+    // console.log(wx.getStorageSync('openid'))
+    // console.log(wx.getStorageSync('unionId'))
+    
     wx.request({
       // url: 'https://wx.bjjy.com/updateguestbook',
       url: api.API_UPLOADMSGLIKE,
       data: {
-        'num': this.data.a,
         'guestbook_id': this.data.b,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',

@@ -120,24 +120,42 @@
 }
 
 .newsList {
-  padding: 30rpx 28rpx;
+  padding: 30rpx;
+}
+
+.newsCon{
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .newsListImg {
   width: 30rpx;
   height: 30rpx;
 }
-
+/* 
 .newsListImg image {
   width: 30rpx;
   height: 30rpx;
+} */
+
+
+
+.newsListText {
+  display: inline-block;
+  line-height: 62rpx;
+  padding-left: 20rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  /* width: 90rpx; */
 }
 
-.newsList navigator {
-  display: inline-block;
-  line-height: 58rpx;
+.newsListCon{
+  width: 530rpx;
   padding-left: 20rpx;
-  font-size: 28rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
 
 /* 精品专栏样式 */
@@ -149,7 +167,6 @@
 
 .swiperbackground {
   background-color: #fff;
-
   height: 438rpx;
 }
 
@@ -160,7 +177,7 @@
   background-color: #fff;
   border-radius: 20px;
   display: inline-block;
-    border: 1px solid #EAEAEA;
+  border: 1px solid #eaeaea;
 }
 
 .boutique_img {
@@ -202,10 +219,12 @@
   display: flex;
   flex-direction: row;
 }
-.boutique_priceItem{
+
+.boutique_priceItem {
   display: flex;
   flex-direction: row;
 }
+
 .boutique_price {
   font-size: 26rpx;
   color: #f86161;
@@ -222,9 +241,9 @@
   font-size: 24rpx;
   color: #777;
   padding-top: 16rpx;
-     overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .boutique_author {
@@ -324,6 +343,7 @@
   font-size: 26rpx;
   color: #F86161;
 } */
+
 .teacherInformation {
   display: flex;
   flex-direction: row;
@@ -332,43 +352,46 @@
 
 .teacherName {
   font-size: 36rpx;
-
 }
-.teacherInformation image{
+
+.teacherInformation image {
   width: 1px;
   height: 20px;
   padding: 0 20rpx;
 }
+
 .teacherPosition {
   font-size: 24rpx;
   color: #999;
 }
-.s_authorInfo{
+
+.s_authorInfo {
   font-size: 24rpx;
   color: #333;
   padding-top: 28rpx;
   display: -webkit-box;
-    line-height: 36rpx;
-    word-break: break-all;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp:2;
-    overflow: hidden;
-    text-overflow:ellipsis;
+  line-height: 36rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.labelBox{
+.labelBox {
   padding-top: 30rpx;
   display: flex;
   flex-direction: row;
-  margin-left:-10rpx; 
+  margin-left: -10rpx;
   flex-wrap: wrap;
 }
-.label{
+
+.label {
   font-size: 24rpx;
   color: #333;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   padding: 20rpx 50rpx;
-  margin:0 10rpx; 
+  margin: 0 10rpx;
   border-radius: 32px;
   display: flex;
   align-items: center;
@@ -377,6 +400,7 @@
 }
 
 /* 建谈商城样式 */
+
 /* .index_shop{
   margin-top: 30rpx;
 }
@@ -457,6 +481,7 @@
 }
 
 /* 建谈视频样式 */
+
 /* .index_video{
   margin-top: 30rpx;
 }
@@ -512,12 +537,8 @@
   padding-left: 20rpx;
 } */
 
-
-
-
-
-
 /* 2018-10-24前视频课程 */
+
 /* .videoCourse {
   margin-top: 30rpx;
 }
@@ -601,7 +622,3 @@
   font-size: 22rpx;
 }
 */
-
-
-
-

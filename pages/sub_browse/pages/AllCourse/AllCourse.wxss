@@ -1,113 +1,128 @@
 /* pages/AllCourse/AllCourse.wxss */
-.search_list{
+
+.search_list {
   height: 1000rpx;
   /* overflow:hidden;white-space:nowrap; */
 }
-.S-list{
+
+.S-list {
   background-color: #fff;
-  margin-bottom: 20rpx; 
+  margin-bottom: 20rpx;
   /* padding: 38rpx 36rpx 20rpx 24rpx; */
 }
-.s_listCon{
+
+.s_listCon {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 35rpx 30rpx 30rpx 30rpx;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid #eaeaea;
 }
-
 
 .s_listTeacherInfo {
   display: flex;
   flex-direction: row;
   align-items: center;
   /* width: 470rpx; */
-  padding:66rpx 0 30rpx 0;
+  padding: 66rpx 0 30rpx 0;
   /* border-bottom: 1px solid #e8e8e8; */
 }
-.s_listTeacherImg{
+
+.s_listTeacherImg {
   width: 56rpx;
   height: 56rpx;
   /* border: 1px solid #ff5d0a; */
   border-radius: 50%;
 }
-.s_listTeacherImg image{
+
+.s_listTeacherImg image {
   width: 56rpx;
   height: 56rpx;
   border-radius: 50%;
 }
-.s_listTeacherCon{
+
+.s_listTeacherCon {
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding-left: 20rpx;
+  display: -webkit-box;
+  line-height: 36rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.s_listTeacherCon image{
+
+.s_listTeacherCon image {
   width: 1px;
   height: 20px;
   padding: 0 20rpx;
 }
-.s_listTeacherName{
+
+.s_listTeacherName {
   font-size: 26rpx;
 }
-.s_listTeacherPosition{
-  font-size: 26rpx;
-  color: #888;
+
+.s_listTeacherPosition {
+  font-size: 22rpx;
+  color: #afafaf;
 }
 
-
-
-
-
-.s_listCourseInfo{
+.s_listCourseInfo {
   display: flex;
   flex-direction: column;
   padding-top: 26rpx;
 }
-.s_listCourseName{
-  font-size:30rpx;
-  color:#333;
+
+.s_listCourseName {
+  font-size: 30rpx;
+  color: #333;
 }
-.s_listCourseSynopsis{
+
+.s_listCourseSynopsis {
   font-size: 24rpx;
   color: #777;
   padding-top: 27rpx;
+  display: -webkit-box;
+  line-height: 24rpx;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-
-
-
-.S-listImg{
+.S-listImg {
   padding-top: 90rpx;
   width: 146rpx;
   height: 146rpx;
 }
-.S-listImg image{
+
+.S-listImg image {
   width: 146rpx;
   height: 146rpx;
 }
 
-
-
-
-.s_listArticle{
+.s_listArticle {
   padding-top: 28rpx;
   display: flex;
   flex-direction: row;
 }
-.s_listArticleId{
+
+.s_listArticleId {
   font-size: 26rpx;
   color: #888;
 }
-.s_listArticleName{
+
+.s_listArticleName {
   font-size: 26rpx;
   color: #888;
   padding-left: 10rpx;
 }
 
-
-
-
-.underline{
+.underline {
   background-color: #ddd;
   height: 2rpx;
   width: 22rpx;
@@ -115,36 +130,36 @@
   margin-bottom: 18rpx;
 }
 
-
-
-
-.s_listPriceGroup{
+.s_listPriceGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80rpx;
   padding: 0 30rpx;
 }
-.s_listPriceGroupText{
-  color: #AFAFAF;
+
+.s_listPriceGroupText {
+  color: #afafaf;
   font-size: 20rpx;
 }
-.color{
-  color: #F86161;
+
+.color {
+  color: #f86161;
 }
-.boutique_priceItem{
+
+.boutique_priceItem {
   display: flex;
   flex-direction: row;
   align-items: center;
   line-height: 30rpx;
 }
-.s_listPrice{
-  color: #F86161;
+
+.s_listPrice {
+  color: #f86161;
   font-size: 26rpx;
 }
 
-
-.search_none{
+.search_none {
   color: #888;
   font-size: 30rpx;
   text-align: center;

@@ -118,7 +118,6 @@ Page({
           url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
           data: {
             openid: wx.getStorageSync('openid'),
-            //openid:'oDpcQ5YZXI7gOzUmOCvMnLiQ6Wkg',
             encryptedData: res.encryptedData,
             iv: res.iv
           },
@@ -266,12 +265,11 @@ Page({
               // url: 'https://wx.bjjy.com/operateuser',
               url: api.API_MINEUPLOADINFO,
               data: {
-                'wx_openid': wx.getStorageSync('openid'),
+                wx_openid: wx.getStorageSync('openid'),
                 source: 'xcx',
                 unionid: wx.getStorageSync('unionId'),
-                'nickname': that.data.userInfo.nickName,
-                'headimage': that.data.userInfo.avatarUrl,
-                unionid: wx.getStorageSync('unionId')
+                nickname: that.data.userInfo.nickName,
+                headimage: that.data.userInfo.avatarUrl,
               },
               header: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -653,34 +651,36 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (wx.getStorageSync('unionid') != '') {
+    // if (wx.getStorageSync('unionid') != '') {
 
-      wx.request({
-        url: 'https://wx.bjjy.com/adduserManage',
-        data: {
-          openid: wx.getStorageSync('openid'),
-          unionid: wx.getStorageSync('unionid')
-        },
-        header: {
+    //   wx.request({
+    //     url: 'https://wx.bjjy.com/operateuser',
+    //     data: {
+    //       wx_openid: wx.getStorageSync('openid'),
+    //       unionid: wx.getStorageSync('unionid'),
+    //       source:'xcx',
+    //       nickname: app.globalData.userInfo.nickName,
+    //       headimage: app.globalData.userInfo.avatarUrl,
+    //     },
+    //     header: {
+    //       'content-type': 'application/x-www-form-urlencoded'
+    //     },
+    //     method: 'POST',
+    //     success: function(res) {
 
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        success: function(res) {
+    //       console.log(res.data)
+    //       console.log('成功')
+    //     },
+    //     fail: function() {
 
-          console.log(res.data)
-          console.log('成功')
-        },
-        fail: function() {
+    //       console.log('失败')
+    //     },
+    //     complete: function() {
 
-          console.log('失败')
-        },
-        complete: function() {
-
-          console.log('onshow的方法执行')
-        }
-      })
-    }
+    //       console.log('onshow的方法执行')
+    //     }
+    //   })
+    // }
     //console.log(app.globalData)
   },
 

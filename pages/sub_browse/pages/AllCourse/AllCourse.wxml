@@ -55,7 +55,7 @@
           </view>
           <text class='s_listPrice'>{{item.countcourse}}讲</text>
           <text class='s_listPriceGroupText' style='padding-left:30rpx;'>{{item.updatetime}}</text>
-          
+
         </view>
 
         <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人购买</text>

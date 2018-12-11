@@ -1,0 +1,104 @@
+/* pages/sub_browse/pages/authorDesc/authorDesc.wxss */
+
+.authorDescBox {
+  width: 100%;
+  /* height: 240rpx; */
+  position: relative;
+  /* overflow: hidden; */
+}
+
+.authorBackground {
+  height: 175rpx;
+  width: 100%;
+}
+
+/* .authorDescBox image {
+  width: 100% !important;
+  z-index: 3;
+  position: absolute;
+} */
+
+
+
+.authorDesc {
+  position: absolute;
+  /* left: 50%;
+  transform: translateX(-50%); */
+  top: 0;
+  /* bottom: 0; */
+  /* z-index: 2; */
+  width: 100%;
+  display: flex;
+  z-index: 4;
+  flex-direction: column;
+  padding-top: 98rpx;
+  padding-bottom: 30rpx;
+  justify-content: center;
+  text-align: center;
+}
+
+.authorDesc image {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  margin: 0 auto;
+}
+
+.authorDesc text {
+  color: #333333;
+  font-size: 34rpx;
+}
+
+.bold {
+  font-weight: bold;
+  padding-bottom: 20rpx;
+}
+
+.authorInfoBox {
+  padding: 183rpx 52rpx 126rpx 40rpx;
+}
+
+.authorInfo {
+  padding-bottom: 90rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 34rpx !important;
+  font-weight: bold !important;
+  color: #333 !important;
+  padding-bottom: 32rpx;
+}
+
+.authorInfo text {
+  line-height: 42rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.courseInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.courseInfoText{
+  display: flex;
+  flex-direction: row;
+}
+
+.courseInfoText image{
+  width: 28rpx;
+  height: 28rpx;
+  padding-right: 20rpx;
+  padding-top: 6rpx;
+}
+
+.courseInfo text {
+  width: 640rpx;
+  line-height: 42rpx;
+  color: #666;
+  font-size: 28rpx;
+  padding-bottom: 50rpx;
+}

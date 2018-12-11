@@ -1,12 +1,15 @@
 <!--pages/author/author.wxml-->
 <view>
-
-  <view class='authorInfo'>
-    <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
-    <view class='authorText'>
-      <text class='authorName'>{{authorinfo.author_name}}</text>
-      <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+  <!-- <p-authorTitle /> -->
+  <view class='authorInfo' bindtap='jumpToAuthorDesc' data-author_id='{{authorinfo.author_id}}'>
+    <view class='author'>
+      <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
+      <view class='authorText'>
+        <text class='authorName'>{{authorinfo.author_name}}</text>
+        <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+      </view>
     </view>
+    <image class='checkMore' src='/image/list_more.png'></image>
   </view>
 
 
@@ -35,47 +38,25 @@
       <block wx:for='{{articleinfo}}' wx:key='key'>
         <view class='articleItem' bindtap='jumpToArticle' data-article_id='{{item.article_id}}' data-article_price='{{item.article_price}}'>
           <view class='articleItemCon'>
-            <view class='articleOrder'>
-              <image src='/image/author_article.png'></image>
-              <text>{{index + 1}}</text>
-            </view>
-            <view class='articleContent'>
-
-              <view wx:if="{{platform !='ios'}}">
+            <view class='articleImage'>
+              <image class='articleImageBack' src='{{item.article_pic}}' mode='aspectFill'></image>
+              <image class='articleImageBoutique' src='/image/author_boutique.png'></image>
+              <view wx:if="{{platform !='ios'}}" class='articlePriceBox'>
                 <text wx:if="{{item.isFree}}" class='articlePrice'>免费</text>
                 <view wx:else>
                   <text class='originalPrice'> ￥{{item.original_price}}</text>
                   <text class='articlePrice'>￥{{item.article_price}}</text>
-
                 </view>
               </view>
-
-              <text class='articleName'>{{item.article_title}}</text>
-              <view class='articleImage'>
-                <image src='{{item.article_pic}}' mode='aspectFill'></image>
-              </view>
-              <text class='articleCon'>{{item.article_desc}}</text>
             </view>
+
+            <text class='articleName'>{{item.article_title}}</text>
+            <text class='articleCon'>{{item.article_desc}}</text>
+
           </view>
-          <!-- <view class='read'>戳此阅读</view> -->
         </view>
 
       </block>
-
-
-
-      <!-- <view class='author_clickBox'>
-        <view class='author_clickBoxImage'>
-          <image src='/image/article_down.png'></image>
-        </view>
-        <view class='author_click'>
-          <image src='/image/article_click.png'></image>
-          <text>访问AWS定制专区,阅读更多私房书单与文章</text>
-        </view>
-      </view> -->
-
-
-
 
       <view class='tips'>
         <view class='tipsTitle'>
@@ -131,7 +112,6 @@
           <!-- <text class='s_listArticleName'>伟大的建筑</text> -->
           <!-- <template is="wxParse" data="{{wxParseData:item.article_name.nodes}}"/>
             </view> -->
-          <view class='underline'></view>
           <view class='s_listPriceGroup'>
             <view class='boutique_priceItem'>
               <view wx:if="{{platform !='ios'}}" class='boutique_priceItem'>
@@ -139,9 +119,9 @@
                 <text class='s_listPrice'>/</text>
               </view>
               <text class='s_listPrice'>{{item.countcourse}}讲</text>
+              <text class='s_listPriceGroupText' style='padding-left:30rpx'>{{item.updatetime}}</text>
             </view>
-            <text class='s_listPriceGroupText'>{{item.coursebuynum}}人购买</text>
-            <text class='s_listPriceGroupText'>{{item.updatetime}}</text>
+            <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人购买</text>
           </view>
         </view>
       </block>

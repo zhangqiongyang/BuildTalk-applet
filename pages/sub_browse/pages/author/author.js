@@ -34,7 +34,15 @@ Page({
     // console.log(this.data.isArticle)
   },
 
-
+  // 跳转到作者详情页面
+  jumpToAuthorDesc(event) {
+    console.log(event);
+    let author_id = event.currentTarget.dataset.author_id;
+    console.log(author_id);
+    wx.navigateTo({
+      url: '/pages/sub_browse/pages/authorDesc/authorDesc?author_id=' + author_id,
+    })
+  },
 
   //跳转到用户反馈（客服）
   jumpToFeedback() {

@@ -1,170 +1,181 @@
 /* pages/buy/buy.wxss */
 
-/* canvas */
+/* 用户信息 */
 
-.buy_canvas {
-  padding-top: 26rpx;
-  padding-left: 22rpx;
-}
-
-.canvas_bg {
-  border: 2px solid #d7ab70;
-  width: 686rpx;
-  height: 686rpx;
-}
-
-.canvas_content {
-  border: 2px solid #d7ab70;
-  width: 686rpx;
-  height: 686rpx;
-  position: absolute;
-  left: 40rpx;
-  top: 44rpx;
-  box-sizing: border-box;
-  padding: 46rpx 34rpx 0 43rpx;
-}
-
-.canvas_userInfo {
+.userInfo {
   display: flex;
-  flex-direction: column;
-  border-bottom: 2px solid #d5d5d5;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
 }
 
-.canvas_userInfo text {
-  padding-bottom: 30rpx;
+.userImg {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
 }
 
 .userName {
-  font-size: 36rpx;
-  color: #444;
+  font-size: 28rpx;
+  padding-left: 20rpx;
 }
 
-.phone {
+.userPhoneImg {
+  width: 24rpx;
+  height: 24rpx;
+  padding-left: 30rpx;
+}
+
+.userPhone {
+  color: #666;
   font-size: 24rpx;
-  color: #404040;
+  padding-left: 10rpx;
 }
 
-.welcome {
-  font-size: 40rpx;
-  color: #000;
-}
-
-.cost {
-  border-bottom: 2px solid #d5d5d5;
-  height: 90rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cost_text {
-  font-size: 26rpx;
-  color: #d7ab70;
-}
-
-.price {
-  font-size: 44rpx;
-  color: #d7ab70;
-}
-
-.originalPrice{ 
-  font-size: 20rpx;
-  text-decoration: line-through;
-  color: #999;
-}
-
-.canvas_con {
-  padding-top: 58rpx;
-  /* display: flex;
-  flex-direction: column; */
-}
-#color{
-  font-weight: bold;
-  color: #7EBBF4;
-}
-.canvas_con text {
-  padding-bottom: 26rpx;
-  font-size: 24rpx;
-  color: #333;
-}
+/* 课程信息 */
 
 .courseInfo {
-  position: absolute;
-  right: 42rpx;
-  top: 14rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.courseInfo image {
-  width: 77rpx;
-  height: 77rpx;
-  padding-right: 14rpx;
-}
-
-.courseName {
+  width: 100%;
+  border-bottom: 1px solid #eaeaea;
+  padding: 43rpx 43rpx 40rpx 30rpx;
   display: flex;
   flex-direction: column;
 }
 
-.courseName text {
+.courseName {
+  font-size: 34rpx;
+  line-height: 46rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coursePrice {
+  padding-top: 30rpx;
+  color: #f86161;
+  font-size: 34rpx;
+}
+
+/* 小提示 */
+
+.buyTips {
+  background-color: #fff6e4;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 30rpx;
+}
+
+.buyTips image {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.buyTips text {
+  color: #f90;
+  font-size: 20rpx;
+}
+
+/* 优惠券 */
+
+.buyAccountBox {
+  padding: 30rpx 30rpx 0 30rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buyAccount {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.buyAccountImg {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.buyAccountText {
+  font-size: 28rpx;
+}
+
+.account {
   font-size: 24rpx;
-  /* font-family: sans-serif; */
-}
-
-
-
-
-/* 收货信息 */
-.address{
-  padding:20rpx;
-  /* padding-bottom: 0; */
-}
-.addressInfo{
   color: #999;
+  padding-left: 30rpx;
 }
 
-
-
+.buyAccountMore {
+  width: 15rpx;
+  height: 28rpx;
+}
 
 /* 支付方式 */
-.payStyle {
-  /* padding-top: 48rpx; */
-  padding-left: 100rpx;
+
+.payMode {
+  padding-top: 45rpx;
+  padding-left: 38rpx;
+  display: flex;
+  flex-direction: row; 
+  align-items: center; 
 }
 
-.pay {
-  padding-left: 26rpx;
+.radioBox {
+  width: 24rpx;
+  height: 24rpx;
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(129, 244, 126, 1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio {
+  width: 16rpx;
+  height: 16rpx;
+  background: rgba(129, 244, 126, 1);
+  border-radius: 50%;
+}
+
+.payMode text {
+  padding-left: 20rpx;
   font-size: 28rpx;
-  color: #000;
 }
-
-
 
 /* 支付按钮 */
+
 .button {
   width: 690rpx;
   height: 88rpx;
-  background-color: #d7ab70;
+  background-color: #7ebbf4;
   border-radius: 10rpx;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 50rpx auto;
-  font-size: 28rpx;
+  margin: 80rpx auto 40rpx auto;
+  font-size: 34rpx;
 }
 
+/* 联系客服 */
 
-
-/* 小提示 */
-.tips {
+.customer {
   width: 100%;
   text-align: center;
 }
 
-.tips text {
+.customer text {
   font-size: 24rpx;
-  color: #999;
+}
+
+.color {
+  color: #3795ed;
+  padding-left: 6rpx;
 }
