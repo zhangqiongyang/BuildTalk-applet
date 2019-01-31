@@ -1,37 +1,22 @@
 <!--pages/sub_browse/pages/authorDesc/authorDesc.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+
 <view>
   <view class='authorDescBox'>
-    <image src='/image/mine_background.png' class='authorBackground' mode='widthFix'></image>
+    <!-- <image src='/image/mine_background.png' class='authorBackground' mode='widthFix' style='height:175rpx;'></image>
     <view class='authorDesc'>
       <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
-      <!-- <view class='authorInfoDesc'> -->
       <text class='bold'>{{authorinfo.author_desc}} - {{authorinfo.author_name}}</text>
-      <!-- </view> -->
+    </view> -->
+    <view class='author'>
+      <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
+      <view class='authorText'>
+        <text class='authorName'>{{authorinfo.author_name}}</text>
+        <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+      </view>
     </view>
   </view>
   <view class='authorInfoBox'>
-    <view class='authorInfo'>
-      <text class='title'>老师简介</text>
-      <text>老师简介~~老师简介~~老师简介~~老师简介~~老师简介~~老师简介~~老师简介~~</text>
-    </view>
-    <view class='courseInfo'>
-      <text class='title'>课程亮点</text>
-      <view class='courseInfoText'>
-        <image src='/image/authorDescStar.png'></image>
-        <text>课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~</text>
-      </view>
-      <view class='courseInfoText'>
-        <image src='/image/authorDescStar.png'></image>
-        <text>课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~</text>
-      </view>
-      <view class='courseInfoText'>
-        <image src='/image/authorDescStar.png'></image>
-        <text>课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~</text>
-      </view>
-      <view class='courseInfoText'>
-        <image src='/image/authorDescStar.png'></image>
-        <text>课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~课程亮点~~</text>
-      </view>
-    </view>
+    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
   </view>
 </view>

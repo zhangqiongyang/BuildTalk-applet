@@ -58,7 +58,7 @@ Page({
         'article_id': article_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -152,7 +152,7 @@ Page({
         'article_id': article_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -182,7 +182,7 @@ Page({
       data: {
         openid: wx.getStorageSync("openid"),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         article_id: article_id,
         course_id: this.data.course_id
       },
@@ -349,7 +349,7 @@ Page({
         'guestbook_id': this.data.b,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -378,7 +378,7 @@ Page({
         'article_id': this.data.articleinfo.article_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -411,7 +411,7 @@ Page({
         'article_id': this.data.article_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

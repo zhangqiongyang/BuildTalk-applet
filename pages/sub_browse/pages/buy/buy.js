@@ -102,297 +102,318 @@ Page({
 
     // if (this.data.isHaveAddress){
 
-
-
-    if (that.data.msg == '0') {
-      //查询订单号
-      wx.request({
-        // url: 'https://wx.bjjy.com/iscreateorder',
-        url: api.API_SEARCHORDER,
-        data: {
-          msg: that.data.msg,
-          course_id: that.data.courseinfo.course_id,
-          openid: wx.getStorageSync('openid'),
-          source: 'xcx',
-          unionid: wx.getStorageSync('unionId')
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        dataType: 'json',
-        responseType: 'text',
-        success: function(res) {
-          console.log('-----------查询订单号成功了------------')
-          console.log(res)
-          that.setData({
-            order_id: res.data.order_id
-          })
+    if (app.globalData.isBindingPhone) {
 
 
 
 
-          // 生成订单接口
-          wx.request({
-            // url: 'https://wx.bjjy.com/unifiedorderhandle',
-            url: api.API_CREATORDER,            
-            data: {
-              msg: that.data.msg,
-              order_id: that.data.order_id,
-              openid: wx.getStorageSync('openid'),
-              source: 'xcx',
-              unionid: wx.getStorageSync('unionId'),
-              order_price: that.data.courseinfo.course_money,
-              order_name: that.data.courseinfo.course_name,
-              course_id: that.data.courseinfo.course_id,
-              is_discounts: 1,
-              // discounts_id:'',
-              original_price: that.data.courseinfo.course_money
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded'
-            },
-            method: 'POST',
-            dataType: 'json',
-            responseType: 'text',
-            success: function(res) {
-              console.log('------------成功生成订单------------')
-              console.log(res)
-              // that.setData({
-              //   timeStamp: res.data.timeStamp,
-              //   nonceStr: res.data.nonceStr,
-              //   package: res.data.package, 
-              //   signType: res.data.signType, 
-              //   paySign: res.data.paySign,
-              // })
+      if (that.data.msg == '0') {
+        //查询订单号
+        wx.request({
+          // url: 'https://wx.bjjy.com/iscreateorder',
+          url: api.API_SEARCHORDER,
+          data: {
+            msg: that.data.msg,
+            course_id: that.data.courseinfo.course_id,
+            openid: wx.getStorageSync('openid'),
+            source: 'xcx',
+            unionid: wx.getStorageSync('unionid')
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          dataType: 'json',
+          responseType: 'text',
+          success: function(res) {
+            console.log('-----------查询订单号成功了------------')
+            console.log(res)
+            that.setData({
+              order_id: res.data.order_id
+            })
 
 
 
 
-              // 微信支付统一下单
-              wx.requestPayment({
-                timeStamp: res.data.timeStamp,
-                nonceStr: res.data.nonceStr,
-                package: res.data.package,
-                signType: res.data.signType,
-                paySign: res.data.paySign,
-                success: function(res) {
-                  console.log('-----------支付成功了--------------')
-                  console.log(res)
-
-
-                  //修改订单状态接口
-                  wx.request({
-                    // url: 'https://wx.bjjy.com/updateorderstatus',
-                    url: api.API_CHANGEORDERINFO,                    
-                    data: {
-                      order_id: that.data.order_id,
-                      pay_amount: that.data.courseinfo.course_money,
-                    },
-                    header: {
-                      'content-type': 'application/x-www-form-urlencoded'
-                    },
-                    method: 'POST',
-                    dataType: 'json',
-                    responseType: 'text',
-                    success: function(res) {
-                      console.log('----------修改订单状态成功了------------')
-
-                      //跳转到相应页面
-                      // wx.redirectTo({
-                      //   url: "/pages/sub_browse/pages/list/list?course_id=" + that.data.courseinfo.course_id
-                      // })
-
-                      var pages = getCurrentPages();
-                      var prevPage = pages[pages.length - 2];
-                      prevPage.setData({
-                        netState: '1',
-                        buy:true,
-                      })
-                      prevPage.onShow();
-                      wx.navigateBack({
-                        delta: 1,
-                      })
-
-                    },
-                    fail: function(res) {},
-                  })
-
-
-                },
-                fail: function(res) {
-                  console.log('-----------支付失败了-------------')
-                },
-              })
+            // 生成订单接口
+            wx.request({
+              // url: 'https://wx.bjjy.com/unifiedorderhandle',
+              url: api.API_CREATORDER,
+              data: {
+                msg: that.data.msg,
+                order_id: that.data.order_id,
+                openid: wx.getStorageSync('openid'),
+                source: 'xcx',
+                unionid: wx.getStorageSync('unionid'),
+                order_price: that.data.courseinfo.course_money,
+                order_name: that.data.courseinfo.course_name,
+                course_id: that.data.courseinfo.course_id,
+                is_discounts: 1,
+                // discounts_id:'',
+                original_price: that.data.courseinfo.course_money
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              dataType: 'json',
+              responseType: 'text',
+              success: function(res) {
+                console.log('------------成功生成订单------------')
+                console.log(res)
+                // that.setData({
+                //   timeStamp: res.data.timeStamp,
+                //   nonceStr: res.data.nonceStr,
+                //   package: res.data.package, 
+                //   signType: res.data.signType, 
+                //   paySign: res.data.paySign,
+                // })
 
 
 
 
+                // 微信支付统一下单
+                wx.requestPayment({
+                  timeStamp: res.data.timeStamp,
+                  nonceStr: res.data.nonceStr,
+                  package: res.data.package,
+                  signType: res.data.signType,
+                  paySign: res.data.paySign,
+                  success: function(res) {
+                    console.log('-----------支付成功了--------------')
+                    console.log(res)
 
 
-            },
-            fail: function(res) {
-              console.log('------------生成订单失败了------------')
-            },
-          })
+                    //修改订单状态接口
+                    wx.request({
+                      // url: 'https://wx.bjjy.com/updateorderstatus',
+                      url: api.API_CHANGEORDERINFO,
+                      data: {
+                        order_id: that.data.order_id,
+                        pay_amount: that.data.courseinfo.course_money,
+                      },
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                      },
+                      method: 'POST',
+                      dataType: 'json',
+                      responseType: 'text',
+                      success: function(res) {
+                        console.log('----------修改订单状态成功了------------')
 
-        },
-        fail: function(res) {
-          console.log('--------查询订单失败了-----------')
-        },
-      })
+                        //跳转到相应页面
+                        // wx.redirectTo({
+                        //   url: "/pages/sub_browse/pages/list/list?course_id=" + that.data.courseinfo.course_id
+                        // })
+
+                        var pages = getCurrentPages();
+                        var prevPage = pages[pages.length - 2];
+                        prevPage.setData({
+                          netState: '1',
+                          buy: true,
+                        })
+                        prevPage.onShow();
+                        wx.navigateBack({
+                          delta: 1,
+                        })
+
+                      },
+                      fail: function(res) {},
+                    })
+
+
+                  },
+                  fail: function(res) {
+                    console.log('-----------支付失败了-------------')
+                  },
+                })
+
+
+
+
+
+
+              },
+              fail: function(res) {
+                console.log('------------生成订单失败了------------')
+              },
+            })
+
+          },
+          fail: function(res) {
+            console.log('--------查询订单失败了-----------')
+          },
+        })
+      } else {
+        console.log(that.data.msg)
+        console.log(that.data.articleinfo.article_id)
+        console.log(wx.getStorageSync('openid'))
+        //查询订单号
+        wx.request({
+          // url: 'https://wx.bjjy.com/iscreateorder',
+          url: api.API_SEARCHORDER,
+          data: {
+            msg: that.data.msg,
+            article_id: that.data.articleinfo.article_id,
+            openid: wx.getStorageSync('openid'),
+            source: 'xcx',
+            unionid: wx.getStorageSync('unionid')
+          },
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          dataType: 'json',
+          responseType: 'text',
+          success: function(res) {
+            console.log('-----------查询订单号成功了------------')
+            console.log(res)
+            that.setData({
+              order_id: res.data.order_id
+            })
+
+
+            console.log(that.data.msg)
+            console.log(that.data.order_id)
+            console.log(wx.getStorageSync('openid'))
+            console.log(that.data.articleinfo.article_price)
+            console.log(that.data.articleinfo.article_title)
+            console.log(that.data.articleinfo.article_id)
+            console.log(that.data.articleinfo.article_price)
+            console.log(that.data.msg)
+            // 生成订单接口
+            wx.request({
+              // url: 'https://wx.bjjy.com/unifiedorderhandle',
+              url: api.API_CREATORDER,
+              data: {
+                msg: that.data.msg,
+                order_id: that.data.order_id,
+                openid: wx.getStorageSync('openid'),
+                source: 'xcx',
+                unionid: wx.getStorageSync('unionid'),
+                order_price: that.data.articleinfo.article_price,
+                order_name: that.data.articleinfo.article_title,
+                article_id: that.data.articleinfo.article_id,
+                is_discounts: 1,
+                // discounts_id:'',
+                original_price: that.data.articleinfo.article_price
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              dataType: 'json',
+              responseType: 'text',
+              success: function(res) {
+                console.log('------------成功生成订单------------')
+                console.log(res)
+                // that.setData({
+                //   timeStamp: res.data.timeStamp,
+                //   nonceStr: res.data.nonceStr,
+                //   package: res.data.package, 
+                //   signType: res.data.signType, 
+                //   paySign: res.data.paySign,
+                // })
+
+
+
+
+                // 微信支付统一下单
+                wx.requestPayment({
+                  timeStamp: res.data.timeStamp,
+                  nonceStr: res.data.nonceStr,
+                  package: res.data.package,
+                  signType: res.data.signType,
+                  paySign: res.data.paySign,
+                  success: function(res) {
+                    console.log('-----------支付成功了--------------')
+                    console.log(res)
+
+
+                    //修改订单状态接口
+                    wx.request({
+                      // url: 'https://wx.bjjy.com/updateorderstatus',
+                      url: api.API_CHANGEORDERINFO,
+                      data: {
+                        order_id: that.data.order_id,
+                        pay_amount: that.data.articleinfo.article_price,
+                        article_id: that.data.article_id
+                      },
+                      header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                      },
+                      method: 'POST',
+                      dataType: 'json',
+                      responseType: 'text',
+                      success: function(res) {
+                        console.log('----------修改订单状态成功了------------')
+
+                        //跳转到相应页面
+                        // wx.redirectTo({
+                        //   url: "/pages/sub_browse/pages/article/article?article_id=" + that.data.articleinfo.article_id
+                        // })
+
+                        var pages = getCurrentPages();
+                        var prevPage = pages[pages.length - 2];
+                        prevPage.setData({
+                          buy: true,
+                        })
+                        prevPage.onShow();
+                        wx.navigateBack({
+                          delta: 1,
+                        })
+
+
+
+                      },
+                      fail: function(res) {},
+                    })
+
+
+                  },
+                  fail: function(res) {
+                    console.log('-----------支付失败了-------------')
+                  },
+                })
+
+
+
+
+
+
+              },
+              fail: function(res) {
+                console.log('------------生成订单失败了------------')
+              },
+            })
+          },
+
+          fail: function(res) {
+            console.log('--------查询订单失败了-----------')
+          },
+        })
+
+
+      }
     } else {
-      console.log(that.data.msg)
-      console.log(that.data.articleinfo.article_id)
-      console.log(wx.getStorageSync('openid'))
-      //查询订单号
-      wx.request({
-        // url: 'https://wx.bjjy.com/iscreateorder',
-        url: api.API_SEARCHORDER,
-        data: {
-          msg: that.data.msg,
-          article_id: that.data.articleinfo.article_id,
-          openid: wx.getStorageSync('openid'),
-          source: 'xcx',
-          unionid: wx.getStorageSync('unionId')
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        dataType: 'json',
-        responseType: 'text',
+      wx.showModal({
+        title: '未绑定手机号',
+        content: '请先绑定手机号',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
         success: function(res) {
-          console.log('-----------查询订单号成功了------------')
-          console.log(res)
-          that.setData({
-            order_id: res.data.order_id
-          })
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/phone/phone',
+            })
+          } else if (res.cancel) {
 
+          }
 
-          console.log(that.data.msg)
-          console.log(that.data.order_id)
-          console.log(wx.getStorageSync('openid'))
-          console.log(that.data.articleinfo.article_price)
-          console.log(that.data.articleinfo.article_title)
-          console.log(that.data.articleinfo.article_id)
-          console.log(that.data.articleinfo.article_price)
-          console.log(that.data.msg)
-          // 生成订单接口
-          wx.request({
-            // url: 'https://wx.bjjy.com/unifiedorderhandle',
-            url: api.API_CREATORDER,
-            data: {
-              msg: that.data.msg,
-              order_id: that.data.order_id,
-              openid: wx.getStorageSync('openid'),
-              source: 'xcx',
-              unionid: wx.getStorageSync('unionId'),
-              order_price: that.data.articleinfo.article_price,
-              order_name: that.data.articleinfo.article_title,
-              article_id: that.data.articleinfo.article_id,
-              is_discounts: 1,
-              // discounts_id:'',
-              original_price: that.data.articleinfo.article_price
-            },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded'
-            },
-            method: 'POST',
-            dataType: 'json',
-            responseType: 'text',
-            success: function(res) {
-              console.log('------------成功生成订单------------')
-              console.log(res)
-              // that.setData({
-              //   timeStamp: res.data.timeStamp,
-              //   nonceStr: res.data.nonceStr,
-              //   package: res.data.package, 
-              //   signType: res.data.signType, 
-              //   paySign: res.data.paySign,
-              // })
-
-
-
-
-              // 微信支付统一下单
-              wx.requestPayment({
-                timeStamp: res.data.timeStamp,
-                nonceStr: res.data.nonceStr,
-                package: res.data.package,
-                signType: res.data.signType,
-                paySign: res.data.paySign,
-                success: function(res) {
-                  console.log('-----------支付成功了--------------')
-                  console.log(res)
-
-
-                  //修改订单状态接口
-                  wx.request({
-                    // url: 'https://wx.bjjy.com/updateorderstatus',
-                    url: api.API_CHANGEORDERINFO,
-                    data: {
-                      order_id: that.data.order_id,
-                      pay_amount: that.data.articleinfo.article_price,
-                      article_id: that.data.article_id
-                    },
-                    header: {
-                      'content-type': 'application/x-www-form-urlencoded'
-                    },
-                    method: 'POST',
-                    dataType: 'json',
-                    responseType: 'text',
-                    success: function(res) {
-                      console.log('----------修改订单状态成功了------------')
-
-                      //跳转到相应页面
-                      // wx.redirectTo({
-                      //   url: "/pages/sub_browse/pages/article/article?article_id=" + that.data.articleinfo.article_id
-                      // })
-
-                      var pages = getCurrentPages();
-                      var prevPage = pages[pages.length - 2];
-                      prevPage.setData({
-                          buy:true,                        
-                      })
-                      prevPage.onShow();
-                      wx.navigateBack({
-                        delta: 1,
-                      })
-                      
-                      
-
-                    },
-                    fail: function(res) {},
-                  })
-
-
-                },
-                fail: function(res) {
-                  console.log('-----------支付失败了-------------')
-                },
-              })
-
-
-
-
-
-
-            },
-            fail: function(res) {
-              console.log('------------生成订单失败了------------')
-            },
-          })
-        },
-
-        fail: function(res) {
-          console.log('--------查询订单失败了-----------')
         },
       })
-
-
     }
-
     // }else{
     //   wx.showModal({
     //     title: '请填写收货地址',
@@ -480,12 +501,12 @@ Page({
     var that = this;
     wx.request({
       // url: 'https://wx.bjjy.com/courselistinfo',
-      url: api.API_COURSERINFO,      
+      url: api.API_COURSERINFO,
       data: {
         'course_id': this.data.course_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -517,12 +538,12 @@ Page({
     console.log(wx.getStorageSync('openid'))
     wx.request({
       // url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
-      url: api.API_GETARTICLEINFO,      
+      url: api.API_GETARTICLEINFO,
       data: {
         'article_id': that.data.article_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -558,7 +579,7 @@ Page({
       data: {
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

@@ -93,7 +93,7 @@ Page({
         data: {
           'openid': wx.getStorageSync('openid'),
           source: 'xcx',
-          unionid: wx.getStorageSync('unionId'),
+          unionid: wx.getStorageSync('unionid'),
           'consignee': that.data.recevinginfo.consignee,
           'telephone': that.data.recevinginfo.telephone,
           'address': that.data.recevinginfo.address
@@ -174,7 +174,7 @@ Page({
       data: {
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

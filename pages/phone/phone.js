@@ -237,7 +237,7 @@ Page({
         code: this.data.formData.code,
         openid:wx.getStorageSync("openid"),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -261,9 +261,12 @@ Page({
         } else if (res.data.msg == "2"){
           console.log("---------------验证码错误---------------")
           util._showToast("验证码错误")
-        } else{
+        } else if (res.data.msg == '3' ){
           console.log("---------------其他错误---------------")
           util._showToast("其他错误")
+        }else {
+          console.log("---------------手机号已被绑定---------------")
+          util._showToast("手机号已被绑定")
         }
       }
     })

@@ -170,7 +170,7 @@ Page({
     }
 
 
-    this.checkPhone()
+    // this.checkPhone()
   },
 
 
@@ -243,7 +243,8 @@ Page({
       console.log(this.data.userInfo.nickName)
 
       wx.request({
-        url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
+        // url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
+        url: api.API_GETENCRYPTEDDATA,
         data: {
           openid: wx.getStorageSync('openid'),
           //openid: 'oDpcQ5YZXI7gOzUmOCvMnLiQ6Wkg',
@@ -260,14 +261,14 @@ Page({
           wx.setStorageSync('unionid', userInfo.unionId)
 
           //上传用户的头像和昵称到数据库
-          if (!util.isEmpty(wx.getStorageSync('unionId')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
+          if (!util.isEmpty(wx.getStorageSync('unionid')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
             wx.request({
               // url: 'https://wx.bjjy.com/operateuser',
               url: api.API_MINEUPLOADINFO,
               data: {
                 wx_openid: wx.getStorageSync('openid'),
                 source: 'xcx',
-                unionid: wx.getStorageSync('unionId'),
+                unionid: wx.getStorageSync('unionid'),
                 nickname: that.data.userInfo.nickName,
                 headimage: that.data.userInfo.avatarUrl,
               },
@@ -278,9 +279,27 @@ Page({
               dataType: 'json',
               responseType: 'text',
               success: function(res) {
-                console.log('-------------上传用户的头像和昵称到数据库了(mine.js)-----------------')
-                console.log(wx.getStorageSync('openid'))
-                console.log('---------------------------')
+                if (res.data.msg == '1') {
+                  console.log('-------------上传用户的头像和昵称到数据库了(mine.js)-----------------')
+                  console.log('--------------1-------------')
+                  console.log(wx.getStorageSync('openid'))
+                } else if (res.data.msg == '2') {
+                  console.log('-------------上传用户的头像和昵称到数据库失敗了(mine.js)-----------------')
+                  console.log('--------------2-------------')
+                  console.log(wx.getStorageSync('openid'))
+                } else if (res.data.msg == '3') {
+                  console.log('-------------上传用户的头像和昵称到数据库更新成功了(mine.js)-----------------')
+                  console.log('--------------3-------------')
+                  console.log(wx.getStorageSync('openid'))
+                } else if (res.data.msg == '4') {
+                  console.log('-------------上传用户的头像和昵称到数据库更新失敗了(mine.js)-----------------')
+                  console.log('--------------4-------------')
+                  console.log(wx.getStorageSync('openid'))
+                } else if (res.data.msg == '5') {
+                  console.log('-------------无需更新(mine.js)-----------------')
+                  console.log('--------------5-------------')
+                  console.log(wx.getStorageSync('openid'))
+                }
               },
               fail: function(res) {
                 console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
@@ -304,9 +323,7 @@ Page({
 
   },
 
-
-
-
+ 
   //检测用户是否绑定手机号
   checkPhone() {
     var that = this
@@ -315,8 +332,7 @@ Page({
       url: api.API_CHECKPHONE,
       data: {
         openid: wx.getStorageSync("openid"),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -333,9 +349,14 @@ Page({
           that.setData({
             phoneNumber: res.data.mobile
           })
+          console.log('============================')
+          console.log(that.data.phoneNumber)
         } else {
           console.log("---------------未绑定手机号---------------------")
           app.globalData.isBindingPhone = false;
+          wx.navigateTo({
+            url: '/pages/phone/phone',
+          })
         }
       }
     })
@@ -651,6 +672,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+
+    this.setData({
+      phoneNumber:app.globalData.phoneNumber
+    })
+
     // if (wx.getStorageSync('unionid') != '') {
 
     //   wx.request({

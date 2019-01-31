@@ -48,7 +48,7 @@
     <view wx:if='{{isHaveCourse}}' class='search_list_scrollView'>
       <view wx:if='{{isCourseinfo == "c"}}'>
         <block wx:for="{{courseinfo}}" wx:key='key'>
-          <view class='S-list' bindtap='jumpToArticle' data-courseid='{{item.course_id}}'>
+          <view class='S-list' bindtap='jumpToArticle' data-mode='course' data-course_id='{{item.course_id}}'>
             <view class='s_listCon'>
               <view>
                 <view class='s_listCourseInfo'>
@@ -84,18 +84,18 @@
                 <view wx:if="{{platform !='ios'}}" class='boutique_priceItem'>
                   <text class='s_listPrice'>￥{{item.course_money}}</text>
                   <text class='s_listPrice'>/</text>
-                </view>
-                <text class='s_listPrice'>{{item.countcourse}}讲</text>
+                </view> 
+                <text class='s_listPrice'>{{item.coursenum}}讲</text>
                 <text class='s_listPriceGroupText'  style='padding-left:30rpx;'>{{item.updatetime}}</text>
               </view>
-              <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人购买</text>
+              <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人解锁</text>
             </view>
           </view>
         </block>
       </view>
       <view wx:if='{{isCourseinfo == "a"}}'>
         <block wx:for="{{articleinfo}}" wx:key='key'>
-          <view class='S-list'>
+          <view class='S-list' bindtap='jumpToArticle' data-mode='article' data-article_id='{{item.article_id}}'>
             <view class='s_listCon'>
               <view>
 
@@ -132,11 +132,11 @@
                   <text class='s_listPrice'>￥{{item.course_money}}</text>
                   <text class='s_listPrice'>/</text>
                 </view>
-                <text class='s_listPrice'>{{item.countcourse}}讲</text>
+                <text class='s_listPrice'>{{item.coursenum}}讲</text>
                 <text class='s_listPriceGroupText'  style='padding-left:30rpx;'>{{item.updatetime}}</text>
 
               </view>
-              <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人购买</text>
+              <text class='s_listPriceGroupText color'>{{item.coursebuynum}}人解锁</text>
             </view>
           </view>
         </block>

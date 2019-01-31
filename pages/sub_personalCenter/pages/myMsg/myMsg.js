@@ -33,7 +33,7 @@ Page({
       data: {
         openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -107,7 +107,7 @@ Page({
       success: function(res) {
         if (res.confirm) {
           that.delMsg()
-          that.getMsg()
+          
         }
       }
     })
@@ -127,7 +127,7 @@ Page({
       data: {
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         'guestbook_id': that.data.guestbook_id
       },
       header: {
@@ -138,6 +138,8 @@ Page({
       responseType: 'text',
       success: function(res) {
         console.log('----------留言删除成功啦---------')
+        
+        that.getMsg()
       },
       fail: function(res) {
         console.log('----------失败啦---------')

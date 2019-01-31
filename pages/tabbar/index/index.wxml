@@ -37,20 +37,19 @@
 
   <!-- 建谈新闻 -->
   <view class='index_news'>
-    <view class='newsNav'>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
-      <text class='newsTitle'>每日一谈</text>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+    <view class='newsNav_new'>
+      <image class='navImg_new' src='/image/index_news.png'></image>
+      <text class='newsTitle_new'>每日一谈</text>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
       <view  class='newsAll' bindtap='jumpToAllNews'>
         <image src='/image/index_more.png'></image>
       </view>
     </view>
     <view class='newsList'>
-      <block wx:for='{{newsList}}' wx:key='key' >
+      <block wx:for='{{newsinfo}}' wx:key='key' >
         <view class='newsCon' bindtap='jumpToNews' data-article_id='{{item.article_id}}'>
           <image class='newsListImg' src='/image/index_play.png'></image>
-          <text class='newsListText'>{{item.newsNumber}}</text>
-          <text class='newsListCon'>{{item.newsName}}</text>
+          <text class='newsListText'>{{item.article_title}}</text>
         </view>
       </block>
     </view>
@@ -60,9 +59,11 @@
   <!-- 精品专栏 -->
   <view class='index_boutique'>
     <view class='newsNav'>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
+      <view class='news_line'></view>
+
       <text class='newsTitle'>精品专栏</text>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
       <view class='newsAll' bindtap='jumpToAllCourse'>
         <image src='/image/index_more.png'></image>
       </view>
@@ -85,7 +86,7 @@
                     <text class='boutique_price'>￥{{item.course_money}}</text>
                     <text class='boutique_num'>/</text>
                   </view>
-                  <text class='boutique_num'>{{item.countcourse}}讲</text>
+                  <text class='boutique_num'>{{item.coursenum}}讲</text>
                 </view>
               </view>
               <text class='boutique_introduce'>{{item.course_desc}}</text>
@@ -107,9 +108,10 @@
   <!-- 作者专栏 -->
   <view class='videoCourse'>
     <view class='newsNav'>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
+      <view class='news_line'></view>
       <text class='newsTitle'>推荐作者</text>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
       <view class='newsAll' bindtap='jumpToAllAuthor'>
         <image src='/image/index_more.png'></image>
       </view>
@@ -173,9 +175,11 @@
   <!-- 热点专题 -->
   <view class='hotTopic'>
     <view class='newsNav'>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
+      <view class='news_line'></view>
+
       <text class='newsTitle'>热点专题</text>
-      <image class='navImg' src='/image/index_headpadding.png'></image>
+      <!-- <image class='navImg' src='/image/index_headpadding.png'></image> -->
       <view class='newsAll'>
         <image src='/image/index_more.png'></image>
       </view>

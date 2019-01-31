@@ -35,7 +35,6 @@ Page({
   onLoad: function(options) {
     var that = this;
 
-
     // 获取屏幕高度
     wx.getSystemInfo({
       success: function(res) {
@@ -82,10 +81,10 @@ Page({
       // url: 'https://wx.bjjy.com/orderbyguestbook',
       url: api.API_GETARTICLEMSG,
       data: {
-        'article_id': article_id,
-        'openid': wx.getStorageSync('openid'),
+        article_id: article_id,
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -108,14 +107,14 @@ Page({
 
 
 
-    //上传用户浏览信息
+    //上传用户浏览信息(文章)
     wx.request({
       // url: 'https://wx.bjjy.com/saveBrowseRecord',
       url: api.API_UPLOADTRACE,
       data: {
         openid: wx.getStorageSync("openid"),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         article_id: article_id,
         course_id: this.data.course_id
       },
@@ -126,11 +125,17 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function(res) {
-        console.log(res)
-        if (res.data.msg == "0") {
-          console.log("-------------浏览记录保存成功---------------")
-        } else {
+        console.log(res);
+        if (res.data.msg == '1') {
+          console.log('---------用户浏览记录上传成功-----------')
+        } else if (res.data.msg == '2') {
           console.log("-------------浏览记录保存失败---------------")
+        } else if (res.data.msg == '3') {
+          console.log("-------------浏览记录更新成功---------------")
+        } else if (res.data.msg == '4'){
+          console.log('---------浏览记录更新失败----------')
+        }else{
+          console.log('---------------浏览记录接口失败-------------------')
         }
       }
     })
@@ -141,20 +146,28 @@ Page({
   //播放
   play: function () {
     myaudio.play();
-    console.log(myaudio.duration);
     this.setData({
       isplay: true
     });
+
+    // setTimeout(() => {
+    //   console.log(myaudio.duration)//2.795102
+    // }, 1000)
   },
-  // 停止
-  stop: function () {
+  // 暂停
+  pause: function () {
     myaudio.pause();
     this.setData({
       isplay: false
     });
   },
-
-
+  // 播放完毕
+  finish:function(){
+    myaudio.stop();
+    this.setData({
+      isplay: false
+    })
+  },
 
 
 
@@ -163,30 +176,134 @@ Page({
     console.log(event)
     var article_id = event.currentTarget.dataset.articleid;
     console.log(article_id)
-    wx: wx.navigateTo({
-      url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
-    })
+    // wx: wx.navigateTo({
+    //   url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
+    // })
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
+        })
+      }
+      else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
+
+          },
+        })
+      }
+
+
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
   },
 
   // 文章点赞
   articleLike: function() {
 
-    if (this.data.articleinfo.is_valid == '0') {
-      this.setData({
-        'articleinfo.is_valid': '1'
-      });
-      this.setData({
-        'articleinfo.countcollect': Number(this.data.articleinfo.countcollect) - 1
-      });
-      this.artLikeUpload()
+    // if (this.data.articleinfo.is_valid == '0') {
+    //   this.setData({
+    //     'articleinfo.is_valid': '1'
+    //   });
+    //   this.setData({
+    //     'articleinfo.countcollect': Number(this.data.articleinfo.countcollect) - 1
+    //   });
+    //   this.artLikeUpload()
+    // } else {
+    //   this.setData({
+    //     'articleinfo.is_valid': '0'
+    //   });
+    //   this.setData({
+    //     'articleinfo.countcollect': Number(this.data.articleinfo.countcollect) + 1
+    //   });
+    //   this.artLikeUpload()
+    // }
+    var that = this;
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+
+        if (that.data.articleinfo.is_valid == '0') {
+          that.setData({
+            'articleinfo.is_valid': '1',
+            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) - 1
+          });
+    
+          that.artLikeUpload()
+        } else {
+          that.setData({
+            'articleinfo.is_valid': '0',
+            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) + 1
+          });
+          that.artLikeUpload()
+        }
+
+      }
+      else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
+
+          },
+        })
+      }
+
+
     } else {
-      this.setData({
-        'articleinfo.is_valid': '0'
-      });
-      this.setData({
-        'articleinfo.countcollect': Number(this.data.articleinfo.countcollect) + 1
-      });
-      this.artLikeUpload()
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
     }
   },
 
@@ -204,37 +321,107 @@ Page({
     let msgnum = 'guestbookinfo[' + key + '].countpraise';
     let num = 'guestbookinfo[' + key + '].num';
     // console.log(that.data.guestbookinfo[key].is_valid);
-    if (that.data.guestbookinfo[key].is_valid == '0' ) {
+    // if (that.data.guestbookinfo[key].is_valid == '0' ) {
       
 
-      that.setData({
-        [msgKey]: '1',
-        [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
-        [num]: '1',
-        b: guestbook_id
-      });
-      console.log(that.data.guestbookinfo[key].num);
-      console.log(that.data.b)
-      that.msgLikeUpload()
-      //console.log(a)
+    //   that.setData({
+    //     [msgKey]: '1',
+    //     [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
+    //     [num]: '1',
+    //     b: guestbook_id
+    //   });
+    //   console.log(that.data.guestbookinfo[key].num);
+    //   console.log(that.data.b)
+    //   that.msgLikeUpload()
+    //   //console.log(a)
       
+
+    // } else {
+
+    //   that.setData({
+    //     [msgKey]: '0',
+    //     [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
+    //     [num]: '-1',
+    //     b: guestbook_id
+    //   });
+    //   console.log(that.data.guestbookinfo[key].num);
+    //   console.log(that.data.b)
+    //   that.msgLikeUpload()
+    //   //console.log(a)
+    
+    // }
+
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        if (that.data.guestbookinfo[key].is_valid == '0') {
+
+
+          that.setData({
+            [msgKey]: '1',
+            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
+            [num]: '1',
+            b: guestbook_id
+          });
+          console.log(that.data.guestbookinfo[key].num);
+          console.log(that.data.b)
+          that.msgLikeUpload()
+          //console.log(a)
+
+
+        } else {
+
+          that.setData({
+            [msgKey]: '0',
+            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
+            [num]: '-1',
+            b: guestbook_id
+          });
+          console.log(that.data.guestbookinfo[key].num);
+          console.log(that.data.b)
+          that.msgLikeUpload()
+          //console.log(a)
+
+        }
+      }
+      else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
+
+          },
+        })
+      }
+
 
     } else {
-
-      that.setData({
-        [msgKey]: '0',
-        [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
-        [num]: '-1',
-        b: guestbook_id
-      });
-      console.log(that.data.guestbookinfo[key].num);
-      console.log(that.data.b)
-      that.msgLikeUpload()
-      //console.log(a)
-    
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
     }
-
-
   },
 
 
@@ -244,7 +431,7 @@ Page({
   msgLikeUpload: function() {
     // console.log(this.data.b)
     // console.log(wx.getStorageSync('openid'))
-    // console.log(wx.getStorageSync('unionId'))
+    // console.log(wx.getStorageSync('unionid'))
     
     wx.request({
       // url: 'https://wx.bjjy.com/updateguestbook',
@@ -253,7 +440,7 @@ Page({
         'guestbook_id': this.data.b,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -282,7 +469,7 @@ Page({
         'article_id': this.data.articleinfo.article_id,
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -313,35 +500,78 @@ Page({
 
       })
     } else {
-      wx.showModal({
-        // title: '购买',
-        content: '是否购买',
-        showCancel: true,
-        cancelText: '取消',
-        // cancelColor: '',
-        confirmText: '确定',
-        // confirmColor: '',
-        success: function(res) {
-          console.log(res)
-          if (res.confirm) {
-            console.log('用户点击确定')
-            // 判断是单文还是课程中的文章
-            // course_id = 0为单文
-            if (that.data.articleinfo.course_id == "0") {
-              wx.navigateTo({
-                url: "/pages/sub_browse/pages/buy/buy?article_id=" + that.data.articleinfo.article_id
-              })
-            } else {
-              wx.navigateTo({
-                url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.articleinfo.course_id
-              })
-            }
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
+      //判断是否登录
+      //如果登录，进行下一步判断，如果未登录，引导用户先登录
+      if (app.globalData.isLogin) {
+        //判断用户是否绑定手机号
+        //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
+        if (app.globalData.isBindingPhone) {
+          wx.showModal({
+            // title: '购买',
+            content: '是否购买',
+            showCancel: true,
+            cancelText: '取消',
+            // cancelColor: '',
+            confirmText: '确定',
+            // confirmColor: '',
+            success: function (res) {
+              console.log(res)
+              if (res.confirm) {
+                console.log('用户点击确定')
+                // 判断是单文还是课程中的文章
+                // course_id = 0为单文
+                if (that.data.articleinfo.course_id == "0") {
+                  wx.navigateTo({
+                    url: "/pages/sub_browse/pages/buy/buy?article_id=" + that.data.articleinfo.article_id
+                  })
+                } else {
+                  wx.navigateTo({
+                    url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.articleinfo.course_id
+                  })
+                }
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
 
+            }
+          })
         }
-      })
+        else {
+          wx.showModal({
+            title: '未绑定手机号',
+            content: '请先绑定手机号',
+            showCancel: true,
+            cancelText: '取消',
+            confirmText: '确定',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/phone/phone',
+                })
+              } else if (res.cancel) {
+
+              }
+
+            },
+          })
+        }
+
+
+      } else {
+        wx.showModal({
+          title: '未登录',
+          content: '请先登录',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            wx.switchTab({
+              url: '/pages/tabbar/mine/mine',
+            })
+          },
+        })
+      }
+      
     }
 
 
@@ -378,10 +608,10 @@ Page({
       // url: 'https://wx.bjjy.com/orderbyguestbook',
       url: api.API_GETARTICLEMSG,
       data: {
-        'article_id': that.data.article_id,
-        'openid': wx.getStorageSync('openid'),
+        article_id: that.data.article_id,
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -406,14 +636,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    this.pause();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    this.finish();
   },
 
   /**
@@ -486,10 +716,10 @@ Page({
       // url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
       url: api.API_GETARTICLEINFO,
       data: {
-        'article_id': that.data.article_id,
-        'openid': wx.getStorageSync('openid'),
+        article_id: that.data.article_id,
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -514,6 +744,8 @@ Page({
             console.log('------含有音频---------')
             that.setData({
               isHaveAudio: true,
+              minute: parseInt(res.data.articleinfo.audio_duration / 60),
+              second: parseInt(res.data.articleinfo.audio_duration % 60)
             })
           }
           if (res.data.articleinfo.video_id) {
@@ -534,7 +766,7 @@ Page({
 
           // 判断该文章是否为试读课程
           //is_audition为1则为试读课程，课程可读，进行赋值操作
-          //is_audition为1则为非试读课程，进行下一步判断
+          //is_audition为0则为非试读课程，进行下一步判断
           if (res.data.articleinfo.is_audition == '1') {
             that.setData({
               buy: true,
@@ -542,6 +774,7 @@ Page({
               authorinfo: res.data.authorinfo,
             })
             myaudio.src = res.data.articleinfo.audio_url;
+            
             WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
           } else {
             that.setData({

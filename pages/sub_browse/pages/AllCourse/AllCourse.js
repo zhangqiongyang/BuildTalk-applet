@@ -94,7 +94,7 @@ Page({
     //       'openid': wx.getStorageSync('openid'),
    // source: 'xcx',
     //       'course_id': course_id,
-   // unionid: wx.getStorageSync('unionId')
+   // unionid: wx.getStorageSync('unionid')
     //     },
     //     header: {
     //       'content-type': 'application/x-www-form-urlencoded'

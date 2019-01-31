@@ -39,6 +39,9 @@ Page({
     console.log(event);
     let author_id = event.currentTarget.dataset.author_id;
     console.log(author_id);
+    console.log(this.data.authorinfo)
+    let authorInfoJson = JSON.stringify(this.data.authorinfo)
+    console.log(authorInfoJson)
     wx.navigateTo({
       url: '/pages/sub_browse/pages/authorDesc/authorDesc?author_id=' + author_id,
     })
@@ -89,7 +92,7 @@ Page({
               'openid': wx.getStorageSync('openid'),
               source: 'xcx',
               'article_id': article_id,
-              unionid: wx.getStorageSync('unionId')
+              unionid: wx.getStorageSync('unionid')
             },
             header: {
               'content-type': 'application/x-www-form-urlencoded'
@@ -224,7 +227,7 @@ Page({
     //       'openid': wx.getStorageSync('openid'),
     // source: 'xcx',
     //       'course_id': course_id,
-    //unionid: wx.getStorageSync('unionId')
+    //unionid: wx.getStorageSync('unionid')
     //     },
     //     header: {
     //       'content-type': 'application/x-www-form-urlencoded'

@@ -189,7 +189,7 @@ Page({
   //     data: {
   //       'wx_openid': wx.getStorageSync('openid'),
   // source: 'xcx',
-  //unionid: wx.getStorageSync('unionId'),
+  //unionid: wx.getStorageSync('unionid'),
   //       'article_id': that.data.article_id,
   //       'content': that.data.value
   //     },
@@ -265,7 +265,7 @@ Page({
       data: {
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         'guestbook_id': that.data.guestbook_id
       },
       header: {
@@ -310,7 +310,7 @@ Page({
       data: {
         'openid': wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         'article_id': that.data.article_id,
       },
       header: {

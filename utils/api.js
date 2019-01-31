@@ -1,4 +1,4 @@
-var base = "https://wx.bjjy.com"
+var base = "https://www.51jiantan.com"
 
 
 module.exports = {
@@ -8,12 +8,18 @@ module.exports = {
   
   //首页index
   API_INDEXPIC: base + "/getindexpic", // 查询首页推荐轮播图
+  API_INDEXNEWS: base + "/searchallrecommend", // 获取新闻信息接口
   API_INDEXCOURSE: base + "/getindexinfo", // 查询首页上精品推荐的课程接口
   API_INDEXAUTHOR: base + "/searchrecommendauthor", // 获取推荐作者信息接口
 
   //个人中心mine
   API_MINEUPLOADINFO: base + "/operateuser", //上传用户的头像和昵称到数据库
   API_CHECKPHONE: base + "/checkbindmobile", //检测用户是否绑定手机号
+
+
+  //全部新闻页allNews
+  API_ALLNEWS: base + "/searchallnews", // 获取所有新闻的信息
+
 
   //全部作者allauthor
   API_ALLAUTHOR: base + "/searchallauthor", // 获取所有作者的信息

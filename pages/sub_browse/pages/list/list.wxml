@@ -104,5 +104,6 @@
   <view wx:else>
     <view wx:if="{{!isBuy}}" class='buy'>由于相关规范，iOS用户暂不可在小程序内订阅</view>
   </view>
+  <view wx:if="{{!isBuy}}" class='buyPlaceholder'></view>
 
 </view>

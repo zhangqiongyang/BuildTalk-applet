@@ -84,9 +84,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           that.delMsg()
-          wx.navigateBack({
-            delta: 1,
-          })
+          
         }
       }
     })
@@ -104,10 +102,10 @@ Page({
       // url: 'https://wx.bjjy.com/deleteguestbook',
       url: api.API_DELETEMSG,
       data: {
-        'openid': wx.getStorageSync('openid'),
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
-        'guestbook_id': that.data.guestbook_id
+        unionid: wx.getStorageSync('unionid'),
+        guestbook_id: that.data.guestbook_id
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -117,6 +115,9 @@ Page({
       responseType: 'text',
       success: function (res) {
         console.log('----------留言删除成功啦---------')
+        wx.navigateBack({
+          delta: 1,
+        })
       },
       fail: function (res) {
         console.log('----------失败啦---------')

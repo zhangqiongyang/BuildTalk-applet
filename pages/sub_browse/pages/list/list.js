@@ -8,6 +8,7 @@ Page({
   data: {
     mode: true,
     order: true,
+    // order_sort:0,
     articlelist: null,
     articlelist_temporary: null,
     toView: 'inToView5',
@@ -100,7 +101,7 @@ Page({
         console.log('---------还未购买------------')
         wx.showModal({
           // title: '',
-          content: '请先购买课程解锁',
+          content: '请先解锁课程',
           showCancel: false,
           // cancelText: '取消',
           // cancelColor: '',
@@ -256,10 +257,10 @@ Page({
       // url: 'https://wx.bjjy.com/courselistinfo',
       url: api.API_COURSERINFO,
       data: {
-        'course_id': this.data.course_id,
-        'openid': wx.getStorageSync('openid'),
+        course_id: this.data.course_id,
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -284,6 +285,9 @@ Page({
           netState: res.data.msg
         })
 
+        for (let i = res.data.articlelist.length;i > 0;i--){
+          // courseInfoInverted
+        }
 
         if (res.data.msg == '1') {
           that.setData({
@@ -334,7 +338,7 @@ Page({
       data: {
         openid: wx.getStorageSync("openid"),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

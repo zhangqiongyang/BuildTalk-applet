@@ -84,7 +84,7 @@ Page({
     })
 
 
-    console.log(wx.getStorageSync('unionId'))
+    console.log(wx.getStorageSync('unionid'))
 
     // 获取已购课程信息接口
     wx.request({
@@ -93,7 +93,7 @@ Page({
       data: {
         openid : wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId')
+        unionid: wx.getStorageSync('unionid')
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

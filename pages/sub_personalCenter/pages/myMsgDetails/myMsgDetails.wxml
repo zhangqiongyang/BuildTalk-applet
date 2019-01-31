@@ -6,7 +6,7 @@
       <view class='myMsg'>
         <view class='myMessage'>
           <text class='myMsgInfo'>留言·{{guestbookinfo.guestbook_time}}</text>
-          <view class='myMessageImage' bindtap='myMsgDel' data-guestbook_id='{{item.guestbook_id}}'>
+          <view class='myMessageImage' bindtap='myMsgDel' data-guestbook_id='{{guestbookinfo.guestbook_id}}'>
             <image src='/image/myMsg_delete.png'></image>
           </view>
           <!-- <button open-type='share'>

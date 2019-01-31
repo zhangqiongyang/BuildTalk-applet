@@ -48,10 +48,10 @@
       <view class='playerInfo'>
         <text class='player_article_title'>{{articleinfo.article_title}}</text>
         <view class='player_article_audioInfo'>
-          <text class='player_article_declaimer'>朗读人：丁婵{{articles.article_author}}</text>
-          <text class='player_article_time'>02'34''</text>
+          <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
+          <text class='player_article_time'>{{minute}}'{{second}}''</text>
           <image src='/image/acticle_line.png'></image>
-          <text class='player_article_size'>1.18M</text>
+          <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
         </view>
       </view>
       <!-- <view class='playerDown'>
@@ -60,16 +60,16 @@
     </view>
     <!--当前为播放状态  -->
     <view class='player' wx:if="{{isplay==true}}">
-      <view class='playerIcon' bindtap='stop'>
+      <view class='playerIcon' bindtap='pause'>
         <image class='playStop' src='/image/article_stop.png'></image>
       </view>
       <view class='playerInfo'>
         <text class='player_article_title'>{{articleinfo.article_title}}</text>
         <view class='player_article_audioInfo'>
-          <text class='player_article_declaimer'>朗读人：丁婵{{articles.article_author}}</text>
-          <text class='player_article_time'>02'34''</text>
+          <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
+          <text class='player_article_time'>{{minute}}'{{second}}''</text>
           <image src='/image/acticle_line.png'></image>
-          <text class='player_article_size'>1.18M</text>
+          <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
         </view>
       </view>
       <!-- <view class='playerDown'>

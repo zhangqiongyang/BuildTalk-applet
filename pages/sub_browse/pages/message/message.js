@@ -5,40 +5,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    placeholder:'欢迎踊跃留言',
-    maxlength:'2000',
-    value:'',
-    myMsg:[]
+    placeholder: '欢迎踊跃留言',
+    maxlength: '2000',
+    value: '',
+    myMsg: [],
+    currentNoteLen: 0
   },
 
   // 字数限制
-  bindWordLimit: function(e){
+  bindWordLimit: function(e) {
     var value = e.detail.value,
-    maxlength = this.data.maxlength,
-    len = parseInt(value.length);
+      maxlength = this.data.maxlength,
+      len = parseInt(value.length);
 
-    if (len > maxlength){
+    if (len > maxlength) {
       return;
     }
 
     this.setData({
-      currentNoteLen: len ,//当前字数
-      value : value        //文本域内容
+      currentNoteLen: len, //当前字数
+      value: value //文本域内容
     })
   },
 
 
 
   //提交
-  msgSubmit: function(e){
-    if (this.data.value == ''){
+  msgSubmit: function(e) {
+    if (this.data.value == '') {
       wx.showModal({
         title: '留言不能为空',
         content: '',
-        showCancel:false,
+        showCancel: false,
       })
-    }
-    else{
+    } else {
       console.log(this.data.value);
 
       // let len = this.data.myMsg.length;
@@ -65,7 +65,6 @@ Page({
         title: '提交成功',
       })
       this.msgUpload()
-      this.getMsg()
     }
 
   },
@@ -73,15 +72,15 @@ Page({
 
 
   // 上传留言接口
-  msgUpload: function () {
+  msgUpload: function() {
     var that = this;
     wx.request({
       // url: 'https://wx.bjjy.com/saveguestbook',
-      url: api.API_UPLOADMSG,      
+      url: api.API_UPLOADMSG,
       data: {
         wx_openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         article_id: that.data.article_id,
         content: that.data.value
       },
@@ -91,14 +90,16 @@ Page({
       method: 'POST',
       dataType: 'json',
       responseType: 'text',
-      success: function (res) {
+      success: function(res) {
         console.log('--------------留言上传成功啦----------------')
         // console.log(res)
         // that.setData({
         //   guestbookinfo: res.data.guestbookinfo
         // })
+        that.getMsg()
+
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log('--------------失败啦----------------')
       },
     })
@@ -108,7 +109,7 @@ Page({
 
 
   // 我的留言删除
-  myMsgDel: function(event){
+  myMsgDel: function(event) {
     console.log(event);
     var guestbook_id = event.currentTarget.dataset.guestbookid;
     this.setData({
@@ -119,10 +120,10 @@ Page({
     wx.showModal({
       title: '删除',
       content: '是否删除该留言',
-      success:function(res){
-        if(res.confirm){
+      success: function(res) {
+        if (res.confirm) {
           that.delMsg()
-          that.getMsg()
+          // that.getMsg()
         }
       }
     })
@@ -143,21 +144,21 @@ Page({
     //   myMsg
     // })
   },
-  
+
 
 
 
 
   // 删除留言接口
-  delMsg:function(){
+  delMsg: function() {
     var that = this;
     wx.request({
       // url: 'https://wx.bjjy.com/deleteguestbook',
       url: api.API_DELETEMSG,
       data: {
-        openid:wx.getStorageSync('openid'),
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         guestbook_id: that.data.guestbook_id
       },
       header: {
@@ -168,6 +169,7 @@ Page({
       responseType: 'text',
       success: function(res) {
         console.log('----------留言删除成功啦---------')
+        that.getMsg()
       },
       fail: function(res) {
         console.log('----------失败啦---------')
@@ -180,7 +182,7 @@ Page({
 
 
   // 获取上层数据
-  onLoad: function (options) {
+  onLoad: function(options) {
     var article_id = options.article_id
     this.setData({
       article_id: article_id
@@ -194,15 +196,15 @@ Page({
 
 
   // 获取留言接口
-  getMsg:function () {
-    var that = this ;
+  getMsg: function() {
+    var that = this;
     wx.request({
       // url: 'https://wx.bjjy.com/getguestbookbyopenid',
-      url: api.API_GETMSG,      
+      url: api.API_GETMSG,
       data: {
-        openid:wx.getStorageSync('openid'),
+        openid: wx.getStorageSync('openid'),
         source: 'xcx',
-        unionid: wx.getStorageSync('unionId'),
+        unionid: wx.getStorageSync('unionid'),
         article_id: that.data.article_id,
       },
       header: {
@@ -237,49 +239,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   }
 })

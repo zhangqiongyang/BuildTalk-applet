@@ -66,7 +66,7 @@
         <view class='accountImg'>
           <image src='/image/mine_bought.png'></image>
         </view>
-        <text class='accountName'>已购</text>
+        <text class='accountName'>已解锁</text>
       </view>
       <view class='accountInfo'>
         <text class='accountNumber accountNumberColor'></text>
