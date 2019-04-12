@@ -27,6 +27,22 @@ function _showToast(title) {
   })
 }
 
+// 模态对话框 showModel
+function _showModel(title,content) {
+  wx.showModal({
+    title: title,
+    content: content,
+    success: (res)=> {
+      if (res.confirm) {
+        console.log('用户点击确定')
+      } else if (res.cancel) {
+        console.log('用户点击取消')
+      }
+    }
+  })
+}
+
+
 //判断字符是否为空的方法
 function isEmpty(obj) {
   if (typeof obj == "undefined" || obj == null || obj == "") {
@@ -60,15 +76,6 @@ function delHtmlTag(str) {
   var str = str.replace(/<\/?[^>]*>/gim, ""); //去掉所有的html标记
   var result = str.replace(/(^\s+)|(\s+$)/g, ""); //去掉前后空格
   return result.replace(/\s/g, ""); //去除文章中间空格
-}
-
-
-
-
-
-//上传多张图片
-function upLoadImg(data){
-  var that = this
 }
 
 

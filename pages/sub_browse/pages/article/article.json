@@ -1,22 +1,3 @@
 {
-  "pages": [
-    "pages/article/article",
-    "pages/message/message"
-  ],
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/article/article",
-        "text": "首页",
-        "iconPath": "image/index.png",
-        "selectedIconPath": "image/indexHover.png"
-      },
-      {
-        "pagePath": "pages/message/message",
-        "text": "我的",
-        "iconPath": "image/mine.png",
-        "selectedIconPath": "image/mineHover.png"
-      }
-    ]
-  }
+  
 }

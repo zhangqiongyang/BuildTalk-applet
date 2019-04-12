@@ -1,0 +1,8 @@
+<!--pages/sub_circle/pages/userAgreement/userAgreement.wxml-->
+<view class='background' style='height:{{windowHeight}}'>
+  <text class='textContent'>用户在注册帐号或使用本服务的过程中，可能需要填写或提交一些必要的个人信息，如法律法规、规章规范性文件（以下称“法律法规”）规定的需要填写的身份信息。如用户提交的信息不完整或不符合法律法规的规定，则用户可能无法使用本服务或在使用本服务的过程中受到限制。</text>
+  <text class='title'>特别声明</text>
+  <text class='textContent'>用户在注册帐号或使用本服务的过程中，可能需要填写或提交一些必要的个人信息，如法律法规、规章规范性文件（以下称“法律法规”）规定的需要填写的身份信息。如用户提交的信息不完整或不符合法律法规的规定，则用户可能无法使用本服务或在使用本服务的过程中受到限制。
+</text>
+  <text class='right'>2019年3月15日</text>
+</view>

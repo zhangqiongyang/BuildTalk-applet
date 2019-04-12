@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.5",
-	"appid": "wxc5c8a3e78de8c693",
+	"appid": "wx729a85a2d7af0ca0",
 	"projectname": "wxc5c8a3e78de8c693",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -27,13 +27,52 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "创建圈子",
+					"pathName": "pages/sub_circle/pages/creatCircle/creatCircle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "圈主规则",
+					"pathName": "pages/sub_circle/pages/userAgreement/userAgreement",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "圈子",
+					"pathName": "pages/sub_circle/pages/circle/circle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索圈子",
+					"pathName": "pages/sub_circle/pages/searchCircle/searchCircle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "圈子详情",
+					"pathName": "pages/sub_circle/pages/circleDetails/circlrDetails",
+					"scene": null
+				}
+			]
 		}
 	}
 }

@@ -1,0 +1,31 @@
+/* components/uploadImage/index.wxss */
+.uploadImage {
+  background-color: #d2d0d1;
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10rpx 10rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.back{
+  width: 240rpx;
+  height: 240rpx;
+  position: absolute;
+  border-radius: 10rpx 10rpx 0 0;
+}
+
+.photo {
+  width: 65rpx;
+  height: 65rpx;
+  z-index: 1;
+}
+
+.uploadImage text {
+  color: #fff;
+  font-size: 28rpx;
+  margin-top: 17rpx;
+  z-index: 1;
+}

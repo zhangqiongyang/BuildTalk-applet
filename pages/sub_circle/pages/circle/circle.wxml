@@ -1,0 +1,48 @@
+<!--pages/sub_circle/pages/circle/circle.wxml-->
+<view>
+  <!-- 搜索圈子 -->
+  <view class='searchBox' bindtap='toSearchCircle'>
+    <view class='search'>搜索圈子</view>
+  </view>
+  <!-- 圈子列表 -->
+  <view class='circle'>
+    <block wx:for='{{circleList}}'>
+      <!-- 圈子项 -->
+      <view class='circleItemBox'>
+        <view class='circleItem'>
+          <image class='circleImage' src='{{item.image}}'></image>
+          <text class='circleTitle'>{{item.title}}</text>
+          <view class='line'></view>
+          <view>
+            <text class='author'>{{item.author}}</text>
+            <image wx:if='{{item.isVip}}' class='author_v' src='/image/circle_v.png'></image>
+          </view>
+        </view>
+        <image wx:if='{{item.isCourse}}' class='courseImage' src='/image/circle_course.png'></image>
+      </view>
+    </block>
+    <!-- 创建圈子 -->
+    <view class='circleItemBox' bindtap='toRule'>
+      <view class='creat'>
+        <image src='/image/circle_creat.png'></image>
+      </view>
+      <view class='creatText'>创建圈子</view>
+    </view>
+  </view>
+
+  <!-- 圈主规则 -->
+  <view class='back' wx:if='{{isRule}}' bindtap='chageRule'>
+    <view class='circleRule'>
+      <image class='tanxiaojian' src='/image/circle_tanxiaojian.png'></image>
+      <view class='content'>
+        <image src='/image/circle_checked.png'></image>
+        <text>我已阅读并同意</text>
+        <text class='color' bindtap='toUserAgreement'>《建谈圈子圈主规则》</text>
+      </view>
+      <image class='ruleLine' src='/image/circle_line.png'></image>
+      <view class='contentText'>包含时政、低俗、色情、暴力引诱等敏感或违禁内容的圈子，将会被封停圈子和账号!</view>
+      <view class='btn' bindtap='toCreatCircle'>下一步</view>
+    </view>
+  </view>
+
+</view>

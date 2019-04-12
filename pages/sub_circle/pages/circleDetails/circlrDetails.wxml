@@ -1,0 +1,163 @@
+<!--pages/sub_circle/pages/circleDetails/circlrDetails.wxml-->
+<view>
+  <!-- 圈子标题 -->
+  <view class='title'>
+    <image class='circle_image' src='/image/example.jpg'></image>
+    <view class='title_content'>
+      <text class='title_title'>建筑产业工业互联网</text>
+      <view class='title_author'>
+        <text>圈主：小地瓜</text>
+        <image src='/image/circle_v.png'></image>
+        <text style='padding-left:30rpx;'>创建 490天</text>
+      </view>
+      <view class='title_label'>
+        <block wx:key='key'>
+          <text class='label'>BIM</text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- 圈子介绍 -->
+  <view class='intro'>
+    <view class='intro_title'>
+      <text>圈子介绍</text>
+      <image hidden='{{isIntro}}' src='/image/circleDetails_down.png' bindtap='changeIntro'></image>
+      <image hidden='{{!isIntro}}' src='/image/circleDetails_up.png' bindtap='changeIntro'></image>
+    </view>
+    <text wx:if='{{!isIntro}}' class='intro_content'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
+</text>
+    <view class='intro_all' wx:else>
+      <text class='intro_content_all'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
+</text>
+      <view class='btn fixed'>加入圈子</view>
+    </view>
+  </view>
+  <!-- 导航 -->
+  <view hidden='{{isIntro}}' class='nav'>
+    <view class='nav_classify'>
+      <view class='nav_item' bindtap='changeNav' data-id='theme'>
+        <text class='{{nav == "theme"?"active":""}}'>主题</text>
+      </view>
+      <view class='nav_item' bindtap='changeNav' data-id='essence'>
+        <text class='{{nav == "essence"?"active":""}}'>精华</text>
+        <text class='nav_num'>2</text>
+      </view>
+    </view>
+    <view class='nav_subject'>
+      <text>全部主题</text>
+      <image src='/image/circleDetails_down.png'></image>
+    </view>
+  </view>
+  <!-- 圈子主体 -->
+  <view hidden='{{isIntro}}' class='content'>
+    <block wx:for='{{circleList}}' wx:key='key'>
+      <view class='circle_item'>
+        <view class='item_author'>
+          <image src='{{item.photo}}'></image>
+          <view class='author_con'>
+            <view class='author_content'>
+              <view class='author_box'>
+                <text class='author_name'>{{item.name}}</text>
+                <text wx:if='{{item.isMaster}}' class='author_master'>圈主</text>
+              </view>
+              <text class='author_time'>{{item.time}}</text>
+            </view>
+            <image src='/image/circleDetails_more.png' bindtap='changeRedactSubject' data-type='open'></image>
+          </view>
+        </view>
+        <view class='circle_content'>
+          <text>{{item.content}}</text>
+          <view class='imageBox'>
+            <block wx:for='{{item.imageList}}' wx:key='key'>
+              <image src='{{item}}'></image>
+            </block>
+          </view>
+
+          <!-- 留言、转发及点赞操作 -->
+
+          <view class='image_box'>
+            <image src='/image/circleDetails_like.png'></image>
+            <image src='/image/circleDetails_msg.png'></image>
+            <button class='share' open-type='share'>
+              <image src='/image/circleDetails_share.png'></image>
+            </button>
+          </view>
+          <view class='liked'>
+            <image class='liked_image' src='/image/circleDetails_liked.png'></image>
+            <view class='liked_name'>
+              <block wx:for='{{item.liked}}' wx:key='key'>
+                <text>{{item.name}}</text>
+                <image wx:if='{{item.isVip}}' class='liked_v' src='/image/circle_v.png'></image>
+                <text>，</text>
+              </block>
+            </view>
+          </view>
+          <view class='msg'>
+            <block wx:for='{{item.msg}}' wx:key='key'>
+              <view class='msg_item'>
+                <text class='msg_name'>{{item.name}}：</text>
+                <text class='msg_con'>{{item.content}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+
+      </view>
+    </block>
+  </view>
+  <!-- 发表 -->
+  <view class='publish'>
+    <view class='publish_box'>
+      <image src='/image/circleDetails_down.png'></image>
+      <text>发表……</text>
+    </view>
+  </view>
+
+  <!-- 加入圈子 -->
+  <view hidden='{{isIntro}}' class='btnBox'>
+    <text>加入圈子可以浏览更多内容</text>
+    <view class='btn'>加入圈子</view>
+  </view>
+
+  <!-- 主题分类查看 -->
+  <view class='back_masking center'>
+    <view class='subject_classify'>
+      <view class='classify_title'>查看指定内容</view>
+      <view class='classify_box'>
+        <view class='classify_item'>
+          <image src='/image/circleDetails_all.png'></image>
+          <text>全部主题</text>
+        </view>
+        <view class='classify_item'>
+          <image src='/image/circleDetails_picture.png'></image>
+          <text>图片主题</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 编辑主题 -->
+  <view class='back_masking' wx:if='{{isRedactSubject}}'>
+    <view class='redactSubject'>
+      <view class='redact_box'>
+        <view class='redact_item'>
+          <image src='/image/circleDetails_collect.png'></image>
+          <text>收藏</text>
+        </view>
+        <view class='redact_item'>
+          <image src='/image/circleDetails_change.png'></image>
+          <text>修改</text>
+        </view>
+        <view class='redact_item'>
+          <image src='/image/circleDetails_delete.png'></image>
+          <text>删除</text>
+        </view>
+      </view>
+      <view class='cancel' bindtap='changeRedactSubject' data-type='close'>取消</view>
+    </view>
+  </view>
+
+
+
+</view>

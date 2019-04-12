@@ -17,7 +17,8 @@ Page({
    * buy:用户是否已购
    */
   data: {
-    windowHeight:app.globalData.windowHeight,
+    windowHeight: app.globalData.windowHeight,
+    // haveVideoHeight: app.globalData.windowHeight-420rpx,
     platform: app.globalData.platform,
     arcData: null,
     articleinfo: null,
@@ -90,8 +91,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      //dataType: 'json',
-      //responseType: 'text',
       success: function(res) {
         console.log('--------------留言数据-------------')
         console.log(res)
@@ -132,9 +131,9 @@ Page({
           console.log("-------------浏览记录保存失败---------------")
         } else if (res.data.msg == '3') {
           console.log("-------------浏览记录更新成功---------------")
-        } else if (res.data.msg == '4'){
+        } else if (res.data.msg == '4') {
           console.log('---------浏览记录更新失败----------')
-        }else{
+        } else {
           console.log('---------------浏览记录接口失败-------------------')
         }
       }
@@ -144,7 +143,7 @@ Page({
 
   // 音频播放器
   //播放
-  play: function () {
+  play: function() {
     myaudio.play();
     this.setData({
       isplay: true
@@ -155,14 +154,14 @@ Page({
     // }, 1000)
   },
   // 暂停
-  pause: function () {
+  pause: function() {
     myaudio.pause();
     this.setData({
       isplay: false
     });
   },
   // 播放完毕
-  finish:function(){
+  finish: function() {
     myaudio.stop();
     this.setData({
       isplay: false
@@ -188,15 +187,14 @@ Page({
         wx.navigateTo({
           url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
         })
-      }
-      else {
+      } else {
         wx.showModal({
           title: '未绑定手机号',
           content: '请先绑定手机号',
           showCancel: true,
           cancelText: '取消',
           confirmText: '确定',
-          success: function (res) {
+          success: function(res) {
             if (res.confirm) {
               wx.navigateTo({
                 url: '/pages/phone/phone',
@@ -217,7 +215,7 @@ Page({
         showCancel: true,
         cancelText: '取消',
         confirmText: '确定',
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: '/pages/tabbar/mine/mine',
           })
@@ -259,7 +257,7 @@ Page({
             'articleinfo.is_valid': '1',
             'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) - 1
           });
-    
+
           that.artLikeUpload()
         } else {
           that.setData({
@@ -269,15 +267,14 @@ Page({
           that.artLikeUpload()
         }
 
-      }
-      else {
+      } else {
         wx.showModal({
           title: '未绑定手机号',
           content: '请先绑定手机号',
           showCancel: true,
           cancelText: '取消',
           confirmText: '确定',
-          success: function (res) {
+          success: function(res) {
             if (res.confirm) {
               wx.navigateTo({
                 url: '/pages/phone/phone',
@@ -298,7 +295,7 @@ Page({
         showCancel: true,
         cancelText: '取消',
         confirmText: '确定',
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: '/pages/tabbar/mine/mine',
           })
@@ -312,7 +309,7 @@ Page({
   msglike: function(event) {
     // console.log(params);
     // console.log(event)
-    let that =this;
+    let that = this;
     let key = event.currentTarget.dataset.key;
     let guestbook_id = event.currentTarget.dataset.guestbookid;
     // console.log('guestbook_id' + event.currentTarget.dataset.guestbookid);    
@@ -322,7 +319,7 @@ Page({
     let num = 'guestbookinfo[' + key + '].num';
     // console.log(that.data.guestbookinfo[key].is_valid);
     // if (that.data.guestbookinfo[key].is_valid == '0' ) {
-      
+
 
     //   that.setData({
     //     [msgKey]: '1',
@@ -334,7 +331,7 @@ Page({
     //   console.log(that.data.b)
     //   that.msgLikeUpload()
     //   //console.log(a)
-      
+
 
     // } else {
 
@@ -348,7 +345,7 @@ Page({
     //   console.log(that.data.b)
     //   that.msgLikeUpload()
     //   //console.log(a)
-    
+
     // }
 
     //判断是否登录
@@ -386,15 +383,14 @@ Page({
           //console.log(a)
 
         }
-      }
-      else {
+      } else {
         wx.showModal({
           title: '未绑定手机号',
           content: '请先绑定手机号',
           showCancel: true,
           cancelText: '取消',
           confirmText: '确定',
-          success: function (res) {
+          success: function(res) {
             if (res.confirm) {
               wx.navigateTo({
                 url: '/pages/phone/phone',
@@ -415,7 +411,7 @@ Page({
         showCancel: true,
         cancelText: '取消',
         confirmText: '确定',
-        success: function (res) {
+        success: function(res) {
           wx.switchTab({
             url: '/pages/tabbar/mine/mine',
           })
@@ -432,7 +428,7 @@ Page({
     // console.log(this.data.b)
     // console.log(wx.getStorageSync('openid'))
     // console.log(wx.getStorageSync('unionid'))
-    
+
     wx.request({
       // url: 'https://wx.bjjy.com/updateguestbook',
       url: api.API_UPLOADMSGLIKE,
@@ -514,7 +510,7 @@ Page({
             // cancelColor: '',
             confirmText: '确定',
             // confirmColor: '',
-            success: function (res) {
+            success: function(res) {
               console.log(res)
               if (res.confirm) {
                 console.log('用户点击确定')
@@ -535,15 +531,14 @@ Page({
 
             }
           })
-        }
-        else {
+        } else {
           wx.showModal({
             title: '未绑定手机号',
             content: '请先绑定手机号',
             showCancel: true,
             cancelText: '取消',
             confirmText: '确定',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 wx.navigateTo({
                   url: '/pages/phone/phone',
@@ -564,14 +559,14 @@ Page({
           showCancel: true,
           cancelText: '取消',
           confirmText: '确定',
-          success: function (res) {
+          success: function(res) {
             wx.switchTab({
               url: '/pages/tabbar/mine/mine',
             })
           },
         })
       }
-      
+
     }
 
 
@@ -749,9 +744,12 @@ Page({
             })
           }
           if (res.data.articleinfo.video_id) {
-            console.log('------含有视频---------')            
+            console.log('------含有视频---------')
+            let haveVideoHeight = app.globalData.scrollHeight - 44
+            haveVideoHeight = haveVideoHeight - 210 - 49
             that.setData({
-              isHaveVideo: true
+              isHaveVideo: true,
+              haveVideoHeight: haveVideoHeight
             })
           }
           /**
@@ -774,7 +772,7 @@ Page({
               authorinfo: res.data.authorinfo,
             })
             myaudio.src = res.data.articleinfo.audio_url;
-            
+
             WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
           } else {
             that.setData({

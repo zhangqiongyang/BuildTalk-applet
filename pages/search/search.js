@@ -15,6 +15,7 @@ Page({
     keyword: '',
     value: '',
     platform: app.globalData.platform,
+    windowHeight: app.globalData.windowHeight + 49,
   },
 
 

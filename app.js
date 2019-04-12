@@ -979,8 +979,12 @@ App({
     wx.getSystemInfo({
       success: function(res) {
         that.globalData.windowHeight = res.windowHeight
+        that.globalData.scrollHeight = res.screenHeight-res.statusBarHeight
+        console.log('============屏幕高度=============')
+        console.log(res)
+
       }
-      // console.log('')
+
     })
 
 
@@ -1016,6 +1020,7 @@ App({
     isBindingPhone: null,
     phoneNumber: '',
     windowHeight: '',
+    scrollHeight:null,
     platform: ''
   }
 })

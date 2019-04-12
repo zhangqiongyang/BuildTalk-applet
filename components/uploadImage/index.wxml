@@ -1,0 +1,6 @@
+<!--components/uploadImage/index.wxml-->
+<view class='uploadImage' bindtap='upload'>
+  <image class='back' src='{{pic}}' mode='aspectFill'></image>
+  <image class='photo' src='/image/creatCircle_photo.png'></image>
+  <text>圈子封面</text>
+</view>

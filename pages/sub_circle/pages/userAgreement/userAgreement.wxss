@@ -1,0 +1,31 @@
+/* pages/sub_circle/pages/userAgreement/userAgreement.wxss */
+
+.background {
+  background-color: #f7f8fa;
+  padding: 38rpx 30rpx;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+text {
+  display: block;
+}
+
+.textContent {
+  font-size: 28rpx;
+  color: #656565;
+  line-height: 40rpx;
+}
+
+.title {
+  color: #242831;
+  font-size: 28rpx;
+  padding: 40rpx 0 30rpx 0;
+}
+
+.right {
+  color: #8f8f8f;
+  font-size: 28rpx;
+  float: right;
+  padding-top: 40rpx;
+}

@@ -2,7 +2,7 @@
 
 <import src="/wxParse/wxParse.wxml" />
 
-<view>
+<view style='font-size:0'>
 
 
   <!-- 视频 -->
@@ -17,107 +17,107 @@
 
   <!-- 文章主体 -->
 
-  <scroll-view  scroll-y class='videoContent' style='{{isHaveVideo?"height:680rpx":"height:{{windowHeight}}"}}'>
+  <scroll-view scroll-y class='videoContent' style='{{"height: " + (isHaveVideo ? haveVideoHeight : windowHeight) + "px;"}}'>
 
 
-  <!-- 文章标题 -->
-  <view class='articleTitle'>
-    <text class='article_title'>{{articleinfo.article_title}}</text>
-    <view class='article_articleInfo'>
-      <image class='article_authorImg' src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
-      <view class='article_authorInfo'>
-        <text class='article_author'>{{authorinfo.author_name}}</text>
-        <text class='article_time'>{{articleinfo.publish_time}}</text>
-      </view>
-    </view>
-  </view>
-
-
-
-  <!-- 音频播放器 -->
-  <view class='articleAudio' wx:if="{{isHaveAudio}}">
-
-    <view class='audio_mask' wx:if='{{!buy}}'  bindtap='jumpToBuy'>解锁当前课程</view>
-
-
-    <!--当前为停止状态  -->
-    <view class='player' wx:if="{{isplay==false}}">
-      <view class='playerIcon' bindtap='play'>
-        <image class='playStop' src='/image/article_play.png'></image>
-      </view>
-      <view class='playerInfo'>
-        <text class='player_article_title'>{{articleinfo.article_title}}</text>
-        <view class='player_article_audioInfo'>
-          <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
-          <text class='player_article_time'>{{minute}}'{{second}}''</text>
-          <image src='/image/acticle_line.png'></image>
-          <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
+    <!-- 文章标题 -->
+    <view class='articleTitle'>
+      <text class='article_title'>{{articleinfo.article_title}}</text>
+      <view class='article_articleInfo'>
+        <image class='article_authorImg' src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
+        <view class='article_authorInfo'>
+          <text class='article_author'>{{authorinfo.author_name}}</text>
+          <text class='article_time'>{{articleinfo.publish_time}}</text>
         </view>
       </view>
-      <!-- <view class='playerDown'>
+    </view>
+
+
+
+    <!-- 音频播放器 -->
+    <view class='articleAudio' wx:if="{{isHaveAudio}}">
+
+      <view class='audio_mask' wx:if='{{!buy}}' bindtap='jumpToBuy'>解锁当前课程</view>
+
+
+      <!--当前为停止状态  -->
+      <view class='player' wx:if="{{isplay==false}}">
+        <view class='playerIcon' bindtap='play'>
+          <image class='playStop' src='/image/article_play.png'></image>
+        </view>
+        <view class='playerInfo'>
+          <text class='player_article_title'>{{articleinfo.article_title}}</text>
+          <view class='player_article_audioInfo'>
+            <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
+            <text class='player_article_time'>{{minute}}'{{second}}''</text>
+            <image src='/image/acticle_line.png'></image>
+            <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
+          </view>
+        </view>
+        <!-- <view class='playerDown'>
         <image src='/image/article_down.jpg'></image>
       </view> -->
-    </view>
-    <!--当前为播放状态  -->
-    <view class='player' wx:if="{{isplay==true}}">
-      <view class='playerIcon' bindtap='pause'>
-        <image class='playStop' src='/image/article_stop.png'></image>
       </view>
-      <view class='playerInfo'>
-        <text class='player_article_title'>{{articleinfo.article_title}}</text>
-        <view class='player_article_audioInfo'>
-          <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
-          <text class='player_article_time'>{{minute}}'{{second}}''</text>
-          <image src='/image/acticle_line.png'></image>
-          <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
+      <!--当前为播放状态  -->
+      <view class='player' wx:if="{{isplay==true}}">
+        <view class='playerIcon' bindtap='pause'>
+          <image class='playStop' src='/image/article_stop.png'></image>
         </view>
-      </view>
-      <!-- <view class='playerDown'>
+        <view class='playerInfo'>
+          <text class='player_article_title'>{{articleinfo.article_title}}</text>
+          <view class='player_article_audioInfo'>
+            <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
+            <text class='player_article_time'>{{minute}}'{{second}}''</text>
+            <image src='/image/acticle_line.png'></image>
+            <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
+          </view>
+        </view>
+        <!-- <view class='playerDown'>
         <image src='/image/article_down.png'></image>
       </view> -->
-    </view>
-  </view>
-
-
-
-
-  <!-- 文章主体 -->
-  <view class='articleContent'>
-    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
-  </view>
-
-
-
-
-
-  <!-- 精选留言 -->
-  <view class='articleMessage'>
-    <view class='msgTitle'>
-      <image class='article_msg_line' src='/image/article_msg_line.png'></image>
-      <text>精选留言</text>
-      <image class='article_msg_line' src='/image/article_msg_line.png'></image>
-    </view>
-    <block wx:for='{{guestbookinfo}}' wx:for-index='key' wx:key='key'>
-      <view class='msgContent'>
-        <view class='msgUserImg'>
-          <image src='{{item.headimage}}'></image>
-        </view>
-        <view class='msgText'>
-          <view class='msgHead'>
-            <text class='msgUserName'>{{item.nickname}}</text>
-            <view class='msgLikeGroup' bindtap='msglike'  data-guestbookid='{{item.guestbook_id}}' data-key='{{key}}'>
-              <!-- <image class='msgLike' src='/image/article_transmit.png'></image> -->
-              <image wx:if="{{item.is_valid=='0'}}" class='msgLike' src='/image/article_msg_like_hover.png'></image>
-              <image wx:else class='msgLike' src='/image/article_msg_like.png' ></image>
-              <text class='likeNum'>{{item.countpraise}}</text>
-            </view>
-          </view>
-          <text class='msg'>{{item.content}}</text>
-          <text class='msgTime'>{{item.guestbook_time}}</text>
-        </view>
       </view>
-    </block>
-  </view>
+    </view>
+
+
+
+
+    <!-- 文章主体 -->
+    <view class='articleContent'>
+      <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+    </view>
+
+
+
+
+
+    <!-- 精选留言 -->
+    <view class='articleMessage'>
+      <view class='msgTitle'>
+        <image class='article_msg_line' src='/image/article_msg_line.png'></image>
+        <text>精选留言</text>
+        <image class='article_msg_line' src='/image/article_msg_line.png'></image>
+      </view>
+      <block wx:for='{{guestbookinfo}}' wx:for-index='key' wx:key='key'>
+        <view class='msgContent'>
+          <view class='msgUserImg'>
+            <image src='{{item.headimage}}'></image>
+          </view>
+          <view class='msgText'>
+            <view class='msgHead'>
+              <text class='msgUserName'>{{item.nickname}}</text>
+              <view class='msgLikeGroup' bindtap='msglike' data-guestbookid='{{item.guestbook_id}}' data-key='{{key}}'>
+                <!-- <image class='msgLike' src='/image/article_transmit.png'></image> -->
+                <image wx:if="{{item.is_valid=='0'}}" class='msgLike' src='/image/article_msg_like_hover.png'></image>
+                <image wx:else class='msgLike' src='/image/article_msg_like.png'></image>
+                <text class='likeNum'>{{item.countpraise}}</text>
+              </view>
+            </view>
+            <text class='msg'>{{item.content}}</text>
+            <text class='msgTime'>{{item.guestbook_time}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
 
 
 

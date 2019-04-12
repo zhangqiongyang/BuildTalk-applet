@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-uploadImage": "/components/uploadImage/index"
+  },
+  "navigationBarTitleText": "创建圈子"
+}

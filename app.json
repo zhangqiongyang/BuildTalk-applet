@@ -66,6 +66,16 @@
         "pages/allNews/allNews",
         "pages/authorDesc/authorDesc"
       ]
+    },
+    {
+      "root": "pages/sub_circle",
+      "pages": [
+        "pages/creatCircle/creatCircle",
+        "pages/userAgreement/userAgreement",
+        "pages/circle/circle",
+        "pages/searchCircle/searchCircle",
+        "pages/circleDetails/circlrDetails"
+      ]
     }
   ]
 }

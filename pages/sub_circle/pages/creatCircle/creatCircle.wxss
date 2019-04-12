@@ -1,0 +1,159 @@
+/* pages/sub_circle/pages/creatCircle/creatCircle.wxss */
+
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circleImageBox {
+  width: 240rpx;
+  margin-top: 80rpx;
+}
+
+.circleImage {
+  width: 240rpx;
+  height: 350rpx;
+  background: #fff;
+  border-radius: 0 0 10rpx 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.uploadImage {
+  background-color: #d2d0d1;
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10rpx 10rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadImage image {
+  width: 65rpx;
+  height: 65rpx;
+}
+
+.uploadImage text {
+  color: #fff;
+  font-size: 28rpx;
+  margin-top: 17rpx;
+}
+
+.circleNameBox {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleName {
+  font-size: 28rpx;
+  color: #656565;
+  text-align: center;
+}
+
+.labelBox {
+  margin-top: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.labelTitle {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #242831;
+}
+
+.labelView {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30rpx;
+}
+
+.label {
+  position: relative;
+}
+
+.label text {
+  padding: 20rpx 64rpx;
+  border: 1px solid #8f8f8f;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #666;
+  margin: 10rpx 15rpx;
+  display: inline-block;
+}
+
+.label image {
+  width: 19rpx;
+  height: 19rpx;
+  padding: 20rpx;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.label .active {
+  border: 1px solid #32a7ff;
+  background-color: #32a7ff;
+  color: #fff;
+}
+
+.labelInput {
+  padding: 13rpx 64rpx;
+  border: 1px solid #8f8f8f;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  color: #666;
+  margin: 10rpx 15rpx;
+  display: inline-block;
+}
+
+.introduceBox {
+  margin-top: 70rpx;
+}
+
+.introduceBox textarea {
+  width: 690rpx;
+  height: 252rpx;
+  background: #fff;
+  border: 1px solid #d2d0d1;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #8f8f8f;
+}
+
+.placeholder {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: #8f8f8f;
+}
+
+.btn {
+  width: 390rpx;
+  height: 88rpx;
+  background: #E0DFE0;
+  border-radius: 10rpx;
+  color: #fff;
+  font-weight: 500;
+  font-size: 34rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 80rpx auto;
+}
+
+.active{
+  background-color: #32A7FF;
+}

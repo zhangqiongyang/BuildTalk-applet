@@ -4,7 +4,7 @@
 <import src="/wxParse/wxParse.wxml" />
 
 
-<view class='background' style='height:{{windowHeight}}rpx;'>
+<view class='background' style='height:{{windowHeight}}px;'>
 
 
   <!-- 搜索框 -->
