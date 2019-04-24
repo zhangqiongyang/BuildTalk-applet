@@ -11,8 +11,14 @@
 }
 
 text {
-  font-size: 30rpx;
-  color: #333;
+  font-size: 28rpx;
+  color: #242831;
+  font-family: PingFang-SC-Regular;
+}
+
+view {
+  font-size: 28rpx;
+  color: #242831;
   font-family: PingFang-SC-Regular;
 }
 

@@ -1,0 +1,54 @@
+<!--components/subject/index.wxml-->
+<view class='circle_item'>
+  <view class='item_author'>
+    <image src='{{subjectInfo.photo}}'></image>
+    <view class='author_con'>
+      <view class='author_content'>
+        <view class='author_box'>
+          <text class='author_name'>{{subjectInfo.name}}</text>
+          <text wx:if='{{subjectInfo.isMaster}}' class='author_master'>圈主</text>
+        </view>
+        <text class='author_time'>{{subjectInfo.time}}</text>
+      </view>
+      <image wx:if='{{isJoin}}' src='/image/circleDetails_more.png' bindtap='changeRedactSubject' data-type='open'></image>
+    </view>
+  </view>
+  <view class='circle_content'>
+    <text>{{subjectInfo.content}}</text>
+    <view class='imageBox'>
+      <block wx:for='{{subjectInfo.imageList}}' wx:key='key'>
+        <image src='{{item}}'></image>
+      </block>
+    </view>
+
+    <!-- 留言、转发及点赞操作 -->
+    <view wx:if='{{isJoin}}'>
+      <view class='image_box'>
+        <image src='/image/circleDetails_like.png'></image>
+        <image src='/image/circleDetails_msg.png'></image>
+        <button class='share' open-type='share'>
+          <image src='/image/circleDetails_share.png'></image>
+        </button>
+      </view>
+      <view class='liked'>
+        <image class='liked_image' src='/image/circleDetails_liked.png'></image>
+        <view class='liked_name'>
+          <block wx:for='{{subjectInfo.liked}}' wx:key='key'>
+            <text>{{item.name}}</text>
+            <image wx:if='{{item.isVip}}' class='liked_v' src='/image/circle_v.png'></image>
+            <text>，</text>
+          </block>
+        </view>
+      </view>
+      <view class='msg'>
+        <block wx:for='{{subjectInfo.msg}}' wx:key='key'>
+          <view class='msg_item'>
+            <text class='msg_name'>{{item.name}}：</text>
+            <text class='msg_con'>{{item.content}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+

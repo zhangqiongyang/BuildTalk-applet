@@ -24,14 +24,14 @@
       <!-- <text style='padding-top: 20rpx;padding-bottom: 20rpx;'>|</text> -->
       <text class='navContentText'>已更新{{articleLen}}讲课程</text>
     </view>
-    <view wx:if='{{mode==true}}' class='navPattern' bindtap='changMode' data-mode='list'>
+    <view wx:if='{{mode==true}}' class='navPattern' data-mode='list'>
       <image wx:if='{{mode==true}}' class='navPatternImg' src='/image/list_list.png'></image>
       <text wx:if='{{mode==true}}' class='navPatternText' data-mode='list'>列表模式</text>
     </view>
-    <view wx:if='{{mode==false}}' class='navPattern' bindtap='changMode' data-mode='image'>
+    <!-- <view wx:if='{{mode==false}}' class='navPattern' bindtap='changMode' data-mode='image'>
       <image wx:if='{{mode==false}}' class='navPatternImg' src='/image/list_image.png'></image>
       <text wx:if='{{mode==false}}' class='navPatternText' data-mode='image'>图文模式</text>
-    </view>
+    </view> -->
   </view>
 
 

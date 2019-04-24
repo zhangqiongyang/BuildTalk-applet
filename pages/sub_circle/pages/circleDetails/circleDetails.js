@@ -5,9 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isJoin: false, //是否加入圈子
+    isCourse: true, //是否为课程
     isIntro: false, //是否显示圈子介绍
+    isCatalog: false, //是否显示目录详情
+    isHide:false,//是否隐藏主题、导航、
     nav: 'theme', //导航  theme主题  essence精华
     isRedactSubject: false, //编辑主题弹窗
+    isSubjectClassify: false, //主题分类弹窗
+    classify: 'all', //主题分类
+    classifyText: '全部主题', //主题分类名称
     circleList: [{
         name: '小地瓜',
         photo: '/image/example.jpg',
@@ -234,6 +241,32 @@ Page({
         ]
       },
     ],
+    catalogList: [{
+        id: 1,
+        num: '01',
+        name: 'ArchCAD简介1',
+        isAudition: true,
+      },
+      {
+        id: 2,
+        num: '02',
+        name: 'ArchCAD简介2',
+        isAudition: true,
+      },
+      {
+        id: 3,
+        num: '03',
+        name: 'ArchCAD简介3',
+        isAudition: true,
+      },
+      {
+        id: 4,
+        num: '04',
+        name: 'ArchCAD简介4',
+        isAudition: false,
+      },
+
+    ]
   },
 
   /**
@@ -298,7 +331,16 @@ Page({
   //切换圈子介绍显示
   changeIntro() {
     this.setData({
-      isIntro: !this.data.isIntro
+      isIntro: !this.data.isIntro,
+      isHide:!this.data.isHide
+    })
+  },
+
+  //切换课程目录显示
+  changeCatalog() {
+    this.setData({
+      isCatalog: !this.data.isCatalog,
+      isHide: !this.data.isHide
     })
   },
 
@@ -324,7 +366,33 @@ Page({
         isRedactSubject: false
       })
     }
+  },
 
+  // 切换主题分类
+  changeSubjectClassify(event) {
+    console.log(event)
+    const type = event.currentTarget.dataset.type,
+      text = event.currentTarget.dataset.text
+    this.setData({
+      classify: type,
+      classifyText: text,
+      isSubjectClassify: false
+    })
+  },
+
+  // 切换主题分类弹窗显示
+  changeclassify(event) {
+    console.log(event)
+    const type = event.currentTarget.dataset.type
+    if (type == 'open') {
+      this.setData({
+        isSubjectClassify: true
+      })
+    } else {
+      this.setData({
+        isSubjectClassify: false
+      })
+    }
   }
 
   /**

@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-subject": "/components/subject/index"
+  }
+}

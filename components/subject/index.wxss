@@ -1,0 +1,155 @@
+/* components/subject/index.wxss */
+
+.item_author {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 40rpx;
+  padding-left: 30rpx;
+}
+
+.item_author image {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+}
+
+.author_content {
+}
+
+.author_con {
+  margin-left: 20rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.author_con image {
+  width: 21rpx;
+  height: 21rpx;
+  padding: 30rpx;
+}
+
+.author_box {
+  display: flex;
+  align-items: center;
+}
+
+.author_name {
+  color: #242831;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.author_master {
+  background-color: #f5b83a;
+  padding: 2rpx 5rpx;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 500;
+  margin-left: 10rpx;
+}
+
+.author_time {
+  color: #8f8f8f;
+  font-size: 18rpx;
+}
+
+.circle_content {
+  margin-left: 100rpx;
+  margin-right: 20rpx;
+}
+
+.circle_content text {
+  color: #242831;
+  line-height: 42rpx;
+}
+
+.imageBox {
+  margin-top: 30rpx;
+}
+
+.imageBox image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 10rpx;
+  margin-right: 10rpx;
+}
+
+.image_box {
+  display: flex;
+  justify-content: space-between;
+}
+
+button::after {
+  border: none;
+}
+
+button {
+  background-color: #fff;
+  margin: 0;
+  border-radius: none;
+  line-height: 37rpx;
+  position: none;
+}
+
+.button-hover {
+  color: rgb(0, 0, 0);
+  background-color: #fff;
+}
+
+.image_box image {
+  width: 30rpx;
+  height: 30rpx;
+  padding: 10rpx;
+}
+
+.liked {
+  margin-top: 10rpx;
+}
+
+.liked_image {
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: text-top;
+  margin-top: 20rpx;
+}
+
+.liked_v {
+  width: 16rpx;
+  height: 14rpx;
+}
+
+.liked_name {
+  display: inline-block;
+  width: 570rpx;
+  margin-left: 20rpx;
+  vertical-align: text-top;
+}
+
+.liked_name text {
+  color: #656565;
+  font-size: 22rpx;
+  line-height: 30rpx;
+}
+
+.msg {
+  margin-top: 37rpx;
+}
+
+.msg_con {
+  color: #242831;
+  font-size: 22rpx;
+  font-weight: 500;
+  display: inline-block;
+  width: 513rpx;
+  vertical-align: text-top;
+}
+
+.msg_name {
+  color: #656565;
+  font-size: 22rpx;
+  vertical-align: text-top;
+}

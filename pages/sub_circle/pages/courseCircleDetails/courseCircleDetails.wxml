@@ -1,0 +1,84 @@
+<!--pages/sub_circle/pages/courseCircleDetails/courseCircleDetails.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+
+<view style='font-size:0;'>
+  <!-- 视频 -->
+  <video class='video'></video>
+
+  <!-- 目录 -->
+  <view class='catalog'>
+
+    <view class='catalog_title'>
+      <text class='intro_title_text'>01讲 ArchCAD简介</text>
+      <view class='catalog_title_con' bindtap='changePictureMode'>
+        <text>图文详情</text>
+        <image hidden='{{isPictureMode}}' src='/image/circleDetails_down.png'></image>
+        <image hidden='{{!isPictureMode}}' src='/image/circleDetails_up.png'></image>
+      </view>
+    </view>
+
+    <!-- 目录列表 -->
+    <view wx:if='{{!isPictureMode}}'>
+      <!-- 收起状态 -->
+      <view class='catalog_con' wx:if='{{!isCatalog}}'>
+        <view class='catalog_video_title'>
+          <image src='/image/circleDetails_video.png'></image>
+          <text>01讲 ArchCAD简介</text>
+        </view>
+        <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+      </view>
+
+      <!-- 更新课程数 -->
+      <view hidden='{{isCatalog}}' class='catalog_title_con center' bindtap='changeCatalog'>
+        <text>更新至37讲</text>
+        <image src='/image/circleDetails_down.png'></image>
+      </view>
+
+      <!-- 展开状态 -->
+      <view class='catalog_content' wx:if='{{isCatalog}}'>
+        <block wx:for='{{catalogList}}' wx:key='key'>
+          <view class='catalog_item'>
+            <view class='catalog_video_title'>
+              <image src='/image/circleDetails_video.png'></image>
+              <text>{{item.num}} {{item.name}}</text>
+            </view>
+            <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+            <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
+          </view>
+        </block>
+        <view class='up fixed catalog_title_con center' bindtap='changeCatalog'>
+          <text>收起</text>
+          <image src='/image/circleDetails_up.png'></image>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+
+
+
+  <!-- 精选主题 -->
+  <view wx:if='{{!isHide}}'>
+    <view class='content_title'>
+      <text class='content_title_text'>精选主题</text>
+      <text class='content_title_num'>5</text>
+    </view>
+
+    <!-- 主题 -->
+    <view class='content'>
+      <block wx:for='{{circleList}}' wx:key='key'>
+        <v-subject subjectInfo='{{item}}' isJoin='{{isJoin}}' bind:changeRedactSubject='changeRedactSubject' data-type='open' />
+      </block>
+    </view>
+  </view>
+
+  <!-- 图文详情 -->
+  <view wx:if='{{isPictureMode}}'>
+    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+
+    <view class='btn fixed'>加入圈子￥10.00</view>
+  </view>
+
+
+</view>

@@ -67,9 +67,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "圈子详情",
-					"pathName": "pages/sub_circle/pages/circleDetails/circlrDetails",
+					"pathName": "pages/sub_circle/pages/circleDetails/circleDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "课程圈子详情",
+					"pathName": "pages/sub_circle/pages/courseCircleDetails/courseCircleDetails",
+					"query": "",
 					"scene": null
 				}
 			]

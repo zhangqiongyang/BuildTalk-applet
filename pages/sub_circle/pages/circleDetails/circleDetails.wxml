@@ -1,0 +1,202 @@
+<!--pages/sub_circle/pages/circleDetails/circlrDetails.wxml-->
+<view>
+  <!-- 已加入圈子标题 -->
+  <view wx:if='{{isJoin}}' class='joined_title'>
+    <image class='circle_back' src='/image/example.jpg'></image>
+    <view class='joined_circle'>
+      <view class='author_image'>
+        <image src='/image/example.jpg'></image>
+      </view>
+      <view class='joined_circle_info'>
+        <text class='joined_circle_title'>建筑产业工业互联网</text>
+        <view class='author_info'>
+          <text>圈主：小地瓜</text>
+          <image src='/image/circle_v.png'></image>
+          <text style='padding-left:30rpx;'>创建 490天</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已加入课程标题 -->
+  <view>
+
+  </view>
+
+  <!-- 圈子标题 -->
+  <view wx:if='{{!isJoin}}' class='title'>
+    <image class='circle_back' src='/image/circleDetails_back.png' mode='aspectFill'></image>
+    <image class='circle_image' src='/image/example.jpg'></image>
+    <view class='title_content'>
+      <text class='title_title'>建筑产业工业互联网</text>
+      <view class='title_author'>
+        <text>圈主：小地瓜</text>
+        <image src='/image/circle_v.png'></image>
+        <text style='padding-left:30rpx;'>创建 490天</text>
+      </view>
+      <view class='title_label'>
+        <block wx:key='key'>
+          <text class='label'>BIM</text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- 圈子介绍 -->
+  <view wx:if='{{!isJoin}}' class='intro'>
+    <!-- 话题圈介绍 -->
+    <view wx:if='{{!isCourse}}'>
+      <view class='intro_title'>
+        <text class='intro_title_text'>圈子介绍</text>
+        <image hidden='{{isIntro}}' src='/image/circleDetails_down.png' bindtap='changeIntro'></image>
+        <image hidden='{{!isIntro}}' src='/image/circleDetails_up.png' bindtap='changeIntro'></image>
+      </view>
+      <text wx:if='{{!isIntro}}' class='intro_content'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
+</text>
+      <view class='intro_all' wx:else>
+        <text class='intro_content_all'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
+</text>
+        <view class='btn fixed'>加入圈子</view>
+      </view>
+    </view>
+    <!-- 课程介绍 -->
+    <view wx:if='{{isCourse}}'>
+      <view class='intro_title'>
+        <text class='intro_title_text'>课程介绍</text>
+        <image hidden='{{isIntro}}' src='/image/circleDetails_down.png' bindtap='changeIntro'></image>
+        <image hidden='{{!isIntro}}' src='/image/circleDetails_up.png' bindtap='changeIntro'></image>
+      </view>
+      <text wx:if='{{!isIntro}}' class='intro_content'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
+</text>
+      <view class='intro_all' wx:else>
+        <text class='intro_content_all'>课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点
+</text>
+        <view class='lightspot'>
+          <text class='intro_title_text'>课程亮点</text>
+          <view class='lightspot_item'>
+            <image src='/image/circleDetails_star.png'></image>
+            <text>第一手实战经验</text>
+          </view>
+        </view>
+        <view class='paymentInstructions'>
+          <text class='intro_title_text'>付费须知</text>
+          <view class='intro_content_all' style='padding-top:26rpx;'> 1、本课程为视频课程，预计四月底更新完毕，购买成功后即可通过“建谈”APP端、小程序端永久观看。 2、由于视频内容为虚拟商品，一经购买，概不退款。 3、课程学习过程中，如有任何问题，请联系13433280987
+          </view>
+        </view>
+        <view class='btn fixed'>加入圈子￥10.00</view>
+      </view>
+
+    </view>
+
+  </view>
+
+  <!-- 目录 -->
+  <view wx:if='{{isCourse}}' hidden='{{isIntro}}' class='catalog'>
+    <view class='catalog_title'>
+      <text class='intro_title_text'>目录</text>
+      <view class='catalog_title_con' bindtap='changeCatalog'>
+        <text>更新至37讲</text>
+        <image hidden='{{isCatalog}}' src='/image/circleDetails_down.png'></image>
+        <image hidden='{{!isCatalog}}' src='/image/circleDetails_up.png'></image>
+      </view>
+    </view>
+    <view class='catalog_con' wx:if='{{!isCatalog}}'>
+      <view class='catalog_video_title'>
+        <image src='/image/circleDetails_video.png'></image>
+        <text>01讲 ArchCAD简介</text>
+      </view>
+      <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+    </view>
+    <view class='catalog_content' wx:if='{{isCatalog}}'>
+      <block wx:for='{{catalogList}}' wx:key='key'>
+        <view class='catalog_item'>
+          <view class='catalog_video_title'>
+            <image src='/image/circleDetails_video.png'></image>
+            <text>{{item.num}} {{item.name}}</text>
+          </view>
+          <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+          <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
+        </view>
+      </block>
+      <view wx:if='{{!isJoin}}' class='btn fixed'>加入圈子￥10.00</view>
+    </view>
+  </view>
+
+  <!-- 导航 -->
+  <view hidden='{{isHide}}' class='nav'>
+    <view class='nav_classify'>
+      <view class='nav_item' bindtap='changeNav' data-id='theme'>
+        <text class='{{nav == "theme"?"active":""}}'>主题</text>
+      </view>
+      <view class='nav_item' bindtap='changeNav' data-id='essence'>
+        <text class='{{nav == "essence"?"active":""}}'>精华</text>
+        <text class='nav_num'>2</text>
+      </view>
+    </view>
+    <view wx:if='{{isJoin}}' class='nav_subject' bindtap='changeclassify' data-type='open'>
+      <text>{{classifyText}}</text>
+      <image src='/image/circleDetails_down.png'></image>
+    </view>
+  </view>
+  <!-- 圈子主体 -->
+  <view hidden='{{isHide}}' class='content'>
+    <block wx:for='{{circleList}}' wx:key='key'>
+      <v-subject subjectInfo='{{item}}' isJoin='{{isJoin}}' bind:changeRedactSubject='changeRedactSubject' data-type='open' />
+    </block>
+  </view>
+
+  <!-- 发表 -->
+  <view wx:if='{{isJoin}}' hidden='{{isHide}}' class='publish'>
+    <view class='publish_box'>
+      <image src='/image/circleDetails_write.png'></image>
+      <text>发表……</text>
+    </view>
+  </view>
+
+  <!-- 加入圈子 -->
+  <view wx:if='{{!isJoin}}' hidden='{{isHide}}' class='btnBox'>
+    <text>加入圈子可以浏览更多内容</text>
+    <view class='btn'>加入圈子</view>
+  </view>
+
+  <!-- 主题分类查看 -->
+  <view class='back_masking center' wx:if='{{isSubjectClassify}}'>
+    <view class='subject_classify'>
+      <view class='classify_title'>查看指定内容</view>
+      <view class='classify_box'>
+        <view class='classify_item' bindtap='changeSubjectClassify' data-type='all' data-text='全部主题'>
+          <image src='/image/circleDetails_all.png'></image>
+          <text>全部主题</text>
+        </view>
+        <view class='classify_item' bindtap='changeSubjectClassify' data-type='picture' data-text='图片主题'>
+          <image src='/image/circleDetails_picture.png'></image>
+          <text>图片主题</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 编辑主题 -->
+  <view class='back_masking' wx:if='{{isRedactSubject}}'>
+    <view class='redactSubject'>
+      <view class='redact_box'>
+        <view class='redact_item'>
+          <image src='/image/circleDetails_collect.png'></image>
+          <text>收藏</text>
+        </view>
+        <view class='redact_item'>
+          <image src='/image/circleDetails_change.png'></image>
+          <text>修改</text>
+        </view>
+        <view class='redact_item'>
+          <image src='/image/circleDetails_delete.png'></image>
+          <text>删除</text>
+        </view>
+      </view>
+      <view class='cancel' bindtap='changeRedactSubject' data-type='close'>取消</view>
+    </view>
+  </view>
+
+
+
+</view>

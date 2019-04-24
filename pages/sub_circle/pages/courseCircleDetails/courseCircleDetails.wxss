@@ -1,0 +1,47 @@
+/* pages/sub_circle/pages/courseCircleDetails/courseCircleDetails.wxss */
+@import "../circleDetails/circleDetails.wxss";
+@import "/wxParse/wxParse.wxss";
+
+/* 视频 */
+
+.video {
+  width: 100%;
+  height: 422rpx;
+}
+
+/* 目录 */
+
+.catalog {
+  padding-top: 0;
+}
+
+.center {
+  justify-content: center;
+}
+
+.up{
+  width: 100%;
+  height: 88rpx;
+  bottom: 0;
+  background-color: #fff;
+}
+
+
+/* 精选主题 */
+.content_title{
+  height: 66rpx;
+  border-bottom: 1px solid #E8E7E8;
+  padding-left: 37rpx;
+}
+
+.content_title_text{
+  font-weight: bold;
+  font-size: 30rpx;
+
+}
+
+.content_title_num{
+  color: #656565;
+  font-size: 30rpx;
+  padding-left: 10rpx;
+}
