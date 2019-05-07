@@ -2,6 +2,15 @@
 
 /* 已加入的圈子标题 */
 
+.circle_set{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 30rpx;
+}
+
 .joined_circle {
   position: relative;
   background-color: #fff;
@@ -33,8 +42,13 @@
 
 .joined_circle_title {
   font-size: 36rpx;
+  line-height: 36rpx;
   font-weight: bold;
   color: #242831;
+}
+
+.author_info{
+  margin-top: 20rpx;
 }
 
 .author_info image {
@@ -81,7 +95,12 @@
 
 .title_content .title_title {
   font-size: 36rpx;
+  line-height: 36rpx;
   font-weight: bold;
+}
+
+.title_author{
+  margin-top: 20rpx;
 }
 
 .title_author image {
@@ -154,6 +173,11 @@
   display: block;
 }
 
+.intro_content_all text{
+  display: inline-block;
+  line-height: 40rpx;
+}
+
 .lightspot_item {
   padding-left: 30rpx;
 }
@@ -188,7 +212,7 @@
 
 .catalog {
   background-color: #fff;
-  padding-top: 50rpx;
+  padding-top: 30rpx;
 }
 
 .catalog_title {

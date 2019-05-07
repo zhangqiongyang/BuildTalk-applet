@@ -9,7 +9,8 @@ Page({
     isCourse: true, //是否为课程
     isIntro: false, //是否显示圈子介绍
     isCatalog: false, //是否显示目录详情
-    isHide:false,//是否隐藏主题、导航、
+    isCollect: true, //是否收藏了
+    isHide: false, //是否隐藏主题、导航、
     nav: 'theme', //导航  theme主题  essence精华
     isRedactSubject: false, //编辑主题弹窗
     isSubjectClassify: false, //主题分类弹窗
@@ -332,7 +333,7 @@ Page({
   changeIntro() {
     this.setData({
       isIntro: !this.data.isIntro,
-      isHide:!this.data.isHide
+      isHide: !this.data.isHide
     })
   },
 
@@ -393,7 +394,44 @@ Page({
         isSubjectClassify: false
       })
     }
+  },
+
+  //跳转到视频播放页面
+  toVideo() {
+    wx.navigateTo({
+      url: '../courseCircleDetails/courseCircleDetails',
+    })
+  },
+
+  // 跳转到圈子信息页面
+  toCircleInfo(){
+    wx.navigateTo({
+      url: '../circleInfo/circleInfo',
+    })
+  },
+
+  // 跳转到发表主题页面
+  toPublishSubject(){
+    wx.navigateTo({
+      url: '../publishSubject/publishSubject',
+    })
+  },
+
+  //打开付款框
+  pay() {
+    this.setData({
+      isPay: true
+    })
+  },
+
+  // 取消付款
+  cancel() {
+    this.setData({
+      isPay: false
+    })
   }
+
+
 
   /**
    * 网络请求

@@ -1,0 +1,63 @@
+<!--pages/sub_circle/pages/subjectDetails/subjectDetails.wxml-->
+<view>
+  <!-- 主题详情 -->
+  <view class='circle_item'>
+    <view class='item_author'>
+      <image src='{{subjectInfo.photo}}'></image>
+      <view class='author_con'>
+        <view class='author_content'>
+          <view class='author_box'>
+            <text class='author_name'>{{subjectInfo.name}}</text>
+            <text wx:if='{{subjectInfo.isMaster}}' class='author_master'>圈主</text>
+          </view>
+          <text class='author_time'>{{subjectInfo.time}}</text>
+        </view>
+        <image src='/image/circleDetails_more.png' bindtap='changeRedactSubject' data-type='open'></image>
+      </view>
+    </view>
+    <view class='circle_content'>
+      <text>{{subjectInfo.content}}</text>
+      <view class='imageBox'>
+        <block wx:for='{{subjectInfo.imageList}}' wx:key='key'>
+          <image src='{{item}}'></image>
+        </block>
+      </view>
+
+      <view class='liked'>
+        <image class='liked_image' src='/image/circleDetails_liked.png'></image>
+        <view class='liked_name'>
+          <block wx:for='{{subjectInfo.liked}}' wx:key='key'>
+            <text>{{item.name}}</text>
+            <image wx:if='{{item.isVip}}' class='liked_v' src='/image/circle_v.png'></image>
+            <text>，</text>
+          </block>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+
+
+
+  <!-- 精选留言 -->
+  <v-msg msgList='{{msgList}}' />
+
+
+  <!-- 评论、点赞、转发 -->
+  <view class='operate'>
+    <view class='operate_msg'>
+      <image src='/image/subjectDetails_msg.png'></image>
+      <text>12评论</text>
+    </view>
+    <view class='operate_like'>
+      <image src='/image/subjectDetails_like.png'></image>
+      <text>8赞</text>
+    </view>
+    <view class='operate_share'>
+      <image src='/image/subjectDetails_share.png'></image>
+    </view>
+  </view>
+
+
+</view>

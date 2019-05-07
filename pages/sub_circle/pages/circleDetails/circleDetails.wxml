@@ -3,6 +3,7 @@
   <!-- 已加入圈子标题 -->
   <view wx:if='{{isJoin}}' class='joined_title'>
     <image class='circle_back' src='/image/example.jpg'></image>
+    <image class='circle_set' src='/image/circleDetails_set.png' bindtap='toCircleInfo'></image>
     <view class='joined_circle'>
       <view class='author_image'>
         <image src='/image/example.jpg'></image>
@@ -12,7 +13,8 @@
         <view class='author_info'>
           <text>圈主：小地瓜</text>
           <image src='/image/circle_v.png'></image>
-          <text style='padding-left:30rpx;'>创建 490天</text>
+          <text wx:if='{{isCourse}}' style='padding-left:30rpx;'>6人加入</text>
+          <text wx:else style='padding-left:30rpx;'>创建 490天</text>
         </view>
       </view>
     </view>
@@ -79,10 +81,13 @@
         </view>
         <view class='paymentInstructions'>
           <text class='intro_title_text'>付费须知</text>
-          <view class='intro_content_all' style='padding-top:26rpx;'> 1、本课程为视频课程，预计四月底更新完毕，购买成功后即可通过“建谈”APP端、小程序端永久观看。 2、由于视频内容为虚拟商品，一经购买，概不退款。 3、课程学习过程中，如有任何问题，请联系13433280987
+          <view class='intro_content_all' style='padding-top:26rpx;'>
+            <text>1、本课程为视频课程，预计四月底更新完毕，购买成功后即可通过“建谈”APP端、小程序端永久观看。</text>
+            <text>2、由于视频内容为虚拟商品，一经购买，概不退款。</text>
+            <text>3、课程学习过程中，如有任何问题，请联系13433280987</text>
           </view>
         </view>
-        <view class='btn fixed'>加入圈子￥10.00</view>
+        <view class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
       </view>
 
     </view>
@@ -94,12 +99,12 @@
     <view class='catalog_title'>
       <text class='intro_title_text'>目录</text>
       <view class='catalog_title_con' bindtap='changeCatalog'>
-        <text>更新至37讲</text>
+        <text>更新至37讲/全100讲</text>
         <image hidden='{{isCatalog}}' src='/image/circleDetails_down.png'></image>
         <image hidden='{{!isCatalog}}' src='/image/circleDetails_up.png'></image>
       </view>
     </view>
-    <view class='catalog_con' wx:if='{{!isCatalog}}'>
+    <view class='catalog_con' wx:if='{{!isCatalog}}' bindtap='toVideo'>
       <view class='catalog_video_title'>
         <image src='/image/circleDetails_video.png'></image>
         <text>01讲 ArchCAD简介</text>
@@ -108,7 +113,7 @@
     </view>
     <view class='catalog_content' wx:if='{{isCatalog}}'>
       <block wx:for='{{catalogList}}' wx:key='key'>
-        <view class='catalog_item'>
+        <view class='catalog_item' bindtap='toVideo'>
           <view class='catalog_video_title'>
             <image src='/image/circleDetails_video.png'></image>
             <text>{{item.num}} {{item.name}}</text>
@@ -117,7 +122,7 @@
           <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
         </view>
       </block>
-      <view wx:if='{{!isJoin}}' class='btn fixed'>加入圈子￥10.00</view>
+      <view wx:if='{{!isJoin}}' class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
     </view>
   </view>
 
@@ -145,7 +150,7 @@
   </view>
 
   <!-- 发表 -->
-  <view wx:if='{{isJoin}}' hidden='{{isHide}}' class='publish'>
+  <view wx:if='{{isJoin}}' hidden='{{isHide}}' class='publish' bindtap='toPublishSubject'>
     <view class='publish_box'>
       <image src='/image/circleDetails_write.png'></image>
       <text>发表……</text>
@@ -155,7 +160,8 @@
   <!-- 加入圈子 -->
   <view wx:if='{{!isJoin}}' hidden='{{isHide}}' class='btnBox'>
     <text>加入圈子可以浏览更多内容</text>
-    <view class='btn'>加入圈子</view>
+    <view wx:if='{{isCourse}}' class='btn' bindtap='pay'>加入圈子￥10.00</view>
+    <view wx:else class='btn'>加入圈子</view>
   </view>
 
   <!-- 主题分类查看 -->
@@ -181,7 +187,8 @@
     <view class='redactSubject'>
       <view class='redact_box'>
         <view class='redact_item'>
-          <image src='/image/circleDetails_collect.png'></image>
+          <image wx:if='{{isCollect}}' src='/image/circleDetails_collect_hover.png'></image>
+          <image wx:else src='/image/circleDetails_collect.png'></image>
           <text>收藏</text>
         </view>
         <view class='redact_item'>
@@ -196,6 +203,9 @@
       <view class='cancel' bindtap='changeRedactSubject' data-type='close'>取消</view>
     </view>
   </view>
+
+  <!-- 付费 -->
+  <v-pay wx:if='{{isPay}}' bind:cancel='cancel' />
 
 
 

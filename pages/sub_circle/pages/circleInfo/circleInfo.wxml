@@ -1,0 +1,60 @@
+<!--pages/sub_circle/pages/circleInfo/circleInfo.wxml-->
+<view class='background' style='height:{{windowHeight}}px;'>
+  <!-- 圈子标题 -->
+  <view class='circle_title'>
+    <image class='title_back' src='/image/example.jpg'></image>
+    <!-- <image class='title_share' src='/image/circleInfo_share.png'></image> -->
+    <view class='title_info'>
+      <image src='/image/example.jpg'></image>
+      <text class='title_title'>建筑产业工业互联网</text>
+      <text class='title_master'>圈主：小地瓜</text>
+      <view class='title_line'></view>
+    </view>
+  </view>
+  <!-- 圈子数量 -->
+  <view class='circle_info'>
+    <view class='info_item'>
+      <text class='item_num'>1618</text>
+      <text class='item_name'>创建天数</text>
+    </view>
+    <view class='item_line'></view>
+    <view class='info_item'>
+      <text class='item_num'>36</text>
+      <text class='item_name'>主题条数</text>
+    </view>
+    <view class='item_line'></view>
+    <view class='info_item'>
+      <text class='item_num'>6</text>
+      <text class='item_name'>成员人数</text>
+    </view>
+  </view>
+  <!-- 圈子设置 -->
+  <view class='circle_set'>
+    <view class='set_item' bindtap='toCircleMember'>
+      <text class='item_title'>圈子成员</text>
+      <view class='item_right'>
+        <view class='item_image'>
+          <image src='/image/example.jpg'></image>
+          <image src='/image/example.jpg'></image>
+          <image src='/image/example.jpg'></image>
+        </view>
+        <image class='item_more' src='/image/circleInfo_more.png'></image>
+      </view>
+    </view>
+    <view class='set_item' bindtap='toCard'>
+      <text class='item_title'>我的名片</text>
+      <view class='item_right'>
+        <image class='item_more' src='/image/circleInfo_more.png'></image>
+      </view>
+    </view>
+    <view class='set_item' bindtap='toCircleData'>
+      <text class='item_title'>{{isMaster? '编辑资料':'圈子资料'}}</text>
+      <view class='item_right'>
+        <image class='item_more' src='/image/circleInfo_more.png'></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出圈子 -->
+  <view wx:if='{{!isMaster}}' class='circle_exit' bindtap='exit'>退出圈子</view>
+</view>

@@ -1,10 +1,11 @@
+/* pages/sub_circle/pages/circleData/circleData.wxss */
 /* pages/sub_circle/pages/creatCircle/creatCircle.wxss */
 
 .background {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #F7F8FA;
+  background-color: #fff;
 }
 
 .circleImageBox {
@@ -49,11 +50,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid #DCDCDC;
+  border-left: 1px solid #DCDCDC;
+  border-right: 1px solid #DCDCDC;
+  border-radius: 0 0 10rpx 10rpx;
 }
 
 .circleName {
   font-size: 28rpx;
-  color: #656565;
+  line-height: 40rpx;
   text-align: center;
 }
 
@@ -84,77 +89,58 @@
 
 .label text {
   padding: 20rpx 64rpx;
-  border: 1px solid #8f8f8f;
+  border: 1px solid #DCDCDC;
   border-radius: 50rpx;
   font-size: 28rpx;
-  color: #666;
+  color: #656565;
   margin: 10rpx 15rpx;
   display: inline-block;
 }
 
-.label image {
-  width: 19rpx;
-  height: 19rpx;
-  padding: 20rpx;
-  position: absolute;
-  right: 10%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.label .active {
-  border: 1px solid #32a7ff;
-  background-color: #32a7ff;
-  color: #fff;
-}
-
-.labelInput {
-  padding: 13rpx 64rpx;
-  border: 1px solid #8f8f8f;
-  border-radius: 50rpx;
-  font-size: 28rpx;
-  color: #666;
-  margin: 10rpx 15rpx;
-  display: inline-block;
-}
 
 .introduceBox {
-  margin-top: 70rpx;
+  margin: 70rpx 60rpx 0 60rpx;
 }
 
-.introduceBox textarea {
-  width: 690rpx;
-  height: 252rpx;
-  background: #fff;
-  border: 1px solid #d2d0d1;
-  border-radius: 10rpx;
-  padding: 30rpx;
-  box-sizing: border-box;
+.introduceBoxTextarea {
+  width: 614rpx;
   font-size: 28rpx;
   line-height: 40rpx;
-  color: #8f8f8f;
+  color: #242831;
 }
 
-.placeholder {
-  font-size: 28rpx;
+.lightspot_item {
+  padding-left: 30rpx;
+}
+
+.lightspot_item image {
+  width: 22rpx;
+  height: 22rpx;
+  margin-right: 20rpx;
+}
+
+.lightspot_item text {
+  color: #656565;
+  font-size: 24rpx;
+}
+
+.lightspot {
+  margin-top: 50rpx;
+}
+.paymentInstructions {
+  margin-top: 50rpx;
+  margin-bottom: 120rpx;
+}
+
+.intro_title_text{
+  font-size: 30rpx;
+  color: #F5B83A;
+}
+
+.intro_content_all{
+  padding-top:26rpx;
+}
+.intro_content_all text{
+  display: inline-block;
   line-height: 40rpx;
-  color: #8f8f8f;
-}
-
-.btn {
-  width: 390rpx;
-  height: 88rpx;
-  background: #E0DFE0;
-  border-radius: 10rpx;
-  color: #fff;
-  font-weight: 500;
-  font-size: 34rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 80rpx auto;
-}
-
-.active{
-  background-color: #32A7FF;
 }

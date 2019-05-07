@@ -37,18 +37,18 @@ Page({
     var that = this;
 
     // 获取屏幕高度
-    wx.getSystemInfo({
-      success: function(res) {
-        let clientHeight = res.windowHeight,
-          clientWidth = res.windowWidth,
-          rpxR = 750 / clientWidth;
-        var calc = clientHeight * rpxR;
-        console.log(calc)
-        that.setData({
-          windowHeight: calc
-        });
-      }
-    });
+    // wx.getSystemInfo({
+    //   success: function(res) {
+    //     let clientHeight = res.windowHeight,
+    //       clientWidth = res.windowWidth,
+    //       rpxR = 750 / clientWidth;
+    //     var calc = clientHeight * rpxR;
+    //     console.log(calc)
+    //     that.setData({
+    //       windowHeight: calc
+    //     });
+    //   }
+    // });
 
 
 
@@ -746,7 +746,7 @@ Page({
           if (res.data.articleinfo.video_id) {
             console.log('------含有视频---------')
             let haveVideoHeight = app.globalData.scrollHeight - 44
-            haveVideoHeight = haveVideoHeight - 210 - 49
+            haveVideoHeight = haveVideoHeight - (210/375)* app.globalData.windowWidth - 49
             that.setData({
               isHaveVideo: true,
               haveVideoHeight: haveVideoHeight

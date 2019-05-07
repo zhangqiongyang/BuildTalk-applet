@@ -1,0 +1,158 @@
+/* pages/sub_circle/pages/card/card.wxss */
+
+.background {
+  background-color: #f7f8fa;
+  padding-top: 1rpx;
+}
+
+/* 名片 */
+
+.card {
+  width: 500rpx;
+  height: 809rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  margin: 100rpx auto 160rpx auto;
+}
+
+.card_title {
+  width: 100%;
+}
+
+.card_back {
+  width: 500rpx;
+  height: 280rpx;
+  border-radius: 10rpx 10rpx 0 0;
+  position: absolute;
+}
+
+.card_user {
+  position: relative;
+  padding-top: 230rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card_user image {
+  border: 3rpx solid #fff;
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 50%;
+}
+
+.card_user text {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  font-weight: bold;
+  margin-top: 10rpx;
+}
+
+/* 名片信息 */
+
+.card_info {
+  display: flex;
+  padding: 30rpx 50rpx;
+  flex-direction: row;
+  justify-content: space-between;
+  /* justify-content: space-around; */
+  align-items: center;
+}
+
+.info_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item_num_box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.item_num {
+  font-size: 36rpx;
+  line-height: 36rpx;
+}
+
+.blue {
+  color: #32a7ff;
+}
+
+.yellow {
+  color: #f5b83a;
+}
+
+.item_text {
+  font-size: 20rpx;
+  line-height: 20rpx;
+  color: #8f8f8f;
+}
+
+.big {
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+
+/* 二维码 */
+
+.card_code {
+  margin-top: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card_code image {
+  width: 138rpx;
+  height: 138rpx;
+}
+
+.card_code text{
+  margin-top: 40rpx;
+}
+
+/* 分享 */
+.share{
+  width: 500rpx;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.share_item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.share_item image{
+width: 50rpx;
+height: 50rpx;
+}
+
+.share_item text{
+  color: #656565;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  margin-top: 18rpx;
+}
+
+
+button::after {
+  border: none;
+}
+
+button {
+  /* background-color: #fff; */
+  height: 86rpx;
+  margin: 0;
+  border-radius: none;
+  line-height: 37rpx;
+  position: none;
+}
+
+.button-hover {
+  color: rgb(0, 0, 0);
+  /* background-color: #fff; */
+}

@@ -1,0 +1,98 @@
+/* components/msg/index.wxss */
+
+.msg {
+  margin-top: 90rpx;
+  padding-bottom: 90rpx;
+}
+
+.msg_title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  padding-left: 30rpx;
+}
+
+.msg_num {
+  font-size: 30rpx;
+  color: #8f8f8f;
+  padding-left: 10rpx;
+}
+
+.msg_list {
+  margin-top: 18rpx;
+  box-shadow: 0 10rpx 5px #f3f6fb;
+}
+
+.msg_item {
+  border-bottom: 1px solid #e8e7e8;
+}
+
+.msg_user_box {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.msg_user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.msg_user image {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+
+.user_info {
+  margin-left: 20rpx;
+}
+
+.user_name_box {
+  display: flex;
+  align-items: center;
+}
+
+.user_name {
+  font-size: 22rpx;
+}
+
+.user_master {
+  background-color: #f5b83a;
+  padding: 2rpx 5rpx;
+  border-radius: 2px;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 500;
+  margin-left: 20rpx;
+}
+
+.msg_time {
+  color: #8f8f8f;
+  font-size: 18rpx;
+}
+
+.msg_like {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.msg_like image {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.msg_like text {
+  color: #8f8f8f;
+  font-size: 18rpx;
+  padding-left: 10rpx;
+}
+
+.msg_content {
+  margin: 10rpx 30rpx 30rpx 90rpx;
+  font-size: 22rpx;
+}

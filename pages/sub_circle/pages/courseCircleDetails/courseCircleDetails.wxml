@@ -11,7 +11,7 @@
     <view class='catalog_title'>
       <text class='intro_title_text'>01讲 ArchCAD简介</text>
       <view class='catalog_title_con' bindtap='changePictureMode'>
-        <text>图文详情</text>
+        <text>章节内容</text>
         <image hidden='{{isPictureMode}}' src='/image/circleDetails_down.png'></image>
         <image hidden='{{!isPictureMode}}' src='/image/circleDetails_up.png'></image>
       </view>
@@ -25,12 +25,12 @@
           <image src='/image/circleDetails_video.png'></image>
           <text>01讲 ArchCAD简介</text>
         </view>
-        <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+        <!-- <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image> -->
       </view>
 
       <!-- 更新课程数 -->
       <view hidden='{{isCatalog}}' class='catalog_title_con center' bindtap='changeCatalog'>
-        <text>更新至37讲</text>
+        <text>更新至37讲/全100讲</text>
         <image src='/image/circleDetails_down.png'></image>
       </view>
 
@@ -42,8 +42,8 @@
               <image src='/image/circleDetails_video.png'></image>
               <text>{{item.num}} {{item.name}}</text>
             </view>
-            <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
-            <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
+            <!-- <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+            <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image> -->
           </view>
         </block>
         <view class='up fixed catalog_title_con center' bindtap='changeCatalog'>
@@ -77,8 +77,11 @@
   <view wx:if='{{isPictureMode}}'>
     <template is="wxParse" data="{{wxParseData:content.nodes}}" />
 
-    <view class='btn fixed'>加入圈子￥10.00</view>
+    <view class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
   </view>
 
+
+  <!-- 付费 -->
+  <v-pay wx:if='{{isPay}}' bind:cancel='cancel'/>
 
 </view>

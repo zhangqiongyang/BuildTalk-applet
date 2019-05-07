@@ -2,6 +2,7 @@
   "pages": [
     "pages/tabbar/index/index",
     "pages/tabbar/allAuthor/allAuthor",
+    "pages/tabbar/authorRecommend/authorRecommend",
     "pages/tabbar/mine/mine",
     "pages/phone/phone",
     "pages/search/search",
@@ -75,8 +76,20 @@
         "pages/circle/circle",
         "pages/searchCircle/searchCircle",
         "pages/circleDetails/circleDetails",
-        "pages/courseCircleDetails/courseCircleDetails"
+        "pages/courseCircleDetails/courseCircleDetails",
+        "pages/subjectDetails/subjectDetails",
+        "pages/circleInfo/circleInfo",
+        "pages/circleMember/circleMember",
+        "pages/card/card",
+        "pages/publishSubject/publishSubject",
+        "pages/circleData/circleData"
+      ]
+    },
+    {
+      "root": "pages/sub_author",
+      "pages": [
       ]
     }
-  ]
+  ],
+  "sitemapLocation": "sitemap.json"
 }

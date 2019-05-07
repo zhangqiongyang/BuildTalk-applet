@@ -1,0 +1,19 @@
+<!--pages/sub_circle/pages/publishSubject/publishSubject.wxml-->
+<view>
+  <textarea class='textarea' placeholder='说点什么......' bindinput='input'></textarea>
+
+  <view class='image_box'>
+  <block wx:for='{{pic}}'>
+    <image src='{{item}}' mode='aspectFill'></image>
+  
+  </block>
+    <image src='/image/example.jpg'></image>
+    <image src='/image/example.jpg'></image>
+    <image src='/image/example.jpg'></image>
+    <image src='/image/example.jpg'></image>
+  </view>
+
+  <view class='add'>
+    <image src='/image/publishSubject_image.png' bindtap='upload'></image>
+  </view>
+</view>

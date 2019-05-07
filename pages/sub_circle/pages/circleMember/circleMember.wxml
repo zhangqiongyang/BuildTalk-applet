@@ -1,0 +1,25 @@
+<!--pages/sub_circle/pages/circleMember/circleMember.wxml-->
+<view>
+  <!-- <view class='member_item_master'>
+    <view class='item_info'>
+      <image class='item_image' src='/image/example.jpg'></image>
+      <text class='item_name'>小地瓜</text>
+      <image class='item_v' src='/image/circle_v.png'></image>
+      <text class='item_master'>圈主</text>
+    </view>
+    <image class='item_more' src='/image/circleInfo_more.png'></image>
+  </view> -->
+  <block wx:for='{{memberList}}'>
+    <view class='member_item'>
+      <view class='item_info'>
+        <image class='item_image' src='{{item.image}}'></image>
+        <text class='item_name'>{{item.name}}</text>
+        <image wx:if='{{item.isVip}}' class='item_v' src='/image/circle_v.png'></image>
+        <text wx:if='{{item.isMaster}}' class='item_master'>圈主</text>
+      </view>
+      <image class='item_more' src='/image/circleInfo_more.png'></image>
+    </view>
+  </block>
+
+
+</view>

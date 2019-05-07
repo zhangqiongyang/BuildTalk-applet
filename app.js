@@ -39,7 +39,7 @@ App({
             method: 'POST',
             dataType: 'json',
             responseType: 'text',
-            success: function (res) {
+            success: function(res) {
               console.log(res)
               if (res.data.msg == "1") {
                 console.log("---------------已经绑定手机号---------------------")
@@ -137,7 +137,7 @@ App({
                         console.log(wx.getStorageSync('openid'))
                         console.log(that.globalData.userInfo.nickName)
                         console.log(that.globalData.userInfo.avatarUrl, '321')
-               
+
 
                         //上传用户的头像和昵称到数据库
                         if (!util.isEmpty(wx.getStorageSync('unionid')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.globalData.userInfo.nickName) && !util.isEmpty(that.globalData.userInfo.avatarUrl)) {
@@ -190,7 +190,7 @@ App({
                               console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
                             },
                           })
-                       
+
                         } else {
                           console.log('---------else----------')
                         }
@@ -270,7 +270,7 @@ App({
                       method: 'POST',
                       dataType: 'json',
                       responseType: 'text',
-                      success: function (res) {
+                      success: function(res) {
                         console.log(res)
                         if (res.data.msg == "1") {
                           console.log("---------------已经绑定手机号---------------------")
@@ -524,7 +524,7 @@ App({
                     method: 'POST',
                     dataType: 'json',
                     responseType: 'text',
-                    success: function (res) {
+                    success: function(res) {
                       console.log(res)
                       if (res.data.msg == "1") {
                         console.log("---------------已经绑定手机号---------------------")
@@ -620,7 +620,7 @@ App({
                                 //上传用户的头像和昵称到数据库
                                 if (!util.isEmpty(wx.getStorageSync('unionid')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.globalData.userInfo.nickName) && !util.isEmpty(that.globalData.userInfo.avatarUrl)) {
 
-                               
+
                                   wx.request({
                                     // url: 'https://wx.bjjy.com/operateuser',
                                     url: api.API_MINEUPLOADINFO,
@@ -659,7 +659,7 @@ App({
                                         console.log('-------------无需更新(app.js)-----------------')
                                         console.log('--------------5-------------')
                                         console.log(wx.getStorageSync('openid'))
-                                      }else{
+                                      } else {
                                         console.log('------------什么都没有------------')
                                       }
 
@@ -669,7 +669,7 @@ App({
                                       console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
                                     },
                                   })
-                           
+
                                 } else {
                                   console.log('---------else----------')
                                 }
@@ -979,7 +979,10 @@ App({
     wx.getSystemInfo({
       success: function(res) {
         that.globalData.windowHeight = res.windowHeight
-        that.globalData.scrollHeight = res.screenHeight-res.statusBarHeight
+        that.globalData.scrollHeight = res.screenHeight - res.statusBarHeight
+        that.globalData.windowWidth = res.windowWidth
+        that.globalData.screenWidth = res.screenWidth
+        that.globalData.screenHeight = res.screenHeight
         console.log('============屏幕高度=============')
         console.log(res)
 
@@ -1019,8 +1022,11 @@ App({
     isLogin: null,
     isBindingPhone: null,
     phoneNumber: '',
-    windowHeight: '',
-    scrollHeight:null,
+    scrollHeight: null,
+    windowHeight: null,
+    windowWidth: null,
+    screenWidth: null,
+    screenHeight: null,
     platform: ''
   }
 })

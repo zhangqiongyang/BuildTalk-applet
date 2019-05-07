@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "v-subject":"/components/subject/index"
+    "v-subject":"/components/subject/index",
+    "v-pay": "/components/pay/index"
   }
 }

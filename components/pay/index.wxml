@@ -1,0 +1,15 @@
+<!--components/pay/index.wxml-->
+<view class='pay_back' style='height:{{windowHeight}}px;' bindtap='cancel'></view>
+<view class='pay'>
+  <view class='pay_title'>
+    <view>
+      <text>需支付</text>
+      <text class='color'>¥10.0</text>
+    </view>
+    <text class='cancel' bindtap='cancel'>取消</text>
+  </view>
+  <view class='pay_btn' bindtap='pay'>
+    <image src='/image/courseCircleDetails_pay.png'></image>
+    <text>微信支付</text>
+  </view>
+</view>

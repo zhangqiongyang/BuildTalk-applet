@@ -22,7 +22,7 @@ Component({
     upload(){
       var that = this
       wx.chooseImage({
-        count: 9,
+        count: 1,
         sizeType: ['original', 'compressed'],
         sourceType: ['album', 'camera'],
         success(res) {

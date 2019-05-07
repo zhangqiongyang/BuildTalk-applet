@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-msg":"/components/msg/index"
+  }
+}

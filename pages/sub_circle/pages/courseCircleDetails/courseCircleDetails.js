@@ -1,12 +1,15 @@
 // pages/sub_circle/pages/courseCircleDetails/courseCircleDetails.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isCatalog: false, //是否显示目录详情
-    isPicture: false, //是否显示图文详情
+    windowHeight: app.globalData.windowHeight,
+    isCatalog: false, // 是否显示目录详情
+    isPicture: false, // 是否显示图文详情
+    isPay: false, // 是否显示付费框
     catalogList: [{
         id: 1,
         num: '01',
@@ -33,230 +36,230 @@ Page({
       },
     ],
     circleList: [{
-      name: '小地瓜',
-      photo: '/image/example.jpg',
-      isMaster: true,
-      time: '2019-01-13 12:30:09',
-      content: '今年流行的几种装修材料',
-      imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-      liked: [{
-        name: '傲慢 & 偏见',
-        isVip: false
-      },
-      {
-        name: '建筑大师的大师',
-        isVip: true
-      },
-      {
-        name: '我是你兄弟',
-        isVip: false
-      },
-      {
-        name: '辛德瑞拉',
-        isVip: true
-      },
-      {
-        name: '心语心愿',
-        isVip: false
-      }
-      ],
-      msg: [{
-        id: 1,
         name: '小地瓜',
-        content: '一点新素材希望能帮到大家'
+        photo: '/image/example.jpg',
+        isMaster: true,
+        time: '2019-01-13 12:30:09',
+        content: '今年流行的几种装修材料',
+        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
+        liked: [{
+            name: '傲慢 & 偏见',
+            isVip: false
+          },
+          {
+            name: '建筑大师的大师',
+            isVip: true
+          },
+          {
+            name: '我是你兄弟',
+            isVip: false
+          },
+          {
+            name: '辛德瑞拉',
+            isVip: true
+          },
+          {
+            name: '心语心愿',
+            isVip: false
+          }
+        ],
+        msg: [{
+            id: 1,
+            name: '小地瓜',
+            content: '一点新素材希望能帮到大家'
+          },
+          {
+            id: 1,
+            name: '傲慢&偏见',
+            content: '呵呵'
+          },
+          {
+            id: 1,
+            name: '辛德瑞拉',
+            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
+          },
+        ]
       },
       {
-        id: 1,
-        name: '傲慢&偏见',
-        content: '呵呵'
-      },
-      {
-        id: 1,
-        name: '辛德瑞拉',
-        content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-      },
-      ]
-    },
-    {
-      name: '小地瓜',
-      photo: '/image/example.jpg',
-      isMaster: false,
-      time: '2019-01-13 12:30:09',
-      content: '今年流行的几种装修材料',
-      imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-      liked: [{
-        name: '傲慢 & 偏见',
-        isVip: false
-      },
-      {
-        name: '建筑大师的大师',
-        isVip: true
-      },
-      {
-        name: '我是你兄弟',
-        isVip: false
-      },
-      {
-        name: '辛德瑞拉',
-        isVip: true
-      },
-      {
-        name: '心语心愿',
-        isVip: false
-      }
-      ],
-      msg: [{
-        id: 1,
         name: '小地瓜',
-        content: '一点新素材希望能帮到大家'
+        photo: '/image/example.jpg',
+        isMaster: false,
+        time: '2019-01-13 12:30:09',
+        content: '今年流行的几种装修材料',
+        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
+        liked: [{
+            name: '傲慢 & 偏见',
+            isVip: false
+          },
+          {
+            name: '建筑大师的大师',
+            isVip: true
+          },
+          {
+            name: '我是你兄弟',
+            isVip: false
+          },
+          {
+            name: '辛德瑞拉',
+            isVip: true
+          },
+          {
+            name: '心语心愿',
+            isVip: false
+          }
+        ],
+        msg: [{
+            id: 1,
+            name: '小地瓜',
+            content: '一点新素材希望能帮到大家'
+          },
+          {
+            id: 1,
+            name: '傲慢&偏见',
+            content: '呵呵'
+          },
+          {
+            id: 1,
+            name: '辛德瑞拉',
+            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
+          },
+        ]
       },
       {
-        id: 1,
-        name: '傲慢&偏见',
-        content: '呵呵'
-      },
-      {
-        id: 1,
-        name: '辛德瑞拉',
-        content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-      },
-      ]
-    },
-    {
-      name: '小地瓜',
-      photo: '/image/example.jpg',
-      isMaster: false,
-      time: '2019-01-13 12:30:09',
-      content: '今年流行的几种装修材料',
-      imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-      liked: [{
-        name: '傲慢 & 偏见',
-        isVip: false
-      },
-      {
-        name: '建筑大师的大师',
-        isVip: true
-      },
-      {
-        name: '我是你兄弟',
-        isVip: false
-      },
-      {
-        name: '辛德瑞拉',
-        isVip: true
-      },
-      {
-        name: '心语心愿',
-        isVip: false
-      }
-      ],
-      msg: [{
-        id: 1,
         name: '小地瓜',
-        content: '一点新素材希望能帮到大家'
+        photo: '/image/example.jpg',
+        isMaster: false,
+        time: '2019-01-13 12:30:09',
+        content: '今年流行的几种装修材料',
+        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
+        liked: [{
+            name: '傲慢 & 偏见',
+            isVip: false
+          },
+          {
+            name: '建筑大师的大师',
+            isVip: true
+          },
+          {
+            name: '我是你兄弟',
+            isVip: false
+          },
+          {
+            name: '辛德瑞拉',
+            isVip: true
+          },
+          {
+            name: '心语心愿',
+            isVip: false
+          }
+        ],
+        msg: [{
+            id: 1,
+            name: '小地瓜',
+            content: '一点新素材希望能帮到大家'
+          },
+          {
+            id: 1,
+            name: '傲慢&偏见',
+            content: '呵呵',
+          },
+          {
+            id: 1,
+            name: '辛德瑞拉',
+            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
+          },
+        ]
       },
       {
-        id: 1,
-        name: '傲慢&偏见',
-        content: '呵呵'
-      },
-      {
-        id: 1,
-        name: '辛德瑞拉',
-        content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-      },
-      ]
-    },
-    {
-      name: '小地瓜',
-      photo: '/image/example.jpg',
-      isMaster: false,
-      time: '2019-01-13 12:30:09',
-      content: '今年流行的几种装修材料',
-      imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-      liked: [{
-        name: '傲慢 & 偏见',
-        isVip: false
-      },
-      {
-        name: '建筑大师的大师',
-        isVip: true
-      },
-      {
-        name: '我是你兄弟',
-        isVip: false
-      },
-      {
-        name: '辛德瑞拉',
-        isVip: true
-      },
-      {
-        name: '心语心愿',
-        isVip: false
-      }
-      ],
-      msg: [{
-        id: 1,
         name: '小地瓜',
-        content: '一点新素材希望能帮到大家'
+        photo: '/image/example.jpg',
+        isMaster: false,
+        time: '2019-01-13 12:30:09',
+        content: '今年流行的几种装修材料',
+        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
+        liked: [{
+            name: '傲慢 & 偏见',
+            isVip: false
+          },
+          {
+            name: '建筑大师的大师',
+            isVip: true
+          },
+          {
+            name: '我是你兄弟',
+            isVip: false
+          },
+          {
+            name: '辛德瑞拉',
+            isVip: true
+          },
+          {
+            name: '心语心愿',
+            isVip: false
+          }
+        ],
+        msg: [{
+            id: 1,
+            name: '小地瓜',
+            content: '一点新素材希望能帮到大家'
+          },
+          {
+            id: 1,
+            name: '傲慢&偏见',
+            content: '呵呵'
+          },
+          {
+            id: 1,
+            name: '辛德瑞拉',
+            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
+          },
+        ]
       },
       {
-        id: 1,
-        name: '傲慢&偏见',
-        content: '呵呵'
-      },
-      {
-        id: 1,
-        name: '辛德瑞拉',
-        content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-      },
-      ]
-    },
-    {
-      name: '小地瓜',
-      photo: '/image/example.jpg',
-      isMaster: false,
-      time: '2019-01-13 12:30:09',
-      content: '今年流行的几种装修材料',
-      imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-      liked: [{
-        name: '傲慢 & 偏见',
-        isVip: false
-      },
-      {
-        name: '建筑大师的大师',
-        isVip: true
-      },
-      {
-        name: '我是你兄弟',
-        isVip: false
-      },
-      {
-        name: '辛德瑞拉',
-        isVip: true
-      },
-      {
-        name: '心语心愿',
-        isVip: false
-      }
-      ],
-      msg: [{
-        id: 1,
         name: '小地瓜',
-        content: '一点新素材希望能帮到大家'
+        photo: '/image/example.jpg',
+        isMaster: false,
+        time: '2019-01-13 12:30:09',
+        content: '今年流行的几种装修材料',
+        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
+        liked: [{
+            name: '傲慢 & 偏见',
+            isVip: false
+          },
+          {
+            name: '建筑大师的大师',
+            isVip: true
+          },
+          {
+            name: '我是你兄弟',
+            isVip: false
+          },
+          {
+            name: '辛德瑞拉',
+            isVip: true
+          },
+          {
+            name: '心语心愿',
+            isVip: false
+          }
+        ],
+        msg: [{
+            id: 1,
+            name: '小地瓜',
+            content: '一点新素材希望能帮到大家'
+          },
+          {
+            id: 1,
+            name: '傲慢&偏见',
+            content: '呵呵'
+          },
+          {
+            id: 1,
+            name: '辛德瑞拉',
+            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
+          },
+        ]
       },
-      {
-        id: 1,
-        name: '傲慢&偏见',
-        content: '呵呵'
-      },
-      {
-        id: 1,
-        name: '辛德瑞拉',
-        content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-      },
-      ]
-    },
     ],
   },
 
@@ -334,6 +337,19 @@ Page({
       isHide: !this.data.isHide,
     })
   },
-  
+
+  //打开付款框
+  pay(){
+    this.setData({
+      isPay:true
+    })
+  },
+
+  // 取消付款
+  cancel() {
+    this.setData({
+      isPay: false
+    })
+  }
 
 })

@@ -1,0 +1,51 @@
+<!--pages/sub_circle/pages/card/card.wxml-->
+<view class='background' style='height:{{windowHeight-0.5}}px;'>
+  <!-- 名片 -->
+  <view class='card'>
+    <view class='card_title'>
+      <image class='card_back' src='/image/example.jpg'></image>
+      <view class='card_user'>
+        <image src='/image/example.jpg'></image>
+        <text>小地瓜</text>
+      </view>
+    </view>
+    <!-- 名片信息 -->
+    <view class='card_info'>
+      <view class='info_item'>
+        <view class='item_num_box'>
+          <text class='item_num'>1618</text>
+          <text class='item_text big'>天</text>
+        </view>
+        <text class='item_text'>{{isMaster?'创建圈子':'加入圈子'}}</text>
+      </view>
+      <view class='info_item'>
+        <view class='item_num_box'>
+          <text class='item_num blue'>36</text>
+        </view>
+        <text class='item_text'>发表主题</text>
+      </view>
+      <view class='info_item'>
+        <view class='item_num_box'>
+          <text class='item_num yellow'>3</text>
+        </view>
+        <text class='item_text'>获得的赞</text>
+      </view>
+    </view>
+    <!-- 二维码 -->
+    <view class='card_code'>
+      <image src='/image/card_code.png'></image>
+      <text>建筑产业工业互联网联盟</text>
+    </view>
+  </view>
+  <!-- 分享 -->
+  <view class='share'>
+    <button open-type='share' class='share_item'>
+      <image src='/image/card_weixin.png'></image>
+      <text>微信好友</text>
+    </button>
+    <view class='share_item'>
+      <image src='/image/card_pengyouquan.png'></image>
+      <text>朋友圈</text>
+    </view>
+  </view>
+</view>
