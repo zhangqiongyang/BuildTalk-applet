@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-authorTitle":"/components/authorTitle/index"
+  }
+}

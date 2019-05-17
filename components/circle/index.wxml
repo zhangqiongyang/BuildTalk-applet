@@ -1,0 +1,19 @@
+<!--components/circle/index.wxml-->
+<view class='circle_item' bindtap='toCircle'>
+  <view class='image_box'>
+    <image class='image_circle' src='{{circle.image}}'></image>
+    <image wx:if='{{circle.isCourse}}' class='image_course' src='/image/circle_course.png'></image>
+  </view>
+  <view class='circle_info'>
+    <text class='circle_title'>{{circle.title}}</text>
+    <view class='circle_master'>
+      <text>圈主：{{circle.name}}</text>
+      <image wx:if='{{circle.isVip}}' src='/image/authorRecommend_v.png'></image>
+    </view>
+    <view class='circle_label_box'>
+      <block wx:for='{{circle.label}}'>
+        <text class='circle_label'>{{item}}</text>
+      </block>
+    </view>
+  </view>
+</view>

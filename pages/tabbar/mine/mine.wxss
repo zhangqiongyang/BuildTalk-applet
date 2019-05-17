@@ -1,113 +1,133 @@
 /* pages/mine/mine.wxss */
 
-
 /* 登录及个人信息样式 */
-.personalInformation{
+
+.personalInformation {
   width: 100%;
-  height: 208rpx;
-  background-color: #fff;
+  height: 260rpx;
+  background-color: #32a7ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.userBg{
-  width:100%;
-  height:208rpx;
-  float:left;
+
+.login_btn {
+  width: 690rpx;
 }
-.userContent{
-  position: absolute;
-  z-index: 1;
+
+.userContent {
+  display: flex;
+  flex-direction: row;
 }
-.headPortrait{
-  height: 100rpx;
-  width: 100rpx;
-  margin:48rpx 28rpx 0 28rpx;
-  float: left;
+
+.headPortrait {
+  height: 120rpx;
+  width: 120rpx;
   border: 3px solid #fff;
   border-radius: 50%;
+  margin-left: 30rpx;
 }
-.headPortrait image{
-  height: 100rpx;
-  width: 100rpx;
+
+.headPortrait image {
+  height: 120rpx;
+  width: 120rpx;
   border-radius: 50%;
 }
-.userInformation{
-  float: left;
-  margin-top: 54rpx;
+
+.userInformation {
   display: flex;
   flex-direction: column;
-}
-.userinfo-nickname{
-  font-size: 44rpx;
-  color: #fff;
-}
-.userinfo_phone{
-  font-size: 22rpx;
-  color: #fff;
-  padding-top: 16rpx;
+  margin-left: 33rpx;
+  justify-content: center;
 }
 
+.userinfo-nickname {
+  font-size: 36rpx;
+  color: #fff;
+}
 
+.userinfo_phone {
+  font-size: 28rpx;
+  color: #fff;
+  padding-top: 23rpx;
+}
+
+.mine_more {
+  width: 25rpx;
+  height: 25rpx;
+  padding: 30rpx;
+}
 
 /* 账户样式 */
-.account{
-  margin-top: 30rpx;
+
+.account {
+  /* margin-top: 30rpx; */
   margin-bottom: 20rpx;
   background-color: #fff;
 }
-.mineAccount{
+
+.mineAccount {
   margin-top: 20rpx;
   background-color: #fff;
 }
 
-.accountItem{
+.accountItem {
   height: 88rpx;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #f8f8f8;
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   position: relative;
 }
-.accountContent{
-  width: 50%;
+
+.accountContent {
+  width: 70%;
   display: flex;
   align-items: center;
 }
-.accountImg{
-  width: 44rpx;
-  height: 44rpx;
+
+.accountImg {
+  width: 40rpx;
+  height: 40rpx;
   display: inline-block;
-  padding-left: 34rpx;
+  padding-left: 40rpx;
+  padding-right: 34rpx;
 }
-.accountImg image{
+
+.accountImg image {
   width: 44rpx;
   height: 44rpx;
 }
-.accountName{
-  padding-left: 24rpx;
-  color: #333;
-  font-size: 26rpx;
-  line-height: 26rpx;
+
+.accountName {
+  color: #252424;
+  font-size: 30rpx;
+  line-height: 30rpx;
+  font-weight: 500;
 }
-.accountInfo{
-  width: 50%;
+
+.accountInfo {
+  width: 30%;
   height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.accountInfo image{
-  width: 15rpx;
-  height: 28rpx;
-  padding-left: 22rpx;
-  padding-right: 32rpx;
-}
-.accountNumber{
-  font-size: 26rpx;
-}
-.accountNumberColor{
- color: #F86161;
+
+.accountInfo image {
+  width: 25rpx;
+  height: 25rpx;
+  padding: 30rpx;
 }
 
-.index_service_button{
+.accountNumber {
+  font-size: 26rpx;
+}
+
+.accountNumberColor {
+  color: #f5b83a;
+}
+
+.index_service_button {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -115,3 +135,26 @@
   width: 100%;
   height: 88rpx;
 }
+
+.btn {
+  border: none;
+  padding: 0;
+  background-color: #fff;
+}
+
+button::after {
+  border: none;
+}
+
+/* button {
+  background-color: #fff;
+  height: 86rpx;
+  border-radius: none;
+  line-height: 37rpx;
+  position: none;
+}
+
+.button-hover {
+  color: rgb(0, 0, 0);
+  background-color: #fff;
+} */

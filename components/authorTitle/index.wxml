@@ -1,8 +1,39 @@
 <!--components/authorTitle/index.wxml-->
-<view class='authorInfo'>
-    <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
-    <view class='authorText'>
-      <text class='authorName'>{{authorinfo.author_name}}</text>
-      <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+<view class='author_info_box'>
+  <!-- 背景图 -->
+  <image class='author_back' src='{{authorInfo.image}}' />
+  <!-- 大咖简介 -->
+  <view class='author_info'>
+    <image class='author_image' src='{{authorInfo.image}}' />
+    <view class='author_name'>
+      <text>{{authorInfo.name}}</text>
+      <image wx:if='{{authorInfo.isVip}}' src='/image/authorRecommend_v.png'></image>
     </view>
+    <text wx:if='{{isAuthor}}' class='author_title'>{{authorInfo.title}}</text>
+  </view>
+  <!-- 关注 -->
+  <view wx:if='{{authorInfo.isAttention}}' class='attention' bindtap='cancelAttention'>
+    <image src='/image/authorRecommend_attention.png'></image>
+    已关注
+  </view>
+  <view wx:else class='attention' bindtap='attention'>+关注</view>
+  <!-- 大咖关注 -->
+  <view class='attention_box'>
+    <view class='attention_item' wx:if='{{isAuthor}}' bindtap='toCirlce'>
+      <text class='attention_num'>{{authorInfo.circle}}</text>
+      <text>圈子</text>
+    </view>
+    <view class='attention_item' bindtap='toFans'>
+      <text class='attention_num'>{{authorInfo.fans}}</text>
+      <text>粉丝</text>
+    </view>
+    <view class='attention_item' bindtap='toCollect'>
+      <text class='attention_num'>{{authorInfo.collect}}</text>
+      <text>收藏</text>
+    </view>
+    <view class='attention_item' bindtap='toAttention'>
+      <text class='attention_num'>{{authorInfo.attention}}</text>
+      <text>关注</text>
+    </view>
+  </view>
 </view>

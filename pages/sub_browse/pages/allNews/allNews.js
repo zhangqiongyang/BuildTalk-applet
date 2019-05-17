@@ -135,5 +135,16 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+
+  /**
+   * 方法
+   */
+
+  // 跳转到每日一谈详情
+  toAuthorDesc(){
+    wx.navigateTo({
+      url: '../authorDesc/authorDesc',
+    })
   }
 })

@@ -1,2 +1,61 @@
 <!--pages/sub_author/pages/authorRecommend/authorRecommend.wxml-->
-<text>pages/sub_author/pages/authorRecommend/authorRecommend.wxml</text>
+<view>
+  <!-- 搜索 -->
+  <view class='search_box'>
+    <view class='search' bindtap='search'>搜索名字</view>
+  </view>
+  <!-- 行业大咖 -->
+  <view class='author'>
+    <!-- 标题 -->
+    <view class='title'>
+      <view class='title_text'>
+        <view class='title_line'></view>
+        <text>行业大咖</text>
+      </view>
+      <text class='more' bindtap='toAuthorList'>查看全部</text>
+    </view>
+    <!-- 大咖列表 -->
+    <view class='list'>
+      <block wx:for='{{authorList}}'>
+        <image src='{{item}}' bindtap='toAuthor'></image>
+      </block>
+    </view>
+    <!-- 换一换 -->
+    <view class='change'>
+      <image src='/image/authorRecommend_change.png'></image>
+      <text>换一换</text>
+    </view>
+  </view>
+  <!-- 人气圈主 -->
+  <view>
+    <!-- 标题 -->
+    <view class='title'>
+      <view class='title_text'>
+        <view class='title_line'></view>
+        <text>人气圈主</text>
+      </view>
+      <text class='more' bindtap='toMasterList'>查看全部</text>
+    </view>
+    <view class='master_list'>
+      <block wx:for='{{masterList}}'>
+        <view class='master_item' bindtap='toMaster'>
+          <image class='master_image' src='{{item.image}}'></image>
+          <view class='master_name'>
+            <text>{{item.name}}</text>
+            <image wx:if='{{item.isVip}}' src='/image/authorRecommend_v.png'></image>
+          </view>
+          <view class='master_info'>
+            <text class='color'>{{item.attentionNum}}</text>
+            <text>人已关注</text>
+          </view>
+          <view wx:if='{{item.isAttention}}' class='master_attention'>
+            <image src='/image/authorRecommend_attention.png'></image>
+            已关注
+          </view>
+          <view wx:else class='master_attention'>+关注</view>
+        </view>
+      </block>
+
+    </view>
+  </view>
+</view>

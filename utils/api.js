@@ -1,15 +1,15 @@
-var base = "https://www.51jiantan.com"
+var base = "https://jt.chinabim.com"
 
 
-module.exports = {
+const api={
   //app.js
   API_GETOPENID: base + "/getloginopenid", // 获取openid
   API_GETENCRYPTEDDATA: base + "/getUserinfoEncryptedData", // 获取用户加密信息
-  
+
   //首页index
-  API_INDEXPIC: base + "/getindexpic", // 查询首页推荐轮播图
-  API_INDEXNEWS: base + "/searchallrecommend", // 获取新闻信息接口
-  API_INDEXCOURSE: base + "/getindexinfo", // 查询首页上精品推荐的课程接口
+  API_INDEXPIC: base + "/getIndexPic", // 查询首页推荐轮播图
+  API_INDEXNEWS: base + "/searchRecommendNews", // 获取新闻信息接口
+  API_INDEXCOURSE: base + "/searchCircleInfoByType", // 查询首页上精品课程、热门话题圈接口 type：1热门话题圈 2精品课程
   API_INDEXAUTHOR: base + "/searchrecommendauthor", // 获取推荐作者信息接口
 
   //个人中心mine
@@ -73,4 +73,8 @@ module.exports = {
   API_GETHISTORY: base + "/getSearchHistory", // 查询历史记录接口
   API_SEARCH: base + "/searchkeywords", //搜索接口
   API_DELETEHISTORY: base + "/deleteSearchHistory", //删除历史纪录接口
+}
+
+export{
+  api
 }

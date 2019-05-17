@@ -1,0 +1,9 @@
+<!--pages/sub_author/pages/fans/fans.wxml-->
+<view>
+  <block wx:if='{{isMine}}' wx:for='{{masterList}}'>
+    <v-master isMineFans='true' master='{{item}}' />
+  </block>
+  <block wx:if='{{!isMine}}' wx:for='{{masterList}}'>
+    <v-master master='{{item}}' />
+  </block>
+</view>

@@ -18,26 +18,15 @@ Page({
   },
 
 
-
-
-
-
-
-
-
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     var that = this;
 
-
-
-
     wx.request({
       // url: 'https://wx.bjjy.com/getrecommend',
-      url: api.API_ALLCOURSE,      
+      url: api.API_ALLCOURSE,
       data: '',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -92,9 +81,9 @@ Page({
     //     url: 'https://wx.bjjy.com/courselistinfo',
     //     data: {
     //       'openid': wx.getStorageSync('openid'),
-   // source: 'xcx',
+    // source: 'xcx',
     //       'course_id': course_id,
-   // unionid: wx.getStorageSync('unionid')
+    // unionid: wx.getStorageSync('unionid')
     //     },
     //     header: {
     //       'content-type': 'application/x-www-form-urlencoded'
@@ -188,5 +177,15 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+
+  /**
+   * 方法
+   */
+  // 跳转到课程详情
+  toCourse() {
+    wx.navigateTo({
+      url: '/pages/sub_circle/pages/circleDetails/circleDetails',
+    })
   }
 })

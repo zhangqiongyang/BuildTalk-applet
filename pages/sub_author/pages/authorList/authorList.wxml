@@ -1,0 +1,6 @@
+<!--pages/sub_author/pages/authorList/authorList.wxml-->
+<view class='author_list'>
+  <block wx:for='{{authorList}}'>
+    <v-author author='{{item}}' />
+  </block>
+</view>

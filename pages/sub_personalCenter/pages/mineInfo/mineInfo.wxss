@@ -1,0 +1,2 @@
+/* pages/sub_personalCenter/pages/mineInfo/mineInfo.wxss */
+@import '../info/info.wxss';

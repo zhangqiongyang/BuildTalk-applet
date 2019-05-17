@@ -1,0 +1,7 @@
+<!--pages/sub_author/pages/masterList/masterList.wxml-->
+<view class='master_list'>
+  <block wx:for='{{masterList}}'>
+    <v-master master='{{item}}' />
+  </block>
+
+</view>

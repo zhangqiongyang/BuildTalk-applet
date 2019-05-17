@@ -1,0 +1,16 @@
+<!--pages/sub_personalCenter/pages/account/account.wxml-->
+<view>
+  <view class='account'>
+    <view class='account_box'>
+      <view>
+        <text class='money'>￥</text>
+        <text class='account_num'>0.00</text>
+      </view>
+      <text class='account_text'>余额（元）</text>
+    </view>
+  </view>
+  <view class='item_info' >
+    <text class='item_text'>交易明细</text>
+    <image class='item_image' src='/image/mine_more_black.png' bindtap='toalreadyBought'></image>
+  </view>
+</view>

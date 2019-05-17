@@ -3,10 +3,10 @@
 
 view {
   overflow: visible;
+  line-height: normal;
 }
 
 /* video */
-
 
 .video {
   width: 100%;
@@ -15,10 +15,12 @@ view {
   top: 0.1px;
   left: 0; */
 }
-.video_placeholder{
+
+.video_placeholder {
   width: 100%;
   height: 420rpx;
 }
+
 .mask {
   width: 100%;
   height: 420rpx;
@@ -44,9 +46,11 @@ view {
 }
 
 .article_title {
-  font-size: 44rpx;
+  font-size: 32rpx;
+  line-height: 36rpx;
+  font-weight: bold;
   display: block;
-  padding: 38rpx 0 68rpx 0;
+  padding: 40rpx 0;
 }
 
 .article_articleInfo {
@@ -62,144 +66,119 @@ view {
 
 .article_time {
   display: inline-block;
-  font-size: 20rpx;
-  color: #999;
-  padding-top: 12rpx;
+  font-size: 18rpx;
+  line-height: 18rpx;
+  color: #8f8f8f;
+  padding-top: 10rpx;
 }
 
 .article_author {
   font-size: 26rpx;
+  line-height: 26rpx;
+  font-weight: 500;
 }
 
 .article_authorImg {
-  width: 60rpx;
-  height: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
   border-radius: 50%;
 }
 
 /* 播放器样式 */
 
-
-.articleAudio{
-  padding: 30rpx 30rpx 10rpx 30rpx;
-  /* padding-bottom: 50rpx; */
+.articleAudio {
+  padding: 30rpx;
 }
-.audio_mask{
-  width:694rpx;
-  height:158rpx;
+
+.audio_mask {
+  width: 690rpx;
+  height: 132rpx;
   position: absolute;
   background-color: #00000099;
   color: #fff;
-  line-height: 158rpx;
+  line-height: 132rpx;
   text-align: center;
   font-size: 28rpx;
 }
-.player{
-  width:100%;
-  height:158rpx;
-  border:1px solid #EAEAEA;
-  /* padding: 38rpx 20rpx 40rpx 32rpx; */
-  /* box-sizing: border-box; */
+
+.player {
+  width: 690rpx;
+  height: 132rpx;
   background-color: #fff;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  box-shadow: 0px 0px 8px 0px #d2d0d1;
 }
 
-
-
-.playerIcon{
+.playerIcon {
   width: 130rpx;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.playerIcon image{
-  width:58rpx;
-  height:58rpx;
-}
-.playStop{
-  width:30rpx;
-  height:30rpx;
+
+.playerIcon image {
+  width: 54rpx;
+  height: 54rpx;
 }
 
+.playGif {
+  width: 31rpx;
+  height: 40rpx;
+  padding-left: 10rpx;
+}
 
-
-
-.playerInfo{
+.playerInfo {
   width: 480rpx;
   display: flex;
   flex-direction: column;
-  /* align-items: center;
-  align-content: center; */
 }
-.player_article_title{
+
+.player_article_title {
   font-size: 30rpx;
-  color: #353535;
+  line-height: 30rpx;
+  font-weight: 500;
   width: 100%;
   display: inline-block;
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow:ellipsis;
-  padding-top: 38rpx;
+  text-overflow: ellipsis;
 }
-.player_article_audioInfo{
+
+.player_article_audioInfo {
   display: flex;
   flex-direction: row;
   width: 100%;
-  /* align-content: center;
-  align-items: center; */
-  padding-top: 18rpx;
+  padding-top: 20rpx;
 }
-.player_article_audioInfo image{
-  height: 14px;
+
+.line {
   width: 1px;
-  padding-left: 10rpx;
+  height: 18rpx;
+  background: #76bdfe;
+  margin: 0 20rpx;
 }
-.player_article_declaimer{
-  color: #666666;
+
+.player_article_audioInfo text{
   font-size: 20rpx;
+  line-height: 20rpx;
+  color: #32A7FF;
 }
-.player_article_time{
-  color: #999999;
-  font-size: 20rpx;
-  padding-left: 60rpx;
-}
-.player_article_size{
-  color: #7EBBF4;
-  font-size: 20rpx;
-  padding-left: 10rpx;
-}
-
-
-
-
-.playerDown{
-  flex: 1;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.playerDown image{
-  width: 84rpx;
-  height: 84rpx;
-}
-
 
 /* 文章主体 */
 
 .articleContent {
-  padding: 40rpx 30rpx;
-  font-size: 32rpx;
-  color: #353535;
+  padding: 30rpx 30rpx 90rpx 30rpx;
 }
 
-.articleContent text {
-  font-size: 32rpx;
-  color: #353535;
-}
+/* 
+.articleContent view {
+  font-size: 24rpx;
+  color: #666666;
+} */
 
 /* 精选留言 */
 

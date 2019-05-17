@@ -45,19 +45,7 @@
 
 
   <!-- 评论、点赞、转发 -->
-  <view class='operate'>
-    <view class='operate_msg'>
-      <image src='/image/subjectDetails_msg.png'></image>
-      <text>12评论</text>
-    </view>
-    <view class='operate_like'>
-      <image src='/image/subjectDetails_like.png'></image>
-      <text>8赞</text>
-    </view>
-    <view class='operate_share'>
-      <image src='/image/subjectDetails_share.png'></image>
-    </view>
-  </view>
+  <v-tabbar />
 
 
 </view>

@@ -1,0 +1,58 @@
+/* pages/sub_personalCenter/pages/account/account.wxss */
+
+.account {
+  width: 100%;
+}
+
+.account_box {
+  width: 690rpx;
+  height: 240rpx;
+  background: linear-gradient(90deg, #fedea7, #feeac9, #fedea7);
+  border-radius: 20rpx;
+  margin: 30rpx auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.account_box text{
+  color: #4c2705;
+
+}
+
+.money{
+  font-size: 36rpx;
+}
+
+.account_num {
+  font-size: 60rpx;
+  line-height: 60rpx;
+}
+
+.account_text {
+  font-size: 24rpx;
+  margin-top: 26rpx;
+}
+
+
+.item_info{
+  height: 88rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom:1px solid  #E8E7E8;
+}
+
+.item_text{
+  font-size: 30rpx;
+  color: #656565;
+  padding-left: 30rpx;
+}
+
+.item_image{
+  width: 25rpx;
+  height: 25rpx;
+  padding: 30rpx;
+}

@@ -3,130 +3,106 @@
 /* 全部 */
 
 .titleBar {
-  height: 100rpx;
-  border-bottom: 2px solid #f4f4f4;
-  align-items: center;
+  height: 98rpx;
   display: flex;
+  align-items: center;
+  background-color: #fff;
 }
 
 .classify {
-  font-size: 30rpx;
-  /* padding: 0 20rpx; */
-  margin-left: 20rpx;
-  /* width: 80rpx; */
-  height: 60rpx;
+  padding: 20rpx 30rpx;
+  margin-top: 16rpx;
+  margin-left: 30rpx;
   display: inline-block;
+  border: 1px solid #e8e7e8;
+  border-radius: 33px;
+  color: #656565;
 }
 
-.active{
-  border-bottom: 6rpx solid #fa8919;
+.active {
+  background-color: #e9f5ff;
+  border: 1px solid #bde0fe;
+  color: #32a7ff;
 }
 
-.underline {
-  /* position: absolute; */
-  margin-top: 20rpx;
-  margin-left: 20rpx;
-  width: 48rpx;
-  height: 6rpx;
-  background-color: #fa8919;
-  border-radius: 20%;
+.swiper {
+  margin-top: 10rpx;
+  background-color: #fff;
 }
-.courseListBox{
+
+.courseListBox {
   white-space: nowrap;
-}
-.courseList {
-  padding: 0 32rpx;
-  border-bottom: 2px solid #f4f4f4;
-}
-
-.title {
-  height: 110rpx;
-  display: flex;
-  align-items: center;
+  background-color: #f8f8f8;
 }
 
 .courseItem {
   display: flex;
-  height: 188rpx;
   align-items: center;
-  margin: 40rpx 0;
-}
-
-.course {
-  display: flex;
+  justify-content: space-between;
   flex-direction: row;
-  position: relative;
-  width: 100%;
+  background-color: #fff;
+  height: 120rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  margin-top: 10rpx;
 }
 
-.courseItem image {
-  width: 122rpx;
-  height: 122rpx;
-}
-
-.courseInfo {
+.info {
   display: flex;
   flex-direction: column;
-  padding-left: 20rpx;
+  justify-content: center;
 }
 
-.courseName {
-  font-size: 32rpx;
-  color: #4d4d4d;
-  /* padding-top: 10rpx; */
+.title {
+  font-size: 30rpx;
+  font-weight: 500;
 }
 
-.courseDate {
-  color: #888;
-  font-size: 24rpx;
-  padding-top: 26rpx;
+.text {
+  font-size: 18rpx;
+  color: #656565;
+  margin-top: 18rpx;
 }
 
-.courseNumber {
+.money_info {
   display: flex;
   flex-direction: row;
-}
-
-/* .courseNumber view{
-  display: inline;
-} */
-
-
-.courseAlreadyLearnText {
-  color: #888;
-  font-size: 24rpx;
-  letter-spacing: 5rpx;
-}
-
-.courseAlreadyLearn {
-  color: #fa8919;
-    font-size: 24rpx;
-  letter-spacing: 5rpx;
-}
-
-.starToLearn {
-  border: 2px solid #fa8919;
-  height: 50rpx;
-  width: 176rpx;
-  border-radius: 20px;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.starToLearn image {
-  width: 26rpx;
-  height: 26rpx;
+.money {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 20rpx;
 }
 
-.starToLearn text {
-  color: #fa8919;
+.num {
+  color: #f5b83a;
+  font-size: 30rpx;
 }
 
+.more {
+  width: 25rpx;
+  height: 25rpx;
+}
+/* 无记录 */
+.no_record {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rpx;
+}
 
-/* .swiper{
-  height: ;
-} */
+.no_record image {
+  width: 430rpx;
+  height: 326rpx;
+  margin-top: 150rpx;
+}
+
+.no_record text {
+  color: #8f8f8f;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}

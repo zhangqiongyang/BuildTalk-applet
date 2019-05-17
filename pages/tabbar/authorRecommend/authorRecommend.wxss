@@ -1,1 +1,166 @@
 /* pages/sub_author/pages/authorRecommend/authorRecommend.wxss */
+
+/* 搜索 */
+
+.search_box {
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  margin: 0 auto;
+  width: 690rpx;
+  height: 62rpx;
+  background: #f7f8fa;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  color: #8f8f8f;
+  font-size: 24rpx;
+}
+
+/* 行业大咖 */
+
+/* 标题 */
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100rpx;
+  width: 100%;
+}
+
+.title_text {
+  display: flex;
+  flex-direction: row;
+  padding-left: 30rpx;
+}
+
+.title_text text {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-left: 20rpx;
+}
+
+.title_line {
+  width: 6rpx;
+  height: 33rpx;
+  background: #32a7ff;
+}
+
+.more {
+  font-size: 22rpx;
+  color: #656565;
+  padding: 30rpx;
+}
+
+/* 列表 */
+
+.list {
+  margin: 0 30rpx;
+}
+
+.list image {
+  width: 690rpx;
+  height: 234rpx;
+  margin: 15rpx 0;
+}
+
+/* 换一换 */
+
+.change {
+  padding-top: 25rpx;
+  text-align: center;
+  padding-bottom: 30rpx;
+}
+
+.change image {
+  width: 25rpx;
+  height: 24rpx;
+}
+
+.change text {
+  color: #8f8f8f;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+
+/* 人气圈主 */
+
+/* 圈主列表 */
+
+.master_list {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 60rpx;
+}
+
+.master_item {
+  width: 210rpx;
+  height: 320rpx;
+  border: 1px solid #e8e7e8;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.master_image {
+  width: 138rpx;
+  height: 138rpx;
+  border-radius: 50%;
+  margin-top: 30rpx;
+}
+
+.master_name {
+  padding-top: 14rpx;
+}
+
+.master_name text {
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 36rpx;
+}
+
+.master_name image {
+  width: 16rpx;
+  height: 16rpx;
+  margin-left: 6rpx;
+}
+
+.master_info text {
+  font-size: 18rpx;
+  color: #656565;
+}
+
+.master_info .color {
+  color: #f5b83a;
+}
+
+.master_attention{
+  border-left: 1px solid #E8E7E8;
+  border-top: 1px solid #E8E7E8;
+  border-right: 1px solid #E8E7E8;
+  border-radius: 4px;
+  font-size: 22rpx;
+  width: 118rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+}
+
+.master_attention image{
+  width: 16rpx;
+  height: 16rpx;
+  padding-right: 10rpx;
+}

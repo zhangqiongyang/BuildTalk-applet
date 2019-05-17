@@ -1,0 +1,14 @@
+<!--components/author/index.wxml-->
+<view class='author_item'>
+  <image src='{{author.image}}'></image>
+  <view class='item_info'>
+    <text class='item_name'>{{author.name}}</text>
+    <text class='item_title'>{{author.title}}</text>
+    <text class='item_desc'>{{author.desc}}</text>
+    <view class='item_label'>
+      <block wx:for='{{author.label}}'>
+        <view class='label'>{{item}}</view>
+      </block>
+    </view>
+  </view>
+</view>

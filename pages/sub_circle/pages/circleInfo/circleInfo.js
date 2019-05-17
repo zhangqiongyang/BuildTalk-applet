@@ -1,5 +1,7 @@
 // pages/sub_circle/pages/circleInfo/circleInfo.js
 const app = getApp();
+const util = require('../../../../utils/util.js');
+
 Page({
 
   /**
@@ -101,19 +103,6 @@ Page({
 
   // 退出圈子
   exit() {
-    wx.showModal({
-      title: '',
-      content: '确定退出此圈子？',
-      showCancel: true,
-      cancelColor: '#242831',
-      confirmColor: '#32A7FF',
-      success: function(res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      },
-    })
+    util._showModal('确定退出此圈子？','')
   }
 })

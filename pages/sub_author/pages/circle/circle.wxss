@@ -1,0 +1,2 @@
+/* pages/sub_author/pages/circle/circle.wxss */
+@import "../masterDetails/masterDetails.wxss"

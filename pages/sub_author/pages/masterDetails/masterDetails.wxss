@@ -1,0 +1,11 @@
+/* pages/sub_author/pages/masterDetails/masterDetails.wxss */
+.circle{
+  padding: 1rpx 30rpx 78rpx 30rpx;
+  background-color: #fff;
+}
+.list_title{
+  font-weight: bold;
+}
+.circle_list{
+  margin-top: 40rpx;
+}

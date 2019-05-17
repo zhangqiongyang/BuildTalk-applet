@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-circle": "/components/circle/index"
+  },
+  "navigationBarTitleText": "热门话题圈"
+}

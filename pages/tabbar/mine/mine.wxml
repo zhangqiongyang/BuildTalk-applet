@@ -5,9 +5,8 @@
 
   <!-- 登录及个人信息 -->
   <view class='personalInformation'>
-    <button style='margin:100rpx;' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
+    <button class='login_btn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信登录 </button>
     <block wx:else>
-      <image class='userBg' src='/image/mine_background.png'></image>
       <view class='userContent'>
         <view class='headPortrait'>
           <image src="{{userInfo.avatarUrl}}" mode="cover"></image>
@@ -17,6 +16,7 @@
           <text class='userinfo_phone'>{{phoneNumber}}</text>
         </view>
       </view>
+      <image class='mine_more' src='/image/mine_more_white.png' bindtap='toMineInfo'></image>
     </block>
   </view>
 
@@ -24,163 +24,59 @@
 
   <!-- 账户 -->
 
-  <!-- <view class='accountItem account'>
+  <view class='accountItem account'>
     <view class='accountContent'>
       <view class='accountImg'>
         <image src='/image/mine_account.png'></image>
       </view>
-      <text class='accountName'>谈资</text>
+      <text class='accountName'>我的钱包</text>
     </view>
-    <view class='accountInfo'>
+    <view class='accountInfo' bindtap='toAccount'>
       <text class='accountNumber accountNumberColor'>0.00</text>
-      <image src='/image/more.png'></image>
-    </view>
-  </view> -->
-
-
-
-  <view class='mineAccount'>
-
-
-
-
-
-
-    <!-- <view class='accountItem' bindtap='jumpToAddress'>
-      <view class='accountContent'>
-        <view class='accountImg'>
-          <image src='/image/mine_adress.png'></image>
-        </view>
-        <text class='accountName'>收货地址</text>
-      </view>
-      <view class='accountInfo'>
-        <text class='accountNumber accountNumberColor'></text>
-        <image src='/image/more.png'></image>
-      </view>
-    </view> -->
-
-
-
-    <view class='accountItem' bindtap='jumpToAlreadyBought'>
-      <view class='accountContent'>
-        <view class='accountImg'>
-          <image src='/image/mine_bought.png'></image>
-        </view>
-        <text class='accountName'>已解锁</text>
-      </view>
-      <view class='accountInfo'>
-        <text class='accountNumber accountNumberColor'></text>
-        <image src='/image/more.png'></image>
-      </view>
-    </view>
-
-
-
-    <!-- <view class='accountItem' bindtap='jumpTogiftCertificate'>
-      <view class='accountContent'>
-        <view class='accountImg'>
-          <image src='/image/mine_giftCertificate.png'></image>
-        </view>
-        <text class='accountName'>礼券</text>
-      </view>
-      <view class='accountInfo'>
-        <text class='accountNumber accountNumberColor'>1</text>
-        <image src='/image/more.png'></image>
-      </view>
-    </view> -->
-
-
-
-    <!-- <view class='accountItem'>
-      <view class='accountContent'>
-        <view class='accountImg'>
-          <image src='/image/mine_redPacket.png'></image>
-        </view>
-        <text class='accountName'>分享有赏</text>
-      </view>
-      <view class='accountInfo'>
-        <text class='accountNumber accountNumberColor'></text>
-        <image src='/image/more.png'></image>
-      </view>
-    </view> -->
-
-
-
-    <!-- 
-    <view class='accountItem' bindtap='jumpToInviteFriends'>
-      <view class='accountContent'>
-        <view class='accountImg'>
-          <image src='/image/mine_friend.png'></image>
-        </view>
-        <text class='accountName'>邀请好友</text>
-      </view>
-      <view class='accountInfo'>
-        <text class='accountNumber'>各得</text>
-        <text class='accountNumber accountNumberColor'>30</text>
-        <text class='accountNumber'>元</text>
-        <image src='/image/more.png'></image>
-      </view>
-    </view> -->
-
-
-  </view>
-
-
-
-  <!-- 我的 -->
-  <view class='mineAccount'>
-    <block wx:for='{{mineList}}' wx:key='key'>
-      <view class='accountItem' bindtap='jumpToMyMsg'>
-        <view class='accountContent'>
-          <view class='accountImg'>
-            <image src='{{item.mineImg}}'></image>
-          </view>
-          <text class='accountName'>{{item.mineName}}</text>
-        </view>
-        <view class='accountInfo'>
-          <image src='/image/more.png'></image>
-        </view>
-      </view>
-    </block>
-    <!-- <view class='accountItem'> -->
-    <view class='accountItem' bindtap='jumpToFeedback'>
-    
-      <view class='accountContent'>
-        <view class='accountImg'>
-          <image src='/image/mine_note.png'></image>
-        </view>
-        <text class='accountName'>用户反馈</text>
-      </view>
-      <view class='accountInfo'>
-        <image src='/image/more.png'></image>
-      </view>
-
-      <!-- <button open-type='contact' class='index_service_button accountItem'></button> -->
+      <image src='/image/mine_more_black.png'></image>
     </view>
   </view>
 
 
 
-  <!-- 设置 -->
-  <!-- <view class='mineAccount'>
-    <block>
-      <view class='accountItem' bindtap='call'>
-        <view class='accountContent'>
-          <view class='accountImg'>
-            <image src='/image/mine_set.png'></image>
-          </view>
-          <text class='accountName'>电话12345678</text>
+  <view class='mineAccount'>
+
+    <view class='accountItem'>
+      <view class='accountContent'>
+        <view class='accountImg'>
+          <image src='/image/mine_set.png'></image>
         </view>
-        <view class='accountInfo'>
-          <image src='/image/more.png'></image>
-        </view>
+        <text class='accountName'>设置</text>
       </view>
+      <view class='accountInfo' bindtap='toSet'>
+        <image src='/image/mine_more_black.png'></image>
+      </view>
+    </view>
 
+    <view class='accountItem'>
+      <view class='accountContent'>
+        <view class='accountImg'>
+          <image src='/image/mine_feedback.png'></image>
+        </view>
+        <text class='accountName'>问题反馈</text>
+      </view>
+      <view class='accountInfo' bindtap='toFeedback'>
+        <image src='/image/mine_more_black.png'></image>
+      </view>
+    </view>
 
+    <view class='accountItem'>
+      <view class='accountContent'>
+        <view class='accountImg'>
+          <image src='/image/mine_service.png'></image>
+        </view>
+        <text class='accountName'>在线客服</text>
+      </view>
+      <button class='accountInfo btn' open-type='contact'>
+        <image src='/image/mine_more_black.png'></image>
+      </button>
+    </view>
 
-    </block>
-  </view> -->
-
-
+  </view>
 
 </view>

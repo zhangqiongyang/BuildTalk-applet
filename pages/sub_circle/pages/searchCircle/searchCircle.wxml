@@ -1,14 +1,16 @@
 <!--pages/sub_circle/pages/searchCircle/searchCircle.wxml-->
 <view>
+  <!-- 搜索框 -->
   <view class='searchBox'>
     <view class='search'>
       <input placeholder='建筑' placeholder-class='placeholder' value='{{key}}' bindconfirm='search'></input>
       <view class='clear' bindtap='clear'>
-        <image src='/image/searchCircle_clear.png' ></image>
+        <image src='/image/searchCircle_clear.png'></image>
       </view>
     </view>
     <text class='cancel' bindtap='cancel'>取消</text>
   </view>
+  <!-- 搜索历史 -->
   <view class='history' wx:if='{{isHistory}}'>
     <view class='title'>
       <text>搜索历史</text>
@@ -20,26 +22,17 @@
       </block>
     </view>
   </view>
+  <!-- 圈子列表 -->
   <view class='list' wx:if='{{isSearchList}}'>
     <block wx:for='{{list}}'>
-      <view class='item'>
-        <view class='imageBox'>
-          <image class='searchImage' src='{{item.image}}'></image>
-          <image wx:if='{{item.isCourse}}' class='course' src='/image/circle_course.png'></image>
-        </view>
-        <view class='info'>
-          <text class='searchTitle'>{{item.title}}</text>
-          <view class='author'>
-            <text>圈主：{{item.author}}</text>
-            <image wx:if='{{item.isVip}}' src='/image/circle_v.png'></image>
-          </view>
-          <view class='labelList'>
-            <block wx:for='{{item.label}}'>
-              <text class='labelItem'>{{item}}</text>
-            </block>
-          </view>
-        </view>
-      </view>
+      <v-circle circle='{{item}}' />
+    </block>
+  </view>
+
+  <!-- 大咖列表 -->
+  <view wx:if='{{isAuthorList}}'>
+    <block wx:for='{{authorList}}'>
+      <v-author author='{{item}}' />
     </block>
   </view>
 </view>

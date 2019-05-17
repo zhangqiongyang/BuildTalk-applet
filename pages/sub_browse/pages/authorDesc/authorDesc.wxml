@@ -2,21 +2,33 @@
 <import src="/wxParse/wxParse.wxml" />
 
 <view>
-  <view class='authorDescBox'>
-    <!-- <image src='/image/mine_background.png' class='authorBackground' mode='widthFix' style='height:175rpx;'></image>
-    <view class='authorDesc'>
-      <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
-      <text class='bold'>{{authorinfo.author_desc}} - {{authorinfo.author_name}}</text>
-    </view> -->
-    <view class='author'>
-      <image src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
-      <view class='authorText'>
-        <text class='authorName'>{{authorinfo.author_name}}</text>
-        <text class='authorIntroduce'>{{authorinfo.author_desc}}</text>
+
+  <!-- 每日一谈 -->
+  <view class='image_box'>
+    <image class='image_back' src='/image/allNews_back.png' />
+    <image class='image_down' src='/image/allNews_down.png' />
+  </view>
+
+  <!-- 个人介绍 -->
+  <view wx:if='{{!isArticle}}' class='author_intro'>
+    <view class='intro_item'>
+      <view class='item_title'>谈小建</view>
+      <view>
+        <text class='item_text' style='margin-right:37rpx;'>博士</text>
+        <text class='item_text'>民盟成员 高级工程师 </text>
       </view>
+      <view class='item_text'>
+        悉尼大学工商管理硕士，美国南加州大学工商管理博士
+      </view>
+
+    </view>
+    <view class='intro_item'>
+      <view class='item_title'>曾获得</view>
+      <text> 2002-2003年度北京优秀企业家
+2004年度北京用户满意杰出管理者
+2005年度北京明星建筑装饰企业家，全部建筑装饰
+行业优秀企业家等诸多荣誉</text>
     </view>
   </view>
-  <view class='authorInfoBox'>
-    <template is="wxParse" data="{{wxParseData:content.nodes}}" />
-  </view>
+
 </view>

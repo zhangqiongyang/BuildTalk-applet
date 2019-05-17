@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -55,9 +55,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "圈子",
-					"pathName": "pages/sub_circle/pages/circle/circle",
+					"pathName": "pages/tabbar/circle/circle",
 					"query": "",
 					"scene": null
 				},
@@ -121,6 +121,182 @@
 					"id": -1,
 					"name": "圈子资料",
 					"pathName": "pages/sub_circle/pages/circleData/circleData",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "谈主推荐",
+					"pathName": "pages/tabbar/authorRecommend/authorRecommend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "大咖列表",
+					"pathName": "pages/sub_author/pages/authorList/authorList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "圈主列表",
+					"pathName": "pages/sub_author/pages/masterList/masterList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "大咖详情",
+					"pathName": "pages/sub_author/pages/authorDetails/authorDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "圈主详情",
+					"pathName": "pages/sub_author/pages/masterDetails/masterDetails",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "粉丝",
+					"pathName": "pages/sub_author/pages/fans/fans",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "关注",
+					"pathName": "pages/sub_author/pages/attention/attention",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "圈子",
+					"pathName": "pages/sub_author/pages/circle/circle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收藏",
+					"pathName": "pages/sub_author/pages/collect/collect",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 21,
+					"name": "文章",
+					"pathName": "pages/sub_browse/pages/video/video",
+					"query": "article_id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "设置",
+					"pathName": "pages/sub_personalCenter/pages/set/set",
+					"query": "article_id=1",
+					"scene": null
+				},
+				{
+					"id": 23,
+					"name": "个人信息",
+					"pathName": "pages/sub_personalCenter/pages/info/info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人信息_我的",
+					"pathName": "pages/sub_personalCenter/pages/mineInfo/mineInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "图片",
+					"pathName": "pages/sub_personalCenter/pages/image/image",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "修改名称",
+					"pathName": "pages/sub_personalCenter/pages/changeName/changeName",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "手机号",
+					"pathName": "pages/sub_personalCenter/pages/phone/phone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "钱包",
+					"pathName": "pages/sub_personalCenter/pages/account/account",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 29,
+					"name": "问题反馈",
+					"pathName": "pages/sub_personalCenter/pages/feedback/feedback",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "已购",
+					"pathName": "pages/sub_personalCenter/pages/alreadyBought/alreadyBought",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "手机号",
+					"pathName": "pages/phone/phone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 32,
+					"name": "每日一谈详情",
+					"pathName": "pages/sub_browse/pages/authorDesc/authorDesc",
+					"query": "author_id=25",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "课程圈",
+					"pathName": "pages/sub_browse/pages/AllCourse/AllCourse",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "热门话题圈",
+					"pathName": "pages/sub_browse/pages/hotCircle/hotCircle",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "交易明细",
+					"pathName": "pages/sub_personalCenter/pages/alreadyBought/alreadyBought",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "404",
+					"pathName": "pages/404/404",
+					"query": "",
 					"scene": null
 				}
 			]

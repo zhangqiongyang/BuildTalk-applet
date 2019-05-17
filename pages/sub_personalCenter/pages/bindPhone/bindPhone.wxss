@@ -1,0 +1,116 @@
+/* pages/phone/phone.wxss */
+
+.form{
+  margin-top: 140rpx;
+}
+
+.codeBtn {
+  flex: 1;
+  font-size: 26rpx;
+  width: 130rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #7ebbf4;
+}
+
+.code_toast {
+  color: #999;
+  font-size: 26rpx;
+  flex: 1;
+  text-align: center;
+}
+
+.formSubmit {
+  margin: 60rpx auto 0 auto;
+  background-color: #BDE0FE;
+  width: 690rpx;
+  height: 88rpx;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.active_btn{
+  background-color: #32A7FF;
+}
+
+
+.phone_item {
+  display: flex;
+  flex-direction: row;
+  margin: 0 32rpx;
+  height: 90rpx;
+  border-bottom: 2px solid #e5e6e7;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone_item  input {
+  flex: 1;
+}
+
+.phone_select {
+  height: 100%;
+  margin-right: 50rpx;
+  position: relative;
+}
+
+.select_title {
+  height: 100%;
+  width: 106rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 10rpx;
+  box-sizing: border-box;
+}
+
+.phone_select image {
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: 14rpx;
+}
+
+.phone_placeholder {
+  font-size: 30rpx;
+  color: #242831;
+}
+
+.code_placeholder {
+  color: #d2d0d1;
+  font-size: 30rpx;
+}
+
+.code {
+  color: #d2d0d1;
+  font-size: 30rpx;
+}
+
+.active {
+  color: #32a7ff;
+}
+
+/* 选择框 */
+
+.select_box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 120rpx;
+  margin-top: 90rpx;
+  border: 1px solid #e5e6e7;
+  z-index: 99;
+}
+
+.select_item {
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #e5e6e7;
+}

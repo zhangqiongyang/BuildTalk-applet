@@ -1,0 +1,17 @@
+<!--pages/sub_author/pages/circle/circle.wxml-->
+<view>
+<view class='circle'>
+    <view class='circle_list'>
+      <view class='list_title'>创建的</view>
+      <block wx:for='{{circleList}}'>
+        <v-circle circle='{{item}}' />
+      </block>
+    </view>
+    <view class='circle_list'>
+      <view class='list_title'>加入的</view>
+      <block wx:for='{{circleList}}'>
+        <v-circle circle='{{item}}' />
+      </block>
+    </view>
+  </view>
+</view>

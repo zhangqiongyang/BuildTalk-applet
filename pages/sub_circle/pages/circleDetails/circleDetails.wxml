@@ -144,6 +144,12 @@
   </view>
   <!-- 圈子主体 -->
   <view hidden='{{isHide}}' class='content'>
+
+    <view wx:if='{{noSubject}}' class='no_record'>
+      <image src='/image/no_essence.png'></image>
+      <text>无内容</text>
+    </view>
+
     <block wx:for='{{circleList}}' wx:key='key'>
       <v-subject subjectInfo='{{item}}' isJoin='{{isJoin}}' bind:changeRedactSubject='changeRedactSubject' data-type='open' />
     </block>

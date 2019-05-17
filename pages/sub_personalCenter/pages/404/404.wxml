@@ -1,0 +1,5 @@
+<view class='no_record'>
+  <image src='/image/404.png'></image>
+  <view class='title'>404</view>
+  <text>您访问的页面去太空游玩了~</text>
+</view>

@@ -2,7 +2,7 @@
 <view class='back'>
 
   <view class='headImage'>
-    <image src='/image/activity.png' mode='widthFix'></image>
+    <image src='https://www.51jiantan.com/static/image/banner2.png' mode='widthFix'></image>
   </view>
 
   <view class='tipsBox'>

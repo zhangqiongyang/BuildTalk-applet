@@ -1,0 +1,6 @@
+<!--pages/sub_browse/pages/hotCircle/hotCircle.wxml-->
+<view class='list'>
+  <block wx:for='{{list}}'>
+    <v-circle circle='{{item}}' />
+  </block>
+</view>

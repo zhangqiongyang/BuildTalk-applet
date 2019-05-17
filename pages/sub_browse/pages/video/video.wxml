@@ -4,21 +4,13 @@
 
 <view style='font-size:0'>
 
-
   <!-- 视频 -->
-
   <video wx:if="{{isHaveVideo}}" id="myVideo" class='video' src="{{articleinfo.video_url}}" binderror="videoErrorCallback" controls custom-cache="{{false}}">
     <cover-view wx:if='{{!buy}}' class='mask' bindtap='jumpToBuy'>解锁当前课程</cover-view>
   </video>
-  <!-- <view wx:if="{{isHaveVideo}}" class='video_placeholder'></view> -->
-
-
-
 
   <!-- 文章主体 -->
-
   <scroll-view scroll-y class='videoContent' style='{{"height: " + (isHaveVideo ? haveVideoHeight : windowHeight) + "px;"}}'>
-
 
     <!-- 文章标题 -->
     <view class='articleTitle'>
@@ -32,122 +24,41 @@
       </view>
     </view>
 
-
-
     <!-- 音频播放器 -->
     <view class='articleAudio' wx:if="{{isHaveAudio}}">
-
+      <!-- 蒙版 -->
       <view class='audio_mask' wx:if='{{!buy}}' bindtap='jumpToBuy'>解锁当前课程</view>
-
-
-      <!--当前为停止状态  -->
-      <view class='player' wx:if="{{isplay==false}}">
-        <view class='playerIcon' bindtap='play'>
-          <image class='playStop' src='/image/article_play.png'></image>
+      <!-- 播放器 -->
+      <view class='player'>
+        <view wx:if='{{!isplay}}' class='playerIcon' bindtap='play'>
+          <image src='/image/article_play.png'></image>
+        </view>
+        <view wx:if='{{isplay}}' class='playerIcon' bindtap='pause'>
+          <image src='/image/article_pause.png'></image>        
         </view>
         <view class='playerInfo'>
           <text class='player_article_title'>{{articleinfo.article_title}}</text>
           <view class='player_article_audioInfo'>
-            <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
-            <text class='player_article_time'>{{minute}}'{{second}}''</text>
-            <image src='/image/acticle_line.png'></image>
-            <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
+            <text>{{minute}}分钟{{second}}秒</text>
+            <view class='line'></view>
+            <text>{{articleinfo.audio_size}}M</text>
           </view>
         </view>
-        <!-- <view class='playerDown'>
-        <image src='/image/article_down.jpg'></image>
-      </view> -->
-      </view>
-      <!--当前为播放状态  -->
-      <view class='player' wx:if="{{isplay==true}}">
-        <view class='playerIcon' bindtap='pause'>
-          <image class='playStop' src='/image/article_stop.png'></image>
-        </view>
-        <view class='playerInfo'>
-          <text class='player_article_title'>{{articleinfo.article_title}}</text>
-          <view class='player_article_audioInfo'>
-            <text class='player_article_declaimer'>朗读人：{{articleinfo.audio_read}}</text>
-            <text class='player_article_time'>{{minute}}'{{second}}''</text>
-            <image src='/image/acticle_line.png'></image>
-            <text class='player_article_size'>{{articleinfo.audio_size}}M</text>
-          </view>
-        </view>
-        <!-- <view class='playerDown'>
-        <image src='/image/article_down.png'></image>
-      </view> -->
+        <image class='playGif' wx:if='{{isplay}}' src='/image/article_vioce.gif'></image>
       </view>
     </view>
-
-
-
 
     <!-- 文章主体 -->
     <view class='articleContent'>
       <template is="wxParse" data="{{wxParseData:content.nodes}}" />
     </view>
 
-
-
-
-
     <!-- 精选留言 -->
-    <view class='articleMessage'>
-      <view class='msgTitle'>
-        <image class='article_msg_line' src='/image/article_msg_line.png'></image>
-        <text>精选留言</text>
-        <image class='article_msg_line' src='/image/article_msg_line.png'></image>
-      </view>
-      <block wx:for='{{guestbookinfo}}' wx:for-index='key' wx:key='key'>
-        <view class='msgContent'>
-          <view class='msgUserImg'>
-            <image src='{{item.headimage}}'></image>
-          </view>
-          <view class='msgText'>
-            <view class='msgHead'>
-              <text class='msgUserName'>{{item.nickname}}</text>
-              <view class='msgLikeGroup' bindtap='msglike' data-guestbookid='{{item.guestbook_id}}' data-key='{{key}}'>
-                <!-- <image class='msgLike' src='/image/article_transmit.png'></image> -->
-                <image wx:if="{{item.is_valid=='0'}}" class='msgLike' src='/image/article_msg_like_hover.png'></image>
-                <image wx:else class='msgLike' src='/image/article_msg_like.png'></image>
-                <text class='likeNum'>{{item.countpraise}}</text>
-              </view>
-            </view>
-            <text class='msg'>{{item.content}}</text>
-            <text class='msgTime'>{{item.guestbook_time}}</text>
-          </view>
-        </view>
-      </block>
-    </view>
-
-
-
+    <v-msg msgList='{{guestbookinfo}}' />
 
   </scroll-view>
 
-
-
-
-
-
-  <!-- 点赞、转发及写留言 -->
-  <view class='articleTabbar'>
-    <view class='tabbarList' bindtap='articleLike'>
-      <image wx:if="{{articleinfo.is_valid=='0'}}" src='/image/article_like_hover.png'></image>
-      <image wx:else src='/image/article_like.png'></image>
-      <text class='tabbarText'>{{articleinfo.countcollect}}</text>
-    </view>
-    <view class='tabbarList' bindtap='jumpToMsg' data-articleid='{{articleinfo.article_id}}'>
-      <image src='/image/article_msg.png'></image>
-      <text class='tabbarText'>写留言</text>
-    </view>
-    <button class='tabbarList acticleShare' open-type='share'>
-      <image src='/image/acticle_share.png'></image>
-      <text class='tabbarText'>分享给朋友</text>
-    </button>
-  </view>
-
-
-
-
+  <!-- 评论、点赞、转发 -->
+  <v-tabbar />
 
 </view>

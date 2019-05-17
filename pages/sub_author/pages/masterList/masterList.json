@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-master":"/components/master/index"
+  }
+}

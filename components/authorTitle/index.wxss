@@ -1,26 +1,107 @@
 /* components/authorTitle/index.wxss */
-/* 作者信息 */
-.authorInfo{
-  display: flex;
-  flex-direction: row;
-  padding: 40rpx 0 60rpx 30rpx;
+
+.author_info_box {
+  position: relative;
+  padding-top: 1rpx;
 }
-.authorInfo image{
-  width: 140rpx;
-  height: 140rpx;
-  border-radius: 14px;
-  /* border: 4px solid #eaeaea; */
+
+/* 背景图 */
+
+.author_back {
+  width: 100%;
+  height: 700rpx;
+  position: absolute;
+  z-index: -1;
 }
-.authorText{
+
+/* 大咖简介 */
+
+.author_info {
   display: flex;
   flex-direction: column;
-  padding-left: 30rpx;
+  align-items: center;
+  margin-top: 113rpx;
 }
-.authorName{
-  font-size: 36rpx;
-  padding-bottom: 20rpx;
+
+.author_image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
 }
-.authorIntroduce{
+
+.author_name {
+  margin-top: 24rpx;
+}
+
+.author_name image {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.author_name text {
+  font-size: 42rpx;
+  line-height: 42rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.author_title {
+  font-weight: 500;
+  color: #fff;
+  line-height: 36rpx;
+  margin-top: 9rpx;
+}
+
+/* 关注 */
+
+.attention {
+  width: 160rpx;
+  height: 44rpx;
+  background: rgba(2, 2, 3, 0.2);
+  border: 1px solid #d2d0d1;
+  border-radius: 4px;
+  color: #fff;
   font-size: 24rpx;
-  color: #AFAFAF; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 70rpx auto 63rpx auto;
+}
+
+
+.attention image {
+  width: 16rpx;
+  height: 16rpx;
+  padding-right: 10rpx;
+}
+
+
+/* 大咖关注 */
+
+.attention_box {
+  width: 100%;
+  height: 150rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.attention_item {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.attention_item text {
+  color: #fff;
+}
+
+.attention_num {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  margin-bottom: 30rpx;
 }

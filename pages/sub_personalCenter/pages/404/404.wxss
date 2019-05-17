@@ -1,0 +1,24 @@
+.no_record {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no_record image {
+  width: 634rpx;
+  height: 480rpx;
+  margin-top: 150rpx;
+}
+
+.title {
+  color: #656565;
+  font-size: 60rpx;
+  margin-top: 78rpx;
+}
+
+.no_record text {
+  color: #8f8f8f;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+}

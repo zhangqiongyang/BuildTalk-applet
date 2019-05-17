@@ -1,0 +1,9 @@
+<!--pages/sub_author/pages/attention/attention.wxml-->
+<view>
+  <block wx:if='{{isMine}}' wx:for='{{masterList}}'>
+    <v-master isMineAttention='true' master='{{item}}' />
+  </block>
+  <block wx:if='{{!isMine}}' wx:for='{{masterList}}'>
+    <v-master master='{{item}}' />
+  </block>
+</view>

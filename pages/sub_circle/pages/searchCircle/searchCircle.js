@@ -7,6 +7,7 @@ Page({
   data: {
     isHistory: true,
     isSearchList: false,
+    isAuthorList:false,
     key: '',
     history: [{
         id: 1,
@@ -33,7 +34,7 @@ Page({
         id: 1,
         image: '/image/example.jpg',
         title: '建筑行业工业互联网',
-        author: '小地瓜',
+        name: '小地瓜',
         isCourse: true,
         isVip: true,
         label: ['BIM', '模型数据', '中国BIM建筑联盟', '建筑行业工业互联网']
@@ -42,7 +43,7 @@ Page({
         id: 1,
         image: '/image/example.jpg',
         title: '建筑行业工业互联网',
-        author: '小地瓜',
+        name: '小地瓜',
         isCourse: true,
         isVip: false,
         label: ['BIM', '模型数据', '中国BIM建筑联盟', '建筑行业工业互联网']
@@ -51,7 +52,7 @@ Page({
         id: 1,
         image: '/image/example.jpg',
         title: '建筑行业工业互联网',
-        author: '小地瓜',
+        name: '小地瓜',
         isCourse: false,
         isVip: true,
         label: ['BIM', '模型数据', '中国BIM建筑联盟', '建筑行业工业互联网']
@@ -60,11 +61,35 @@ Page({
         id: 1,
         image: '/image/example.jpg',
         title: '建筑行业工业互联网',
-        author: '小地瓜',
+        name: '小地瓜',
         isCourse: false,
         isVip: false,
         label: ['BIM', '模型数据', '中国BIM建筑联盟', '建筑行业工业互联网']
       },
+    ],
+    authorList: [
+      {
+        image: '/image/example.jpg',
+        name: '关爱',
+        title: '博士 民盟成员 高级工程师',
+        desc: '尼大学工商管理硕士，美国南加州大学工商管理博士...',
+        label: ['BIM', "模型数据", "装配式钢结构"]
+      },
+      {
+        image: '/image/example.jpg',
+        name: '蒲小强',
+        title: '博士 民盟成员 高级工程师',
+        desc: '尼大学工商管理硕士，美国南加州大学工商管理博士...',
+        label: ['BIM', "模型数据", "装配式钢结构"]
+      },
+      {
+        image: '/image/example.jpg',
+        name: '龙瑞',
+        title: '博士 民盟成员 高级工程师',
+        desc: '尼大学工商管理硕士，美国南加州大学工商管理博士...',
+        label: ['BIM', "模型数据", "装配式钢结构"]
+      },
+
     ]
   },
 

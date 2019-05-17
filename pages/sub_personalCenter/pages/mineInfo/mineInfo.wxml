@@ -1,0 +1,31 @@
+<!--pages/sub_personalCenter/pages/mineInfo/mineInfo.wxml-->
+<view>
+  <view class='info_item'>
+    <text class='item_title'>头像</text>
+    <view class='item_info' bindtap='toImage'>
+      <image class='item_author_image' src='/image/example.jpg'></image>
+      <image class='item_image' src='/image/mine_more_black.png'></image>
+    </view>
+  </view>
+  <view class='info_item'>
+    <text class='item_title'>背景图</text>
+    <view class='item_info' bindtap='toImage'>
+      <image class='item_image' src='/image/mine_more_black.png'></image>
+    </view>
+  </view>
+  <view class='info_item'>
+    <text class='item_title'>名字</text>
+    <view class='item_info' bindtap='toChangeName'>
+      <text class='item_text'>荀</text>
+      <image class='item_image' src='/image/mine_more_black.png'></image>
+    </view>
+  </view>
+  <view class='info_item'>
+    <text class='item_title'>手机号码</text>
+    <view class='item_info' bindtap='toPhone'>
+      <text class='item_text'>18812037077</text>
+      <image class='item_image' src='/image/mine_more_black.png'></image>
+    </view>
+  </view>
+
+</view>

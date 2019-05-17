@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "v-author": "/components/author/index",
+    "v-circle": "/components/circle/index"
+  }
 }

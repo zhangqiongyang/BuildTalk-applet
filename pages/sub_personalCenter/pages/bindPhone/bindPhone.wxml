@@ -1,0 +1,38 @@
+<!--pages/phone/phone.wxml-->
+<view class='background' style='height:{{windowHeight +"px"}}'>
+
+  <!-- <text class='title'>验证手机号</text> -->
+
+  <view class='form'>
+    <view class='phone_item'>
+      <view class='phone_select'>
+        <view class='select_title' bindtap='seeCode'>
+          <text>+{{current}}</text>
+          <image src='/image/phone_down.png'></image>
+        </view>
+
+        <view hidden='{{!isSellect}}' class='select_box'>
+          <block wx:for='{{quhao}}'>
+            <view class='select_item' data-index='{{index}}' bindtap='choseCode'>+{{item}}</view>
+          </block>
+        </view>
+      </view>
+
+      <input placeholder='手机号码' placeholder-class='phone_placeholder' bindinput='input' data-id='phone'></input>
+    </view>
+
+    <view class='phone_item'>
+      <input placeholder='短信验证码' placeholder-class='code_placeholder' bindinput='input' data-id='code'></input>
+
+      <view wx:if='{{!isHavePhone}}' class='code'>获取验证码</view>
+      <view wx:else>
+       <view wx:if='{{!isGetCode}}' class='code active' bindtap='getPhoneCode'>{{btnText}}</view>
+      <text wx:else class='code_toast'>{{countDown}}s</text>
+      </view>     
+    </view>
+
+    <view wx:if='{{isHaveAllNum}}' class='formSubmit active_btn' bindtap="submit">确定</view>
+    <view wx:else class='formSubmit'>确定</view>
+
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "v-master": "/components/master/index"
+  },
+  "navigationBarTitleText": "关注"
+}

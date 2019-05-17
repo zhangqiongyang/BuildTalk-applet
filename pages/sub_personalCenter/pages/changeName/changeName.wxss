@@ -1,0 +1,27 @@
+/* pages/sub_personalCenter/pages/changeName/changeName.wxss */
+
+.input {
+  width: 100%;
+  height: 88rpx;
+  background-color: #fff;
+  position: relative;
+  padding: 0 60rpx 0 30rpx;
+  box-sizing: border-box;
+  margin-top: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.input input {
+  width: 100%;
+}
+
+.input image {
+  width: 24rpx;
+  height: 24rpx;
+  padding: 30rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}

@@ -1,0 +1,60 @@
+/* components/author/index.wxss */
+.author_item {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40rpx;
+}
+
+.author_item image {
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 20px;
+  margin-left: 28rpx;
+}
+
+.item_info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40rpx;
+  width: 480rpx;
+}
+
+.item_name {
+  font-size: 30rpx;
+  line-height: 30rpx;
+  font-weight: bold;
+}
+
+.item_title {
+  color: #656565;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  margin-top: 15rpx;
+}
+
+.item_desc {
+  font-size: 24rpx;
+  line-height: 34rpx;
+  margin-top: 30rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item_label {
+  margin-top: 20rpx;
+}
+
+.label {
+  display: inline-block;
+  background-color: #f7f8fa;
+  border-radius: 2px;
+  font-size: 20rpx;
+  color: #656565;
+  padding: 5rpx 20rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+}

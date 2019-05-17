@@ -1,0 +1,19 @@
+<!--components/tabbar/index.wxml-->
+<view class='operate'>
+
+  <view class='textarea'>
+    <textarea  bindinput='input' cursor-spacing='10' adjust-position bindlinechange='linechange'></textarea>
+    <view wx:if='{{!isMsg}}' class='operate_msg'>
+      <image src='/image/subjectDetails_msg.png'></image>
+      <text>12评论</text>
+    </view>
+  </view>
+
+  <view class='operate_like'>
+    <image src='/image/subjectDetails_like.png'></image>
+    <text>8赞</text>
+  </view>
+  <view class='operate_share'>
+    <image src='/image/subjectDetails_share.png'></image>
+  </view>
+</view>

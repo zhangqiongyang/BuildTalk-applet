@@ -1,0 +1,16 @@
+<!--pages/sub_author/pages/collect/collect.wxml-->
+<view>
+  <block wx:for="{{collectList}}">
+    <view class='collect_item'>
+      <text class='content'>{{item.content}}</text>
+      <view class='master_info'>
+        <view class='master'>
+          <text>{{item.name}}</text>
+          <view class='line'></view>
+          <text>{{item.title}}</text>
+        </view>
+        <image wx:if='{{isMine}}' src='/image/collect_delete.png'></image>
+      </view>
+    </view>
+  </block>
+</view>

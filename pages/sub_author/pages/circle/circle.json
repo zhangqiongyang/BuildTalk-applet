@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "v-circle": "/components/circle/index"
+  }
+}

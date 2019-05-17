@@ -1,0 +1,21 @@
+<!--pages/sub_author/pages/masterDetails/masterDetails.wxml-->
+<view>
+  <!-- 圈主信息 -->
+  <v-authorTitle authorInfo='{{authorInfo}}' />
+
+  <!-- 圈主圈子 -->
+  <view class='circle'>
+    <view class='circle_list'>
+      <view class='list_title'>创建的</view>
+      <block wx:for='{{circleList}}'>
+        <v-circle circle='{{item}}' />
+      </block>
+    </view>
+    <view class='circle_list'>
+      <view class='list_title'>加入的</view>
+      <block wx:for='{{circleList}}'>
+        <v-circle circle='{{item}}' />
+      </block>
+    </view>
+  </view>
+</view>

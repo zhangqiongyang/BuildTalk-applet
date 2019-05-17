@@ -5,7 +5,12 @@
       <text class='msg_num'>{{msgList.length}}</text>
     </view>
 
-    <view class='msg_list'>
+    <view wx:if='{{noMsg}}' class='no_record'>
+      <image src='/image/msg_norecord.png'></image>
+      <text>成为评论第一人</text>
+    </view>
+
+    <view wx:else class='msg_list'>
       <block wx:for='{{msgList}}'>
         <view class='msg_item'>
           <view class='msg_user_box'>

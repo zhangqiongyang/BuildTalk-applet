@@ -15,26 +15,35 @@ const formatNumber = n => {
 }
 
 
-
-
-
-
-// 提示框，showToast
-function _showToast(title) {
+//showToast
+function _showToastSuccess(title){
   wx.showToast({
-    icon: "none",
     title: title,
+    image: '/image/showToast_success.png',
+    success: function(res) {},
   })
 }
 
-// 模态对话框 showModel
-function _showModel(title,content) {
+function _showToastCancel(title) {
+  wx.showToast({
+    title: title,
+    image: '/image/showToast_cancel.png',
+    success: function (res) { },
+  })
+}
+
+
+// 模态对话框 showModal
+function _showModal(title,content) {
   wx.showModal({
     title: title,
     content: content,
+    cancelColor: '#242831',
+    confirmColor: '#32A7FF',
     success: (res)=> {
       if (res.confirm) {
         console.log('用户点击确定')
+        return true
       } else if (res.cancel) {
         console.log('用户点击取消')
       }
@@ -82,6 +91,8 @@ function delHtmlTag(str) {
 
 module.exports = {
   formatTime: formatTime,
-  _showToast,
+  _showToastSuccess,
+  _showToastCancel,
+  _showModal,
   isEmpty
 }

@@ -36,24 +36,6 @@ Page({
   onLoad: function(options) {
     var that = this;
 
-    // 获取屏幕高度
-    // wx.getSystemInfo({
-    //   success: function(res) {
-    //     let clientHeight = res.windowHeight,
-    //       clientWidth = res.windowWidth,
-    //       rpxR = 750 / clientWidth;
-    //     var calc = clientHeight * rpxR;
-    //     console.log(calc)
-    //     that.setData({
-    //       windowHeight: calc
-    //     });
-    //   }
-    // });
-
-
-
-
-
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -141,436 +123,6 @@ Page({
 
   },
 
-  // 音频播放器
-  //播放
-  play: function() {
-    myaudio.play();
-    this.setData({
-      isplay: true
-    });
-
-    // setTimeout(() => {
-    //   console.log(myaudio.duration)//2.795102
-    // }, 1000)
-  },
-  // 暂停
-  pause: function() {
-    myaudio.pause();
-    this.setData({
-      isplay: false
-    });
-  },
-  // 播放完毕
-  finish: function() {
-    myaudio.stop();
-    this.setData({
-      isplay: false
-    })
-  },
-
-
-
-  // 跳转到写留言
-  jumpToMsg: function(event) {
-    console.log(event)
-    var article_id = event.currentTarget.dataset.articleid;
-    console.log(article_id)
-    // wx: wx.navigateTo({
-    //   url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
-    // })
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-        wx.navigateTo({
-          url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
-        })
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function(res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-  },
-
-  // 文章点赞
-  articleLike: function() {
-
-    // if (this.data.articleinfo.is_valid == '0') {
-    //   this.setData({
-    //     'articleinfo.is_valid': '1'
-    //   });
-    //   this.setData({
-    //     'articleinfo.countcollect': Number(this.data.articleinfo.countcollect) - 1
-    //   });
-    //   this.artLikeUpload()
-    // } else {
-    //   this.setData({
-    //     'articleinfo.is_valid': '0'
-    //   });
-    //   this.setData({
-    //     'articleinfo.countcollect': Number(this.data.articleinfo.countcollect) + 1
-    //   });
-    //   this.artLikeUpload()
-    // }
-    var that = this;
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-
-        if (that.data.articleinfo.is_valid == '0') {
-          that.setData({
-            'articleinfo.is_valid': '1',
-            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) - 1
-          });
-
-          that.artLikeUpload()
-        } else {
-          that.setData({
-            'articleinfo.is_valid': '0',
-            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) + 1
-          });
-          that.artLikeUpload()
-        }
-
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function(res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-  },
-
-
-  // 留言点赞
-  msglike: function(event) {
-    // console.log(params);
-    // console.log(event)
-    let that = this;
-    let key = event.currentTarget.dataset.key;
-    let guestbook_id = event.currentTarget.dataset.guestbookid;
-    // console.log('guestbook_id' + event.currentTarget.dataset.guestbookid);    
-    // console.log('key' + event.currentTarget.dataset.key);
-    let msgKey = 'guestbookinfo[' + key + '].is_valid';
-    let msgnum = 'guestbookinfo[' + key + '].countpraise';
-    let num = 'guestbookinfo[' + key + '].num';
-    // console.log(that.data.guestbookinfo[key].is_valid);
-    // if (that.data.guestbookinfo[key].is_valid == '0' ) {
-
-
-    //   that.setData({
-    //     [msgKey]: '1',
-    //     [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
-    //     [num]: '1',
-    //     b: guestbook_id
-    //   });
-    //   console.log(that.data.guestbookinfo[key].num);
-    //   console.log(that.data.b)
-    //   that.msgLikeUpload()
-    //   //console.log(a)
-
-
-    // } else {
-
-    //   that.setData({
-    //     [msgKey]: '0',
-    //     [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
-    //     [num]: '-1',
-    //     b: guestbook_id
-    //   });
-    //   console.log(that.data.guestbookinfo[key].num);
-    //   console.log(that.data.b)
-    //   that.msgLikeUpload()
-    //   //console.log(a)
-
-    // }
-
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-        if (that.data.guestbookinfo[key].is_valid == '0') {
-
-
-          that.setData({
-            [msgKey]: '1',
-            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
-            [num]: '1',
-            b: guestbook_id
-          });
-          console.log(that.data.guestbookinfo[key].num);
-          console.log(that.data.b)
-          that.msgLikeUpload()
-          //console.log(a)
-
-
-        } else {
-
-          that.setData({
-            [msgKey]: '0',
-            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
-            [num]: '-1',
-            b: guestbook_id
-          });
-          console.log(that.data.guestbookinfo[key].num);
-          console.log(that.data.b)
-          that.msgLikeUpload()
-          //console.log(a)
-
-        }
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function(res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-  },
-
-
-
-
-  // 留言点赞上传接口
-  msgLikeUpload: function() {
-    // console.log(this.data.b)
-    // console.log(wx.getStorageSync('openid'))
-    // console.log(wx.getStorageSync('unionid'))
-
-    wx.request({
-      // url: 'https://wx.bjjy.com/updateguestbook',
-      url: api.API_UPLOADMSGLIKE,
-      data: {
-        'guestbook_id': this.data.b,
-        'openid': wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function(res) {
-        console.log('留言点赞信息上传成功')
-      },
-      fail: function(res) {
-        console.log('留言点赞信息上传失败')
-      },
-    })
-  },
-
-
-
-
-  // 文章收藏信息上传接口
-  artLikeUpload: function() {
-    wx.request({
-      // url: 'https://wx.bjjy.com/collectarticle',
-      url: api.API_UPLOADARTICLLIKE,
-      data: {
-        'article_id': this.data.articleinfo.article_id,
-        'openid': wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function(res) {
-        console.log('-----------文章收藏信息上传成功啦------------')
-      },
-      fail: function(res) {
-        console.log('-----------失败啦------------')
-      },
-    })
-  },
-
-
-  // 跳转到购买页
-
-  jumpToBuy() {
-    var that = this
-    if (this.data.platform == 'ios') {
-      wx.showModal({
-        content: '由于相关规范，iOS用户暂不可在小程序内订阅',
-        showCancel: false,
-        confirmText: '确定',
-        success: function(res) {}
-
-      })
-    } else {
-      //判断是否登录
-      //如果登录，进行下一步判断，如果未登录，引导用户先登录
-      if (app.globalData.isLogin) {
-        //判断用户是否绑定手机号
-        //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
-        if (app.globalData.isBindingPhone) {
-          wx.showModal({
-            // title: '购买',
-            content: '是否购买',
-            showCancel: true,
-            cancelText: '取消',
-            // cancelColor: '',
-            confirmText: '确定',
-            // confirmColor: '',
-            success: function(res) {
-              console.log(res)
-              if (res.confirm) {
-                console.log('用户点击确定')
-                // 判断是单文还是课程中的文章
-                // course_id = 0为单文
-                if (that.data.articleinfo.course_id == "0") {
-                  wx.navigateTo({
-                    url: "/pages/sub_browse/pages/buy/buy?article_id=" + that.data.articleinfo.article_id
-                  })
-                } else {
-                  wx.navigateTo({
-                    url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.articleinfo.course_id
-                  })
-                }
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '未绑定手机号',
-            content: '请先绑定手机号',
-            showCancel: true,
-            cancelText: '取消',
-            confirmText: '确定',
-            success: function(res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '/pages/phone/phone',
-                })
-              } else if (res.cancel) {
-
-              }
-
-            },
-          })
-        }
-
-
-      } else {
-        wx.showModal({
-          title: '未登录',
-          content: '请先登录',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function(res) {
-            wx.switchTab({
-              url: '/pages/tabbar/mine/mine',
-            })
-          },
-        })
-      }
-
-    }
-
-
-  },
 
   onShareAppMessage() {
 
@@ -590,13 +142,7 @@ Page({
   onShow: function() {
     var that = this;
 
-    // if (that.data.buy && that.data.arcData != null && that.data.articleinfo == null) {
-    //   that.setData({
-    //     articleinfo: that.data.arcData.articleinfo,
-    //     authorinfo: that.data.arcData.authorinfo,
-    //   })
-    //   WxParse.wxParse('content', 'html', that.data.arcData.content, that, 0)
-    // }
+  
 
     // 获取留言数据
     wx.request({
@@ -667,43 +213,399 @@ Page({
     return {
       title: that.data.articleinfo.article_title,
       path: "/pages/sub_browse/pages/video/video?article_id=" + that.data.article_id,
-      // success: function (res) {
-      //   // 转发成功  
-      //   var shareTickets = res.shareTickets;
-      //   var shareTicket = shareTickets;
-      //   wx.getShareInfo({
-      //     shareTicket: shareTicket,
-      //     success: function (res) {
-      //       console.log('success');
-      //       console.log(res);
-      //       //console.log(res);  
-      //       wx.showToast({
-      //         title: '转发成功',
-      //         duration: 5000
-      //       })
-      //     },
-      //     fail: function (res) {
-      //       console.log('fail');
-      //       console.log(res);
-      //       wx.showToast({
-      //         title: 'fail:' + res.errMsg,
-      //         duration: 5000
-      //       })
-      //     }
-      //   });
-      // },
-      // fail: function (res) {
-      //   // 转发失败  
-      // }  
+   
     }
 
 
   },
 
   /**
-   * 请求服务当前文章信息
+   *方法
    * 
    */
+
+  // 音频播放器
+  //播放
+  play: function () {
+    myaudio.play();
+    this.setData({
+      isplay: true
+    });
+
+  },
+  // 暂停
+  pause: function () {
+    myaudio.pause();
+    this.setData({
+      isplay: false
+    });
+  },
+  // 播放完毕
+  finish: function () {
+    myaudio.stop();
+    this.setData({
+      isplay: false
+    })
+  },
+
+
+
+  // 跳转到写留言
+  jumpToMsg: function (event) {
+    console.log(event)
+    var article_id = event.currentTarget.dataset.articleid;
+    console.log(article_id)
+
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        wx.navigateTo({
+          url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
+        })
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
+
+          },
+        })
+      }
+
+
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+  },
+
+  // 文章点赞
+  articleLike: function () {
+
+    var that = this;
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+
+        if (that.data.articleinfo.is_valid == '0') {
+          that.setData({
+            'articleinfo.is_valid': '1',
+            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) - 1
+          });
+
+          that.artLikeUpload()
+        } else {
+          that.setData({
+            'articleinfo.is_valid': '0',
+            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) + 1
+          });
+          that.artLikeUpload()
+        }
+
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
+
+          },
+        })
+      }
+
+
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+  },
+
+
+  // 留言点赞
+  msglike: function (event) {
+
+    let that = this;
+    let key = event.currentTarget.dataset.key;
+    let guestbook_id = event.currentTarget.dataset.guestbookid;
+
+    let msgKey = 'guestbookinfo[' + key + '].is_valid';
+    let msgnum = 'guestbookinfo[' + key + '].countpraise';
+    let num = 'guestbookinfo[' + key + '].num';
+
+
+    //判断是否登录
+    //如果登录，进行下一步判断，如果未登录，引导用户先登录
+    if (app.globalData.isLogin) {
+      //判断用户是否绑定手机号
+      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
+      if (app.globalData.isBindingPhone) {
+        if (that.data.guestbookinfo[key].is_valid == '0') {
+
+
+          that.setData({
+            [msgKey]: '1',
+            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
+            [num]: '1',
+            b: guestbook_id
+          });
+          console.log(that.data.guestbookinfo[key].num);
+          console.log(that.data.b)
+          that.msgLikeUpload()
+          //console.log(a)
+
+
+        } else {
+
+          that.setData({
+            [msgKey]: '0',
+            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
+            [num]: '-1',
+            b: guestbook_id
+          });
+          console.log(that.data.guestbookinfo[key].num);
+          console.log(that.data.b)
+          that.msgLikeUpload()
+          //console.log(a)
+
+        }
+      } else {
+        wx.showModal({
+          title: '未绑定手机号',
+          content: '请先绑定手机号',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/phone/phone',
+              })
+            } else if (res.cancel) {
+
+            }
+
+          },
+        })
+      }
+
+
+    } else {
+      wx.showModal({
+        title: '未登录',
+        content: '请先登录',
+        showCancel: true,
+        cancelText: '取消',
+        confirmText: '确定',
+        success: function (res) {
+          wx.switchTab({
+            url: '/pages/tabbar/mine/mine',
+          })
+        },
+      })
+    }
+  },
+
+
+
+
+  // 留言点赞上传接口
+  msgLikeUpload: function () {
+
+    wx.request({
+      // url: 'https://wx.bjjy.com/updateguestbook',
+      url: api.API_UPLOADMSGLIKE,
+      data: {
+        'guestbook_id': this.data.b,
+        'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
+        unionid: wx.getStorageSync('unionid')
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (res) {
+        console.log('留言点赞信息上传成功')
+      },
+      fail: function (res) {
+        console.log('留言点赞信息上传失败')
+      },
+    })
+  },
+
+
+
+
+  // 文章收藏信息上传接口
+  artLikeUpload: function () {
+    wx.request({
+      // url: 'https://wx.bjjy.com/collectarticle',
+      url: api.API_UPLOADARTICLLIKE,
+      data: {
+        'article_id': this.data.articleinfo.article_id,
+        'openid': wx.getStorageSync('openid'),
+        source: 'xcx',
+        unionid: wx.getStorageSync('unionid')
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: function (res) {
+        console.log('-----------文章收藏信息上传成功啦------------')
+      },
+      fail: function (res) {
+        console.log('-----------失败啦------------')
+      },
+    })
+  },
+
+
+  // 跳转到购买页
+
+  jumpToBuy() {
+    var that = this
+    if (this.data.platform == 'ios') {
+      wx.showModal({
+        content: '由于相关规范，iOS用户暂不可在小程序内订阅',
+        showCancel: false,
+        confirmText: '确定',
+        success: function (res) { }
+
+      })
+    } else {
+      //判断是否登录
+      //如果登录，进行下一步判断，如果未登录，引导用户先登录
+      if (app.globalData.isLogin) {
+        //判断用户是否绑定手机号
+        //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
+        if (app.globalData.isBindingPhone) {
+          wx.showModal({
+            // title: '购买',
+            content: '是否购买',
+            showCancel: true,
+            cancelText: '取消',
+            // cancelColor: '',
+            confirmText: '确定',
+            // confirmColor: '',
+            success: function (res) {
+              console.log(res)
+              if (res.confirm) {
+                console.log('用户点击确定')
+                // 判断是单文还是课程中的文章
+                // course_id = 0为单文
+                if (that.data.articleinfo.course_id == "0") {
+                  wx.navigateTo({
+                    url: "/pages/sub_browse/pages/buy/buy?article_id=" + that.data.articleinfo.article_id
+                  })
+                } else {
+                  wx.navigateTo({
+                    url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.articleinfo.course_id
+                  })
+                }
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+
+            }
+          })
+        } else {
+          wx.showModal({
+            title: '未绑定手机号',
+            content: '请先绑定手机号',
+            showCancel: true,
+            cancelText: '取消',
+            confirmText: '确定',
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/phone/phone',
+                })
+              } else if (res.cancel) {
+
+              }
+
+            },
+          })
+        }
+
+
+      } else {
+        wx.showModal({
+          title: '未登录',
+          content: '请先登录',
+          showCancel: true,
+          cancelText: '取消',
+          confirmText: '确定',
+          success: function (res) {
+            wx.switchTab({
+              url: '/pages/tabbar/mine/mine',
+            })
+          },
+        })
+      }
+
+    }
+
+
+  },
+
+
+  /**
+   * 网络请求
+   * 
+   */
+
+  //文章信息
   requestArc: function() {
     var that = this
     // 获取文章数据

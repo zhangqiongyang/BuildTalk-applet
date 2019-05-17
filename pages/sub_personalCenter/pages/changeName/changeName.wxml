@@ -1,0 +1,7 @@
+<!--pages/sub_personalCenter/pages/changeName/changeName.wxml-->
+<view class='background' style='height:{{windowHeight}}px;'>
+  <view class='input'>
+    <input value='{{value}}' bindconfirm='submit'></input>
+    <image bindtap='clear' src='/image/changeName_delete.png'></image>
+  </view>
+</view>

@@ -1,12 +1,9 @@
 {
   "pages": [
     "pages/tabbar/index/index",
-    "pages/tabbar/allAuthor/allAuthor",
     "pages/tabbar/authorRecommend/authorRecommend",
     "pages/tabbar/mine/mine",
-    "pages/phone/phone",
-    "pages/search/search",
-    "pages/logs/logs"
+    "pages/tabbar/circle/circle"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,21 +17,27 @@
     "list": [
       {
         "pagePath": "pages/tabbar/index/index",
-        "text": "首页",
-        "iconPath": "image/index.png",
-        "selectedIconPath": "image/indexHover.png"
+        "text": "发现",
+        "iconPath": "image/tabbar_index.png",
+        "selectedIconPath": "image/tabbar_index_hover.png"
       },
       {
-        "pagePath": "pages/tabbar/allAuthor/allAuthor",
-        "text": "作者",
-        "iconPath": "image/course.png",
-        "selectedIconPath": "image/courseHover.png"
+        "pagePath": "pages/tabbar/circle/circle",
+        "text": "圈子",
+        "iconPath": "image/tabbar_circle.png",
+        "selectedIconPath": "image/tabbar_circle_hover.png"
+      },
+      {
+        "pagePath": "pages/tabbar/authorRecommend/authorRecommend",
+        "text": "谈主",
+        "iconPath": "image/tabbar_author.png",
+        "selectedIconPath": "image/tabbar_author_hover.png"
       },
       {
         "pagePath": "pages/tabbar/mine/mine",
         "text": "我的",
-        "iconPath": "image/mine.png",
-        "selectedIconPath": "image/mineHover.png"
+        "iconPath": "image/tabbar_mine.png",
+        "selectedIconPath": "image/tabbar_mine_hover.png"
       }
     ]
   },
@@ -47,10 +50,17 @@
         "pages/alreadyBought/alreadyBought",
         "pages/myMsgDetails/myMsgDetails",
         "pages/myMsg/myMsg",
-        "pages/inviteRules/inviteRules",
-        "pages/inviteFriends/inviteFriends",
-        "pages/giftCertificate/giftCertificate",
-        "pages/feedback/feedback"
+        "pages/feedback/feedback",
+        "pages/set/set",
+        "pages/about/about",
+        "pages/info/info",
+        "pages/mineInfo/mineInfo",
+        "pages/image/image",
+        "pages/account/account",
+        "pages/changeName/changeName",
+        "pages/phone/phone",
+        "pages/bindPhone/bindPhone",
+        "pages/404/404"
       ]
     },
     {
@@ -65,15 +75,15 @@
         "pages/message/message",
         "pages/article/article",
         "pages/allNews/allNews",
-        "pages/authorDesc/authorDesc"
+        "pages/authorDesc/authorDesc",
+        "pages/hotCircle/hotCircle"
       ]
     },
     {
       "root": "pages/sub_circle",
       "pages": [
-        "pages/creatCircle/creatCircle",
         "pages/userAgreement/userAgreement",
-        "pages/circle/circle",
+        "pages/creatCircle/creatCircle",
         "pages/searchCircle/searchCircle",
         "pages/circleDetails/circleDetails",
         "pages/courseCircleDetails/courseCircleDetails",
@@ -88,6 +98,15 @@
     {
       "root": "pages/sub_author",
       "pages": [
+        "pages/authorList/authorList",
+        "pages/masterList/masterList",
+        "pages/masterDetails/masterDetails",
+        "pages/authorDetails/authorDetails",
+        "pages/searchAuthor/searchAuthor",
+        "pages/circle/circle",
+        "pages/collect/collect",
+        "pages/fans/fans",
+        "pages/attention/attention"
       ]
     }
   ],
