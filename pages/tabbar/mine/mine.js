@@ -1,17 +1,24 @@
 const app = getApp()
 const util = require('../../../utils/util.js')
-const api = require('../../../utils/api.js');
+import {
+  HTTP
+} from '../../../utils/http.js'
+let http = new HTTP()
 
+import {
+  api
+} from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: app.globalData.windowHeight -0.5,
     phoneNumber: app.globalData.phoneNumber,
     userInfo: {},
     hasUserInfo: false,
+    isHavePhone: '', //用户是否绑定手机号
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
 
@@ -20,56 +27,18 @@ Page({
    */
   onLoad: function(options) {
 
-    console.log('----------mine 打印openid-------------')
-    console.log(wx.getStorageSync('openid'))
-    
-
-
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回.
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
-      
-        wx.request({
-          url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
-          data: {
-            openid: wx.getStorageSync('openid'),
-            encryptedData: res.encryptedData,
-            iv: res.iv
-          },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
-          success: function(re) {
-            console.log('--------12------')
-            console.log(re)
-            console.log('--------34--------')
-            var userInfo = JSON.parse(re.data.returndata)
-            console.log(userInfo)
-            wx.setStorageSync('unionid', userInfo.unionId)
-            //console.log(userInfo.openId)
-            that.setData({
-              userInfo: userInfo,
-              openid: userInfo.openId,
-              hasUserInfo: true
-            })
-            //console.log('----------成功返回数据-------')
-            //var userInfo = JSON.parse(res.data.returndata)
-            //console.log(userInfo)
-            console.log('--------返回数据结束12-------')
-          },
-          fail: function() {
-            console.log('------------数据失败---')
-          },
-          complete: function() {
-            console.log('执行啦执行拉')
-          }
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
         })
       }
     } else {
@@ -81,226 +50,19 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-        },
-        fail: res => {
-          this.setData({
-            hasUserInfo: false
-          })
         }
       })
     }
 
-
-    // this.checkPhone()
-  },
-
-
-  getUserInfo: function(e) {
-    var that = this;
-    console.log('==============res=============')
-    console.log(e)
-
-
-    app.globalData.userInfo = e.detail.userInfo
-
-
-    console.log(app.globalData.userInfo)
-
-    if (e.detail.errMsg == "getUserInfo:fail auth deny") {
-      app.globalData.isLogin = false
-      that.setData({
-        hasUserInfo: false
-      })
+    if (!app.globalData.isHavePhone) {
+      // 查询用户是否绑定手机号
+      this.checkIsHavePhone()
     } else {
-
-
-
-      that.setData({
-        userInfo: e.detail.userInfo,
-        hasUserInfo: true
-      })
-
-
-      console.log('-------------获取全局变量----------------')
-      console.log(app.globalData)
-
-      app.globalData.isLogin = true
-
-      console.log('-------------赋值后获取全局变量----------------')
-      console.log(app.globalData)
-
-
-      console.log(this.data.userInfo.nickName)
-
-      wx.request({
-        // url: 'https://wx.bjjy.com/getUserinfoEncryptedData',
-        url: api.API_GETENCRYPTEDDATA,
-        data: {
-          openid: wx.getStorageSync('openid'),
-          //openid: 'oDpcQ5YZXI7gOzUmOCvMnLiQ6Wkg',
-          encryptedData: e.detail.encryptedData,
-          iv: e.detail.iv
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        success: function(re) {
-          var userInfo = JSON.parse(re.data.returndata)
-          console.log(userInfo)
-          wx.setStorageSync('unionid', userInfo.unionId)
-
-          //上传用户的头像和昵称到数据库
-          if (!util.isEmpty(wx.getStorageSync('unionid')) && !util.isEmpty(wx.getStorageSync('openid')) && !util.isEmpty(that.data.userInfo.nickName) && !util.isEmpty(that.data.userInfo.avatarUrl)) {
-            wx.request({
-              // url: 'https://wx.bjjy.com/operateuser',
-              url: api.API_MINEUPLOADINFO,
-              data: {
-                wx_openid: wx.getStorageSync('openid'),
-                source: 'xcx',
-                unionid: wx.getStorageSync('unionid'),
-                nickname: that.data.userInfo.nickName,
-                headimage: that.data.userInfo.avatarUrl,
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              method: 'POST',
-              dataType: 'json',
-              responseType: 'text',
-              success: function(res) {
-                if (res.data.msg == '1') {
-                  console.log('-------------上传用户的头像和昵称到数据库了(mine.js)-----------------')
-                  console.log('--------------1-------------')
-                  console.log(wx.getStorageSync('openid'))
-                } else if (res.data.msg == '2') {
-                  console.log('-------------上传用户的头像和昵称到数据库失敗了(mine.js)-----------------')
-                  console.log('--------------2-------------')
-                  console.log(wx.getStorageSync('openid'))
-                } else if (res.data.msg == '3') {
-                  console.log('-------------上传用户的头像和昵称到数据库更新成功了(mine.js)-----------------')
-                  console.log('--------------3-------------')
-                  console.log(wx.getStorageSync('openid'))
-                } else if (res.data.msg == '4') {
-                  console.log('-------------上传用户的头像和昵称到数据库更新失敗了(mine.js)-----------------')
-                  console.log('--------------4-------------')
-                  console.log(wx.getStorageSync('openid'))
-                } else if (res.data.msg == '5') {
-                  console.log('-------------无需更新(mine.js)-----------------')
-                  console.log('--------------5-------------')
-                  console.log(wx.getStorageSync('openid'))
-                }
-              },
-              fail: function(res) {
-                console.log('-------------上传用户的头像和昵称到数据库失败了-----------------')
-              },
-            })
-          }
-        },
-
-        fail: function() {
-          console.log('------------数据失败---')
-        },
-        complete: function() {
-          console.log('执行啦执行拉')
-        }
+      this.setData({
+        isHavePhone: true
       })
     }
-    this.checkPhone()
-
-
-
-
   },
-
- 
-  //检测用户是否绑定手机号
-  checkPhone() {
-    var that = this
-    wx.request({
-      // url: 'https://wx.bjjy.com/checkbindmobile',
-      url: api.API_CHECKPHONE,
-      data: {
-        openid: wx.getStorageSync("openid"),
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function(res) {
-        console.log(res)
-        if (res.data.msg == "1") {
-          console.log("---------------已经绑定手机号---------------------")
-          app.globalData.isBindingPhone = true;
-          app.globalData.phoneNumber = res.data.mobile
-          that.setData({
-            phoneNumber: res.data.mobile
-          })
-          console.log('============================')
-          console.log(that.data.phoneNumber)
-        } else {
-          console.log("---------------未绑定手机号---------------------")
-          app.globalData.isBindingPhone = false;
-          wx.navigateTo({
-            url: '/pages/phone/phone',
-          })
-        }
-      }
-    })
-  },
-
-
-  jumpToFeedback() {
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-        wx.navigateTo({
-          url: "/pages/sub_personalCenter/pages/feedback/feedback",
-        })
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function(res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-          },
-        })
-      }
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function(res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-        fail: function(res) {},
-        complete: function(res) {},
-      })
-    }
-
-  },
-
-
 
 
 
@@ -308,7 +70,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-   
+
   },
 
   /**
@@ -317,10 +79,10 @@ Page({
   onShow: function() {
 
     this.setData({
-      phoneNumber:app.globalData.phoneNumber
+      phoneNumber: app.globalData.phoneNumber
     })
 
-  
+
   },
 
   /**
@@ -362,8 +124,33 @@ Page({
    * 方法
    */
 
+  //登录
+  getUserInfo: function(e) {
+    console.log(e)
+    if (e.detail.errMsg == "getUserInfo:fail auth deny") {
+      this.setData({
+        hasUserInfo: false
+      })
+    } else {
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true
+      })
+      //isHaveUnionId为false，代表不含unionId，需要解密
+      if (!app.globalData.isHaveUnionId) {
+
+        // 解密获取用户unionId
+        this.getSecretInfo(e.detail.encryptedData, e.detail.iv)
+      }
+      // 查询用户是否绑定手机号
+      this.checkIsHavePhone()
+    }
+  },
+
+
   // 跳转到信息
-  toMineInfo(){
+  toMineInfo() {
     wx.navigateTo({
       url: '/pages/sub_personalCenter/pages/info/info',
     })
@@ -386,4 +173,56 @@ Page({
       url: '/pages/sub_personalCenter/pages/feedback/feedback',
     })
   },
+
+  // 跳转到问题反馈
+  toBindPhone() {
+    wx.navigateTo({
+      url: '/pages/sub_personalCenter/pages/bindPhone/bindPhone',
+    })
+  },
+  
+
+  /**
+   * 网络请求
+   */
+
+  // 解密获取用户unionId
+  getSecretInfo(tencryptedData, iv) {
+    http.request({
+      url: api.API_GETENCRYPTEDDATA,
+      data: {
+        login_id: wx.getStorageSync('login_id'),
+        encryptedData: tencryptedData,
+        iv: iv
+      }
+    })
+      .then(res => {
+        console.log('---------获取到用户加密信息----------')
+        console.log(res)
+      })
+
+  },
+
+
+  // 查询用户是否绑定手机号
+  checkIsHavePhone() {
+    http.request({
+      url: api.API_CHECKPHONE,
+      data: {
+        login_id: wx.getStorageSync('login_id')
+      }
+    })
+      .then(res => {
+        console.log('---------已经绑定手机号-----------')
+        console.log(res)
+        this.setData({
+          isHavePhone: true,
+          phone: res.data
+        })
+        app.globalData.isHavePhone = true
+        app.globalData.mobile = res.data
+        console.log(app.globalData.isHavePhone)
+      })
+  }
+
 })

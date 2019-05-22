@@ -13,7 +13,8 @@
         </view>
         <view class='userInformation'>
           <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-          <text class='userinfo_phone'>{{phoneNumber}}</text>
+          <text wx:if='{{isHavePhone}}' class='userinfo_phone'>{{phoneNumber}}</text>
+          <text wx:else class='userinfo_phone' bindtap='toBindPhone'>绑定手机号</text>
         </view>
       </view>
       <image class='mine_more' src='/image/mine_more_white.png' bindtap='toMineInfo'></image>

@@ -3,8 +3,9 @@ var base = "https://jt.chinabim.com"
 
 const api={
   //app.js
-  API_GETOPENID: base + "/getloginopenid", // 获取openid
-  API_GETENCRYPTEDDATA: base + "/getUserinfoEncryptedData", // 获取用户加密信息
+  API_FROMCODEGETLOGINID: base + "/jianTan/getLoginid", // 获取Loginid
+  API_CHECKLOGINIDISVALID: base + "/checkLogin_id",//判断多设备login_id是否一致
+  API_GETENCRYPTEDDATA: base + "/getloginEncryptedData", // 获取用户加密信息
 
   //首页index
   API_INDEXPIC: base + "/getIndexPic", // 查询首页推荐轮播图
@@ -14,11 +15,11 @@ const api={
 
   //个人中心mine
   API_MINEUPLOADINFO: base + "/operateuser", //上传用户的头像和昵称到数据库
-  API_CHECKPHONE: base + "/checkbindmobile", //检测用户是否绑定手机号
+  API_CHECKPHONE: base + "/checkisBindMobile", //检测用户是否绑定手机号
 
 
   //全部新闻页allNews
-  API_ALLNEWS: base + "/searchallnews", // 获取所有新闻的信息
+  API_ALLNEWS: base + "/searchAllNews", // 获取所有新闻的信息
 
 
   //全部作者allauthor
@@ -68,6 +69,8 @@ const api={
   //手机号phone
   API_SENDCODE: base + "/sendSms", //发送短信接口
   API_GETCODE: base + "/checkcodevalid", //获取验证码接口
+  API_CHECKPHONE: base +'/checkisBindMobile', // 检查用户是否绑定手机号
+
 
   //搜索search
   API_GETHISTORY: base + "/getSearchHistory", // 查询历史记录接口

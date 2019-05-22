@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "每日一谈"
+  "navigationBarTitleText": "每日一谈",
+  "enablePullDownRefresh":true
 }

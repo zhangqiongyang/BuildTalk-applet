@@ -10,10 +10,10 @@
   <!-- 新闻列表 -->
   <view class='news'>
     <view class='listNav'>
-        <text class='navContentText'>已更新至{{authorinfo.countupdate}}期</text>
+        <text class='navContentText'>已更新至{{authorInfo.countupdate}}期</text>
     </view>
     <view class='newsList'>
-      <block wx:for='{{newsinfo}}' wx:key='key'>
+      <block wx:for='{{newsInfo}}' wx:key='key'>
         <view class='newsItem' data-article_id='{{item.article_id}}' bindtap='jumpToArticle'>
           <image src='/image/allNews_play.png'></image>
           <view class='item_info'>

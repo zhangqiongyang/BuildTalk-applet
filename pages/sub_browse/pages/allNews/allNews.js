@@ -1,8 +1,15 @@
 // pages/sub_browse/pages/allNews/allNews.js
 
 var app = getApp();
-const api = require('../../../../utils/api.js');
+const util = require('../../../../utils/util.js')
 
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
 
 Page({
 
@@ -10,82 +17,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order: 0,
-    authorinfo: {},
-    newsList: []
+    page:1,
+    newsInfo:[],
+    loading:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-
-    //获取所有新闻信息的接口
-    this.checkAllNews();
+    // 查询全部新闻
+    this.getNewsList()
   },
-
-  //获取所有新闻信息的接口
-  checkAllNews() {
-    var that = this;
-
-    wx.request({
-      url: api.API_ALLNEWS,
-      data: {
-        order_sort: this.data.order,
-        // page_size: '',
-        // page: ''
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function(res) {
-        console.log("------------获取到所有新闻信息了--------------")
-        console.log(res)
-        that.setData({
-          authorinfo: res.data.authorinfo,
-          newsinfo: res.data.newsinfo
-        })
-      },
-    })
-  },
-
-  //切换正序倒序
-  changeOrder(event) {
-    console.log(event)
-    let order = event.target.dataset.order
-    this.setData({
-      order: order
-    })
-    this.checkAllNews()
-  },
-
-
-
-
-  // 跳转到作者详情页面
-  jumpToAuthorDesc(event) {
-    console.log(event);
-    let author_id = event.currentTarget.dataset.author_id;
-    console.log(author_id);
-    wx.navigateTo({
-      url: '/pages/sub_browse/pages/authorDesc/authorDesc?author_id=' + author_id ,
-    })
-  },
-
-  // 跳转到文章页面
-  jumpToArticle(event) {
-    console.log(event);
-    let article_id = event.currentTarget.dataset.article_id;
-    console.log(article_id)
-    wx.navigateTo({
-      url: '/pages/sub_browse/pages/video/video?article_id=' + article_id,
-    })
-  },
-
 
 
   /**
@@ -120,14 +63,33 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.setData({
+      page:1,
+      newsInfo:[]
+    }) 
+    // 查询全部新闻
+    this.getNewsList(1)
+    wx.showLoading({
+      title: '加载中',
+    })
   },
 
-  /**
+  /** 
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (this.data.page < this.data.page_count){
+      // 查询全部新闻
+      this.getNewsList(Number(this.data.page) + 1)
+      wx.showLoading({
+        title: '加载中',
+      })
+    }else{
+      wx.showToast({
+        title: '没有更多数据了',
+      })
+    }
+    
   },
 
   /**
@@ -142,9 +104,51 @@ Page({
    */
 
   // 跳转到每日一谈详情
-  toAuthorDesc(){
+  toAuthorDesc() {
     wx.navigateTo({
       url: '../authorDesc/authorDesc',
     })
+  },
+
+  // 跳转到文章页面
+  jumpToArticle(event) {
+    console.log(event);
+    let article_id = event.currentTarget.dataset.article_id;
+    console.log(article_id)
+    wx.navigateTo({
+      url: '/pages/sub_browse/pages/video/video?article_id=' + article_id,
+    })
+  },
+
+
+  /**
+   * 网络请求
+   */
+
+  // 查询全部新闻
+  getNewsList(page) {
+    http.request({
+        url: api.API_ALLNEWS,
+        data: {
+          page_size: 20,
+          page: page ? page : this.data.page,
+        }
+      })
+      .then(res => {
+        console.log('------------查询到全部新闻信息了--------------')
+        console.log(res)
+        let newsInfo = this.data.newsInfo
+        for (let i = 0; i < res.data.newsInfo.length;i++){
+          newsInfo.push(res.data.newsInfo[i])
+        }
+        this.setData({
+          newsInfo: newsInfo,
+          authorInfo: res.data.authorInfo,
+          page: res.data.page,
+          page_count: res.data.page_count
+        })
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
   }
 })

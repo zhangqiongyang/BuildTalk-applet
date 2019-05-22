@@ -8,7 +8,7 @@ class HTTP {
   request({ url, data = {} }) {
     // 复制对象进行操作
     let objNew = JSON.parse(JSON.stringify(data))
-    console.log('45656', data)
+    // console.log('45656', data)
 
     // 删除空元素
     function deleteNull(obj) {
@@ -22,14 +22,14 @@ class HTTP {
     }
 
     deleteNull(objNew)//执行函数
-    console.log('22222222222', objNew)
+    // console.log('22222222222', objNew)
 
 
 
     // 添加时间戳
     objNew.timestamp = new Date().getTime()
-    console.log('==============================')
-    console.log(objNew)
+    // console.log('==============================')
+    // console.log(objNew)
 
 
     // 对对象进行排序
@@ -43,7 +43,7 @@ class HTTP {
     }
 
     objKeySort(objNew) //执行函数
-    console.log(objNew)
+    // console.log(objNew)
 
 
     // 将对象转化为字符串
@@ -53,11 +53,11 @@ class HTTP {
       for (let j = 0; j < newKey.length; j++) {
         str += newKey[j] + objNew[newKey[j]]
       }
-      console.log(str)
+      // console.log(str)
       return str
     }
     changeStr(objNew)//执行函数
-    console.log('22将对象转化为字符串', str)
+    // console.log('22将对象转化为字符串', str)
 
 
 
@@ -65,7 +65,7 @@ class HTTP {
     let passSecret = 'a0ny1099ec8yek4wa1pi3l4cf2h86wptorv6o3einn79u',
       passid = 'z7gcawmtu4g1blzgnzftns5435638tdl'
     var strVal = passSecret + str + passSecret //拼接字符串
-    console.log(strVal)
+    // console.log(strVal)
     var strValMd5 = md5(strVal) //MD5加密
     var sign = strValMd5.toUpperCase() //转化为大写
 
