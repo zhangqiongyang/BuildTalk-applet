@@ -3,32 +3,32 @@
   <!-- 主题详情 -->
   <view class='circle_item'>
     <view class='item_author'>
-      <image src='{{subjectInfo.photo}}'></image>
+      <image src='{{subjectInfo.headImage}}'></image>
       <view class='author_con'>
         <view class='author_content'>
           <view class='author_box'>
             <text class='author_name'>{{subjectInfo.name}}</text>
-            <text wx:if='{{subjectInfo.isMaster}}' class='author_master'>圈主</text>
+            <text wx:if='{{subjectInfo.is_circleMaster == 1}}' class='author_master'>圈主</text>
           </view>
-          <text class='author_time'>{{subjectInfo.time}}</text>
+          <text class='author_time'>{{subjectInfo.publish_time}}</text>
         </view>
         <image src='/image/circleDetails_more.png' bindtap='changeRedactSubject' data-type='open'></image>
       </view>
     </view>
     <view class='circle_content'>
-      <text>{{subjectInfo.content}}</text>
+      <text style='width:100%;display:block;'>{{subjectInfo.theme_content}}</text>
       <view class='imageBox'>
-        <block wx:for='{{subjectInfo.imageList}}' wx:key='key'>
-          <image src='{{item}}'></image>
+        <block wx:for='{{subjectInfo.theme_image}}' wx:key='key'>
+          <image src='{{item.pic_url}}' mode='aspectFill'></image>
         </block>
       </view>
 
-      <view class='liked'>
+      <view class='liked' wx:if='{{subjectInfo.parise_nickName.length>0}}'>
         <image class='liked_image' src='/image/circleDetails_liked.png'></image>
         <view class='liked_name'>
-          <block wx:for='{{subjectInfo.liked}}' wx:key='key'>
+          <block wx:for='{{subjectInfo.parise_nickName}}' wx:key='key'>
             <text>{{item.name}}</text>
-            <image wx:if='{{item.isVip}}' class='liked_v' src='/image/circle_v.png'></image>
+            <image wx:if='{{item.is_author == 1}}' class='liked_v' src='/image/circle_v.png'></image>
             <text>，</text>
           </block>
         </view>
@@ -41,11 +41,13 @@
 
 
   <!-- 精选留言 -->
-  <v-msg msgList='{{msgList}}' />
+  <v-msg msgList='{{commentInfo}}' />
 
 
   <!-- 评论、点赞、转发 -->
-  <v-tabbar />
+  <v-tabbar list='{{tabbarlist}}' bind:uploadmsg='uploadMsg' />
 
-
+ <!-- 编辑主题 -->
+  <v-redact wx:if='{{isRedactSubject}}' subjectclassify='{{subjectclassify}}' bind:changeRedactSubject='changeRedactSubject' bind:deleteSubject='deleteSubject' bindcollectSubject='collectSubject' data-type='close' />
+  
 </view>

@@ -1,7 +1,7 @@
 /* 留言样式 */
 
 .background{
-  padding-bottom: 450rpx;
+  /* padding-bottom: 450rpx; */
   padding-top:1rpx;
 }
 

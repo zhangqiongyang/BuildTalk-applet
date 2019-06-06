@@ -2,29 +2,29 @@
 <view class='background' style='height:{{windowHeight}}px;'>
   <!-- 圈子标题 -->
   <view class='circle_title'>
-    <image class='title_back' src='/image/example.jpg'></image>
+    <image class='title_back' src='{{circleInfo.circle_image.pic_url}}' mode='aspectFill'></image>
     <!-- <image class='title_share' src='/image/circleInfo_share.png'></image> -->
     <view class='title_info'>
-      <image src='/image/example.jpg'></image>
-      <text class='title_title'>建筑产业工业互联网</text>
-      <text class='title_master'>圈主：小地瓜</text>
+      <image src='{{circleInfo.master_pic}}' mode='aspectFill'></image>
+      <text class='title_title'>{{circleInfo.circle_name}}</text>
+      <text class='title_master'>圈主：{{circleInfo.name}}</text>
       <view class='title_line'></view>
     </view>
   </view>
   <!-- 圈子数量 -->
   <view class='circle_info'>
     <view class='info_item'>
-      <text class='item_num'>1618</text>
+      <text class='item_num'>{{circleInfo.create_day}}</text>
       <text class='item_name'>创建天数</text>
     </view>
     <view class='item_line'></view>
     <view class='info_item'>
-      <text class='item_num'>36</text>
+      <text class='item_num'>{{circleInfo.countTheme}}</text>
       <text class='item_name'>主题条数</text>
     </view>
     <view class='item_line'></view>
     <view class='info_item'>
-      <text class='item_num'>6</text>
+      <text class='item_num'>{{circleInfo.countUser}}</text>
       <text class='item_name'>成员人数</text>
     </view>
   </view>
@@ -34,9 +34,9 @@
       <text class='item_title'>圈子成员</text>
       <view class='item_right'>
         <view class='item_image'>
-          <image src='/image/example.jpg'></image>
-          <image src='/image/example.jpg'></image>
-          <image src='/image/example.jpg'></image>
+          <block wx:for='{{circleInfo.user_image}}' wx:key='key'>
+            <image src='{{item}}'></image>
+          </block>
         </view>
         <image class='item_more' src='/image/circleInfo_more.png'></image>
       </view>
@@ -48,7 +48,7 @@
       </view>
     </view>
     <view class='set_item' bindtap='toCircleData'>
-      <text class='item_title'>{{isMaster? '编辑资料':'圈子资料'}}</text>
+      <text class='item_title'>{{circleInfo.is_circleMaster==1? '编辑资料':'圈子资料'}}</text>
       <view class='item_right'>
         <image class='item_more' src='/image/circleInfo_more.png'></image>
       </view>
@@ -56,5 +56,5 @@
   </view>
 
   <!-- 退出圈子 -->
-  <view wx:if='{{!isMaster}}' class='circle_exit' bindtap='exit'>退出圈子</view>
+  <view wx:if='{{circleInfo.is_circleMaster==0}}' class='circle_exit' bindtap='exit'>退出圈子</view>
 </view>

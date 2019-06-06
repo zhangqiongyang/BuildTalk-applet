@@ -1,7 +1,15 @@
 // pages/video/video.js
 
 const app = getApp();
-const api = require('../../../../utils/api.js');
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+const util = require('../../../../utils/util.js')
+
 var WxParse = require('../../../../wxParse/wxParse.js');
 const myaudio = wx.createInnerAudioContext();
 
@@ -17,8 +25,12 @@ Page({
    * buy:用户是否已购
    */
   data: {
+    user_id: '',
+    page: 1, //留言页数
+    tabbarlist: {}, // tabbar信息
+    articleinfo: '', // 文章信息
+    guestbookinfo: '', // 留言信息
     windowHeight: app.globalData.windowHeight,
-    // haveVideoHeight: app.globalData.windowHeight-420rpx,
     platform: app.globalData.platform,
     arcData: null,
     articleinfo: null,
@@ -34,92 +46,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
 
-    wx.showShareMenu({
-      withShareTicket: true
+    wx.showLoading({
+      title: '请等待',
     })
 
-
     //获取上层传输数据
-    var article_id = options.article_id;
-
+    const article_id = options.article_id;
     console.log(article_id)
-    console.log(wx.getStorageSync('openid'))
     this.setData({
       article_id: article_id
     })
 
-    // 请求当前文章内容
-    wx.showToast({
-      title: '请等待',
-      icon: 'loading',
-      mask: true,
-    })
-    that.requestArc();
-
-
-    // 获取留言数据
-    wx.request({
-      // url: 'https://wx.bjjy.com/orderbyguestbook',
-      url: api.API_GETARTICLEMSG,
-      data: {
-        article_id: article_id,
-        openid: wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      success: function(res) {
-        console.log('--------------留言数据-------------')
-        console.log(res)
-        that.setData({
-          guestbookinfo: res.data.guestbookinfo
-        })
-      },
-      fail: function(res) {
-        console.log('failed')
-      },
-    })
-
-
-
-
-    //上传用户浏览信息(文章)
-    wx.request({
-      // url: 'https://wx.bjjy.com/saveBrowseRecord',
-      url: api.API_UPLOADTRACE,
-      data: {
-        openid: wx.getStorageSync("openid"),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid'),
-        article_id: article_id,
-        course_id: this.data.course_id
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function(res) {
-        console.log(res);
-        if (res.data.msg == '1') {
-          console.log('---------用户浏览记录上传成功-----------')
-        } else if (res.data.msg == '2') {
-          console.log("-------------浏览记录保存失败---------------")
-        } else if (res.data.msg == '3') {
-          console.log("-------------浏览记录更新成功---------------")
-        } else if (res.data.msg == '4') {
-          console.log('---------浏览记录更新失败----------')
-        } else {
-          console.log('---------------浏览记录接口失败-------------------')
-        }
-      }
-    })
+    // 获取文章信息
+    this.getArticleInfo()
+    // 获取留言信息
+    this.getGuestbook()
 
   },
 
@@ -139,39 +81,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    var that = this;
-
-  
-
-    // 获取留言数据
-    wx.request({
-      // url: 'https://wx.bjjy.com/orderbyguestbook',
-      url: api.API_GETARTICLEMSG,
-      data: {
-        article_id: that.data.article_id,
-        openid: wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      //dataType: 'json',
-      //responseType: 'text',
-      success: function(res) {
-        console.log('--------------留言数据-------------')
-        console.log(res)
-        that.setData({
-          guestbookinfo: res.data.guestbookinfo
-        })
-      },
-      fail: function(res) {
-        console.log('failed')
-      },
-    })
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -191,14 +101,37 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    console.log('监听用户下拉动作')
+    this.setData({
+      page: 1,
+      guestbookinfo: '', // 留言信息
+    })
+    // 获取文章信息
+    this.getArticleInfo()
+    // 获取留言信息
+    this.getGuestbook(1)
+    wx.showLoading({
+      title: '加载中',
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    console.log('页面上拉触底事件的处理函数')
 
+    if (this.data.page < this.data.page_count) {
+      // 获取留言信息
+      this.getGuestbook(Number(this.data.page) + 1)
+      wx.showLoading({
+        title: '加载中',
+      })
+    } else {
+      wx.showToast({
+        title: '没有更多数据了',
+      })
+    }
   },
 
   /**
@@ -213,7 +146,7 @@ Page({
     return {
       title: that.data.articleinfo.article_title,
       path: "/pages/sub_browse/pages/video/video?article_id=" + that.data.article_id,
-   
+
     }
 
 
@@ -226,7 +159,7 @@ Page({
 
   // 音频播放器
   //播放
-  play: function () {
+  play: function() {
     myaudio.play();
     this.setData({
       isplay: true
@@ -234,14 +167,14 @@ Page({
 
   },
   // 暂停
-  pause: function () {
+  pause: function() {
     myaudio.pause();
     this.setData({
       isplay: false
     });
   },
   // 播放完毕
-  finish: function () {
+  finish: function() {
     myaudio.stop();
     this.setData({
       isplay: false
@@ -249,266 +182,14 @@ Page({
   },
 
 
-
-  // 跳转到写留言
-  jumpToMsg: function (event) {
+  // 发表留言
+  uploadMsg(event) {
     console.log(event)
-    var article_id = event.currentTarget.dataset.articleid;
-    console.log(article_id)
+    const value = event.detail.value
 
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-        wx.navigateTo({
-          url: '/pages/sub_browse/pages/message/message?article_id=' + article_id
-        })
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
+    // 留言接口
+    this.submitRequest(value)
   },
-
-  // 文章点赞
-  articleLike: function () {
-
-    var that = this;
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-
-        if (that.data.articleinfo.is_valid == '0') {
-          that.setData({
-            'articleinfo.is_valid': '1',
-            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) - 1
-          });
-
-          that.artLikeUpload()
-        } else {
-          that.setData({
-            'articleinfo.is_valid': '0',
-            'articleinfo.countcollect': Number(that.data.articleinfo.countcollect) + 1
-          });
-          that.artLikeUpload()
-        }
-
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-  },
-
-
-  // 留言点赞
-  msglike: function (event) {
-
-    let that = this;
-    let key = event.currentTarget.dataset.key;
-    let guestbook_id = event.currentTarget.dataset.guestbookid;
-
-    let msgKey = 'guestbookinfo[' + key + '].is_valid';
-    let msgnum = 'guestbookinfo[' + key + '].countpraise';
-    let num = 'guestbookinfo[' + key + '].num';
-
-
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-        if (that.data.guestbookinfo[key].is_valid == '0') {
-
-
-          that.setData({
-            [msgKey]: '1',
-            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) - 1,
-            [num]: '1',
-            b: guestbook_id
-          });
-          console.log(that.data.guestbookinfo[key].num);
-          console.log(that.data.b)
-          that.msgLikeUpload()
-          //console.log(a)
-
-
-        } else {
-
-          that.setData({
-            [msgKey]: '0',
-            [msgnum]: Number(that.data.guestbookinfo[key].countpraise) + 1,
-            [num]: '-1',
-            b: guestbook_id
-          });
-          console.log(that.data.guestbookinfo[key].num);
-          console.log(that.data.b)
-          that.msgLikeUpload()
-          //console.log(a)
-
-        }
-      } else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-  },
-
-
-
-
-  // 留言点赞上传接口
-  msgLikeUpload: function () {
-
-    wx.request({
-      // url: 'https://wx.bjjy.com/updateguestbook',
-      url: api.API_UPLOADMSGLIKE,
-      data: {
-        'guestbook_id': this.data.b,
-        'openid': wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function (res) {
-        console.log('留言点赞信息上传成功')
-      },
-      fail: function (res) {
-        console.log('留言点赞信息上传失败')
-      },
-    })
-  },
-
-
-
-
-  // 文章收藏信息上传接口
-  artLikeUpload: function () {
-    wx.request({
-      // url: 'https://wx.bjjy.com/collectarticle',
-      url: api.API_UPLOADARTICLLIKE,
-      data: {
-        'article_id': this.data.articleinfo.article_id,
-        'openid': wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function (res) {
-        console.log('-----------文章收藏信息上传成功啦------------')
-      },
-      fail: function (res) {
-        console.log('-----------失败啦------------')
-      },
-    })
-  },
-
 
   // 跳转到购买页
 
@@ -519,7 +200,7 @@ Page({
         content: '由于相关规范，iOS用户暂不可在小程序内订阅',
         showCancel: false,
         confirmText: '确定',
-        success: function (res) { }
+        success: function(res) {}
 
       })
     } else {
@@ -537,7 +218,7 @@ Page({
             // cancelColor: '',
             confirmText: '确定',
             // confirmColor: '',
-            success: function (res) {
+            success: function(res) {
               console.log(res)
               if (res.confirm) {
                 console.log('用户点击确定')
@@ -565,7 +246,7 @@ Page({
             showCancel: true,
             cancelText: '取消',
             confirmText: '确定',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 wx.navigateTo({
                   url: '/pages/phone/phone',
@@ -586,7 +267,7 @@ Page({
           showCancel: true,
           cancelText: '取消',
           confirmText: '确定',
-          success: function (res) {
+          success: function(res) {
             wx.switchTab({
               url: '/pages/tabbar/mine/mine',
             })
@@ -648,7 +329,7 @@ Page({
           if (res.data.articleinfo.video_id) {
             console.log('------含有视频---------')
             let haveVideoHeight = app.globalData.scrollHeight - 44
-            haveVideoHeight = haveVideoHeight - (210/375)* app.globalData.windowWidth - 49
+            haveVideoHeight = haveVideoHeight - (210 / 375) * app.globalData.windowWidth - 49
             that.setData({
               isHaveVideo: true,
               haveVideoHeight: haveVideoHeight
@@ -718,6 +399,117 @@ Page({
         console.log('-------------失败啦---------------')
       },
     })
-  }
+  },
 
+
+  // 获取文章信息
+  getArticleInfo() {
+    http.request({
+        url: api.API_GETARTICLEINFO,
+        data: {
+          user_id: wx.getStorageSync('user_id'),
+          article_id: this.data.article_id,
+          source: 'xcx'
+        }
+      })
+      .then(res => {
+        console.log('----------获取到文章信息了-------------')
+        console.log(res)
+        this.setData({
+          articleinfo: res.data.newsInfo,
+          'tabbarlist.countCollect': res.data.newsInfo.countCollect,
+          'tabbarlist.isCollect': res.data.newsInfo.isCollect,
+          'tabbarlist.article_id': res.data.newsInfo.article_id,
+          'tabbarlist.isArticle': true
+
+        })
+        var that = this
+        myaudio.src = res.data.newsInfo.audio_url;
+        WxParse.wxParse('content', 'html', res.data.newsInfo.content, that, 0)
+        //判断是否含有音频和视频
+        //根据是否有audio_id来判断是否含有音频，如果有audio_id则含有音频，isHaveAudio为true,如果没有则不含有音频，isHaveAudio为false,
+        //根据是否有video_id来判断是否含有视频，如果有video_id则含有视频，isHaveVideo为true,如果没有则不含有视频，isHaveVideo为false,
+        if (res.data.newsInfo.audio_id) {
+          console.log('------含有音频---------')
+          that.setData({
+            isHaveAudio: true,
+            minute: parseInt(res.data.newsInfo.audio_duration / 60),
+            second: parseInt(res.data.newsInfo.audio_duration % 60)
+          })
+        }
+        if (res.data.newsInfo.video_id) {
+          console.log('------含有视频---------')
+          let haveVideoHeight = app.globalData.scrollHeight - 44
+          haveVideoHeight = haveVideoHeight - (210 / 375) * app.globalData.windowWidth - 49
+          that.setData({
+            isHaveVideo: true,
+            haveVideoHeight: haveVideoHeight
+          })
+        }
+
+        // 动态设置当前页面标题
+        if (res.data.newsInfo.type == 'article'){
+          wx.setNavigationBarTitle({
+            title: res.data.newsInfo.article_title
+          })
+        }else{
+          wx.setNavigationBarTitle({
+            title: '每日一谈'
+          })
+        }
+        
+        // 关闭刷新
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
+  },
+
+  // 获取留言信息
+  getGuestbook() {
+    http.request({
+        url: api.API_GETARTICLEMSG,
+        data: {
+          article_id: this.data.article_id,
+          page: this.data.page,
+          page_size: 20
+        }
+      })
+      .then(res => {
+        console.log('----------获取到留言信息了-------------')
+        console.log(res)
+        this.setData({
+          guestbookinfo: res.data.guestbookInfo,
+          page_count: res.data.page_count,
+          'tabbarlist.guestbookNum': res.data.guestbookInfo.length
+        })
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
+  },
+
+  // 留言接口
+  submitRequest(value) {
+    http.request({
+        url: api.API_UPLOADMSG,
+        data: {
+          source: 'xcx',
+          user_id: wx.getStorageSync('user_id'),
+          article_id: this.data.article_id,
+          content: value
+        }
+      })
+      .then(res => {
+        console.log('-----------上传留言成功------------')
+        console.log(res)
+        util._showToastSuccess('上传留言成功')
+        this.setData({
+          value: '',
+          guestbookinfo: res.data.guestbookInfo,
+          page_count: res.data.page_count,
+          'tabbarlist.guestbookNum': res.data.guestbookInfo.length
+        })
+      })
+
+
+  }
 })

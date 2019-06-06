@@ -2,26 +2,34 @@
 <view class='background'>
   <view class='circleImageBox'>
     <view class='circleImage'>
-      <v-uploadImage bind:uploadImage='uploadImage' />
+      <v-uploadImage bind:uploadImage='uploadImage' pic='{{logo}}' />
       <view class='circleNameBox'>
-        <input bindinput='input' data-type='name' class='circleName' placeholder='圈子名称'></input>
+        <input bindinput='input' data-type='name' class='circleName' value='{{name}}' placeholder='圈子名称'></input>
       </view>
     </view>
   </view>
   <view class='labelBox'>
     <text class='labelTitle'>建筑行业标签(必填)</text>
     <view class='labelView'>
-      <block wx:for='{{label}}' wx:key='key'>
-        <view class='label' bindtap='choseLable' data-id='{{item.id}}'>
-          <text class='{{item.isActive?"active":""}}'>{{item.text}}</text>
-          <image catchtap='deleteLabel'  data-id='{{item.id}}' wx:if='{{item.isActive}}' src='/image/creatCircle_delete.png'></image>
-        </view>
-      </block>
-      <input wx:if='{{labelActive<5}}' bindconfirm='input' data-type='label' class='labelInput' placeholder='+自定义标签'></input>
+      <view class='labelViewBox'>
+        <block wx:for='{{label}}' wx:key='key'>
+          <view class='label'>
+            <view wx:if='{{item.isLabel}}'>
+              <text class='{{item.isActive?"active":""}}'>{{item.tag_name}}</text>
+              <image wx:if='{{item.isActive}}' src='/image/creatCircle_delete.png' bindtap='deleteLabel' data-index='{{index}}'></image>
+            </view>
+            <text wx:else class='{{item.isActive?"active":""}}' bindtap='choseLable' data-name='{{item.tag_name}}'>{{item.tag_name}}</text>
+          </view>
+        </block>
+      </view>
+      <view>
+        <input wx:if='{{labelActive<5}}' value='{{value}}' bindconfirm='input' data-type='label' class='labelInput' placeholder='+自定义标签'></input>
+      </view>
+
     </view>
   </view>
   <view class='introduceBox'>
-    <textarea bindinput='input' data-type='intro' class='introduct' placeholder='圈子介绍（选填）1、请简要描述提供的内容。2、能突出圈主身份背景更好。' placeholder-class='placeholder'></textarea>
+    <textarea bindinput='input' data-type='intro' class='introduct' value='{{intro}}' placeholder='圈子介绍（选填）1、请简要描述提供的内容。2、能突出圈主身份背景更好。' placeholder-class='placeholder'></textarea>
   </view>
   <view wx:if='{{isAlready}}' class='btn active' bindtap='submit'>完成</view>
   <view wx:else class='btn'>完成</view>

@@ -10,12 +10,12 @@
     <image class='item_more' src='/image/circleInfo_more.png'></image>
   </view> -->
   <block wx:for='{{memberList}}'>
-    <view class='member_item'>
+    <view class='member_item' bindtap='toDetails' data-id='{{item.user_id}}' data-type='{{item.is_author == 1?author:master}}'>
       <view class='item_info'>
-        <image class='item_image' src='{{item.image}}'></image>
+        <image class='item_image' src='{{item.headImage}}'></image>
         <text class='item_name'>{{item.name}}</text>
-        <image wx:if='{{item.isVip}}' class='item_v' src='/image/circle_v.png'></image>
-        <text wx:if='{{item.isMaster}}' class='item_master'>圈主</text>
+        <image wx:if='{{item.is_author == 1}}' class='item_v' src='/image/circle_v.png'></image>
+        <text wx:if='{{index == 0}}' class='item_master'>圈主</text>
       </view>
       <image class='item_more' src='/image/circleInfo_more.png'></image>
     </view>

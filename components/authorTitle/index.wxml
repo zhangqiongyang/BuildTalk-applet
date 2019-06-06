@@ -1,38 +1,38 @@
 <!--components/authorTitle/index.wxml-->
 <view class='author_info_box'>
   <!-- 背景图 -->
-  <image class='author_back' src='{{authorInfo.image}}' />
+  <image class='author_back' src='{{authorInfo.bg_pic}}' mode='aspectFill' />
   <!-- 大咖简介 -->
   <view class='author_info'>
-    <image class='author_image' src='{{authorInfo.image}}' />
+    <image class='author_image' src='{{authorInfo.headImage}}' mode='aspectFill'/>
     <view class='author_name'>
       <text>{{authorInfo.name}}</text>
       <image wx:if='{{authorInfo.isVip}}' src='/image/authorRecommend_v.png'></image>
     </view>
-    <text wx:if='{{isAuthor}}' class='author_title'>{{authorInfo.title}}</text>
+    <text wx:if='{{isAuthor}}' class='author_title'>{{authorInfo.author_desc}}</text>
   </view>
   <!-- 关注 -->
-  <view wx:if='{{authorInfo.isAttention}}' class='attention' bindtap='cancelAttention'>
+  <view wx:if='{{authorInfo.is_attention == 1}}' class='attention' bindtap='attention' data-id='{{authorInfo.user_id}}'>
     <image src='/image/authorRecommend_attention.png'></image>
     已关注
   </view>
-  <view wx:else class='attention' bindtap='attention'>+关注</view>
+  <view wx:else class='attention' bindtap='attention' data-id='{{authorInfo.user_id}}'>+关注</view>
   <!-- 大咖关注 -->
   <view class='attention_box'>
-    <view class='attention_item' wx:if='{{isAuthor}}' bindtap='toCirlce'>
-      <text class='attention_num'>{{authorInfo.circle}}</text>
+    <view class='attention_item' wx:if='{{isAuthor}}' bindtap='toCirlce' data-id='{{authorInfo.user_id}}'>
+      <text class='attention_num'>{{authorInfo.countMyCircle}}</text>
       <text>圈子</text>
     </view>
-    <view class='attention_item' bindtap='toFans'>
-      <text class='attention_num'>{{authorInfo.fans}}</text>
+    <view class='attention_item' bindtap='toFans' data-id='{{authorInfo.user_id}}'>
+      <text class='attention_num'>{{authorInfo.countMyFans}}</text>
       <text>粉丝</text>
     </view>
-    <view class='attention_item' bindtap='toCollect'>
-      <text class='attention_num'>{{authorInfo.collect}}</text>
+    <view class='attention_item' bindtap='toCollect' data-id='{{authorInfo.user_id}}'>
+      <text class='attention_num'>{{authorInfo.countMyCollect}}</text>
       <text>收藏</text>
     </view>
-    <view class='attention_item' bindtap='toAttention'>
-      <text class='attention_num'>{{authorInfo.attention}}</text>
+    <view class='attention_item' bindtap='toAttention' data-id='{{authorInfo.user_id}}'>
+      <text class='attention_num'>{{authorInfo.countMyAttention}}</text>
       <text>关注</text>
     </view>
   </view>

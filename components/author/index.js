@@ -18,6 +18,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    // 跳转到大咖详情
+    toAuthorDetails(event){
+      const id=event.currentTarget.dataset.id
+      wx.navigateTo({
+        url: '/pages/sub_author/pages/authorDetails/authorDetails?author_id='+id,
+      })
+    }
   }
 })

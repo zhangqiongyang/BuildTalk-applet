@@ -1,4 +1,15 @@
 // pages/sub_circle/pages/circleData/circleData.js
+var WxParse = require('../../../../wxParse/wxParse.js');
+
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+
+const util = require('../../../../utils/util.js')
 Page({
 
   /**
@@ -17,6 +28,12 @@ Page({
    */
   onLoad: function(options) {
 
+    this.setData({
+      circle_id: options.circle_id
+    })
+
+    // 圈子资料
+    this.circleData()
   },
 
   /**
@@ -66,5 +83,55 @@ Page({
    */
   onShareAppMessage: function() {
 
-  }
+  },
+
+  /**
+   * 方法
+   */
+
+
+  /**
+   * 网络请求
+   */
+  // 圈子资料
+  circleData() {
+    http.request({
+        url: api.API_CIRCLEDATA,
+        data: {
+          user_id: wx.getStorageSync("user_id"),
+          circle_id: this.data.circle_id,
+        }
+      })
+      .then(res => {
+        console.log('------------查询圈子信息成功------------')
+        console.log(res)
+
+        // let tags = res.data.circle_tags.split(","),
+        //   label = this.data.label
+        // for (let i = 0; i < tags.length; i++) {
+        //   for (let j = 0; j < label.length; j++) {
+        //     if (tags[i] == label[j].tag_name) {
+        //       label[j].isActive = true
+        //       tags.splice(i, 1)
+        //     }
+        //   }
+        //   label.push({
+        //     tag_name: tags[i],
+        //     isActive: true,
+        //     isLabel: true,
+        //   })
+        // }
+
+        this.setData({
+          circle_desc: res.data.circle_desc,
+          circle_image: res.data.circle_image.pic_url,
+          circle_name: res.data.circle_name,
+          label: res.data.circle_tags.split(","),
+          isCourse: res.data.type == 1 ? false : true
+        })
+        WxParse.wxParse('lightSpot', 'html', res.data.lightSpot, this, 0)
+
+      })
+  },
+
 })

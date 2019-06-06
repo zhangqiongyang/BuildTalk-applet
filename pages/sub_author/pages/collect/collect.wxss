@@ -2,7 +2,7 @@
 
 .collect_item {
   /* padding: 40rpx 30rpx; */
-  border: 1px solid #e8e7e8;
+  border-bottom: 1px solid #e8e7e8;
 }
 
 .content {

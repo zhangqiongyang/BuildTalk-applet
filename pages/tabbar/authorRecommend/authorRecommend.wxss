@@ -75,9 +75,12 @@
 /* 换一换 */
 
 .change {
-  padding-top: 25rpx;
-  text-align: center;
-  padding-bottom: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100rpx;
+  width: 200rpx;
+  margin: 0 auto;
 }
 
 .change image {
@@ -86,8 +89,8 @@
 }
 
 .change text {
+  font-size: 20rpx;
   color: #8f8f8f;
-  font-size: 30rpx;
   margin-left: 20rpx;
 }
 

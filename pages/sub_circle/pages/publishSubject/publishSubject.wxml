@@ -1,14 +1,20 @@
 <!--pages/sub_circle/pages/publishSubject/publishSubject.wxml-->
 <view>
-  <textarea class='textarea' placeholder='说点什么......' adjust-position auto-height bindinput='input' />
+  <textarea class='textarea' value='{{content}}' placeholder='说点什么......' bindfocus='focus' bindblur='blur' focus='true' auto-focus='true' auto-height bindinput='input' />
 
   <view class='image_box'>
     <block wx:for='{{pic}}'>
-      <image src='{{item}}' mode='aspectFill' />
+      <view class='image_item'>
+        <image class='image' src='{{item}}' mode='aspectFill' />
+        <image class='delete' src='/image/publishSubject_delete.png' bindtap='deleteImage' data-index='{{index}}'></image>
+      </view>
     </block>
   </view>
 
-  <view class='add'>
-    <image src='/image/publishSubject_image.png' bindtap='upload' />
+  <view class='add' style='padding-bottom:{{height}}px;'>
+    <view>
+      <image src='/image/publishSubject_image.png' bindtap='upload' />
+    </view>
+    <view class='btn' bindtap='submit'>完成</view>
   </view>
 </view>

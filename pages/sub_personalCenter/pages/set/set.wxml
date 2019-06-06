@@ -1,13 +1,13 @@
 <!--pages/sub_personalCenter/pages/set/set.wxml-->
 <view>
   <view class='set_list'>
-    <view class='set_item'>
+    <!-- <view class='set_item'>
       <text class='item_title'>绑定微信</text>
       <view class='item_info'>
-        <text class='item_text'>荀</text>
+        <text class='item_text'>{{nickName}}</text>
         <image class='item_image' src='/image/mine_more_black.png'></image>
       </view>
-    </view>
+    </view> -->
     <view class='set_item'>
       <text class='item_title'>关于我们</text>
       <view class='item_info' bindtap='toAbout'>

@@ -42,8 +42,8 @@
     <!-- 话题圈列表 -->
     <view class='circle_list'>
       <block wx:for='{{circleInfo}}' wx:key='key'>
-        <view class='circle_item' bindtap='toCircle'>
-          <image class='circle_image' src='{{item.circle_image.pic_url}}'></image>
+        <view class='circle_item' bindtap='toCircle' data-id='{{item.circle_id}}'>
+          <image class='circle_image' src='{{item.circle_image.pic_url}}' mode='aspectFill'></image>
           <view class='circle_info'>
             <text class='circle_name'>{{item.circle_name}}</text>
             <view class='circle_master'>
@@ -74,8 +74,8 @@
     <!-- 课程列表 -->
     <view class='course_list'>
       <block wx:for="{{courseInfo}}" wx:key='key'>
-        <view class='course_item' bindtap='toCourse' data-courseid='{{item.course_id}}'>
-          <image class='course_image' src='{{item.circle_image.pic_url}}'></image>
+        <view class='course_item' bindtap='toCircle'  data-id='{{item.circle_id}}'>
+          <image class='course_image' src='{{item.circle_image.pic_url}}' mode='aspectFill'></image>
           <view class='course_info'>
             <text class='course_name'>{{item.circle_name}}</text>
             <view class='course_master'>

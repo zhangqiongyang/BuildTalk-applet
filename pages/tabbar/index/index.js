@@ -14,14 +14,14 @@ Page({
       image: "https://www.51jiantan.com/static/image/banner2.png",
       label: '建筑互联网大会',
     }],
-    indexpicinfo:[],
-    newsinfo:[],
+    indexpicinfo: [],
+    newsinfo: [],
     circleInfo: [],
-    courseInfo:[],
+    courseInfo: [],
     circle_page: 1,
     course_page: 1,
-    cicle_page_count:'',
-    course_page_count:'',
+    cicle_page_count: '',
+    course_page_count: '',
   },
 
 
@@ -41,9 +41,9 @@ Page({
   },
 
   /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-  onPullDownRefresh: function () {
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
     this.setData({
       indexpicinfo: [],
       newsinfo: [],
@@ -189,17 +189,13 @@ Page({
   },
 
   // 跳转到圈子详情
-  toCircle() {
+  toCircle(event) {
+    const circle_id= event.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/sub_circle/pages/circleDetails/circleDetails',
+      url: '/pages/sub_circle/pages/circleDetails/circleDetails?circle_id=' + circle_id,
     })
   },
-  // 跳转到课程详情
-  toCourse() {
-    wx.navigateTo({
-      url: '/pages/sub_circle/pages/circleDetails/circleDetails',
-    })
-  },
+
   // 跳转到热点专题相应页面
   jumpToActivity(event) {
     // console.log(event)

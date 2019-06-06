@@ -8,19 +8,19 @@
   <view class='circle'>
     <block wx:for='{{circleList}}'>
       <!-- 圈子项 -->
-      <view class='circleItemBox' bindtap='toCircle'>
+      <view class='circleItemBox' bindtap='toCircle' data-id='{{item.circle_id}}'>
         <view class='circleItem'>
-          <image class='circleImage' src='{{item.image}}'></image>
+          <image class='circleImage' src='{{item.circle_image.pic_url}}' mode='aspectFill'></image>
           <view class='item_box'>
-            <text class='circleTitle'>{{item.title}}</text>
+            <text class='circleTitle'>{{item.circle_name}}</text>
             <view class='line'></view>
             <view>
-              <text class='author'>{{item.author}}</text>
-              <image wx:if='{{item.isVip}}' class='author_v' src='/image/circle_v.png'></image>
+              <text class='author'>{{item.name}}</text>
+              <image wx:if='{{item.is_author == 1}}' class='author_v' src='/image/circle_v.png'></image>
             </view>
           </view>
         </view>
-        <image wx:if='{{item.isCourse}}' class='courseImage' src='/image/circle_course.png'></image>
+        <image wx:if='{{item.type == 2}}' class='courseImage' src='/image/circle_course.png'></image>
       </view>
     </block>
     <!-- 创建圈子 -->
@@ -38,13 +38,15 @@
     <view class='circleRule'>
       <image class='tanxiaojian' src='/image/circle_tanxiaojian.png'></image>
       <view class='content'>
-        <image src='/image/circle_checked.png'></image>
+        <image wx:if='{{isChecked}}' src='/image/circle_checked.png' bindtap='toChecked'></image>
+        <image wx:else src='/image/circle_unchecked.png' bindtap='toChecked'></image>
         <text>我已阅读并同意</text>
         <text class='color' bindtap='toUserAgreement'>《建谈圈子圈主规则》</text>
       </view>
       <image class='ruleLine' src='/image/circle_line.png'></image>
       <view class='contentText'>包含时政、低俗、色情、暴力引诱等敏感或违禁内容的圈子，将会被封停圈子和账号!</view>
-      <view class='btn' bindtap='toCreatCircle'>下一步</view>
+      <view class='btn' wx:if='{{isChecked}}' bindtap='toCreatCircle'>下一步</view>
+      <view class='btn uncolor' wx:else>下一步</view>
     </view>
   </view>
 

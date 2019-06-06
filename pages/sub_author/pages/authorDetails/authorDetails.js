@@ -1,4 +1,14 @@
 // pages/sub_author/pages/authorDetails/authorDetails.js
+
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+
+const util = require('../../../../utils/util.js')
 Page({
 
   /**
@@ -6,35 +16,20 @@ Page({
    */
   data: {
     isArticle: true, // nav是否是精品文章
-    authorInfo:{
-      image:'/image/example.jpg',
-      name:'关艾',
-      title:'家具首席设计师',
-      isVip:true,
-      isAttention:false,
-      circle:'3',
-      fans:'2',
-      collect:'3',
-      attention:'2'
-    },
-    articleList: [{
-        image: '/image/example.jpg',
-        title: '科技宅 新生活',
-        text: '建筑工业互联网峰会建筑工业互联网峰会建筑工业互联网峰会-浦小强'
-      },
-      {
-        image: '/image/example.jpg',
-        title: '乐智能 悦享家',
-        text: '建筑工业互联网峰会建筑工业互联网峰会建筑工业互联网峰会-浦小强'
-      },
-    ]
+    authorInfo: {},
+    articleList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      author_id: options.author_id
+    })
 
+    // 获取大咖信息
+    this.authorInfo()
   },
 
   /**
@@ -89,18 +84,47 @@ Page({
   /**
    * 方法
    */
+  // 切换导航
   changeNav(event) {
     console.log(event)
     const id = event.currentTarget.dataset.id
-    if(id == 'article'){
+    if (id == 'article') {
       this.setData({
-        isArticle:true
+        isArticle: true
       })
-      
-    }else{
+
+    } else {
       this.setData({
         isArticle: false
       })
     }
-  }
+  },
+
+  /**
+   * 网络请求
+   */
+  // 获取大咖信息
+  authorInfo() {
+    http.request({
+        url: api.API_AUTHORDETAILS,
+        data: {
+          examine_user: wx.getStorageSync('user_id'),
+          user_id: this.data.author_id,
+          user_type: 1, //1大咖 2圈主
+        }
+      })
+      .then(res => {
+        console.log('--------获取到大咖信息了----------')
+        console.log(res)
+
+        this.setData({
+          authorInfo:res.data,
+          'authorInfo.isVip':true,
+          'authorInfo.user_id': this.data.author_id,
+          articleList: res.data.articleInfo,
+        })
+      })
+  },
+
+
 })

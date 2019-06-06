@@ -6,7 +6,7 @@
     "pages/tabbar/circle/circle"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "建谈",
     "navigationBarTextStyle": "black"
@@ -53,7 +53,6 @@
         "pages/feedback/feedback",
         "pages/set/set",
         "pages/about/about",
-        "pages/info/info",
         "pages/mineInfo/mineInfo",
         "pages/image/image",
         "pages/account/account",

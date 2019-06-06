@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "圈子"
+  "navigationBarTitleText": "圈子",
+  "enablePullDownRefresh": true
 }

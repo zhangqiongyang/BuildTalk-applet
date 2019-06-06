@@ -5,17 +5,27 @@
 
   <!-- 圈主圈子 -->
   <view class='circle'>
-    <view class='circle_list'>
-      <view class='list_title'>创建的</view>
-      <block wx:for='{{circleList}}'>
-        <v-circle circle='{{item}}' />
-      </block>
+    <view class='nav'>
+      <view class='nav_item' bindtap='changeNav' data-type='creat'>
+        <text>创建的</text>
+        <view wx:if='{{isCreat}}' class='line'></view>
+      </view>
+      <view class='nav_item' bindtap='changeNav' data-type='join'>
+        <text>加入的</text>
+        <view wx:if='{{!isCreat}}' class='line'></view>
+      </view>
     </view>
     <view class='circle_list'>
-      <view class='list_title'>加入的</view>
-      <block wx:for='{{circleList}}'>
-        <v-circle circle='{{item}}' />
-      </block>
+      <view wx:if='{{isCreat}}'>
+        <block wx:for='{{creatCircleList}}'>
+          <v-circle circle='{{item}}' />
+        </block>
+      </view>
+      <view wx:else class='circle_list'>
+        <block wx:for='{{joinCircleList}}'>
+          <v-circle circle='{{item}}' />
+        </block>
+      </view>
     </view>
   </view>
 </view>

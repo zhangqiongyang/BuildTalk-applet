@@ -3,7 +3,7 @@
 
 <view style='font-size:0;'>
   <!-- 视频 -->
-  <video class='video'></video>
+  <video class='video' src='{{}}'></video>
 
   <!-- 目录 -->
   <view class='catalog'>
@@ -25,7 +25,7 @@
           <image src='/image/circleDetails_video.png'></image>
           <text>01讲 ArchCAD简介</text>
         </view>
-        <!-- <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image> -->
+        <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
       </view>
 
       <!-- 更新课程数 -->
@@ -42,8 +42,8 @@
               <image src='/image/circleDetails_video.png'></image>
               <text>{{item.num}} {{item.name}}</text>
             </view>
-            <!-- <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
-            <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image> -->
+            <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+            <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
           </view>
         </block>
         <view class='up fixed catalog_title_con center' bindtap='changeCatalog'>
@@ -77,11 +77,14 @@
   <view wx:if='{{isPictureMode}}'>
     <template is="wxParse" data="{{wxParseData:content.nodes}}" />
 
-    <view class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
+    
   </view>
 
 
   <!-- 付费 -->
   <v-pay wx:if='{{isPay}}' bind:cancel='cancel'/>
+
+<!-- 购买 -->
+  <view wx:if='{{!isJoin}}' class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
 
 </view>

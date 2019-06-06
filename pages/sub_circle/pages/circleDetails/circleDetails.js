@@ -1,4 +1,17 @@
 // pages/sub_circle/pages/circleDetails/circlrDetails.js
+
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+
+const util = require('../../../../utils/util.js')
+
+var WxParse = require('../../../../wxParse/wxParse.js');
+
 Page({
 
   /**
@@ -6,275 +19,34 @@ Page({
    */
   data: {
     isJoin: false, //是否加入圈子
-    isCourse: true, //是否为课程
+    isCourse: false, //是否为课程
     isIntro: false, //是否显示圈子介绍
     isCatalog: false, //是否显示目录详情
-    isCollect: true, //是否收藏了
     isHide: false, //是否隐藏主题、导航、
     nav: 'theme', //导航  theme主题  essence精华
     isRedactSubject: false, //编辑主题弹窗
     isSubjectClassify: false, //主题分类弹窗
-    classify: 'all', //主题分类
+    classify: 1, //主题分类 1全部2图片3圈主4自己
     classifyText: '全部主题', //主题分类名称
-    circleList: [{
-        name: '小地瓜',
-        photo: '/image/example.jpg',
-        isMaster: true,
-        time: '2019-01-13 12:30:09',
-        content: '今年流行的几种装修材料',
-        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-        liked: [{
-            name: '傲慢 & 偏见',
-            isVip: false
-          },
-          {
-            name: '建筑大师的大师',
-            isVip: true
-          },
-          {
-            name: '我是你兄弟',
-            isVip: false
-          },
-          {
-            name: '辛德瑞拉',
-            isVip: true
-          },
-          {
-            name: '心语心愿',
-            isVip: false
-          }
-        ],
-        msg: [{
-            id: 1,
-            name: '小地瓜',
-            content: '一点新素材希望能帮到大家'
-          },
-          {
-            id: 1,
-            name: '傲慢&偏见',
-            content: '呵呵'
-          },
-          {
-            id: 1,
-            name: '辛德瑞拉',
-            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-          },
-        ]
-      },
-      {
-        name: '小地瓜',
-        photo: '/image/example.jpg',
-        isMaster: false,
-        time: '2019-01-13 12:30:09',
-        content: '今年流行的几种装修材料',
-        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-        liked: [{
-            name: '傲慢 & 偏见',
-            isVip: false
-          },
-          {
-            name: '建筑大师的大师',
-            isVip: true
-          },
-          {
-            name: '我是你兄弟',
-            isVip: false
-          },
-          {
-            name: '辛德瑞拉',
-            isVip: true
-          },
-          {
-            name: '心语心愿',
-            isVip: false
-          }
-        ],
-        msg: [{
-            id: 1,
-            name: '小地瓜',
-            content: '一点新素材希望能帮到大家'
-          },
-          {
-            id: 1,
-            name: '傲慢&偏见',
-            content: '呵呵'
-          },
-          {
-            id: 1,
-            name: '辛德瑞拉',
-            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-          },
-        ]
-      },
-      {
-        name: '小地瓜',
-        photo: '/image/example.jpg',
-        isMaster: false,
-        time: '2019-01-13 12:30:09',
-        content: '今年流行的几种装修材料',
-        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-        liked: [{
-            name: '傲慢 & 偏见',
-            isVip: false
-          },
-          {
-            name: '建筑大师的大师',
-            isVip: true
-          },
-          {
-            name: '我是你兄弟',
-            isVip: false
-          },
-          {
-            name: '辛德瑞拉',
-            isVip: true
-          },
-          {
-            name: '心语心愿',
-            isVip: false
-          }
-        ],
-        msg: [{
-            id: 1,
-            name: '小地瓜',
-            content: '一点新素材希望能帮到大家'
-          },
-          {
-            id: 1,
-            name: '傲慢&偏见',
-            content: '呵呵'
-          },
-          {
-            id: 1,
-            name: '辛德瑞拉',
-            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-          },
-        ]
-      },
-      {
-        name: '小地瓜',
-        photo: '/image/example.jpg',
-        isMaster: false,
-        time: '2019-01-13 12:30:09',
-        content: '今年流行的几种装修材料',
-        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-        liked: [{
-            name: '傲慢 & 偏见',
-            isVip: false
-          },
-          {
-            name: '建筑大师的大师',
-            isVip: true
-          },
-          {
-            name: '我是你兄弟',
-            isVip: false
-          },
-          {
-            name: '辛德瑞拉',
-            isVip: true
-          },
-          {
-            name: '心语心愿',
-            isVip: false
-          }
-        ],
-        msg: [{
-            id: 1,
-            name: '小地瓜',
-            content: '一点新素材希望能帮到大家'
-          },
-          {
-            id: 1,
-            name: '傲慢&偏见',
-            content: '呵呵'
-          },
-          {
-            id: 1,
-            name: '辛德瑞拉',
-            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-          },
-        ]
-      },
-      {
-        name: '小地瓜',
-        photo: '/image/example.jpg',
-        isMaster: false,
-        time: '2019-01-13 12:30:09',
-        content: '今年流行的几种装修材料',
-        imageList: ['/image/example.jpg', '/image/example.jpg', '/image/example.jpg', '/image/example.jpg'],
-        liked: [{
-            name: '傲慢 & 偏见',
-            isVip: false
-          },
-          {
-            name: '建筑大师的大师',
-            isVip: true
-          },
-          {
-            name: '我是你兄弟',
-            isVip: false
-          },
-          {
-            name: '辛德瑞拉',
-            isVip: true
-          },
-          {
-            name: '心语心愿',
-            isVip: false
-          }
-        ],
-        msg: [{
-            id: 1,
-            name: '小地瓜',
-            content: '一点新素材希望能帮到大家'
-          },
-          {
-            id: 1,
-            name: '傲慢&偏见',
-            content: '呵呵'
-          },
-          {
-            id: 1,
-            name: '辛德瑞拉',
-            content: '我也有同类的资源，在我网盘里大家可以下载浏览哦，网址：链接: https://pan.baidu.com/s/1Z9Inl0LNa6zGIDXUgmGnhw  密码: l6ag'
-          },
-        ]
-      },
-    ],
-    catalogList: [{
-        id: 1,
-        num: '01',
-        name: 'ArchCAD简介1',
-        isAudition: true,
-      },
-      {
-        id: 2,
-        num: '02',
-        name: 'ArchCAD简介2',
-        isAudition: true,
-      },
-      {
-        id: 3,
-        num: '03',
-        name: 'ArchCAD简介3',
-        isAudition: true,
-      },
-      {
-        id: 4,
-        num: '04',
-        name: 'ArchCAD简介4',
-        isAudition: false,
-      },
-
-    ]
+    subject_page: 1, // 主题页数
+    course_page: 1, //课程页数
+    circleList: [],
+    catalogList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    const circle_id = options.circle_id
+    this.setData({
+      circle_id: circle_id
+    })
 
+    util._showLoading
+
+    // 预览圈信息
+    this.circleInfo()
   },
 
   /**
@@ -330,19 +102,38 @@ Page({
    * 方法
    */
   //切换圈子介绍显示
-  changeIntro() {
-    this.setData({
-      isIntro: !this.data.isIntro,
-      isHide: !this.data.isHide
-    })
+  changeIntro(event) {
+    console.log(event)
+    const type = event.target.dataset.type
+    if (type == 'open') {
+      this.setData({
+        isIntro: true,
+        isHide: true
+      })
+    } else {
+      this.setData({
+        isIntro: false,
+        isHide: false
+      })
+    }
   },
 
   //切换课程目录显示
-  changeCatalog() {
-    this.setData({
-      isCatalog: !this.data.isCatalog,
-      isHide: !this.data.isHide
-    })
+  changeCatalog(event) {
+    console.log(event)
+    const type = event.target.dataset.type
+    if (type == 'open') {
+      this.setData({
+        isCatalog: true,
+        isHide: true
+      })
+    } else {
+      this.setData({
+        isCatalog: false,
+        isHide: false
+      })
+    }
+
   },
 
   //切换导航
@@ -357,8 +148,11 @@ Page({
   // 切换编辑主题
   changeRedactSubject(event) {
     console.log(event)
-    const type = event.currentTarget.dataset.type
+    const type = event.currentTarget.dataset.type,
+      theme_id = event.detail.theme_id
     if (type == 'open') {
+      // 主题权限查看
+      this.subjectclassifyRequest(theme_id)
       this.setData({
         isRedactSubject: true
       })
@@ -379,6 +173,8 @@ Page({
       classifyText: text,
       isSubjectClassify: false
     })
+    // 根据分类查询主题
+    this.subject()
   },
 
   // 切换主题分类弹窗显示
@@ -396,26 +192,44 @@ Page({
     }
   },
 
+
+  // 删除主题成功
+  deleteSubject() {
+    this.setData({
+      isRedactSubject: false
+    })
+  },
+
+  // 收藏主题成功
+  collectSubject() {
+    this.setData({
+      isRedactSubject: false
+    })
+  },
+
+
   //跳转到视频播放页面
-  toVideo() {
+  toVideo(event) {
+    const article_id= event.currentTarget.dataset.article_id
     wx.navigateTo({
-      url: '../courseCircleDetails/courseCircleDetails',
+      url: '../courseCircleDetails/courseCircleDetails?article_id=' + article_id,
     })
   },
 
   // 跳转到圈子信息页面
-  toCircleInfo(){
+  toCircleInfo() {
     wx.navigateTo({
-      url: '../circleInfo/circleInfo',
+      url: '../circleInfo/circleInfo?circle_id=' + this.data.circle_id + '&operate_user=' + this.data.circleInfo.user_id,
     })
   },
 
   // 跳转到发表主题页面
-  toPublishSubject(){
+  toPublishSubject() {
     wx.navigateTo({
-      url: '../publishSubject/publishSubject',
+      url: '../publishSubject/publishSubject?circle_id=' + this.data.circle_id ,
     })
   },
+
 
   //打开付款框
   pay() {
@@ -429,11 +243,229 @@ Page({
     this.setData({
       isPay: false
     })
-  }
+  },
+
+  // 完成付款
+  payment(){
+    this.setData({
+      isPay: false
+    })
+
+    // 预览圈信息
+    this.circleInfo()
+  },
 
 
 
   /**
    * 网络请求
    */
+
+  // 圈子信息
+  circleInfo() {
+    http.request({
+        url: api.API_PREVIEWCIRCLEINFO,
+        data: {
+          circle_id: this.data.circle_id,
+          user_id: wx.getStorageSync("user_id"),
+          source: 'xcx'
+        }
+      })
+      .then(res => {
+        console.log('----------圈子信息----------')
+        console.log(res)
+
+        // 判断是否加入
+        if (res.data.isJoin == 1) {
+          this.setData({
+            isJoin: true
+          })
+          // 根据分类查询主题
+          this.subject()
+        } else {
+          // 查询预览主题
+          this.previewSubject()
+        }
+
+        //判断是话题圈还是课程圈
+        if (res.data.circleInfo.type == 2) {
+          this.setData({
+            isCourse: true,
+            course_id: res.data.circleInfo.data_id
+          })
+          // 课程目录
+          this.courseCatalog()
+        }
+
+        this.setData({
+          circleInfo: res.data.circleInfo
+        })
+
+        WxParse.wxParse('lightSpot', 'html', res.data.circleInfo.lightSpot, this, 0)
+
+
+
+        // 关闭刷新
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
+  },
+
+
+  // 查询预览主题
+  previewSubject() {
+    http.request({
+        url: api.API_PREVIEWSUBJECT,
+        data: {
+          circle_id: this.data.circle_id,
+        }
+      })
+      .then(res => {
+        console.log('----------预览主题----------')
+        console.log(res)
+
+        this.setData({
+          themeInfo: res.data
+        })
+
+        // 关闭刷新
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
+      .catch(err => {
+        console.log(err.errorMsg)
+        this.setData({
+          themeInfo: []
+        })
+      })
+  },
+
+  // 根据分类查询主题
+  subject() {
+    http.request({
+        url: api.API_SUBJECT,
+        data: {
+          circle_id: this.data.circle_id,
+          page: this.data.subject_page,
+          page_size: 20,
+          type_id: this.data.classify,
+          user_id: wx.getStorageSync("user_id"),
+        }
+      })
+      .then(res => {
+        console.log('---------主题----------')
+        console.log(res)
+
+        let themeInfo = res.data.themeInfo
+
+        for (let i = 0; i < themeInfo.length; i++) {
+          const isLiked = themeInfo[i].isHaveLiked
+          if (themeInfo[i].parise_nickName.length > 0) {
+            this.setData({
+              isHaveLiked: true
+            })
+          } else {
+            this.setData({
+              isHaveLiked: false
+            })
+          }
+        }
+
+        this.setData({
+          subject_page: res.data.page,
+          subject_page_count: res.data.page_count,
+          themeInfo: themeInfo
+        })
+
+
+
+        // 关闭刷新
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
+      .catch(err => {
+        console.log(err.errorMsg)
+        this.setData({
+          themeInfo: []
+        })
+      })
+  },
+
+
+  // 课程目录
+  courseCatalog() {
+    http.request({
+        url: api.API_COURSECATALOG,
+        data: {
+          course_id: this.data.course_id,
+          page: this.data.course_page,
+          page_size: 20,
+        }
+      })
+      .then(res => {
+        console.log('----------课程目录----------')
+        console.log(res)
+
+        this.setData({
+          countCourse: res.data.countCourse,
+          countUpdateCourse: res.data.countUpdateCourse,
+          courselist: res.data.courselist,
+          course_page: res.data.page,
+          course_page_count: res.data.page_count,
+        })
+
+        // 关闭刷新
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
+  },
+
+  // 主题权限查看
+  subjectclassifyRequest(id) {
+    http.request({
+        url: api.API_SUBJECTCLASSIFY,
+        data: {
+          theme_id: id,
+          user_id: wx.getStorageSync("user_id"),
+        }
+      })
+      .then(res => {
+        console.log('----------主题权限查看----------')
+        console.log(res)
+
+        this.setData({
+          'subjectclassify.is_upadate': res.data.is_upadate, //是否有修改权限 0无修改权限 1有修改权限
+          'subjectclassify.is_delete': res.data.is_delete, //是否有删除权限 0无删除权限 1有删除权限
+          'subjectclassify.is_collect': res.data.is_collect, //是否有收藏权限 0无收藏权限 1有收藏权限
+          'subjectclassify.collect_status': res.data.collect_status, //0未收藏  1已收藏
+          'subjectclassify.theme_id': id, //主题id
+          'subjectclassify.circle_id': this.data.circle_id, //圈子id
+        })
+
+        // 关闭刷新
+        wx.hideLoading()
+      })
+  },
+
+  // 加入圈子
+  joinCircle(){
+    http.request({
+      url: api.API_JIONCIRCLE,
+      data:{
+        circle_id: this.data.circle_id,
+        user_id: wx.getStorageSync("user_id"),
+      }
+    })
+    .then(res=>{
+      console.log('----------加入成功-----------')
+      console.log(res)
+
+      util._showToastSuccess('成功加入')
+
+      // 圈子信息
+      this.circleInfo()
+    })
+  },
+
+ 
 })

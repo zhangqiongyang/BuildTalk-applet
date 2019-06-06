@@ -31,7 +31,7 @@
       </view>     
     </view>
 
-    <view wx:if='{{isHaveAllNum}}' class='formSubmit active_btn' bindtap="submit">确定</view>
+    <view wx:if='{{isHaveAllNum}}' class='formSubmit active_btn' bindtap="formSubmit">确定</view>
     <view wx:else class='formSubmit'>确定</view>
 
   </view>

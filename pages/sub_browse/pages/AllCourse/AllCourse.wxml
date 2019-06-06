@@ -1,19 +1,19 @@
 <!--pages/AllCourse/AllCourse.wxml-->
 <view class='courseList'>
   <block wx:for="{{courseinfo}}" wx:key='key'>
-    <view class='course_item' bindtap='toCourse'>
-      <image class='course_image' src='{{item.coursepic_url}}'></image>
+    <view class='course_item' bindtap='toCourse' data-id='{{item.circle_id}}'>
+      <image class='course_image' src='{{item.circle_image.pic_url}}'></image>
       <view class='course_info'>
-        <text class='item_title'>{{item.course_name}}</text>
-        <text class='item_update'>更新至{{item.coursenum}}讲</text>
+        <text class='item_title'>{{item.circle_name}}</text>
+        <text class='item_update'>更新至{{item.countCourse}}讲</text>
         <view class='item_author'>
-          <text>{{item.author_name}}</text>
-          <image src='/image/circle_v.png'></image>
+          <text>{{item.name}}</text>
+          <image wx:if='{{item.is_author==1}}' src='/image/circle_v.png'></image>
           <text style='margin-left:20rpx;'>{{item.author_desc}}</text>
         </view>
         <view class='item_money'>
           <text class='item_num'>¥{{item.course_money}}</text>
-          <text class='item_joined'>{{item.coursebuynum}}人已加入</text>
+          <text class='item_joined'>{{item.countUser}}人已加入</text>
         </view>
       </view>
     </view>

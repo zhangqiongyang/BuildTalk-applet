@@ -38,13 +38,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 19,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "创建圈子",
 					"pathName": "pages/sub_circle/pages/creatCircle/creatCircle",
-					"query": "",
+					"query": "circle_id=18",
 					"scene": null
 				},
 				{
@@ -72,7 +72,7 @@
 					"id": 4,
 					"name": "圈子详情",
 					"pathName": "pages/sub_circle/pages/circleDetails/circleDetails",
-					"query": "",
+					"query": "circle_id=3",
 					"scene": null
 				},
 				{
@@ -174,10 +174,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 19,
 					"name": "圈子",
 					"pathName": "pages/sub_author/pages/circle/circle",
-					"query": "",
+					"query": "user_id=144",
 					"scene": null
 				},
 				{

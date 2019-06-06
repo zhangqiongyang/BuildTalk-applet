@@ -7,61 +7,63 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: app.globalData.windowHeight + 49 - 2,
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.setData({
+      phone: options.mobile
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
@@ -70,9 +72,9 @@ Page({
    */
 
   // 跳转到绑定手机号
-  toPhone(){
+  toPhone() {
     wx.navigateTo({
-      url: '../bindPhone/bindPhone',
+      url: '../bindPhone/bindPhone?type=' + 2,
     })
   }
 })

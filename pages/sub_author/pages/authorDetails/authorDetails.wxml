@@ -18,10 +18,10 @@
   <!-- 精品文章 -->
   <view wx:if='{{isArticle}}' class='article_list'>
     <block wx:for='{{articleList}}'>
-      <view class='article_item'>
-        <image src='{{item.image}}' />
-        <text class='article_title'>{{item.title}}</text>
-        <text>{{item.text}}</text>
+      <view class='article_item' data-id='{{item.article_id}}'>
+        <image src='{{item.article_pic}}' mode='aspectFill'  />
+        <text class='article_title'>{{item.article_title}}</text>
+        <text>{{item.article_desc}}</text>
       </view>
     </block>
 
@@ -30,21 +30,16 @@
   <!-- 个人介绍 -->
   <view wx:if='{{!isArticle}}' class='author_intro'>
     <view class='intro_item'>
-      <view class='item_title'>关艾</view>
+      <view class='item_title'>{{authorInfo.name}}</view>
       <view>
-        <text class='item_text' style='margin-right:37rpx;'>博士</text>
-        <text class='item_text'>民盟成员 高级工程师 </text>
+        <text class='item_text' style='margin-right:37rpx;'>{{authorInfo.education}}</text>
+        <text class='item_text'>{{authorInfo.author_desc}}</text>
       </view>
-      <view class='item_text'>
-        悉尼大学工商管理硕士，美国南加州大学工商管理博士
-      </view>
+      <view class='item_text'>{{authorInfo.remark}}</view>
     </view>
     <view class='intro_item'>
       <view class='item_title'>曾获得</view>
-      <text> 2002-2003年度北京优秀企业家
-2004年度北京用户满意杰出管理者
-2005年度北京明星建筑装饰企业家，全部建筑装饰
-行业优秀企业家等诸多荣誉</text>
+      <text>{{authorInfo.received}}</text>
     </view>
   </view>
 </view>

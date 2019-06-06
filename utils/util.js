@@ -16,6 +16,14 @@ const formatNumber = n => {
 
 
 //showToast
+function _showToast(title) {
+  wx.showToast({
+    title: title,
+    icon:'none',
+    success: function (res) { },
+  })
+}
+
 function _showToastSuccess(title){
   wx.showToast({
     title: title,
@@ -34,7 +42,7 @@ function _showToastCancel(title) {
 
 
 // 模态对话框 showModal
-function _showModal(title,content) {
+function _showModal(title,content,callback) {
   wx.showModal({
     title: title,
     content: content,
@@ -43,11 +51,20 @@ function _showModal(title,content) {
     success: (res)=> {
       if (res.confirm) {
         console.log('用户点击确定')
+        callback()
         return true
+
       } else if (res.cancel) {
         console.log('用户点击取消')
       }
     }
+  })
+}
+
+// loading
+function _showLoading(){
+  wx.showLoading({
+    title: '加载中',
   })
 }
 
@@ -91,8 +108,10 @@ function delHtmlTag(str) {
 
 module.exports = {
   formatTime: formatTime,
+  _showToast,
   _showToastSuccess,
   _showToastCancel,
   _showModal,
+  _showLoading,
   isEmpty
 }

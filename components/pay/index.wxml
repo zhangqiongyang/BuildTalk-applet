@@ -4,7 +4,7 @@
   <view class='pay_title'>
     <view>
       <text>需支付</text>
-      <text class='color'>¥10.0</text>
+      <text class='color'>¥{{circleInfo.course_money}}</text>
     </view>
     <text class='cancel' bindtap='cancel'>取消</text>
   </view>

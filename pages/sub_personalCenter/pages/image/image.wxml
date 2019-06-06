@@ -1,6 +1,6 @@
 <!--pages/sub_personalCenter/pages/image/image.wxml-->
 <view class='background' style='height:{{windowHeight}}px;'>
-  <image style='height:{{windowWidth}}px;' src='{{pic}}' />
+  <image style='height:{{windowWidth}}px;' src='{{isHeadImage=="true"?mineInfo.headImage:mineInfo.bg_pic}}' mode='aspectFill'/>
   <view class='btn top' bindtap='upload'>从相册中选一张</view>
   <view class='btn bottom' bindtap='camera'>拍一张照片</view>
 </view> 

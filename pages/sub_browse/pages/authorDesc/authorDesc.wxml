@@ -6,7 +6,7 @@
   <!-- 每日一谈 -->
   <view class='image_box'>
     <image class='image_back' src='/image/allNews_back.png' />
-    <image class='image_down' src='/image/allNews_down.png' />
+    <image class='image_down' src='/image/authorDesc_up.png' />
   </view>
 
   <!-- 个人介绍 -->
@@ -14,20 +14,17 @@
     <view class='intro_item'>
       <view class='item_title'>谈小建</view>
       <view>
-        <text class='item_text' style='margin-right:37rpx;'>博士</text>
-        <text class='item_text'>民盟成员 高级工程师 </text>
+        <text class='item_text' style='margin-right:37rpx;'>{{authorInfo.education}}</text>
+        <block wx:for='{{authorInfo.author_desc}}'>
+          <text class='item_text'>{{item}}</text>
+        </block>
       </view>
-      <view class='item_text'>
-        悉尼大学工商管理硕士，美国南加州大学工商管理博士
-      </view>
+      <view class='item_text'>{{authorInfo.author_intro}}</view>
 
     </view>
     <view class='intro_item'>
       <view class='item_title'>曾获得</view>
-      <text> 2002-2003年度北京优秀企业家
-2004年度北京用户满意杰出管理者
-2005年度北京明星建筑装饰企业家，全部建筑装饰
-行业优秀企业家等诸多荣誉</text>
+      <text>{{authorInfo.received}}</text>
     </view>
   </view>
 

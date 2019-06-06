@@ -1,54 +1,63 @@
 <!--components/subject/index.wxml-->
 <view class='circle_item'>
-  <view class='item_author'>
-    <image src='{{subjectInfo.photo}}'></image>
+  <view class='item_author' bindtap='toSubjectDetails'>
+    <image src='{{subjectInfo.headImage}}'></image>
     <view class='author_con'>
       <view class='author_content'>
         <view class='author_box'>
           <text class='author_name'>{{subjectInfo.name}}</text>
-          <text wx:if='{{subjectInfo.isMaster}}' class='author_master'>圈主</text>
+          <text wx:if='{{subjectInfo.is_circleMaster == 1}}' class='author_master'>圈主</text>
         </view>
-        <text class='author_time'>{{subjectInfo.time}}</text>
+        <text class='author_time'>{{subjectInfo.publish_time}}</text>
       </view>
-      <image wx:if='{{isJoin}}' src='/image/circleDetails_more.png' bindtap='changeRedactSubject' data-type='open'></image>
+      <image wx:if='{{isJoin}}' src='/image/circleDetails_more.png' catchtap='changeRedactSubject' data-type='open'></image>
     </view>
   </view>
   <view class='circle_content'>
-    <text>{{subjectInfo.content}}</text>
-    <view class='imageBox'>
-      <block wx:for='{{subjectInfo.imageList}}' wx:key='key'>
-        <image src='{{item}}'></image>
+    <text  style='width:100%;display:block;' bindtap='toSubjectDetails'>{{subjectInfo.theme_content}}</text>
+    <view class='imageBox'  bindtap='toSubjectDetails'>
+      <block wx:for='{{subjectInfo.theme_image}}' wx:key='key'>
+        <image src='{{item.pic_url}}' lazy-load='true' mode='aspectFill'></image>
       </block>
     </view>
 
     <!-- 留言、转发及点赞操作 -->
     <view wx:if='{{isJoin}}'>
       <view class='image_box'>
-        <image src='/image/circleDetails_like.png'></image>
-        <image src='/image/circleDetails_msg.png'></image>
+        <image wx:if='{{subjectInfo.is_parise == 1}}' src='/image/msg_like_hover.png' bindtap='like'></image>
+        <image wx:else src='/image/msg_like.png' catchtap='like'></image>
+        <image src='/image/circleDetails_msg.png' catchtap='isMsg' data-type='open'></image>
         <button class='share' open-type='share'>
           <image src='/image/circleDetails_share.png'></image>
         </button>
       </view>
-      <view class='liked'>
+      <view class='liked' wx:if='{{subjectInfo.parise_nickName.length>0}}'>
         <image class='liked_image' src='/image/circleDetails_liked.png'></image>
         <view class='liked_name'>
-          <block wx:for='{{subjectInfo.liked}}' wx:key='key'>
+          <block wx:for='{{subjectInfo.parise_nickName}}' wx:key='key'>
             <text>{{item.name}}</text>
-            <image wx:if='{{item.isVip}}' class='liked_v' src='/image/circle_v.png'></image>
+            <image wx:if='{{item.user_type==2}}' class='liked_v' src='/image/circle_v.png'></image>
             <text>，</text>
           </block>
         </view>
       </view>
       <view class='msg'>
-        <block wx:for='{{subjectInfo.msg}}' wx:key='key'>
+        <block wx:for='{{subjectInfo.comment_content}}' wx:key='key'>
           <view class='msg_item'>
             <text class='msg_name'>{{item.name}}：</text>
             <text class='msg_con'>{{item.content}}</text>
           </view>
         </block>
       </view>
+
+
+      <view wx:if='{{isMsg}}' class='textarea_box'>
+        <view class='masking' catchtap='isMsg' data-type='close'></view>
+        <view class='textarea_box'>
+          <textarea cursor-spacing='182' placeholder='评论...' maxlength='200' auto-focus='true' focus='true' fixed='true' bindfocus='textareafocus' bindconfirm='submit' bindinput='input' />
+          <view class='btn' catchtap='submit'>提交</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>
-

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "v-msg":"/components/msg/index",
-    "v-tabbar": "/components/tabbar/index"
+    "v-tabbar": "/components/tabbar/index",
+    "v-redact": "/components/redact/index"
   }
 }

@@ -1,0 +1,55 @@
+/* components/redact/index.wxss */
+
+.back_masking {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 40, 49, 0.4);
+}
+
+.redactSubject {
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+  background-color: #f8f8f8;
+  width: 100%;
+}
+
+.redact_box {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+}
+
+.redact_item {
+  width: 180rpx;
+  height: 173rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.redact_item image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.redact_item text {
+  padding-top: 28rpx;
+  color: #656565;
+  font-size: 22rpx;
+}
+
+.cancel {
+  width: 100%;
+  height: 88rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #656565;
+  margin-top: 10rpx;
+}

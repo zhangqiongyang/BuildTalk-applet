@@ -1,14 +1,22 @@
 // pages/sub_circle/pages/circleInfo/circleInfo.js
 const app = getApp();
-const util = require('../../../../utils/util.js');
 
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+
+const util = require('../../../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: app.globalData.windowHeight + 49 -1.5,
     isMaster: false, // 是否是圈主
   },
 
@@ -16,7 +24,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log(options)
+    this.setData({
+      circle_id: options.circle_id,
+      operate_user: options.operate_user
+    })
+    // 圈子信息
+    this.circleInfo()
   },
 
   /**
@@ -76,33 +90,92 @@ Page({
   //跳转到圈子成员
   toCircleMember() {
     wx.navigateTo({
-      url: '../circleMember/circleMember',
+      url: '../circleMember/circleMember?circle_id=' + this.data.circle_id,
     })
   },
 
   // 跳转到名片
   toCard() {
     wx.navigateTo({
-      url: '../card/card',
+      url: '../card/card?circle_id=' + this.data.circle_id,
     })
   },
 
   // 跳转到圈子资料
   toCircleData() {
-    if (this.data.isMaster) {
+    if (this.data.circleInfo.is_circleMaster == 1 ) {
       wx.navigateTo({
-        url: '../creatCircle/creatCircle',
+        url: '../creatCircle/creatCircle?circle_id=' + this.data.circle_id,
       })
-    }else{
+    } else {
       wx.navigateTo({
-        url: '../circleData/circleData',
+        url: '../circleData/circleData?circle_id=' + this.data.circle_id,
       })
     }
- 
+
   },
 
   // 退出圈子
   exit() {
-    util._showModal('确定退出此圈子？','')
-  }
+    let that = this
+    util._showModal('确定退出此圈子？', '',function(){
+      // 退出圈子
+      that.quitCircle()
+    })
+   
+    // util._showModal('确定退出此圈子？', '', ()=> {
+    //   // 退出圈子
+    //   that.quitCircle()
+    // })
+  },
+
+
+  /**
+   * 网络请求
+   */
+
+  // 圈子信息
+  circleInfo() {
+    http.request({
+        url: api.API_CIRCLEINFO,
+        data: {
+          user_id: wx.getStorageSync('user_id'),
+          circle_id: this.data.circle_id,
+          source: 'xcx',
+          operate_user: this.data.operate_user,
+        }
+      })
+      .then(res => {
+        console.log('--------圈子信息---------')
+        console.log(res)
+        this.setData({
+          circleInfo:res.data
+        })
+      })
+  },
+
+  
+  // 退出圈子
+  quitCircle(){
+    http.request({
+      url: api.API_QUITCIRCLE,
+      data:{
+        circle_id: this.data.circle_id,
+        user_id: wx.getStorageSync("user_id"),
+      }
+    })
+    .then(res=>{
+      console.log('----------退出成功-----------')
+      console.log(res)
+
+      util._showToastSuccess('退出成功')
+
+      wx.navigateBack({
+        delta: 2,
+      })
+      wx.redirectTo({
+        url: '../../../../pages/tabbar/circle/circle',
+      })      
+    })
+  },
 })

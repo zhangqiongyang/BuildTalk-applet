@@ -1,10 +1,12 @@
 <!--pages/sub_circle/pages/circleData/circleData.wxml-->
+<import src="/wxParse/wxParse.wxml" />
+
 <view class='background'>
   <view class='circleImageBox'>
     <view class='circleImage'>
-      <image class='uploadImage' src='{{image}}'></image>
+      <image class='uploadImage' src='{{circle_image}}' mode='aspectFill'></image>
       <view class='circleNameBox'>
-        <view class='circleName'>{{name}}</view>
+        <view class='circleName'>{{circle_name}}</view>
       </view>
     </view>
   </view>
@@ -17,18 +19,18 @@
       </block>
     </view>
   </view>
-  
+
 
   <view wx:if='{{isCourse}}' class='introduceBox'>
     <view class='lightspot'>
+      <text class='intro_title_text'>课程亮点</text>
       <view class='lightspot_item'>
-        <image src='/image/circleDetails_star.png'></image>
-        <text>第一手实战经验</text>
+        <template is="wxParse" data="{{wxParseData:lightSpot.nodes}}" />
       </view>
     </view>
     <view class='paymentInstructions'>
       <text class='intro_title_text'>付费须知</text>
-      <view class='intro_content_all'> 
+      <view class='intro_content_all'>
         <text>1、本课程为视频课程，预计四月底更新完毕，购买成功后即可通过“建谈”APP端、小程序端永久观看。</text>
         <text>2、由于视频内容为虚拟商品，一经购买，概不退款。</text>
         <text>3、课程学习过程中，如有任何问题，请联系13433280987</text>
@@ -37,6 +39,6 @@
   </view>
 
   <view wx:else class='introduceBox'>
-    <view class='introduceBoxTextarea'>{{content}}</view>
+    <view class='introduceBoxTextarea'>{{circle_desc}}</view>
   </view>
 </view>

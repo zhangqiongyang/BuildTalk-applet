@@ -1,28 +1,28 @@
 <!--components/master/index.wxml-->
 <view class='master_item'>
-  <view class='item'>
-    <image src='{{master.image}}' />
+  <view class='item' bindtap='toMasterDetails' data-id='{{master.user_id}}'>
+    <image src='{{master.headImage}}' mode='aspectFill' />
     <view class='item_info_box'>
       <view class='item_name'>
         <text>{{master.name}}</text>
-        <image wx:if='{{master.isVip}}' src='/image/authorRecommend_v.png'></image>
+        <image wx:if='{{master.is_author ==1}}' src='/image/authorRecommend_v.png'></image>
       </view>
       <view class='item_info'>
-        <text class='color'>{{master.attentionNum}}</text>
+        <text class='color'>{{master.countAttention}}</text>
         <text>人已关注</text>
       </view>
     </view>
   </view>
   <view wx:if="{{!isMineFans}}">
-    <view wx:if='{{master.isAttention}}' >
-      <view  wx:if='{{!isMineAttention}}' class='master_attention'>
+    <view wx:if='{{master.is_attention == 1}}'>
+      <view wx:if='{{!isMineAttention}}' class='master_attention' bindtap='attention' data-id='{{master.user_id}}'>
         <image src='/image/authorRecommend_attention.png'></image>
         已关注
       </view>
-      <view wx:if='{{isMineAttention}}' class='master_attention'>取消关注</view>
+      <view wx:if='{{isMineAttention}}' class='master_attention' bindtap='attention' data-id='{{master.user_id}}'>取消关注</view>
     </view>
 
-    <view wx:if='{{!master.isAttention}}' class='master_attention'>+关注</view>
+    <view wx:if='{{master.is_attention == 0}}' class='master_attention' bindtap='attention' data-id='{{master.user_id}}'>+关注</view>
   </view>
 
 </view>

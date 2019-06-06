@@ -1,44 +1,43 @@
 <!--pages/sub_circle/pages/circleDetails/circlrDetails.wxml-->
+
+<import src="/wxParse/wxParse.wxml" />
+
 <view>
   <!-- 已加入圈子标题 -->
   <view wx:if='{{isJoin}}' class='joined_title'>
-    <image class='circle_back' src='/image/example.jpg'></image>
+    <image class='circle_back' src='{{circleInfo.circle_image.pic_url}}' mode='aspectFill'></image>
     <image class='circle_set' src='/image/circleDetails_set.png' bindtap='toCircleInfo'></image>
     <view class='joined_circle'>
       <view class='author_image'>
-        <image src='/image/example.jpg'></image>
+        <image src='{{circleInfo.master_pic}}'></image>
       </view>
       <view class='joined_circle_info'>
-        <text class='joined_circle_title'>建筑产业工业互联网</text>
+        <text class='joined_circle_title'>{{circleInfo.circle_name}}</text>
         <view class='author_info'>
-          <text>圈主：小地瓜</text>
-          <image src='/image/circle_v.png'></image>
-          <text wx:if='{{isCourse}}' style='padding-left:30rpx;'>6人加入</text>
-          <text wx:else style='padding-left:30rpx;'>创建 490天</text>
+          <text>圈主：{{circleInfo.name}}</text>
+          <image wx:if='{{circleInfo.is_author==1}}' src='/image/circle_v.png'></image>
+          <text wx:if='{{isCourse}}' style='padding-left:30rpx;'>{{circleInfo.joinCirlceNum}}人加入</text>
+          <text wx:else style='padding-left:30rpx;'>创建{{circleInfo.create_day}}天</text>
         </view>
       </view>
     </view>
   </view>
 
-  <!-- 已加入课程标题 -->
-  <view>
-
-  </view>
 
   <!-- 圈子标题 -->
   <view wx:if='{{!isJoin}}' class='title'>
-    <image class='circle_back' src='/image/circleDetails_back.png' mode='aspectFill'></image>
-    <image class='circle_image' src='/image/example.jpg'></image>
+    <image class='circle_back' src='/image/circleDetails_back.png' mode='aspectFill' />
+    <image class='circle_image' src='{{circleInfo.circle_image.pic_url}}' mode='aspectFill' />
     <view class='title_content'>
-      <text class='title_title'>建筑产业工业互联网</text>
+      <text class='title_title'>{{circleInfo.circle_name}}</text>
       <view class='title_author'>
-        <text>圈主：小地瓜</text>9
-        <image src='/image/circle_v.png'></image>
-        <text style='padding-left:30rpx;'>创建 490天</text>
+        <text>圈主：{{circleInfo.name}}</text>
+        <image wx:if='{{circleInfo.is_author==1}}' src='/image/circle_v.png'></image>
+        <text style='padding-left:30rpx;'>创建{{circleInfo.create_day}}天</text>
       </view>
       <view class='title_label'>
-        <block wx:key='key'>
-          <text class='label'>BIM</text>
+        <block wx:for='{{circleInfo.circle_tags}}' wx:key='key'>
+          <text class='label'>{{item}}</text>
         </block>
       </view>
     </view>
@@ -52,11 +51,9 @@
         <image hidden='{{isIntro}}' src='/image/circleDetails_down.png' bindtap='changeIntro'></image>
         <image hidden='{{!isIntro}}' src='/image/circleDetails_up.png' bindtap='changeIntro'></image>
       </view>
-      <text wx:if='{{!isIntro}}' class='intro_content'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
-</text>
+      <text wx:if='{{!isIntro}}' class='intro_content'>{{circleInfo.circle_desc}}</text>
       <view class='intro_all' wx:else>
-        <text class='intro_content_all'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
-</text>
+        <text class='intro_content_all'>{{circleInfo.circle_desc}}</text>
         <view class='btn fixed'>加入圈子</view>
       </view>
     </view>
@@ -64,19 +61,16 @@
     <view wx:if='{{isCourse}}'>
       <view class='intro_title'>
         <text class='intro_title_text'>课程介绍</text>
-        <image hidden='{{isIntro}}' src='/image/circleDetails_down.png' bindtap='changeIntro'></image>
-        <image hidden='{{!isIntro}}' src='/image/circleDetails_up.png' bindtap='changeIntro'></image>
+        <image hidden='{{isIntro}}' src='/image/circleDetails_down.png' bindtap='changeIntro' lazy-load='true' data-type='open'></image>
+        <image hidden='{{!isIntro}}' src='/image/circleDetails_up.png' bindtap='changeIntro' data-type='close'></image>
       </view>
-      <text wx:if='{{!isIntro}}' class='intro_content'>加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合加快Bim技术的推广与应用，对建筑业每个项目的所有参建方用三维仿真的形式表现出来，加快所有资源的整合
-</text>
+      <text wx:if='{{!isIntro}}' class='intro_content'>{{circleInfo.circle_desc}}</text>
       <view class='intro_all' wx:else>
-        <text class='intro_content_all'>课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点课程亮点
-</text>
+        <text class='intro_content_all'>{{circleInfo.circle_desc}}</text>
         <view class='lightspot'>
           <text class='intro_title_text'>课程亮点</text>
           <view class='lightspot_item'>
-            <image src='/image/circleDetails_star.png'></image>
-            <text>第一手实战经验</text>
+            <template is="wxParse" data="{{wxParseData:lightSpot.nodes}}" />
           </view>
         </view>
         <view class='paymentInstructions'>
@@ -87,7 +81,6 @@
             <text>3、课程学习过程中，如有任何问题，请联系13433280987</text>
           </view>
         </view>
-        <view class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
       </view>
 
     </view>
@@ -99,30 +92,29 @@
     <view class='catalog_title'>
       <text class='intro_title_text'>目录</text>
       <view class='catalog_title_con' bindtap='changeCatalog'>
-        <text>更新至37讲/全100讲</text>
-        <image hidden='{{isCatalog}}' src='/image/circleDetails_down.png'></image>
-        <image hidden='{{!isCatalog}}' src='/image/circleDetails_up.png'></image>
+        <text>更新至{{countUpdateCourse}}讲/全{{countCourse}}讲</text>
+        <image hidden='{{isCatalog}}' src='/image/circleDetails_down.png' data-type='open'></image>
+        <image hidden='{{!isCatalog}}' src='/image/circleDetails_up.png' data-type='close'></image>
       </view>
     </view>
-    <view class='catalog_con' wx:if='{{!isCatalog}}' bindtap='toVideo'>
+    <view class='catalog_con' wx:if='{{!isCatalog}}' bindtap='toVideo' data-id='{{courselist[0].article_id}}'>
       <view class='catalog_video_title'>
         <image src='/image/circleDetails_video.png'></image>
-        <text>01讲 ArchCAD简介</text>
+        <text>{{courselist[0].article_title}}</text>
       </view>
       <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
     </view>
     <view class='catalog_content' wx:if='{{isCatalog}}'>
-      <block wx:for='{{catalogList}}' wx:key='key'>
-        <view class='catalog_item' bindtap='toVideo'>
+      <block wx:for='{{courselist}}' wx:key='key'>
+        <view class='catalog_item'>
           <view class='catalog_video_title'>
             <image src='/image/circleDetails_video.png'></image>
-            <text>{{item.num}} {{item.name}}</text>
+            <text>{{item.article_title}}</text>
           </view>
-          <image wx:if='{{item.isAudition}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+          <image wx:if='{{item.is_audition ==1}}' class='catalog_audition' src='/image/circleDetails_audition.png' bindtap='toVideo' data-id='{{item.article_id}}'></image>
           <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
         </view>
       </block>
-      <view wx:if='{{!isJoin}}' class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
     </view>
   </view>
 
@@ -145,12 +137,12 @@
   <!-- 圈子主体 -->
   <view hidden='{{isHide}}' class='content'>
 
-    <view wx:if='{{noSubject}}' class='no_record'>
+    <view wx:if='{{themeInfo.length==0}}' class='no_record'>
       <image src='/image/no_essence.png'></image>
       <text>无内容</text>
     </view>
 
-    <block wx:for='{{circleList}}' wx:key='key'>
+    <block wx:if='{{themeInfo.length>0}}' wx:for='{{themeInfo}}' wx:key='key'>
       <v-subject subjectInfo='{{item}}' isJoin='{{isJoin}}' bind:changeRedactSubject='changeRedactSubject' data-type='open' />
     </block>
   </view>
@@ -164,10 +156,10 @@
   </view>
 
   <!-- 加入圈子 -->
-  <view wx:if='{{!isJoin}}' hidden='{{isHide}}' class='btnBox'>
-    <text>加入圈子可以浏览更多内容</text>
-    <view wx:if='{{isCourse}}' class='btn' bindtap='pay'>加入圈子￥10.00</view>
-    <view wx:else class='btn'>加入圈子</view>
+  <view wx:if='{{!isJoin}}'>
+    <text class='joinMore' wx:if='{{!isHide}}'>加入圈子可以浏览更多内容</text>
+    <view wx:if='{{isCourse}}' class='btn fixed' bindtap='pay'>加入圈子￥{{circleInfo.course_money}}</view>
+    <view wx:else class='btn fixed' bindtap='joinCircle'>加入圈子</view>
   </view>
 
   <!-- 主题分类查看 -->
@@ -175,13 +167,21 @@
     <view class='subject_classify'>
       <view class='classify_title'>查看指定内容</view>
       <view class='classify_box'>
-        <view class='classify_item' bindtap='changeSubjectClassify' data-type='all' data-text='全部主题'>
+        <view class='classify_item' bindtap='changeSubjectClassify' data-type='1' data-text='全部主题'>
           <image src='/image/circleDetails_all.png'></image>
           <text>全部主题</text>
         </view>
-        <view class='classify_item' bindtap='changeSubjectClassify' data-type='picture' data-text='图片主题'>
+        <view class='classify_item' bindtap='changeSubjectClassify' data-type='2' data-text='图片主题'>
           <image src='/image/circleDetails_picture.png'></image>
           <text>图片主题</text>
+        </view>
+        <view class='classify_item' bindtap='changeSubjectClassify' data-type='3' data-text='只看圈主'>
+          <image src='/image/circleDetails_master.png'></image>
+          <text>只看圈主</text>
+        </view>
+        <view class='classify_item' bindtap='changeSubjectClassify' data-type='4' data-text='我的主题'>
+          <image src='/image/circleDetails_mine.png'></image>
+          <text>我的主题</text>
         </view>
       </view>
     </view>
@@ -189,29 +189,10 @@
 
 
   <!-- 编辑主题 -->
-  <view class='back_masking' wx:if='{{isRedactSubject}}'>
-    <view class='redactSubject'>
-      <view class='redact_box'>
-        <view class='redact_item'>
-          <image wx:if='{{isCollect}}' src='/image/circleDetails_collect_hover.png'></image>
-          <image wx:else src='/image/circleDetails_collect.png'></image>
-          <text>收藏</text>
-        </view>
-        <view class='redact_item'>
-          <image src='/image/circleDetails_change.png'></image>
-          <text>修改</text>
-        </view>
-        <view class='redact_item'>
-          <image src='/image/circleDetails_delete.png'></image>
-          <text>删除</text>
-        </view>
-      </view>
-      <view class='cancel' bindtap='changeRedactSubject' data-type='close'>取消</view>
-    </view>
-  </view>
-
+  <v-redact wx:if='{{isRedactSubject}}' subjectclassify='{{subjectclassify}}' bind:changeRedactSubject='changeRedactSubject' bind:deleteSubject='deleteSubject' bindcollectSubject='collectSubject' data-type='close' />
+  
   <!-- 付费 -->
-  <v-pay wx:if='{{isPay}}' bind:cancel='cancel' />
+  <v-pay wx:if='{{isPay}}' bind:cancel='cancel' bind:pay='payment'  circleInfo='{{circleInfo}}' />
 
 
 

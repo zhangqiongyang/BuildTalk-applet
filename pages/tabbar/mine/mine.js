@@ -15,7 +15,9 @@ Page({
    */
   data: {
     windowHeight: app.globalData.windowHeight -0.5,
-    phoneNumber: app.globalData.phoneNumber,
+    phoneNumber: app.globalData.mobile,
+    headImage: app.globalData.headImage,
+    nickName: app.globalData.nickName,
     userInfo: {},
     hasUserInfo: false,
     isHavePhone: '', //用户是否绑定手机号
@@ -54,14 +56,7 @@ Page({
       })
     }
 
-    if (!app.globalData.isHavePhone) {
-      // 查询用户是否绑定手机号
-      this.checkIsHavePhone()
-    } else {
-      this.setData({
-        isHavePhone: true
-      })
-    }
+    
   },
 
 
@@ -77,9 +72,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (!app.globalData.isHavePhone) {
+      // 查询用户是否绑定手机号
+      this.checkIsHavePhone()
+    } else {
+      this.setData({
+        isHavePhone: true
+      })
+    }
 
     this.setData({
-      phoneNumber: app.globalData.phoneNumber
+      mobile: app.globalData.mobile,
+      headImage: app.globalData.headImage,
+      nickName: app.globalData.nickName,
     })
 
 
@@ -152,7 +157,7 @@ Page({
   // 跳转到信息
   toMineInfo() {
     wx.navigateTo({
-      url: '/pages/sub_personalCenter/pages/info/info',
+      url: '/pages/sub_personalCenter/pages/mineInfo/mineInfo',
     })
   },
   // 跳转到钱包
@@ -174,7 +179,7 @@ Page({
     })
   },
 
-  // 跳转到问题反馈
+  // 跳转到绑定手机号
   toBindPhone() {
     wx.navigateTo({
       url: '/pages/sub_personalCenter/pages/bindPhone/bindPhone',
@@ -217,11 +222,25 @@ Page({
         console.log(res)
         this.setData({
           isHavePhone: true,
-          phone: res.data
+          mobile: res.data.mobile
         })
+     
         app.globalData.isHavePhone = true
-        app.globalData.mobile = res.data
+        app.globalData.mobile = res.data.mobile
+        app.globalData.headImage = res.data.headImage
+        app.globalData.nickName = res.data.nickName
+        app.globalData.user_id = res.data.user_id
+        wx.setStorageSync('user_id', res.data.user_id)
+        console.log(wx.getStorageSync('user_id'))
+
+
         console.log(app.globalData.isHavePhone)
+      })
+      .catch(err=>{
+        console.log('------------未绑定手机号------------')
+        wx.navigateTo({
+          url: '/pages/sub_personalCeter/pages/bindPhone/bindPhone',
+        })
       })
   }
 

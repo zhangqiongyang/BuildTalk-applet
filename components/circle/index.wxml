@@ -1,17 +1,17 @@
 <!--components/circle/index.wxml-->
-<view class='circle_item' bindtap='toCircle'>
+<view class='circle_item' bindtap='toCircle' data-id='{{circle.circle_id}}'>
   <view class='image_box'>
-    <image class='image_circle' src='{{circle.image}}'></image>
-    <image wx:if='{{circle.isCourse}}' class='image_course' src='/image/circle_course.png'></image>
+    <image class='image_circle' src='{{circle.circle_image.pic_url}}' mode='aspectFill'></image>
+    <image wx:if='{{circle.type =="课程"}}' class='image_course' src='/image/circle_course.png'></image>
   </view>
   <view class='circle_info'>
-    <text class='circle_title'>{{circle.title}}</text>
+    <text class='circle_title'>{{circle.circle_name}}</text>
     <view class='circle_master'>
       <text>圈主：{{circle.name}}</text>
-      <image wx:if='{{circle.isVip}}' src='/image/authorRecommend_v.png'></image>
+      <image wx:if='{{circle.is_author == 1}}' src='/image/authorRecommend_v.png'></image>
     </view>
-    <view class='circle_label_box'>
-      <block wx:for='{{circle.label}}'>
+    <view class='circle_label_box' wx:if='{{circle.circle_tags.length>0}}'>
+      <block wx:for='{{circle.circle_tags}}'>
         <text class='circle_label'>{{item}}</text>
       </block>
     </view>

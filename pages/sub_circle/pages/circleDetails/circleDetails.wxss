@@ -1,8 +1,12 @@
 /* pages/sub_circle/pages/circleDetails/circlrDetails.wxss */
-
+@import "/wxParse/wxParse.wxss";
+view {
+  overflow: visible;
+  line-height: normal;
+}
 /* 已加入的圈子标题 */
 
-.circle_set{
+.circle_set {
   width: 40rpx;
   height: 40rpx;
   position: absolute;
@@ -47,7 +51,7 @@
   color: #242831;
 }
 
-.author_info{
+.author_info {
   margin-top: 20rpx;
 }
 
@@ -99,7 +103,7 @@
   font-weight: bold;
 }
 
-.title_author{
+.title_author {
   margin-top: 20rpx;
 }
 
@@ -113,6 +117,7 @@
 }
 
 .label {
+  display: inline-block;
   padding: 5rpx 20rpx;
   margin-right: 10rpx;
   margin-bottom: 10rpx;
@@ -162,7 +167,8 @@
 .intro_all {
   background-color: #fff;
   z-index: 1;
-  height: 500rpx;
+  /* height: 500rpx; */
+  padding-bottom: 100rpx;
 }
 
 .intro_content_all {
@@ -173,7 +179,7 @@
   display: block;
 }
 
-.intro_content_all text{
+.intro_content_all text {
   display: inline-block;
   line-height: 40rpx;
 }
@@ -273,6 +279,7 @@
 
 .catalog_content {
   background-color: #f7f8fa;
+  padding-bottom: 100rpx;
 }
 
 .catalog_item {
@@ -346,26 +353,23 @@
 
 .content {
   margin-top: 10rpx;
+  margin-bottom: 88rpx;
 }
 
 .circle_item {
   /* padding: 40rpx 30rpx; */
 }
 
-
 /* 加入圈子 */
 
-.btnBox {
+.joinMore {
   background-color: #f7f8fa;
-  padding-top: 1px;
-}
-
-.btnBox text {
+  padding-top: 40rpx;
+  padding-bottom: 130rpx;
   color: #8f8f8f;
   font-size: 24rpx;
   display: block;
   text-align: center;
-  margin: 40rpx auto 30rpx auto;
 }
 
 .btn {
@@ -418,60 +422,6 @@
 
 /* 编辑主题 */
 
-.back_masking {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(36, 40, 49, 0.4);
-}
-
-.redactSubject {
-  position: fixed;
-  bottom: 0;
-  z-index: 99;
-  background-color: #f8f8f8;
-  width: 100%;
-}
-
-.redact_box {
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
-}
-
-.redact_item {
-  width: 180rpx;
-  height: 173rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.redact_item image {
-  width: 30rpx;
-  height: 30rpx;
-}
-
-.redact_item text {
-  padding-top: 28rpx;
-  color: #656565;
-  font-size: 22rpx;
-}
-
-.cancel {
-  width: 100%;
-  height: 88rpx;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24rpx;
-  color: #656565;
-  margin-top: 10rpx;
-}
-
 /* 主题分类查看 */
 
 .center {
@@ -523,8 +473,8 @@
   padding-top: 30rpx;
 }
 
-
 /* 无内容 */
+
 .no_record {
   display: flex;
   flex-direction: column;

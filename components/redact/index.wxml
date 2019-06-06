@@ -1,0 +1,22 @@
+<!--components/redact/index.wxml-->
+<view>
+  <view class='back_masking' bindtap='changeRedactSubject'></view>
+  <view class='redactSubject'>
+    <view class='redact_box'>
+      <view class='redact_item' wx:if='{{subjectclassify.is_collect == 1}}' bindtap='collect'>
+        <image wx:if='{{subjectclassify.collect_status == 1}}' src='/image/circleDetails_collect_hover.png'></image>
+        <image wx:else src='/image/circleDetails_collect.png'></image>
+        <text>收藏</text>
+      </view>
+      <view class='redact_item' wx:if='{{subjectclassify.is_upadate == 1}}' bindtap='change'>
+        <image src='/image/circleDetails_change.png'></image>
+        <text>修改</text>
+      </view>
+      <view class='redact_item' wx:if='{{subjectclassify.is_delete == 1}}' bindtap='deleteSubject'>
+        <image src='/image/circleDetails_delete.png'></image>
+        <text>删除</text>
+      </view>
+    </view>
+    <view class='cancel' bindtap='changeRedactSubject'>取消</view>
+  </view>
+</view>

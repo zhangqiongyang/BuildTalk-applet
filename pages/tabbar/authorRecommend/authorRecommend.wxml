@@ -16,15 +16,16 @@
     </view>
     <!-- 大咖列表 -->
     <view class='list'>
-      <block wx:for='{{authorList}}'>
-        <image src='{{item}}' bindtap='toAuthor'></image>
+      <block wx:for='{{authorList}}' wx:key='key' >
+        <image src='{{item.master_pic}}' bindtap='toAuthor' data-id='{{item.author_id}}'></image>
       </block>
     </view>
     <!-- 换一换 -->
-    <view class='change'>
+    <view class='change' bindtap='change'>
       <image src='/image/authorRecommend_change.png'></image>
       <text>换一换</text>
     </view>
+
   </view>
   <!-- 人气圈主 -->
   <view>
@@ -38,21 +39,21 @@
     </view>
     <view class='master_list'>
       <block wx:for='{{masterList}}'>
-        <view class='master_item' bindtap='toMaster'>
-          <image class='master_image' src='{{item.image}}'></image>
+        <view class='master_item' bindtap='toMaster' data-id='{{item.user_id}}'>
+          <image class='master_image' src='{{item.headImage}}' mode='aspectFill'></image>
           <view class='master_name'>
             <text>{{item.name}}</text>
             <image wx:if='{{item.isVip}}' src='/image/authorRecommend_v.png'></image>
           </view>
           <view class='master_info'>
-            <text class='color'>{{item.attentionNum}}</text>
+            <text class='color'>{{item.countAttention}}</text>
             <text>人已关注</text>
           </view>
-          <view wx:if='{{item.isAttention}}' class='master_attention'>
+          <view wx:if='{{item.is_attention ==1}}' class='master_attention' catchtap='attention' data-id='{{item.user_id}}' data-index='{{index}}'>
             <image src='/image/authorRecommend_attention.png'></image>
             已关注
           </view>
-          <view wx:else class='master_attention'>+关注</view>
+          <view wx:else class='master_attention' catchtap='attention' data-id='{{item.user_id}}'>+关注</view>
         </view>
       </block>
 

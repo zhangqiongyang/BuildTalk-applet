@@ -16,9 +16,9 @@
     <view class='articleTitle'>
       <text class='article_title'>{{articleinfo.article_title}}</text>
       <view class='article_articleInfo'>
-        <image class='article_authorImg' src='{{authorinfo.author_pic}}' mode='aspectFill'></image>
+        <image class='article_authorImg' src='{{articleinfo.author_pic}}' mode='aspectFill'></image>
         <view class='article_authorInfo'>
-          <text class='article_author'>{{authorinfo.author_name}}</text>
+          <text class='article_author'>{{articleinfo.author_name}}</text>
           <text class='article_time'>{{articleinfo.publish_time}}</text>
         </view>
       </view>
@@ -59,6 +59,6 @@
   </scroll-view>
 
   <!-- 评论、点赞、转发 -->
-  <v-tabbar />
+  <v-tabbar list='{{tabbarlist}}' bind:uploadmsg='uploadMsg'/>
 
 </view>

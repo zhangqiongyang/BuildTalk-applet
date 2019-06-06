@@ -2,18 +2,19 @@
 <view class='operate'>
 
   <view class='textarea'>
-    <textarea  bindinput='input' cursor-spacing='10' adjust-position bindlinechange='linechange'></textarea>
+    <textarea bindinput='input' fixed='true' show-confirm-bar='true' cursor-spacing='10' auto-height='true' adjust-position bindconfirm='submit' value='{{value}}' maxlength='200'></textarea>
     <view wx:if='{{!isMsg}}' class='operate_msg'>
       <image src='/image/subjectDetails_msg.png'></image>
-      <text>12评论</text>
+      <text>{{list.guestbookNum}}评论</text>
     </view>
   </view>
 
-  <view class='operate_like'>
-    <image src='/image/subjectDetails_like.png'></image>
-    <text>8赞</text>
+  <view class='operate_like' bindtap='like' data-id='{{list.article_id}}'>
+    <image wx:if='{{list.isCollect == 1}}' src='/image/msg_like_hover.png'></image>
+    <image wx:else src='/image/msg_like.png'></image>
+    <text>{{list.countCollect}}赞</text>
   </view>
-  <view class='operate_share'>
+  <button open-type='share' class='operate_share'>
     <image src='/image/subjectDetails_share.png'></image>
-  </view>
+  </button>
 </view>

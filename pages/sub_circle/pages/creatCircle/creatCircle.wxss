@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #F7F8FA;
+  background-color: #f7f8fa;
 }
 
 .circleImageBox {
@@ -72,10 +72,16 @@
 
 .labelView {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.labelViewBox {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 30rpx;
 }
 
 .label {
@@ -144,7 +150,7 @@
 .btn {
   width: 390rpx;
   height: 88rpx;
-  background: #E0DFE0;
+  background: #e0dfe0;
   border-radius: 10rpx;
   color: #fff;
   font-weight: 500;
@@ -155,6 +161,6 @@
   margin: 80rpx auto;
 }
 
-.active{
-  background-color: #32A7FF;
+.active {
+  background-color: #32a7ff;
 }

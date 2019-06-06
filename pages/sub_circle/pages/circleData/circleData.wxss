@@ -1,6 +1,9 @@
 /* pages/sub_circle/pages/circleData/circleData.wxss */
-/* pages/sub_circle/pages/creatCircle/creatCircle.wxss */
-
+@import "/wxParse/wxParse.wxss";
+view {
+  overflow: visible;
+  line-height: normal;
+}
 .background {
   display: flex;
   flex-direction: column;
@@ -47,6 +50,7 @@
 
 .circleNameBox {
   flex: 1;
+  width:100%;
   display: flex;
   align-items: center;
   justify-content: center;

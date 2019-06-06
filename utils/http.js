@@ -14,9 +14,9 @@ class HTTP {
     function deleteNull(obj) {
       let newKey = Object.keys(obj).sort()
       for (let k = 0; k < newKey.length; k++) {
-        if (obj[newKey[k]] == '') {
+        if (obj[newKey[k]] === '') {
           let age = newKey[k]
-          delete obj.age
+          delete obj[age]
         }
       }
     }
@@ -68,7 +68,6 @@ class HTTP {
     // console.log(strVal)
     var strValMd5 = md5(strVal) //MD5加密
     var sign = strValMd5.toUpperCase() //转化为大写
-
 
 
 

@@ -3,7 +3,7 @@
   <view class='phone'>
     <image src='/image/phone_phone.png' />
     <text class='text'>当前绑定的手机号</text>
-    <text class='num'>17611248851</text>
+    <text class='num'>{{phone}}</text>
     <view class='btn' bindtap='toPhone'>更改手机号码</view>
   </view>
 </view>

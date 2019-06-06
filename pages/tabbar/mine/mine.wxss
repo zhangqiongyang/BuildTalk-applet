@@ -43,7 +43,12 @@
 
 .userinfo-nickname {
   font-size: 36rpx;
+  line-height: 36rpx;
   color: #fff;
+  margin: 0;
+  padding: 0;
+  background: none;
+  text-align: left;
 }
 
 .userinfo_phone {
@@ -147,6 +152,24 @@ button::after {
 }
 
 /* button {
+  background-color: #fff;
+  height: 86rpx;
+  border-radius: none;
+  line-height: 37rpx;
+  position: none;
+}
+
+.button-hover {
+  color: rgb(0, 0, 0);
+  background-color: #fff;
+} */
+
+/* 
+button::after {
+  border: none;
+}
+
+button {
   background-color: #fff;
   height: 86rpx;
   border-radius: none;

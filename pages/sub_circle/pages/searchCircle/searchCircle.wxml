@@ -18,19 +18,19 @@
     </view>
     <view class='historyList'>
       <block wx:for='{{history}}'>
-        <text class='historyItem' bindtap='searchHistory' data-value='{{item.value}}'>{{item.value}}</text>
+        <text class='historyItem' bindtap='searchHistory' data-value='{{item.search_keyword}}'>{{item.search_keyword}}</text>
       </block>
     </view>
   </view>
   <!-- 圈子列表 -->
   <view class='list' wx:if='{{isSearchList}}'>
-    <block wx:for='{{list}}'>
+    <block wx:for='{{circleInfo}}'>
       <v-circle circle='{{item}}' />
     </block>
   </view>
 
   <!-- 大咖列表 -->
-  <view wx:if='{{isAuthorList}}'>
+  <view class='list' wx:if='{{isAuthorList}}'>
     <block wx:for='{{authorList}}'>
       <v-author author='{{item}}' />
     </block>

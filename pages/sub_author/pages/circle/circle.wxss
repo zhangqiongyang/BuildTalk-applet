@@ -1,2 +1,36 @@
 /* pages/sub_author/pages/circle/circle.wxss */
-@import "../masterDetails/masterDetails.wxss"
+@import "../masterDetails/masterDetails.wxss";
+
+.nav {
+  width: 100%;
+  height: 82rpx;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.nav_item {
+  position: relative;
+  height: 60rpx;
+  padding: 20rpx 30rpx 0 30rpx;
+  width: 84rpx;
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background: #f5b83a;
+}
+
+.circle_list {
+  margin-top: 120rpx;
+}

@@ -114,6 +114,7 @@
   justify-content: center;
   width: 300rpx;
   height: 300rpx;
+  border-radius: 10rpx 10rpx 0px 0px;
 }
 
 .creat image {
@@ -127,6 +128,10 @@
   font-size: 30rpx;
   line-height: 144rpx;
   text-align: center;
+  border-left: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  border-radius: 0px  0px 10rpx 10rpx;
 }
 
 /* 圈主规则 */
@@ -206,4 +211,8 @@
   align-items: center;
   justify-content: center;
   margin: 40rpx auto 80rpx auto;
+}
+
+.uncolor {
+  background: #bde0fe;
 }

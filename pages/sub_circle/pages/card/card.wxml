@@ -3,38 +3,38 @@
   <!-- 名片 -->
   <view class='card'>
     <view class='card_title'>
-      <image class='card_back' src='/image/example.jpg'></image>
+      <image class='card_back' src='{{info.circle_image.pic_url}}'></image>
       <view class='card_user'>
-        <image src='/image/example.jpg'></image>
-        <text>小地瓜</text>
+        <image src='{{is_circleMaster == 1?info.master_pic:info.headImage}}'></image>
+        <text>{{info.name}}</text>
       </view>
     </view>
     <!-- 名片信息 -->
     <view class='card_info'>
       <view class='info_item'>
         <view class='item_num_box'>
-          <text class='item_num'>1618</text>
+          <text class='item_num'>{{is_circleMaster == 1?info.create_day:info.join_day}}</text>
           <text class='item_text big'>天</text>
         </view>
-        <text class='item_text'>{{isMaster?'创建圈子':'加入圈子'}}</text>
+        <text class='item_text'>{{is_circleMaster == 1?'创建圈子':'加入圈子'}}</text>
       </view>
       <view class='info_item'>
         <view class='item_num_box'>
-          <text class='item_num blue'>36</text>
+          <text class='item_num blue'>{{info.countTheme}}</text>
         </view>
         <text class='item_text'>发表主题</text>
       </view>
       <view class='info_item'>
         <view class='item_num_box'>
-          <text class='item_num yellow'>3</text>
+          <text class='item_num yellow'>{{info.countpraise}}</text>
         </view>
         <text class='item_text'>获得的赞</text>
       </view>
     </view>
     <!-- 二维码 -->
     <view class='card_code'>
-      <image src='/image/card_code.png'></image>
-      <text>建筑产业工业互联网联盟</text>
+      <image src='{{info.circle_code}}'></image>
+      <text>{{info.circle_name}}</text>
     </view>
   </view>
   <!-- 分享 -->

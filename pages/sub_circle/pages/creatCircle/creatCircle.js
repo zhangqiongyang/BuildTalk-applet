@@ -1,4 +1,11 @@
 // pages/sub_circle/pages/creatCircle/creatCircle.js
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
 
 const util = require('../../../../utils/util.js')
 
@@ -10,22 +17,7 @@ Page({
   data: {
     isAlready: false,
     labelActive: 0,
-    label: [{
-        id: 1,
-        text: 'BIM',
-        isActive: true
-      },
-      {
-        id: 2,
-        text: '装配式',
-        isActive: true
-      },
-      {
-        id: 3,
-        text: '钢结构',
-        isActive: false
-      },
-    ],
+    label: [],
     labelText: []
   },
 
@@ -33,7 +25,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 查询可用标签
+    this.searchLabel()
 
+    if (options.circle_id) {
+      this.setData({
+        circle_id: options.circle_id
+      })
+
+      // 查询圈子信息
+      this.selcetCircleInfo()
+
+    }
   },
 
   /**
@@ -91,7 +94,7 @@ Page({
   // 选择标签
   choseLable(event) {
     console.log(event)
-    const id = event.currentTarget.dataset.id,
+    const name = event.currentTarget.dataset.name,
       labelActive = this.data.labelActive
     let label = this.data.label
 
@@ -99,14 +102,14 @@ Page({
       util._showToast('标签不可以超过5个')
     } else {
       for (let i = 0; i < label.length; i++) {
-        if (id == label[i].id) {
-          label[i].isActive = true
+        if (name == label[i].tag_name) {
+          label[i].isActive = !label[i].isActive
         }
       }
       let labelText = []
       for (let k = 0; k < label.length; k++) {
         if (label[k].isActive == true) {
-          labelText.push(label[k].text)
+          labelText.push(label[k].tag_name)
         }
       }
       this.setData({
@@ -126,13 +129,11 @@ Page({
   // 删除标签
   deleteLabel(event) {
     console.log(event)
-    const id = event.currentTarget.dataset.id
+    const index = event.currentTarget.dataset.index
     let label = this.data.label
-    for (let i = 0; i < label.length; i++) {
-      if (id == label[i].id) {
-        label[i].isActive = false
-      }
-    }
+
+    label.splice(index, 1)
+
     let labelText = []
     for (let k = 0; k < label.length; k++) {
       if (label[k].isActive == true) {
@@ -201,10 +202,12 @@ Page({
         len = parseInt(value.length)
       if (len > 10) {
         util._showToast('不能超过10个字符')
+      } else if (len == 0) {
+        util._showToast('请输入')
       } else {
         label.push({
-          id: Math.random(),
-          text: value,
+          isLabel: true,
+          tag_name: value,
           isActive: true
         })
 
@@ -215,17 +218,17 @@ Page({
 
         this.setData({
           label: label,
-          labelText: labelText
+          labelText: labelText,
+          value: ''
         })
 
 
         // 标签大于5个隐藏自定义标签输入框
         this.checklabel()
       }
-      // 判断是否全部填写
-      this.check()
-
     }
+    // 判断是否全部填写
+    this.check()
   },
 
   // 判断是否全部填写
@@ -264,10 +267,119 @@ Page({
 
   // 提交表单
   submit() {
+    // 判断是首次创建还是修改
+    if (this.data.circle_id) {
+      // 修改表单接口
+      this.changeSubmit()
+    } else {
+      // 提交表单接口
+      this.submitRequest()
+    }
+  },
 
-  }
 
   /**
    * 网络请求
    */
+
+  // 查询可用标签
+  searchLabel() {
+    http.request({
+        url: api.API_SEARCHCIRCLETAGS,
+        data: {}
+      })
+      .then(res => {
+        console.log('------------获取到圈子标签了------------')
+        console.log(res)
+        let label = res.data
+        for (let i = 0; i < res.data.length; i++) {
+          label[i].isActive = false
+        }
+        this.setData({
+          label: label
+        })
+      })
+  },
+  // 查询圈子信息
+  selcetCircleInfo() {
+    http.request({
+        url: api.API_CIRCLEDATA,
+        data: {
+          user_id: wx.getStorageSync("user_id"),
+          circle_id: this.data.circle_id,
+        }
+      })
+      .then(res => {
+        console.log('------------查询圈子信息成功------------')
+        console.log(res)
+
+        let tags = res.data.circle_tags.split(","),
+          label = this.data.label
+        for (let i = 0; i < tags.length; i++) {
+          for (let j = 0; j < label.length; j++) {
+            if (tags[i] == label[j].tag_name) {
+              label[j].isActive = true
+              tags.splice(i, 1)
+            }
+          }
+          label.push({
+            tag_name: tags[i],
+            isActive: true,
+            isLabel: true,
+          })
+        }
+
+        this.setData({
+          intro: res.data.circle_desc,
+          logo: res.data.circle_image.pic_url,
+          name: res.data.circle_name,
+          labelText: res.data.circle_tags.split(","),
+          label: label
+        })
+      })
+  },
+  // 提交表单接口
+  submitRequest() {
+    http.request({
+        url: api.API_CREATCIRCLE,
+        data: {
+          user_id: wx.getStorageSync("user_id"),
+          circle_image: this.data.logo,
+          circle_name: this.data.name,
+          circle_tags: this.data.labelText.toString(),
+          circle_desc: this.data.intro,
+          source: 'xcx',
+        }
+      })
+      .then(res => {
+        console.log('------------创建圈子成功------------')
+        console.log(res)
+        const circle_id = res.data
+        util._showToastSuccess('创建成功')
+        wx.redirectTo({
+          url: '../circleDetails/circleDetails?circle_id=' + circle_id,
+        })
+      })
+  },
+
+
+  // 修改表单接口
+  changeSubmit() {
+    http.request({
+        url: api.API_UPDATECIRCLE,
+        data: {
+          user_id: wx.getStorageSync("user_id"),
+          circle_id: this.data.circle_id,
+          circle_image: this.data.logo,
+          circle_name: this.data.name,
+          circle_tags: this.data.labelText.toString(),
+          circle_desc: this.data.intro,
+        }
+      })
+      .then(res => {
+        console.log('------------修改圈子成功------------')
+        console.log(res)
+        util._showToastSuccess('修改成功')
+      })
+  },
 })

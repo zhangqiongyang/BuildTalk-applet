@@ -19,9 +19,10 @@ Component({
    */
   methods: {
     // 跳转到圈子详情
-    toCircle() {
+    toCircle(event) {
+      const circle_id = event.currentTarget.dataset.id
       wx.navigateTo({
-        url: '/pages/sub_circle/pages/circleDetails/circleDetails',
+        url: '/pages/sub_circle/pages/circleDetails/circleDetails?circle_id=' + circle_id,
       })
     }
   }

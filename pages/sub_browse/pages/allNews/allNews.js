@@ -19,7 +19,6 @@ Page({
   data: {
     page:1,
     newsInfo:[],
-    loading:false,
   },
 
   /**
@@ -106,7 +105,7 @@ Page({
   // 跳转到每日一谈详情
   toAuthorDesc() {
     wx.navigateTo({
-      url: '../authorDesc/authorDesc',
+      url: '../authorDesc/authorDesc?author_id=' + this.data.authorInfo.author_id,
     })
   },
 

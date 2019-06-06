@@ -3,11 +3,16 @@
 /* 搜索框 */
 
 .searchBox {
+  width: 100%;
   height: 88rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   box-shadow: 5px 5px #f7f8fa;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
 }
 
 .search {
@@ -59,7 +64,7 @@
 /* 搜索历史 */
 
 .history {
-  /* padding-top: 40rpx; */
+  margin-top: 88rpx;
 }
 
 .title {
@@ -99,7 +104,8 @@
 /* 搜索结果 */
 
 .list {
-  padding-top: 40rpx;
+  margin-top: 88rpx;
+  padding-top: 1rpx;
 }
 
 .item {
@@ -120,44 +126,43 @@
   border-radius: 10px;
 }
 
-.course{
+.course {
   width: 86rpx;
   height: 86rpx;
   position: absolute;
   right: 0;
 }
 
-.info{
+.info {
   padding-left: 30rpx;
 }
 
-.searchTitle{
+.searchTitle {
   color: #242831;
-  font-weight:bold;
-  line-height:36rpx;
+  font-weight: bold;
+  line-height: 36rpx;
 }
 
-.author text{
+.author text {
   color: #656565;
-  font-size:22rpx;
-  line-height:36rpx;
+  font-size: 22rpx;
+  line-height: 36rpx;
 }
 
-.author image{
+.author image {
   width: 16rpx;
   height: 14rpx;
 }
 
-.labelList{
-
+.labelList {
 }
 
-.labelItem{
+.labelItem {
   display: inline-block;
-  background-color: #F7F8FA;
-  border-radius:2px;
+  background-color: #f7f8fa;
+  border-radius: 2px;
   padding: 5rpx 20rpx;
-  font-size:20rpx;
+  font-size: 20rpx;
   color: #656565;
   margin-right: 10rpx;
   margin-bottom: 10rpx;

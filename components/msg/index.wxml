@@ -11,23 +11,23 @@
     </view>
 
     <view wx:else class='msg_list'>
-      <block wx:for='{{msgList}}'>
+      <block wx:for='{{msgList}}' wx:key='key'>
         <view class='msg_item'>
           <view class='msg_user_box'>
             <view class='msg_user'>
-              <image src='{{item.image}}'></image>
+              <image src='{{item.headImage}}'></image>
               <view class='user_info'>
                 <view class='user_name_box'>
                   <text class='user_name'>{{item.name}}</text>
-                  <text wx:if='{{item.isMaster}}' class='user_master'>圈主</text>
+                  <text wx:if='{{item.is_circleMaster ==1}}' class='user_master'>圈主</text>
                 </view>
-                <text class='msg_time'>{{item.time}}</text>
+                <text class='msg_time'>{{item.guestbook_time}}</text>
               </view>
             </view>
-            <view class='msg_like'>
-              <image wx:if='{{item.isLike}}' src='/image/msg_like_hover.png' bindtap='changeLike'></image>
-              <image wx:else src='/image/msg_like.png' bindtap='changeLike'></image>
-              <text>{{item.likeNum}}</text>
+            <view class='msg_like' bindtap='changeLike' data-id='{{item.guestbook_id?item.guestbook_id:item.comment_id}}'>
+              <image wx:if='{{item.isPraise == 1}}' src='/image/msg_like_hover.png'></image>
+              <image wx:else src='/image/msg_like.png'></image>
+              <text>{{item.countpraise}}</text>
             </view>
           </view>
           <view class='msg_content'>{{item.content}}</view>

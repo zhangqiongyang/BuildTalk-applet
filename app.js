@@ -33,11 +33,11 @@ App({
               if (res.code) {
                 // 发起网络请求，通过code换取login_id
                 http.request({
-                  url: api.API_FROMCODEGETLOGINID,
-                  data: {
-                    code: res.code
-                  }
-                })
+                    url: api.API_FROMCODEGETLOGINID,
+                    data: {
+                      code: res.code
+                    }
+                  })
                   .then(res => {
                     console.log('--------通过code换取的res---------')
                     console.log(res)
@@ -45,6 +45,7 @@ App({
 
                     wx.setStorageSync('login_id', res.data.login_id)
                     wx.setStorageSync('sessionkey_id', res.data.sessionkey_id)
+
                     console.log('---------login_id----------')
                     console.log(wx.getStorageSync('login_id'))
                     // res.getUnionid代表后台是否含有unionId
@@ -69,12 +70,12 @@ App({
         // console.log(wx.getStorageSync('sessionkey_id'))
         console.log(wx.getStorageSync('login_id'))
         http.request({
-          url: api.API_CHECKLOGINIDISVALID,
-          data: {
-            login_id: wx.getStorageSync('login_id'),
-            sessionkey_id: wx.getStorageSync('sessionkey_id'),
-          }
-        })
+            url: api.API_CHECKLOGINIDISVALID,
+            data: {
+              login_id: wx.getStorageSync('login_id'),
+              sessionkey_id: wx.getStorageSync('sessionkey_id'),
+            }
+          })
           .then(res => {
             console.log('-------------检测到login_id是否有效了-------------')
             console.log(res)
@@ -87,7 +88,13 @@ App({
             }
             if (res.data.exist_mobile == 1) {
               that.globalData.isHavePhone = true
-              that.globalData.mobile = res.data.mobile
+              that.globalData.mobile = res.data.userInfo.mobile
+              that.globalData.headImage = res.data.userInfo.headImage
+              that.globalData.nickName = res.data.userInfo.nickName
+              that.globalData.user_id = res.data.userInfo.user_id
+              wx.setStorageSync('user_id', res.data.userInfo.user_id)
+              console.log(wx.getStorageSync('user_id'))
+
             }
 
           })
@@ -105,11 +112,11 @@ App({
             if (res.code) {
               // 发起网络请求，通过code换取login_id
               http.request({
-                url: api.API_FROMCODEGETLOGINID,
-                data: {
-                  code: res.code
-                }
-              })
+                  url: api.API_FROMCODEGETLOGINID,
+                  data: {
+                    code: res.code
+                  }
+                })
                 .then(res => {
                   console.log('--------通过code换取的res---------')
                   console.log(res)
@@ -117,6 +124,7 @@ App({
 
                   wx.setStorageSync('login_id', res.data.login_id)
                   wx.setStorageSync('sessionkey_id', res.data.sessionkey_id)
+
                   console.log('---------login_id----------')
                   console.log(wx.getStorageSync('login_id'))
                   // res.getUnionid代表后台是否含有unionId
@@ -153,13 +161,13 @@ App({
               if (!this.globalData.isHaveUnionId) {
                 // 解密获取用户unionId
                 http.request({
-                  url: api.API_GETENCRYPTEDDATA,
-                  data: {
-                    login_id: wx.getStorageSync('login_id'),
-                    encryptedData: res.encryptedData,
-                    iv: res.iv
-                  }
-                })
+                    url: api.API_GETENCRYPTEDDATA,
+                    data: {
+                      login_id: wx.getStorageSync('login_id'),
+                      encryptedData: res.encryptedData,
+                      iv: res.iv
+                    }
+                  })
                   .then(res => {
                     console.log('---------获取到用户加密信息----------')
                     console.log(res)
@@ -198,17 +206,16 @@ App({
 
   },
   globalData: {
-    userInfo: '',
-    openid: '',
-    unionid: '',
-    isLogin: null,
-    isBindingPhone: null,
-    phoneNumber: '',
+    userInfo: null,
     scrollHeight: null,
     windowHeight: null,
     windowWidth: null,
     screenWidth: null,
     screenHeight: null,
-    platform: ''
+    platform: null,
+    headImage: null,
+    nickName: null,
+    mobile: null,
+    isHavePhone: null,
   }
 })

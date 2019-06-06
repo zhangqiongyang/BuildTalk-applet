@@ -1,12 +1,14 @@
 // pages/AllCourse/AllCourse.js
 
-
-
 var app = getApp();
-const api = require('../../../../utils/api.js');
-
-
-
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+const util = require('../../../../utils/util.js')
 
 Page({
 
@@ -15,6 +17,8 @@ Page({
    */
   data: {
     platform: app.globalData.platform,
+    courseinfo:[],
+    page:1,
   },
 
 
@@ -22,113 +26,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-
-    wx.request({
-      // url: 'https://wx.bjjy.com/getrecommend',
-      url: api.API_ALLCOURSE,
-      data: '',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      dataType: 'json',
-      responseType: 'text',
-      success: function(res) {
-        console.log(res)
-        that.setData({
-          courseinfo: res.data.courseinfo
-        })
-      },
-      fail: function(res) {},
-      complete: function(res) {},
-    })
+    // 课程圈
+    this.circleInfo() 
   },
-
-
-
-  // 跳转到相应页面
-  jumpToArticle: function(event) {
-    console.log(event);
-
-    var course_id = event.currentTarget.dataset.courseid;
-
-    console.log(course_id)
-    if (app.globalData.isLogin) {
-
-      wx: wx.navigateTo({
-        url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-      })
-
-    }
-    else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function(res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
-      })
-    }
-
-    // if (app.globalData.isLogin){
-    //   wx.request({
-    //     url: 'https://wx.bjjy.com/courselistinfo',
-    //     data: {
-    //       'openid': wx.getStorageSync('openid'),
-    // source: 'xcx',
-    //       'course_id': course_id,
-    // unionid: wx.getStorageSync('unionid')
-    //     },
-    //     header: {
-    //       'content-type': 'application/x-www-form-urlencoded'
-    //     },
-    //     method: 'POST',
-    //     dataType: 'json',
-    //     responseType: 'text',
-    //     success: function (res) {
-    //       console.log('------------这里是res--------------')
-    //       console.log(res)
-    //       if (res.data.msg == '1') {
-    //         console.log('---------已经购买了------------')
-    //         wx: wx.navigateTo({
-    //           url: "/pages/sub_browse/pages/list/list?course_id=" + course_id
-    //         })
-    //       } else {
-    //         console.log('---------还未购买------------')
-    //         wx: wx.navigateTo({
-    //           url: "/pages/sub_browse/pages/buy/buy?course_id=" + course_id
-    //         })
-    //       }
-    //     },
-    //   })
-    // } else {
-    //   wx.showModal({
-    //     title: '未登录',
-    //     content: '请先登录',
-    //     showCancel: true,
-    //     cancelText: '取消',
-    //     confirmText: '确定',
-    //     success: function (res) {
-    //       wx.switchTab({
-    //         url: '/pages/tabbar/mine/mine',
-    //       })
-    //     },
-    //   })
-    // }
-
-
-
-
-  },
-
-
-
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -183,9 +83,40 @@ Page({
    * 方法
    */
   // 跳转到课程详情
-  toCourse() {
+  toCourse(event) {
+    console.log(event)
+    const circle_id = event.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/sub_circle/pages/circleDetails/circleDetails',
+      url: '/pages/sub_circle/pages/circleDetails/circleDetails?circle_id=' + circle_id,
     })
+  },
+
+
+  /**
+   * 网络请求
+   */
+  // 课程圈
+  circleInfo() {
+    http.request({
+        url: api.API_ALLCIRCLE,
+        data: {
+          type: 2,
+          isIndex: 0,
+          page: this.data.page,
+          page_size: 20
+        }
+      })
+      .then(res => {
+        console.log('------------获取到课程圈了-----------')
+        console.log(res)
+        this.setData({
+          courseinfo: res.data.circleInfo
+        })
+
+
+        // 关闭刷新
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
+      })
   }
 })
