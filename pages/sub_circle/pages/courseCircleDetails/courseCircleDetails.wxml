@@ -3,7 +3,7 @@
 
 <view style='font-size:0;'>
   <!-- 视频 -->
-  <video class='video' src='{{}}'></video>
+  <video class='video' src='{{video}}'></video>
 
   <!-- 目录 -->
   <view class='catalog'>
@@ -77,14 +77,14 @@
   <view wx:if='{{isPictureMode}}'>
     <template is="wxParse" data="{{wxParseData:content.nodes}}" />
 
-    
+
   </view>
 
 
   <!-- 付费 -->
-  <v-pay wx:if='{{isPay}}' bind:cancel='cancel'/>
+  <v-pay wx:if='{{isPay}}' bind:cancel='cancel' />
 
-<!-- 购买 -->
+  <!-- 购买 -->
   <view wx:if='{{!isJoin}}' class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
 
 </view>
