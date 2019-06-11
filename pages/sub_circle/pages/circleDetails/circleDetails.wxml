@@ -102,17 +102,22 @@
         <image src='/image/circleDetails_video.png'></image>
         <text>{{courselist[0].article_title}}</text>
       </view>
-      <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+      <block wx:if='{{!isJoin}}'>
+        <image style='padding:20rpx;' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+      </block>
+
     </view>
     <view class='catalog_content' wx:if='{{isCatalog}}'>
       <block wx:for='{{courselist}}' wx:key='key'>
-        <view class='catalog_item'>
+        <view class='catalog_item' bindtap='toVideo' data-id='{{item.article_id}}' data-audition='{{item.is_audition ==1}}'>
           <view class='catalog_video_title'>
             <image src='/image/circleDetails_video.png'></image>
             <text>{{item.article_title}}</text>
           </view>
-          <image wx:if='{{item.is_audition ==1}}' class='catalog_audition' src='/image/circleDetails_audition.png' bindtap='toVideo' data-id='{{item.article_id}}'></image>
-          <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
+          <block wx:if='{{!isJoin}}'>
+            <image wx:if='{{item.is_audition ==1}}' class='catalog_audition' src='/image/circleDetails_audition.png'></image>
+            <image wx:else class='catalog_lock' src='/image/circleDetails_lock.png'></image>
+          </block>
         </view>
       </block>
     </view>
@@ -158,12 +163,16 @@
   <!-- 加入圈子 -->
   <view wx:if='{{!isJoin}}'>
     <text class='joinMore' wx:if='{{!isHide}}'>加入圈子可以浏览更多内容</text>
-    <view wx:if='{{isCourse}}' class='btn fixed' bindtap='pay'>加入圈子￥{{circleInfo.course_money}}</view>
-    <view wx:else class='btn fixed' bindtap='joinCircle'>加入圈子</view>
+    <block wx:if='{{isCourse}}'>
+      <view wx:if='{{platform=="ios"}}' class='btn_ios fixed'>由于相关规范，iOS用户暂不可在小程序内订阅</view>
+      <view wx:if='{{platform!="ios"}}' class='btn fixed' bindtap='pay'>加入圈子￥{{circleInfo.course_money}}</view>
+    </block>
+    <view wx:if='{{!isCourse}}' class='btn fixed' bindtap='joinCircle'>加入圈子</view>
   </view>
 
   <!-- 主题分类查看 -->
-  <view class='back_masking center' wx:if='{{isSubjectClassify}}'>
+  <view wx:if='{{isSubjectClassify}}'>
+    <view class='back_masking center' bindtap='changeclassify' data-type='close'></view>
     <view class='subject_classify'>
       <view class='classify_title'>查看指定内容</view>
       <view class='classify_box'>
@@ -190,10 +199,9 @@
 
   <!-- 编辑主题 -->
   <v-redact wx:if='{{isRedactSubject}}' subjectclassify='{{subjectclassify}}' bind:changeRedactSubject='changeRedactSubject' bind:deleteSubject='deleteSubject' bindcollectSubject='collectSubject' data-type='close' />
-  
-  <!-- 付费 -->
-  <v-pay wx:if='{{isPay}}' bind:cancel='cancel' bind:pay='payment'  circleInfo='{{circleInfo}}' />
 
+  <!-- 付费 -->
+  <v-pay wx:if='{{isPay}}' bind:cancel='cancel' bind:pay='payment' circleInfo='{{circleInfo}}' />
 
 
 </view>

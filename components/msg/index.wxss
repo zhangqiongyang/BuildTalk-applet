@@ -75,6 +75,12 @@
   font-size: 18rpx;
 }
 
+.msg_box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .msg_like {
   display: flex;
   align-items: center;
@@ -90,6 +96,12 @@
   color: #8f8f8f;
   font-size: 18rpx;
   padding-left: 10rpx;
+}
+
+.msg_delete {
+  width: 24rpx;
+  height: 24rpx;
+  padding: 20rpx;
 }
 
 .msg_content {

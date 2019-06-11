@@ -54,7 +54,7 @@ const api = {
 
   //文章article，视频video
   API_GETARTICLEINFO: base + "/searchArticleInfo", // 获取文章数据-_-
-  API_GETARTICLEMSG: base + "/serachManyGuestbook", // 获取文章留言数据-_-
+  API_GETARTICLEMSG: base + "/searchManyGuestbook", // 获取文章留言数据-_-
   API_UPLOADTRACE: base + "/saveBrowseRecord", //上传用户浏览信息
   API_UPLOADMSGLIKE: base + "/guestbookPraise", // 留言点赞上传接口-_-
   API_UPLOADARTICLLIKE: base + "/collectarticle", // 文章收藏信息上传接口-_-
@@ -117,6 +117,7 @@ const api = {
   // 主题详情
   API_SUBJECTDETAIL: base + "/searchThemeDetail", // 主题详情
   API_SUBJECTMSGINFO: base + "/commentPageHandle", // 留言
+  API_SUBJECTMSGDELETE: base + "/deleteGuestbook", // 删除留言
   API_SUBJECTMSG: base + "/publishThemeComment", // 提交主题留言
 
   API_SUBJECTLIKE: base + "/themeParise", // 主题、评论点赞

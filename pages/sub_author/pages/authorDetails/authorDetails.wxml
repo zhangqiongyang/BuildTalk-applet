@@ -18,7 +18,7 @@
   <!-- 精品文章 -->
   <view wx:if='{{isArticle}}' class='article_list'>
     <block wx:for='{{articleList}}'>
-      <view class='article_item' data-id='{{item.article_id}}'>
+      <view class='article_item' bindtap='toArticle' data-id='{{item.article_id}}'>
         <image src='{{item.article_pic}}' mode='aspectFill'  />
         <text class='article_title'>{{item.article_title}}</text>
         <text>{{item.article_desc}}</text>

@@ -173,7 +173,7 @@ Page({
       wx.navigateBack({
         delta: 2,
       })
-      wx.redirectTo({
+      wx.switchTab ({
         url: '../../../../pages/tabbar/circle/circle',
       })      
     })

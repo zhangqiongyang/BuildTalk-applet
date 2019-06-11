@@ -1,5 +1,16 @@
 // pages/sub_circle/pages/courseCircleDetails/courseCircleDetails.js
 const app = getApp();
+import {
+  HTTP
+} from '../../../../utils/http.js'
+let http = new HTTP()
+import {
+  api
+} from '../../../../utils/api.js'
+
+const util = require('../../../../utils/util.js')
+
+var WxParse = require('../../../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -10,8 +21,21 @@ Page({
     isCatalog: false, // 是否显示目录详情
     isPicture: false, // 是否显示图文详情
     isPay: false, // 是否显示付费框
-    catalogList: [],
+
+    isJoin: false, //是否加入圈子
+    isCourse: false, //是否为课程
+    isIntro: false, //是否显示圈子介绍
+    isCatalog: false, //是否显示目录详情
+    isHide: false, //是否隐藏主题、导航、
+    nav: 'theme', //导航  theme主题  essence精华
+    isRedactSubject: false, //编辑主题弹窗
+    isSubjectClassify: false, //主题分类弹窗
+    classify: 1, //主题分类 1全部2图片3圈主4自己
+    classifyText: '全部主题', //主题分类名称
+    subject_page: 1, // 主题页数
+    course_page: 1, //课程页数
     circleList: [],
+    catalogList: []
   },
 
   /**
@@ -20,7 +44,15 @@ Page({
   onLoad: function(options) {
     const circle_id = options.circle_id
     this.setData({
-      circle_id: circle_id
+      circle_id: circle_id,
+      article_id: options.article_id
+    })
+
+
+    let haveVideoHeight = app.globalData.scrollHeight - 44
+    haveVideoHeight = haveVideoHeight - (210 / 375) * app.globalData.windowWidth - 1
+    this.setData({
+      haveVideoHeight: haveVideoHeight
     })
 
     util._showLoading
@@ -68,7 +100,17 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    // 判断是否加入
+    if (this.data.isJoin) {
+      // 根据分类查询主题
+      if (this.data.subject_page < this.data.subject_page_count) {
+        this.subject(Number(this.data.subject_page) + 1)
+      } else {
+        util._showToast('没有更多了')
+      }
+    } else {
 
+    }
   },
 
   /**
@@ -81,14 +123,6 @@ Page({
    * 方法
    */
 
-  //切换课程目录显示
-  changeCatalog() {
-    this.setData({
-      isCatalog: !this.data.isCatalog,
-      isHide: !this.data.isHide
-    })
-  },
-
   //切换图文详情模式显示
   changePictureMode() {
     this.setData({
@@ -98,9 +132,12 @@ Page({
   },
 
   //打开付款框
-  pay(){
+  pay() {
+    util.judge(() => {
+
     this.setData({
-      isPay:true
+      isPay: true
+    })
     })
   },
 
@@ -111,9 +148,7 @@ Page({
     })
   },
 
-  /**
-   * 方法
-   */
+
   //切换圈子介绍显示
   changeIntro(event) {
     console.log(event)
@@ -134,7 +169,7 @@ Page({
   //切换课程目录显示
   changeCatalog(event) {
     console.log(event)
-    const type = event.target.dataset.type
+    const type = event.currentTarget.dataset.type
     if (type == 'open') {
       this.setData({
         isCatalog: true,
@@ -163,6 +198,8 @@ Page({
     console.log(event)
     const type = event.currentTarget.dataset.type,
       theme_id = event.detail.theme_id
+    util.judge(() => {
+
     if (type == 'open') {
       // 主题权限查看
       this.subjectclassifyRequest(theme_id)
@@ -174,6 +211,7 @@ Page({
         isRedactSubject: false
       })
     }
+    })
   },
 
   // 切换主题分类
@@ -231,23 +269,32 @@ Page({
 
   // 跳转到圈子信息页面
   toCircleInfo() {
+    util.judge(() => {
+
     wx.navigateTo({
       url: '../circleInfo/circleInfo?circle_id=' + this.data.circle_id + '&operate_user=' + this.data.circleInfo.user_id,
+    })
     })
   },
 
   // 跳转到发表主题页面
   toPublishSubject() {
+    util.judge(() => {
+
     wx.navigateTo({
       url: '../publishSubject/publishSubject?circle_id=' + this.data.circle_id,
+    })
     })
   },
 
 
   //打开付款框
   pay() {
+    util.judge(() => {
+
     this.setData({
       isPay: true
+    })
     })
   },
 
@@ -260,12 +307,15 @@ Page({
 
   // 完成付款
   payment() {
+    util.judge(() => {
+
     this.setData({
       isPay: false
     })
 
     // 预览圈信息
     this.circleInfo()
+    })
   },
 
 
@@ -277,13 +327,13 @@ Page({
   // 圈子信息
   circleInfo() {
     http.request({
-      url: api.API_PREVIEWCIRCLEINFO,
-      data: {
-        circle_id: this.data.circle_id,
-        user_id: wx.getStorageSync("user_id"),
-        source: 'xcx'
-      }
-    })
+        url: api.API_PREVIEWCIRCLEINFO,
+        data: {
+          circle_id: this.data.circle_id,
+          user_id: wx.getStorageSync("user_id"),
+          source: 'xcx'
+        }
+      })
       .then(res => {
         console.log('----------圈子信息----------')
         console.log(res)
@@ -328,11 +378,11 @@ Page({
   // 查询预览主题
   previewSubject() {
     http.request({
-      url: api.API_PREVIEWSUBJECT,
-      data: {
-        circle_id: this.data.circle_id,
-      }
-    })
+        url: api.API_PREVIEWSUBJECT,
+        data: {
+          circle_id: this.data.circle_id,
+        }
+      })
       .then(res => {
         console.log('----------预览主题----------')
         console.log(res)
@@ -354,17 +404,17 @@ Page({
   },
 
   // 根据分类查询主题
-  subject() {
+  subject(page) {
     http.request({
-      url: api.API_SUBJECT,
-      data: {
-        circle_id: this.data.circle_id,
-        page: this.data.subject_page,
-        page_size: 20,
-        type_id: this.data.classify,
-        user_id: wx.getStorageSync("user_id"),
-      }
-    })
+        url: api.API_SUBJECT,
+        data: {
+          circle_id: this.data.circle_id,
+          page: page?page:this.data.subject_page,
+          page_size: 20,
+          type_id: this.data.classify,
+          user_id: wx.getStorageSync("user_id"),
+        }
+      })
       .then(res => {
         console.log('---------主题----------')
         console.log(res)
@@ -408,16 +458,26 @@ Page({
   // 课程目录
   courseCatalog() {
     http.request({
-      url: api.API_COURSECATALOG,
-      data: {
-        course_id: this.data.course_id,
-        page: this.data.course_page,
-        page_size: 20,
-      }
-    })
+        url: api.API_COURSECATALOG,
+        data: {
+          course_id: this.data.course_id,
+          page: this.data.course_page,
+          page_size: 20,
+        }
+      })
       .then(res => {
         console.log('----------课程目录----------')
         console.log(res)
+
+        for (let i = 0; i < res.data.courselist.length; i++) {
+          if (this.data.article_id == res.data.courselist[i].article_id) {
+            this.setData({
+              article_info: res.data.courselist[i]
+            })
+            WxParse.wxParse('content', 'html', res.data.courselist[i].content, this, 0)
+
+          }
+        }
 
         this.setData({
           countCourse: res.data.countCourse,
@@ -426,6 +486,8 @@ Page({
           course_page: res.data.page,
           course_page_count: res.data.page_count,
         })
+
+
 
         // 关闭刷新
         wx.hideLoading()
@@ -436,12 +498,12 @@ Page({
   // 主题权限查看
   subjectclassifyRequest(id) {
     http.request({
-      url: api.API_SUBJECTCLASSIFY,
-      data: {
-        theme_id: id,
-        user_id: wx.getStorageSync("user_id"),
-      }
-    })
+        url: api.API_SUBJECTCLASSIFY,
+        data: {
+          theme_id: id,
+          user_id: wx.getStorageSync("user_id"),
+        }
+      })
       .then(res => {
         console.log('----------主题权限查看----------')
         console.log(res)
@@ -463,12 +525,12 @@ Page({
   // 加入圈子
   joinCircle() {
     http.request({
-      url: api.API_JIONCIRCLE,
-      data: {
-        circle_id: this.data.circle_id,
-        user_id: wx.getStorageSync("user_id"),
-      }
-    })
+        url: api.API_JIONCIRCLE,
+        data: {
+          circle_id: this.data.circle_id,
+          user_id: wx.getStorageSync("user_id"),
+        }
+      })
       .then(res => {
         console.log('----------加入成功-----------')
         console.log(res)

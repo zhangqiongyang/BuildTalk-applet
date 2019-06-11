@@ -30,6 +30,10 @@
   background-color: #fff;
 }
 
+.courseList {
+  background-color: #f8f8f8;
+}
+
 .courseListBox {
   white-space: nowrap;
   background-color: #f8f8f8;
@@ -86,7 +90,9 @@
   width: 25rpx;
   height: 25rpx;
 }
+
 /* 无记录 */
+
 .no_record {
   display: flex;
   flex-direction: column;

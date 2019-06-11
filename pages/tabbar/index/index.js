@@ -139,7 +139,7 @@ Page({
     // type_id 类型id. 1课程 2精品单文 3 作者 4活动
     if (type == '1') {
       wx.navigateTo({
-        url: "/pages/sub_circle/pages/courseCircleDetails/courseCircleDetails?course_id=" + id,
+        url: "/pages/sub_circle/pages/circleDetails/circleDetails?circle_id=" + id,
       })
     } else if (type == '2') {
       wx.navigateTo({
@@ -147,7 +147,7 @@ Page({
       })
     } else if (type == '3') {
       wx.navigateTo({
-        url: '/pages/sub_browse/pages/author/author?author_id=' + id,
+        url: '/pages/sub_author/pages/authorDetails/authorDetails?author_id=' + id,
       })
     } else if (type == '4') {
       wx.navigateTo({
@@ -190,7 +190,7 @@ Page({
 
   // 跳转到圈子详情
   toCircle(event) {
-    const circle_id= event.currentTarget.dataset.id
+    const circle_id = event.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/sub_circle/pages/circleDetails/circleDetails?circle_id=' + circle_id,
     })

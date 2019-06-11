@@ -3,113 +3,111 @@
 
 
   <scroll-view scroll-x class='titleBar'>
-    <view class='classify {{currentTab=="0"?"active":""}}' data-current='0' bindtap='swichNav'>全部</view>
-    <view class='classify {{currentTab=="1"?"active":""}}' data-current='1' bindtap='swichNav'>课程</view>
-    <view class='classify {{currentTab=="2"?"active":""}}' data-current='2' bindtap='swichNav'>文章</view>
+    <view class='classify {{currentTab=="0"?"active":""}}' data-current='0' data-type='0' bindtap='swichNav'>全部</view>
+    <view class='classify {{currentTab=="1"?"active":""}}' data-current='1' data-type='2' bindtap='swichNav'>课程</view>
+    <view class='classify {{currentTab=="2"?"active":""}}' data-current='2' data-type='1' bindtap='swichNav'>文章</view>
     <!-- <view class='underline'></view> -->
   </scroll-view>
 
+  <scroll-view style='height:{{windowHeight}}px' class='courseListBox'>
+    <!-- 选项卡内容 -->
+    <swiper current='{{currentTab}}' class='swiper' bindchange='bindChange' style='height:{{windowHeight?windowHeight-2+"px":"auto"}}'>
 
-
-  <!-- 选项卡内容 -->
-  <swiper current='{{currentTab}}' class='swiper' bindchange='bindChange' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>
-    <!-- <swiper current='{{currentTab}}' class='swiper' bindchange='bindChange'> -->
-
-    <!-- 全部选项卡 -->
-    <swiper-item>
-      <view class='courseList'>
-        <!-- <view class='title'>全部</view> -->
-        <block wx:for='{{alreadyinfo}}' wx:key='key'>
-          <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
-            <view class='info'>
-              <text class='title'>{{item.course_name}}</text>
-              <text class='text'>2019-03-15  13:30:00</text>
-            </view>
-            <view class='money_info'>
-              <view class='money'>
-                <text class='num'>-10.00</text>
-                <text class='text'>支付成功</text>
-              </view>
-              <image class='more' src='/image/mine_more_black.png'></image>
-            </view>
-          </view>
-        </block>
-
-        <view class='no_record' >
-          <image src='/image/alreadybought_norecord_.png'></image>
-          <text>无记录</text>
-        </view>
-
-      </view>
-    </swiper-item>
-
-
-
-
-
-
-    <!-- 课程选项卡 -->
-    <swiper-item>
-      <scroll-view scroll-y class='courseListBox' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>
+      <!-- 全部选项卡 -->
+      <swiper-item  class='courseListBox'>
         <view class='courseList'>
-          <!-- <view class='title'>课程</view> -->
-          <block wx:for='{{coursebuyinfo}}' wx:key='key'>
-            <view class='courseItem' bindtap='jumpToList' data-course_id='{{item.course_id}}'>
+          <!-- <view class='title'>全部</view> -->
+          <block wx:for='{{alreadyinfo}}' wx:key='key'>
+            <view class='courseItem' bindtap='toDetails' data-id='{{item.data_id}}' data-type='{{item.type}}'>
               <view class='info'>
-                <text class='title'>{{item.course_name}}</text>
-                <text class='text'>2019-03-15  13:30:00</text>
+                <text class='title'>{{item.order_name}}</text>
+                <text class='text'>{{item.order_time}}</text>
               </view>
               <view class='money_info'>
                 <view class='money'>
-                  <text class='num'>-{{item.original_price}}</text>
+                  <text class='num'>-{{item.order_price}}</text>
                   <text class='text'>支付成功</text>
                 </view>
-                <image class='more' src='/image/mine_more_black.png'></image>
+                <!-- <image class='more' src='/image/mine_more_black.png'></image> -->
               </view>
             </view>
           </block>
+
+          <view wx:if='{{alreadyinfo.length==0}}' class='no_record'>
+            <image src='/image/alreadybought_norecord_.png'></image>
+            <text>无记录</text>
+          </view>
+
         </view>
-      </scroll-view>
-    </swiper-item>
+      </swiper-item>
 
 
 
-    <!-- 文章选项卡 -->
-    <swiper-item>
-      <scroll-view scroll-y class='courseListBox' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'>
+
+
+
+      <!-- 课程选项卡 -->
+      <swiper-item class='courseListBox'>
+        <!-- <scroll-view scroll-y class='courseListBox' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'> -->
+        <view class='courseList'>
+          <block wx:for='{{alreadyinfo}}' wx:key='key'>
+            <view class='courseItem' bindtap='toDetails' data-id='{{item.data_id}}' data-type='{{item.type}}'>
+              <view class='info'>
+                <text class='title'>{{item.order_name}}</text>
+                <text class='text'>{{item.order_time}}</text>
+              </view>
+              <view class='money_info'>
+                <view class='money'>
+                  <text class='num'>-{{item.order_price}}</text>
+                  <text class='text'>支付成功</text>
+                </view>
+                <!-- <image class='more' src='/image/mine_more_black.png'></image> -->
+              </view>
+            </view>
+          </block>
+
+          <view wx:if='{{alreadyinfo.length==0}}' class='no_record'>
+            <image src='/image/alreadybought_norecord_.png'></image>
+            <text>无记录</text>
+          </view>
+
+        </view>
+        <!-- </scroll-view> -->
+      </swiper-item>
+
+
+
+      <!-- 文章选项卡 -->
+      <swiper-item class='courseListBox'>
+        <!-- <scroll-view scroll-y class='courseListBox' style='height:{{windowHeight?windowHeight-52+"px":"auto"}}'> -->
         <view class='courseList'>
           <!-- <view class='title'>文章</view> -->
-          <block wx:for='{{articlebuyinfo}}' wx:key='key'>
-            <view class='courseItem' bindtap='jumpToArticle' data-article_id='{{item.article_id}}' data-audio_id='{{item.audio_id}}'>
+          <block wx:for='{{alreadyinfo}}' wx:key='key'>
+            <view class='courseItem' bindtap='toDetails' data-id='{{item.data_id}}' data-type='{{item.type}}'>
               <view class='info'>
-                <text class='title'>{{item.article_title}}</text>
-                <text class='text'>2019-03-15  13:30:00</text>
+                <text class='title'>{{item.order_name}}</text>
+                <text class='text'>{{item.order_time}}</text>
               </view>
               <view class='money_info'>
                 <view class='money'>
-                  <text class='num'>-{{item.original_price}}</text>
+                  <text class='num'>-{{item.order_price}}</text>
                   <text class='text'>支付成功</text>
                 </view>
-                <image class='more' src='/image/mine_more_black.png'></image>
+                <!-- <image class='more' src='/image/mine_more_black.png'></image> -->
               </view>
             </view>
           </block>
+
+          <view wx:if='{{alreadyinfo.length==0}}' class='no_record'>
+            <image src='/image/alreadybought_norecord_.png'></image>
+            <text>无记录</text>
+          </view>
+
         </view>
-      </scroll-view>
+        <!-- </scroll-view> -->
+      </swiper-item>
 
-    </swiper-item>
+    </swiper>
 
-  </swiper>
-
-
-
-
-
-
-
-
-
-
-
-
+  </scroll-view>
 </view>

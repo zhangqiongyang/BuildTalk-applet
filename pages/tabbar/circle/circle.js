@@ -24,8 +24,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // 获取圈子信息
-    this.getCircle()
+    
+    
   },
 
   /**
@@ -39,7 +39,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    util.judge(() => {
+      // 获取圈子信息
+      this.getCircle()
+    })
   },
 
   /**

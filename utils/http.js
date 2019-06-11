@@ -1,11 +1,16 @@
-import { api } from './api.js'
+import {
+  api
+} from './api.js'
 // const md5 = require('../utils/md5.js')
 import {
   md5
 } from "./md5.js"
 class HTTP {
 
-  request({ url, data = {} }) {
+  request({
+    url,
+    data = {}
+  }) {
     // 复制对象进行操作
     let objNew = JSON.parse(JSON.stringify(data))
     // console.log('45656', data)
@@ -21,7 +26,7 @@ class HTTP {
       }
     }
 
-    deleteNull(objNew)//执行函数
+    deleteNull(objNew) //执行函数
     // console.log('22222222222', objNew)
 
 
@@ -48,6 +53,7 @@ class HTTP {
 
     // 将对象转化为字符串
     let str = ''
+
     function changeStr(obj) {
       let newKey = Object.keys(objNew).sort()
       for (let j = 0; j < newKey.length; j++) {
@@ -56,7 +62,7 @@ class HTTP {
       // console.log(str)
       return str
     }
-    changeStr(objNew)//执行函数
+    changeStr(objNew) //执行函数
     // console.log('22将对象转化为字符串', str)
 
 
@@ -96,7 +102,7 @@ class HTTP {
           reject(res.data)
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log('------网络请求失败-------')
         reject()
         wx.showToast({
@@ -104,11 +110,15 @@ class HTTP {
           icon: 'none',
           duration: 2000,
         })
+
+        wx.navigateTo({
+          url: '/pages/sub_personalCenter/pages/404/404',
+        })
       }
     })
   }
 }
 
-export { HTTP }
-
-
+export {
+  HTTP
+}

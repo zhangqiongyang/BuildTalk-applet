@@ -15,8 +15,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab: '0',
+    currentTab: 0,
     type: 0,
+    windowHeight: app.globalData.windowHeight - 2
   },
 
 
@@ -113,22 +114,49 @@ Page({
   // 滑动切换tab
   bindChange(event) {
     console.log(event)
-    var current = event.detail.current;
+    const current = event.detail.current,
+      type = event.currentTarget.dataset.type
     this.setData({
-      currentTab: current
+      currentTab: current,
+      type: type
     })
+    //获取已购信息
+    this.bought()
   },
 
   // 点击切换tab
   swichNav(event) {
     var that = this;
     // console.log(event)
-    var current = event.currentTarget.dataset.current
+    const current = event.currentTarget.dataset.current,
+      type = event.currentTarget.dataset.type
+
     if (this.data.currentTab == current) {
       return
     } else {
       that.setData({
-        currentTab: current
+        currentTab: current,
+        type: type
+      })
+      //获取已购信息
+      this.bought()
+    }
+
+  },
+
+  // 跳转
+  toDetails(event){
+    console.log(event)
+    const type=event.currentTarget.dataset.type,
+    id=event.currentTarget.dataset.id
+
+    if(type == 2){
+      wx.navigateTo({
+        url: '/pages/sub_circle/pages/circleDetails/circleDetails?circle_id='+id,
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/sub_browse/pages/video/video?article_id=' + id,
       })
     }
   },
@@ -149,6 +177,10 @@ Page({
       .then(res => {
         console.log('-----------获取到已购信息了----------')
         console.log(res)
+
+        this.setData({
+          alreadyinfo: res.data
+        })
       })
   },
 })

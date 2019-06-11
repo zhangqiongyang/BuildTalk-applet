@@ -1,3 +1,5 @@
+var app=getApp()
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -68,6 +70,29 @@ function _showLoading(){
   })
 }
 
+// 判断登陆与绑定手机号
+function judge(callback){
+  var app=getApp()
+  if (app.globalData.isLogin) {
+    if (app.globalData.isHavePhone) {
+      callback()
+    } else {
+      this._showModal('未绑定手机号', '请绑定手机号后进行操作', () => {
+        wx.navigateTo({
+          url: '/pages/sub_personalCenter/pages/bindPhone/bindPhone',
+        })
+      })
+    }
+
+  } else {
+    this._showModal('未登录', '请登录后进行操作', () => {
+      wx.switchTab({
+        url: '/pages/tabbar/mine/mine',
+      })
+    })
+  }
+}
+
 
 //判断字符是否为空的方法
 function isEmpty(obj) {
@@ -113,5 +138,6 @@ module.exports = {
   _showToastCancel,
   _showModal,
   _showLoading,
-  isEmpty
+  isEmpty,
+  judge
 }

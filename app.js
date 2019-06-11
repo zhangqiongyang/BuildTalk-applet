@@ -53,7 +53,7 @@ App({
                     if (res.data.getUnionid == '1') {
                       that.globalData.isHaveUnionId = true
                       console.log('-------已经含有unionId，不需要解密--------')
-
+                      // that.globalData.isLogin=true
                     } else {
 
                     }
@@ -94,6 +94,7 @@ App({
               that.globalData.user_id = res.data.userInfo.user_id
               wx.setStorageSync('user_id', res.data.userInfo.user_id)
               console.log(wx.getStorageSync('user_id'))
+              that.globalData.isLogin = true
 
             }
 
@@ -132,9 +133,7 @@ App({
                   if (res.data.getUnionid == '1') {
                     that.globalData.isHaveUnionId = true
                     console.log('-------已经含有unionId，不需要解密--------')
-
-                  } else {
-
+                    // that.globalData.isLogin = true
                   }
                 })
 
@@ -171,6 +170,7 @@ App({
                   .then(res => {
                     console.log('---------获取到用户加密信息----------')
                     console.log(res)
+                    that.globalData.isLogin = true
 
                   })
 
@@ -217,5 +217,6 @@ App({
     nickName: null,
     mobile: null,
     isHavePhone: null,
+    isLogin:null,
   }
 })

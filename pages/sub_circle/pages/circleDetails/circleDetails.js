@@ -11,7 +11,7 @@ import {
 const util = require('../../../../utils/util.js')
 
 var WxParse = require('../../../../wxParse/wxParse.js');
-
+var app = getApp()
 Page({
 
   /**
@@ -31,7 +31,8 @@ Page({
     subject_page: 1, // 主题页数
     course_page: 1, //课程页数
     circleList: [],
-    catalogList: []
+    catalogList: [],
+    platform: app.globalData.platform,
   },
 
   /**
@@ -47,6 +48,7 @@ Page({
 
     // 预览圈信息
     this.circleInfo()
+
   },
 
   /**
@@ -82,12 +84,27 @@ Page({
    */
   onPullDownRefresh: function() {
 
+    util._showLoading
+
+    // 预览圈信息
+    this.circleInfo()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    // 判断是否加入
+    if (this.data.isJoin) {
+      // 根据分类查询主题
+      if (this.data.subject_page < this.data.subject_page_count) {
+        this.subject(Number(this.data.subject_page) + 1)
+      } else {
+        util._showToast('没有更多了')
+      }
+    } else {
+
+    }
 
   },
 
@@ -150,17 +167,20 @@ Page({
     console.log(event)
     const type = event.currentTarget.dataset.type,
       theme_id = event.detail.theme_id
-    if (type == 'open') {
-      // 主题权限查看
-      this.subjectclassifyRequest(theme_id)
-      this.setData({
-        isRedactSubject: true
-      })
-    } else {
-      this.setData({
-        isRedactSubject: false
-      })
-    }
+    util.judge(() => {
+
+      if (type == 'open') {
+        // 主题权限查看
+        this.subjectclassifyRequest(theme_id)
+        this.setData({
+          isRedactSubject: true
+        })
+      } else {
+        this.setData({
+          isRedactSubject: false
+        })
+      }
+    })
   },
 
   // 切换主题分类
@@ -210,31 +230,52 @@ Page({
 
   //跳转到视频播放页面
   toVideo(event) {
-    const article_id= event.currentTarget.dataset.article_id
-    wx.navigateTo({
-      url: '../courseCircleDetails/courseCircleDetails?article_id=' + article_id,
-    })
+    const article_id = event.currentTarget.dataset.id,
+      audition = event.currentTarget.dataset.audition
+    if (this.data.isJoin) {
+      wx.navigateTo({
+        url: '../courseCircleDetails/courseCircleDetails?article_id=' + article_id + '&circle_id=' + this.data.circle_id,
+      })
+
+    } else {
+      if (audition == 1) {
+        wx.navigateTo({
+          url: '../courseCircleDetails/courseCircleDetails?article_id=' + article_id + '&circle_id=' + this.data.circle_id,
+        })
+      } else {
+        util._showModal('请解锁后查看', '', () => {})
+      }
+    }
+
   },
 
   // 跳转到圈子信息页面
   toCircleInfo() {
-    wx.navigateTo({
-      url: '../circleInfo/circleInfo?circle_id=' + this.data.circle_id + '&operate_user=' + this.data.circleInfo.user_id,
+    util.judge(() => {
+
+      wx.navigateTo({
+        url: '../circleInfo/circleInfo?circle_id=' + this.data.circle_id + '&operate_user=' + this.data.circleInfo.user_id,
+      })
     })
   },
 
   // 跳转到发表主题页面
   toPublishSubject() {
-    wx.navigateTo({
-      url: '../publishSubject/publishSubject?circle_id=' + this.data.circle_id ,
+    util.judge(() => {
+
+      wx.navigateTo({
+        url: '../publishSubject/publishSubject?circle_id=' + this.data.circle_id,
+      })
     })
   },
 
 
   //打开付款框
   pay() {
-    this.setData({
-      isPay: true
+    util.judge(() => {
+      this.setData({
+        isPay: true
+      })
     })
   },
 
@@ -246,7 +287,7 @@ Page({
   },
 
   // 完成付款
-  payment(){
+  payment() {
     this.setData({
       isPay: false
     })
@@ -254,7 +295,6 @@ Page({
     // 预览圈信息
     this.circleInfo()
   },
-
 
 
   /**
@@ -341,12 +381,12 @@ Page({
   },
 
   // 根据分类查询主题
-  subject() {
+  subject(page) {
     http.request({
         url: api.API_SUBJECT,
         data: {
           circle_id: this.data.circle_id,
-          page: this.data.subject_page,
+          page: page?page:this.data.subject_page,
           page_size: 20,
           type_id: this.data.classify,
           user_id: wx.getStorageSync("user_id"),
@@ -448,24 +488,27 @@ Page({
   },
 
   // 加入圈子
-  joinCircle(){
-    http.request({
-      url: api.API_JIONCIRCLE,
-      data:{
-        circle_id: this.data.circle_id,
-        user_id: wx.getStorageSync("user_id"),
-      }
-    })
-    .then(res=>{
-      console.log('----------加入成功-----------')
-      console.log(res)
+  joinCircle() {
+    util.judge(() => {
 
-      util._showToastSuccess('成功加入')
+      http.request({
+          url: api.API_JIONCIRCLE,
+          data: {
+            circle_id: this.data.circle_id,
+            user_id: wx.getStorageSync("user_id"),
+          }
+        })
+        .then(res => {
+          console.log('----------加入成功-----------')
+          console.log(res)
 
-      // 圈子信息
-      this.circleInfo()
+          util._showToastSuccess('成功加入')
+
+          // 圈子信息
+          this.circleInfo()
+        })
     })
   },
 
- 
+
 })

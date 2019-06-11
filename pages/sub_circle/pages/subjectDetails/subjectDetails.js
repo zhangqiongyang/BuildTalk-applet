@@ -81,7 +81,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if(this.data.page<this.data.page_count){
+      // 留言
+      guestbookInfo(page) 
+    }else{
+      util._showToast('没有更多了')
+    }
+  
   },
 
   /**
@@ -98,15 +104,19 @@ Page({
   uploadMsg(event) {
     console.log(event)
     const value = event.detail.value
+    util.judge(() => {
 
     // 留言接口
     this.submitRequest(value)
+    })
   },
 
   // 切换编辑主题
   changeRedactSubject(event) {
     console.log(event)
     const type = event.currentTarget.dataset.type
+    util.judge(() => {
+
     if (type == 'open') {
       // 主题权限查看
       this.subjectclassifyRequest()
@@ -118,6 +128,7 @@ Page({
         isRedactSubject: false
       })
     }
+    })
   },
 
   // 删除主题成功
@@ -166,13 +177,13 @@ Page({
   },
 
   // 留言
-  guestbookInfo() {
+  guestbookInfo(page) {
     http.request({
         url: api.API_SUBJECTMSGINFO,
         data: {
           user_id: wx.getStorageSync('user_id'),
           theme_id: this.data.theme_id,
-          page: this.data.page,
+          page: page?page:this.data.page,
           page_size: 20,
         }
       })

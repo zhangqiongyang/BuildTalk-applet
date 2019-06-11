@@ -100,6 +100,16 @@ Page({
     }
   },
 
+  // 跳转
+  toArticle(event) {
+    console.log(event)
+    const id = event.currentTarget.dataset.id
+
+    wx.navigateTo({
+      url: '/pages/sub_browse/pages/video/video?article_id=' + id,
+    })
+  },
+
   /**
    * 网络请求
    */
@@ -118,8 +128,8 @@ Page({
         console.log(res)
 
         this.setData({
-          authorInfo:res.data,
-          'authorInfo.isVip':true,
+          authorInfo: res.data,
+          'authorInfo.isVip': true,
           'authorInfo.user_id': this.data.author_id,
           articleList: res.data.articleInfo,
         })

@@ -33,9 +33,11 @@ Component({
     attention(event) {
       console.log(event)
       const id = event.currentTarget.dataset.id
+      util.judge(() => {
 
       // 关注接口
       this.attentionRequest(id)
+      })
     },
 
     // 跳转到圈主详情

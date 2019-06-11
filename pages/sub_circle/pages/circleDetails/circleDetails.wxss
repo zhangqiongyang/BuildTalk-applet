@@ -1,9 +1,11 @@
 /* pages/sub_circle/pages/circleDetails/circlrDetails.wxss */
 @import "/wxParse/wxParse.wxss";
+
 view {
   overflow: visible;
   line-height: normal;
 }
+
 /* 已加入的圈子标题 */
 
 .circle_set {
@@ -386,6 +388,20 @@ view {
   margin: 10rpx auto;
 }
 
+.btn_ios {
+  padding: 30rpx;
+  background: #32a7ff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10rpx auto;
+  white-space:nowrap;
+}
+
 /* 发表 */
 
 .publish {
@@ -424,6 +440,15 @@ view {
 
 /* 主题分类查看 */
 
+.back_masking {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(2, 2, 3, 0.4);
+  width: 100%;
+  height: 100%;
+}
+
 .center {
   display: flex;
   align-items: center;
@@ -432,6 +457,10 @@ view {
 
 .subject_classify {
   width: 618rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .classify_title {
@@ -448,6 +477,7 @@ view {
 
 .classify_box {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   background-color: #fff;
   border-radius: 0 0 10rpx 10rpx;
@@ -459,7 +489,7 @@ view {
   flex-direction: column;
   justify-content: center;
   width: 33%;
-  height: 208rpx;
+  height: 160rpx;
 }
 
 .classify_item image {

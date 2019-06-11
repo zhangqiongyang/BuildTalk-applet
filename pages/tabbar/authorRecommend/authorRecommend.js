@@ -27,6 +27,9 @@ Page({
     this.author()
     // 人气圈主
     this.master()
+    wx.showLoading({
+      title: '加载中',
+    })
   },
 
   /**
@@ -61,7 +64,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.setData({
+      author_page: 1,
+    })
+    //行业大咖
+    this.author()
+    // 人气圈主
+    this.master()
+    wx.showLoading({
+      title: '加载中',
+    })
   },
 
   /**
@@ -121,16 +133,16 @@ Page({
   //跳转到大咖
   toAuthor(event) {
     console.log(event)
-    const author_id= event.currentTarget.dataset.id
+    const author_id = event.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/sub_author/pages/authorDetails/authorDetails?author_id=' + author_id,
     })
   },
   //跳转到圈主
   toMaster(event) {
-    const user_id= event.currentTarget.dataset.id
+    const user_id = event.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/sub_author/pages/masterDetails/masterDetails?user_id='+user_id,
+      url: '/pages/sub_author/pages/masterDetails/masterDetails?user_id=' + user_id,
     })
   },
 
@@ -143,7 +155,7 @@ Page({
     http.request({
         url: api.API_AUTHOR,
         data: {
-          page: page?page:this.data.author_page,
+          page: page ? page : this.data.author_page,
           page_size: 3,
         }
       })
@@ -155,6 +167,8 @@ Page({
           author_page: res.data.page,
           author_page_count: res.data.page_count
         })
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
       })
   },
 
@@ -173,6 +187,8 @@ Page({
         this.setData({
           masterList: res.data,
         })
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
       })
   },
 

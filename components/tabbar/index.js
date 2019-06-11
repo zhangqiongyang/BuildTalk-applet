@@ -32,34 +32,41 @@ Component({
     input(event) {
       console.log(event)
       const value = event.detail.value
+
       this.setData({
         isMsg: true,
         value: value
       })
+
     },
 
     submit(id) {
+      util.judge(() => {
 
-      this.triggerEvent('uploadmsg', {
-        value: this.data.value
-      }, {})
+        this.triggerEvent('uploadmsg', {
+          value: this.data.value
+        }, {})
 
-      this.setData({
-        value: '',
-        isMsg: false
+        this.setData({
+          value: '',
+          isMsg: false
+        })
       })
+
     },
 
     // 点赞
     like(event) {
+      util.judge(() => {
+        if (this.properties.list.isArticle) {
+          // 文章点赞接口
+          this.likeRequestArticle()
+        } else {
+          // 主题点赞接口
+          this.likeRequestSubject()
+        }
+      })
 
-      if (this.properties.list.isArticle) {
-        // 文章点赞接口
-        this.likeRequestArticle()
-      } else {
-        // 主题点赞接口
-        this.likeRequestSubject()
-      }
 
     },
     // 文章点赞网络请求

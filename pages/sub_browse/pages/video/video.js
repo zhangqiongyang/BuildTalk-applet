@@ -186,98 +186,11 @@ Page({
   uploadMsg(event) {
     console.log(event)
     const value = event.detail.value
+    util.judge(() => {
 
     // 留言接口
     this.submitRequest(value)
-  },
-
-  // 跳转到购买页
-
-  jumpToBuy() {
-    var that = this
-    if (this.data.platform == 'ios') {
-      wx.showModal({
-        content: '由于相关规范，iOS用户暂不可在小程序内订阅',
-        showCancel: false,
-        confirmText: '确定',
-        success: function(res) {}
-
-      })
-    } else {
-      //判断是否登录
-      //如果登录，进行下一步判断，如果未登录，引导用户先登录
-      if (app.globalData.isLogin) {
-        //判断用户是否绑定手机号
-        //如果已经绑定手机号，可以进行操作，如果没有绑定，引导用户先绑定手机号
-        if (app.globalData.isBindingPhone) {
-          wx.showModal({
-            // title: '购买',
-            content: '是否购买',
-            showCancel: true,
-            cancelText: '取消',
-            // cancelColor: '',
-            confirmText: '确定',
-            // confirmColor: '',
-            success: function(res) {
-              console.log(res)
-              if (res.confirm) {
-                console.log('用户点击确定')
-                // 判断是单文还是课程中的文章
-                // course_id = 0为单文
-                if (that.data.articleinfo.course_id == "0") {
-                  wx.navigateTo({
-                    url: "/pages/sub_browse/pages/buy/buy?article_id=" + that.data.articleinfo.article_id
-                  })
-                } else {
-                  wx.navigateTo({
-                    url: "/pages/sub_browse/pages/buy/buy?course_id=" + that.data.articleinfo.course_id
-                  })
-                }
-              } else if (res.cancel) {
-                console.log('用户点击取消')
-              }
-
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '未绑定手机号',
-            content: '请先绑定手机号',
-            showCancel: true,
-            cancelText: '取消',
-            confirmText: '确定',
-            success: function(res) {
-              if (res.confirm) {
-                wx.navigateTo({
-                  url: '/pages/phone/phone',
-                })
-              } else if (res.cancel) {
-
-              }
-
-            },
-          })
-        }
-
-
-      } else {
-        wx.showModal({
-          title: '未登录',
-          content: '请先登录',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function(res) {
-            wx.switchTab({
-              url: '/pages/tabbar/mine/mine',
-            })
-          },
-        })
-      }
-
-    }
-
-
+    })
   },
 
 
@@ -285,121 +198,6 @@ Page({
    * 网络请求
    * 
    */
-
-  //文章信息
-  requestArc: function() {
-    var that = this
-    // 获取文章数据
-    wx.request({
-      // url: 'https://wx.bjjy.com/getArticleinfobyArticleId',
-      url: api.API_GETARTICLEINFO,
-      data: {
-        article_id: that.data.article_id,
-        openid: wx.getStorageSync('openid'),
-        source: 'xcx',
-        unionid: wx.getStorageSync('unionid')
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: 'POST',
-      //dataType: 'json',
-      //responseType: 'text',
-      success: function(res) {
-        console.log('-------------文章数据---------------')
-        console.log(res)
-
-
-        //判断是否登录
-        //如果登录，进行下一步判断，如果未登录，引导用户先登录
-        if (app.globalData.isLogin) {
-
-
-          //判断是否含有音频和视频
-          //根据是否有audio_id来判断是否含有音频，如果有audio_id则含有音频，isHaveAudio为true,如果没有则不含有音频，isHaveAudio为false,
-          //根据是否有video_id来判断是否含有视频，如果有video_id则含有视频，isHaveVideo为true,如果没有则不含有视频，isHaveVideo为false,
-          if (res.data.articleinfo.audio_id) {
-            console.log('------含有音频---------')
-            that.setData({
-              isHaveAudio: true,
-              minute: parseInt(res.data.articleinfo.audio_duration / 60),
-              second: parseInt(res.data.articleinfo.audio_duration % 60)
-            })
-          }
-          if (res.data.articleinfo.video_id) {
-            console.log('------含有视频---------')
-            let haveVideoHeight = app.globalData.scrollHeight - 44
-            haveVideoHeight = haveVideoHeight - (210 / 375) * app.globalData.windowWidth - 49
-            that.setData({
-              isHaveVideo: true,
-              haveVideoHeight: haveVideoHeight
-            })
-          }
-          /**
-           * 无论用户是否购买，先进行赋值，在onshow时，判断用户是否购买，
-           * 无购买，不对字段进行使用 
-           * 
-           */
-          that.setData({
-            arcData: res.data,
-          })
-
-
-          // 判断该文章是否为试读课程
-          //is_audition为1则为试读课程，课程可读，进行赋值操作
-          //is_audition为0则为非试读课程，进行下一步判断
-          if (res.data.articleinfo.is_audition == '1') {
-            that.setData({
-              buy: true,
-              articleinfo: res.data.articleinfo,
-              authorinfo: res.data.authorinfo,
-            })
-            myaudio.src = res.data.articleinfo.audio_url;
-
-            WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
-          } else {
-            that.setData({
-              articleinfo: res.data.articleinfo,
-              authorinfo: res.data.authorinfo,
-            })
-            myaudio.src = res.data.articleinfo.audio_url;
-            WxParse.wxParse('content', 'html', res.data.articleinfo.content, that, 0)
-
-            //判断用户是否购买
-            //msg=1 代表已购买
-            //msg=0 代表未购买
-            if (res.data.msg == "1") {
-              that.setData({
-                buy: true,
-              })
-            } else {
-
-            }
-          }
-
-
-        } else {
-          wx.showModal({
-            title: '未登录',
-            content: '请先登录',
-            showCancel: true,
-            cancelText: '取消',
-            confirmText: '确定',
-            success: function(res) {
-              wx.switchTab({
-                url: '/pages/tabbar/mine/mine',
-              })
-            },
-          })
-        }
-
-        wx.hideToast();
-      },
-      fail: function(res) {
-        console.log('-------------失败啦---------------')
-      },
-    })
-  },
 
 
   // 获取文章信息
@@ -447,17 +245,27 @@ Page({
           })
         }
 
+        if (res.data.newsInfo.is_buy == 1) {
+          this.setData({
+            buy: true
+          })
+        }
+
         // 动态设置当前页面标题
-        if (res.data.newsInfo.type == 'article'){
+        if (res.data.newsInfo.type == 'article') {
+
           wx.setNavigationBarTitle({
             title: res.data.newsInfo.article_title
           })
-        }else{
+        } else {
+          this.setData({
+            buy: true
+          })
           wx.setNavigationBarTitle({
             title: '每日一谈'
           })
         }
-        
+
         // 关闭刷新
         wx.hideLoading()
         wx.stopPullDownRefresh()
@@ -470,6 +278,7 @@ Page({
         url: api.API_GETARTICLEMSG,
         data: {
           article_id: this.data.article_id,
+          user_id: wx.getStorageSync('user_id'),
           page: this.data.page,
           page_size: 20
         }
@@ -509,7 +318,48 @@ Page({
           'tabbarlist.guestbookNum': res.data.guestbookInfo.length
         })
       })
+  },
 
 
+  //支付
+  pay() {
+    http.request({
+        url: api.API_BUY,
+        data: {
+          user_id: wx.getStorageSync("user_id"),
+          type_id: 1, //1文章 2课程
+          data_id: this.data.articleinfo.article_id,
+          order_name: this.data.articleinfo.article_title,
+          source: 'xcx',
+          order_price: this.data.articleinfo.article_price
+        }
+      })
+      .then(res => {
+        console.log('----------统一下单成功-----------')
+        console.log(res)
+
+        util._showToastSuccess('成功加入')
+
+        var that = this
+        // 发起支付
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: function(res) {
+            console.log('----------支付成功-----------')
+            util._showToastSuccess('支付成功')
+
+            // 获取文章信息
+            that.getArticleInfo()
+          },
+          fail: function(res) {
+            console.log('----------支付失败-----------')
+            util._showToastCancel('支付失败')
+          },
+        })
+      })
   }
 })

@@ -14,8 +14,8 @@
     </view>
   </view>
   <view class='circle_content'>
-    <text  style='width:100%;display:block;' bindtap='toSubjectDetails'>{{subjectInfo.theme_content}}</text>
-    <view class='imageBox'  bindtap='toSubjectDetails'>
+    <text style='width:100%;display:block;' bindtap='toSubjectDetails'>{{subjectInfo.theme_content}}</text>
+    <view class='imageBox' bindtap='toSubjectDetails'>
       <block wx:for='{{subjectInfo.theme_image}}' wx:key='key'>
         <image src='{{item.pic_url}}' lazy-load='true' mode='aspectFill'></image>
       </block>
@@ -48,6 +48,10 @@
             <text class='msg_con'>{{item.content}}</text>
           </view>
         </block>
+        <view wx:if='{{page!=page_count}}' class='subject_more' bindtap='more'>
+          <text>查看更多</text>
+          <image src='/image/circleDetails_subject_more.png'></image>
+        </view>
       </view>
 
 

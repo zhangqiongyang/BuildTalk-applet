@@ -14,7 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowHeight: app.globalData.windowHeight -0.5,
+    windowHeight: app.globalData.windowHeight - 0.5,
     phoneNumber: app.globalData.mobile,
     headImage: app.globalData.headImage,
     nickName: app.globalData.nickName,
@@ -22,13 +22,18 @@ Page({
     hasUserInfo: false,
     isHavePhone: '', //用户是否绑定手机号
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isLogin: app.globalData.isLogin,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    console.log('----------是否登陆-----------')
+    console.log(app.globalData.isLogin)
+    wx.showLoading({
+      title: '加载中',
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -56,7 +61,7 @@ Page({
       })
     }
 
-    
+
   },
 
 
@@ -108,6 +113,26 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    wx.showLoading({
+      title: '加载中',
+    })
+    if (!app.globalData.isHavePhone) {
+      // 查询用户是否绑定手机号
+      this.checkIsHavePhone()
+    } else {
+      this.setData({
+        isHavePhone: true
+      })
+    }
+
+    this.setData({
+      mobile: app.globalData.mobile,
+      headImage: app.globalData.headImage,
+      nickName: app.globalData.nickName,
+    })
+
+    wx.hideLoading()
+    wx.stopPullDownRefresh()
 
   },
 
@@ -136,12 +161,14 @@ Page({
       this.setData({
         hasUserInfo: false
       })
+
     } else {
       app.globalData.userInfo = e.detail.userInfo
       this.setData({
         userInfo: e.detail.userInfo,
         hasUserInfo: true
       })
+      app.globalData.isLogin = true
       //isHaveUnionId为false，代表不含unionId，需要解密
       if (!app.globalData.isHaveUnionId) {
 
@@ -156,14 +183,18 @@ Page({
 
   // 跳转到信息
   toMineInfo() {
-    wx.navigateTo({
-      url: '/pages/sub_personalCenter/pages/mineInfo/mineInfo',
+    util.judge(() => {
+      wx.navigateTo({
+        url: '/pages/sub_personalCenter/pages/mineInfo/mineInfo',
+      })
     })
   },
   // 跳转到钱包
   toAccount() {
-    wx.navigateTo({
-      url: '/pages/sub_personalCenter/pages/account/account',
+    util.judge(() => {
+      wx.navigateTo({
+        url: '/pages/sub_personalCenter/pages/account/account',
+      })
     })
   },
   // 跳转到设置
@@ -185,7 +216,7 @@ Page({
       url: '/pages/sub_personalCenter/pages/bindPhone/bindPhone',
     })
   },
-  
+
 
   /**
    * 网络请求
@@ -194,16 +225,20 @@ Page({
   // 解密获取用户unionId
   getSecretInfo(tencryptedData, iv) {
     http.request({
-      url: api.API_GETENCRYPTEDDATA,
-      data: {
-        login_id: wx.getStorageSync('login_id'),
-        encryptedData: tencryptedData,
-        iv: iv
-      }
-    })
+        url: api.API_GETENCRYPTEDDATA,
+        data: {
+          login_id: wx.getStorageSync('login_id'),
+          encryptedData: tencryptedData,
+          iv: iv
+        }
+      })
       .then(res => {
         console.log('---------获取到用户加密信息----------')
         console.log(res)
+        app.globalData.isLogin = true
+
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
       })
 
   },
@@ -212,11 +247,11 @@ Page({
   // 查询用户是否绑定手机号
   checkIsHavePhone() {
     http.request({
-      url: api.API_CHECKPHONE,
-      data: {
-        login_id: wx.getStorageSync('login_id')
-      }
-    })
+        url: api.API_CHECKPHONE,
+        data: {
+          login_id: wx.getStorageSync('login_id')
+        }
+      })
       .then(res => {
         console.log('---------已经绑定手机号-----------')
         console.log(res)
@@ -224,19 +259,32 @@ Page({
           isHavePhone: true,
           mobile: res.data.mobile
         })
-     
+
         app.globalData.isHavePhone = true
         app.globalData.mobile = res.data.mobile
         app.globalData.headImage = res.data.headImage
         app.globalData.nickName = res.data.nickName
         app.globalData.user_id = res.data.user_id
+        app.globalData.isLogin = true
+
+        this.setData({
+          isHavePhone: true,
+          isLogin: true,
+          mobile: res.data.mobile,
+          headImage: res.data.headImage,
+          nickName: res.data.nickName,
+        })
+
         wx.setStorageSync('user_id', res.data.user_id)
         console.log(wx.getStorageSync('user_id'))
 
 
         console.log(app.globalData.isHavePhone)
+
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
       })
-      .catch(err=>{
+      .catch(err => {
         console.log('------------未绑定手机号------------')
         wx.navigateTo({
           url: '/pages/sub_personalCeter/pages/bindPhone/bindPhone',

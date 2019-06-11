@@ -23,6 +23,8 @@ Component({
    */
   data: {
     isMsg: false,
+    page: 1,
+    page_count: 1,
   },
 
   /**
@@ -38,20 +40,28 @@ Component({
 
     // 切换编辑主题
     changeRedactSubject(event) {
+      util.judge(() => {
+
       this.triggerEvent('changeRedactSubject', {
         theme_id: this.properties.subjectInfo.theme_id
       }, {})
+      })
     },
 
     // 点赞
     like() {
+      util.judge(() => {
+
       // 点赞接口
       this.likeRequest()
+      })
     },
 
     // 打开留言框
     isMsg(event) {
       const type = event.currentTarget.dataset.type
+      util.judge(() => {
+
       if (type == 'open') {
         this.setData({
           isMsg: true
@@ -61,6 +71,7 @@ Component({
           isMsg: false
         })
       }
+      })
 
     },
 
@@ -84,6 +95,13 @@ Component({
       console.log(event)
       const height = event.detail.height
 
+    },
+
+    // 留言查看更多
+    more() {
+
+      // 主题留言
+      this.guestbookInfo(Number(this.data.page) + 1)
     },
 
 
@@ -147,6 +165,38 @@ Component({
           }
 
         })
-    }
+    },
+
+    // 主题留言
+    guestbookInfo(page) {
+      http.request({
+          url: api.API_SUBJECTMSGINFO,
+          data: {
+            user_id: wx.getStorageSync('user_id'),
+            theme_id: this.properties.subjectInfo.theme_id,
+            page: page ? page : this.data.page,
+            page_size: 10,
+          }
+        })
+        .then(res => {
+          console.log('----------留言----------')
+          console.log(res)
+
+          let comment = this.properties.subjectInfo.comment_content
+
+          comment.push(res.data.commentInfo)
+
+          this.setData({
+            'subjectInfo.comment_content': comment,
+            // 'tabbarlist.guestbookNum': res.data.commentInfo.length,
+            page: res.data.page,
+            page_count: res.data.page_count,
+          })
+
+          // 关闭刷新
+          wx.hideLoading()
+          wx.stopPullDownRefresh()
+        })
+    },
   }
 })
