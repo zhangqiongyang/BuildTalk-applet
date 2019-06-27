@@ -128,7 +128,7 @@ Component({
           util._showToastSuccess('提交成功')
           this.setData({
             isMsg: false,
-            'subjectInfo.comment_content': res.data.commentInfo
+            'subjectInfo.comment_content': res.data.comment_content
           })
         })
     },

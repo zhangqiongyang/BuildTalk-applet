@@ -133,9 +133,9 @@ Page({
   //跳转到大咖
   toAuthor(event) {
     console.log(event)
-    const author_id = event.currentTarget.dataset.id
+    const author_user_id = event.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/sub_author/pages/authorDetails/authorDetails?author_id=' + author_id,
+      url: '/pages/sub_author/pages/authorDetails/authorDetails?author_user_id=' + author_user_id,
     })
   },
   //跳转到圈主
@@ -144,6 +144,7 @@ Page({
     wx.navigateTo({
       url: '/pages/sub_author/pages/masterDetails/masterDetails?user_id=' + user_id,
     })
+    
   },
 
   /**
@@ -211,9 +212,11 @@ Page({
           if (id == masterList[i].user_id) {
             if (masterList[i].is_attention == 1) {
               masterList[i].is_attention = 0
+              masterList[i].countAttention--
               util._showToastCancel('已取消关注')
             } else {
               masterList[i].is_attention = 1
+              masterList[i].countAttention++
               util._showToastSuccess('关注成功')
             }
           }

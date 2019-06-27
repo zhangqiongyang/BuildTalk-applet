@@ -39,15 +39,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    const circle_id = options.circle_id
-    this.setData({
-      circle_id: circle_id
-    })
+    console.log(options)
+    console.log(decodeURIComponent(options.q))
+    if (options.q) {
+      let scene = decodeURIComponent(options.q)
+      let arr1 = scene.split('/')
+      let code1 = arr1[arr1.length - 1]
+      let arr2 = scene.split('?')
+      let code2 = arr2[arr2.length - 1]
+      let arrPara = code2.split('&')
+      var arr = []
+      for (var i in arrPara) {
+        arr = arrPara[i].split("=");
+        // wx.setStorageSync(arr[0], arr[1]);
+        console.log("setStorageSync:", arr[0], "=", arr[1]);
 
-    util._showLoading
+        if (arr[0] == 'circle_id') {
+          this.setData({
+            circle_id: arr[1]
+          })
+        } else {
+          this.setData({
+            user_id: arr[1]
+          })
+        }
 
-    // 预览圈信息
-    this.circleInfo()
+      }
+      // 预览圈信息
+      this.circleInfo()
+    } else {
+      const circle_id = options.circle_id
+      this.setData({
+        circle_id: circle_id
+      })
+
+      util._showLoading
+
+      // 预览圈信息
+      this.circleInfo()
+    }
+
+   
 
   },
 
@@ -160,6 +192,16 @@ Page({
     this.setData({
       nav: id
     })
+
+    if (id == 'theme') {
+      // 根据分类查询主题
+      this.subject()
+    } else {
+      this.setData({
+        themeInfo: ''
+      })
+    }
+
   },
 
   // 切换编辑主题
@@ -218,6 +260,10 @@ Page({
     this.setData({
       isRedactSubject: false
     })
+
+    //刷新列表
+    // 根据分类查询主题
+    this.subject()
   },
 
   // 收藏主题成功
@@ -344,6 +390,15 @@ Page({
         WxParse.wxParse('lightSpot', 'html', res.data.circleInfo.lightSpot, this, 0)
 
 
+        // 判断是否是圈主
+        if (wx.getStorageSync('user_id') == res.data.circleInfo.user_id){
+          this.setData({
+            isMaster:true
+          })
+        }
+
+
+
 
         // 关闭刷新
         wx.hideLoading()
@@ -386,7 +441,7 @@ Page({
         url: api.API_SUBJECT,
         data: {
           circle_id: this.data.circle_id,
-          page: page?page:this.data.subject_page,
+          page: page ? page : this.data.subject_page,
           page_size: 20,
           type_id: this.data.classify,
           user_id: wx.getStorageSync("user_id"),
@@ -397,6 +452,12 @@ Page({
         console.log(res)
 
         let themeInfo = res.data.themeInfo
+
+        if (themeInfo.length == 0) {
+          this.setData({
+            themeInfo: ''
+          })
+        }
 
         for (let i = 0; i < themeInfo.length; i++) {
           const isLiked = themeInfo[i].isHaveLiked

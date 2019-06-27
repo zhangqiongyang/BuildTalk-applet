@@ -2,10 +2,11 @@
 
 <import src="/wxParse/wxParse.wxml" />
 
-<view>
+<view style='padding-bottom:1px;'>
   <!-- 已加入圈子标题 -->
   <view wx:if='{{isJoin}}' class='joined_title'>
     <image class='circle_back' src='{{circleInfo.circle_image.pic_url}}' mode='aspectFill'></image>
+    <view class='masking'></view>
     <image class='circle_set' src='/image/circleDetails_set.png' bindtap='toCircleInfo'></image>
     <view class='joined_circle'>
       <view class='author_image'>
@@ -97,7 +98,7 @@
         <image hidden='{{!isCatalog}}' src='/image/circleDetails_up.png' data-type='close'></image>
       </view>
     </view>
-    <view class='catalog_con' wx:if='{{!isCatalog}}' bindtap='toVideo' data-id='{{courselist[0].article_id}}'>
+    <view class='catalog_con' wx:if='{{!isCatalog}}' bindtap='toVideo' data-id='{{courselist[0].article_id}}' data-audition='{{courselist[0].is_audition ==1}}'>
       <view class='catalog_video_title'>
         <image src='/image/circleDetails_video.png'></image>
         <text>{{courselist[0].article_title}}</text>
@@ -131,7 +132,7 @@
       </view>
       <view class='nav_item' bindtap='changeNav' data-id='essence'>
         <text class='{{nav == "essence"?"active":""}}'>精华</text>
-        <text class='nav_num'>2</text>
+        <text class='nav_num'>0</text>
       </view>
     </view>
     <view wx:if='{{isJoin}}' class='nav_subject' bindtap='changeclassify' data-type='open'>
@@ -184,7 +185,7 @@
           <image src='/image/circleDetails_picture.png'></image>
           <text>图片主题</text>
         </view>
-        <view class='classify_item' bindtap='changeSubjectClassify' data-type='3' data-text='只看圈主'>
+        <view wx:if='{{!isMaster}}' class='classify_item' bindtap='changeSubjectClassify' data-type='3' data-text='只看圈主'>
           <image src='/image/circleDetails_master.png'></image>
           <text>只看圈主</text>
         </view>

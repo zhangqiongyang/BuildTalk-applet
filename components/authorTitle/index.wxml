@@ -4,7 +4,7 @@
   <image class='author_back' src='{{authorInfo.bg_pic}}' mode='aspectFill' />
   <!-- 大咖简介 -->
   <view class='author_info'>
-    <image class='author_image' src='{{authorInfo.headImage}}' mode='aspectFill'/>
+    <image class='author_image' src='{{authorInfo.headImage}}' mode='aspectFill' />
     <view class='author_name'>
       <text>{{authorInfo.name}}</text>
       <image wx:if='{{authorInfo.isVip}}' src='/image/authorRecommend_v.png'></image>
@@ -12,11 +12,13 @@
     <text wx:if='{{isAuthor}}' class='author_title'>{{authorInfo.author_desc}}</text>
   </view>
   <!-- 关注 -->
-  <view wx:if='{{authorInfo.is_attention == 1}}' class='attention' bindtap='attention' data-id='{{authorInfo.user_id}}'>
-    <image src='/image/authorRecommend_attention.png'></image>
-    已关注
-  </view>
-  <view wx:else class='attention' bindtap='attention' data-id='{{authorInfo.user_id}}'>+关注</view>
+  <block wx:if='{{authorInfo.is_attention != 2}}'>
+    <view wx:if='{{authorInfo.is_attention == 1}}' class='attention' bindtap='attention' data-id='{{authorInfo.user_id}}'>
+      <image src='/image/authorRecommend_attention.png'></image>
+      已关注
+    </view>
+    <view wx:else class='attention' bindtap='attention' data-id='{{authorInfo.user_id}}'>+关注</view>
+  </block>
   <!-- 大咖关注 -->
   <view class='attention_box'>
     <view class='attention_item' wx:if='{{isAuthor}}' bindtap='toCirlce' data-id='{{authorInfo.user_id}}'>

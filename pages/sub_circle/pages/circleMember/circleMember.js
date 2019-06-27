@@ -15,7 +15,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    memberList: []
+    memberList: [],
+    page:1,
   },
 
   /**
@@ -68,7 +69,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if(this.data.page<this.data.page_count){
+      // 圈子成员
+      this.memberList(Number(this.data.page)+1) 
+    }else{
+      util._showToast('没有更多了')
+    }
   },
 
   /**
@@ -83,15 +89,16 @@ Page({
    */
   // 跳转到成员详情
   toDetails(event) {
+    console.log(event)
     const id = event.currentTarget.dataset.id,
       type = event.currentTarget.dataset.type
     if (type == 'author') {
       wx.navigateTo({
-        url: '/pages/sub_author/pages/masterDetails/masterDetails?user_id=' + id,
+        url: '/pages/sub_author/pages/authorDetails/authorDetails?author_user_id=' + id,
       })
     }else{
       wx.navigateTo({
-        url: '/pages/sub_author/pages/authorDetails/authorDetails?user_id=' + id,
+        url: '/pages/sub_author/pages/masterDetails/masterDetails?user_id=' + id,
       })
     }
   },
@@ -106,13 +113,17 @@ Page({
         url: api.API_CIRCLEMEMBER,
         data: {
           circle_id: this.data.circle_id,
+          page:this.data.page,
+          page_size:20,
         }
       })
       .then(res => {
         console.log('--------圈子成员---------')
         console.log(res)
         this.setData({
-          memberList: res.data
+          memberList: res.data.circleUser,
+          page:res.data.page,
+          page_count:res.data.page_count
         })
       })
   },

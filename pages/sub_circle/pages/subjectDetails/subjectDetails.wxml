@@ -41,7 +41,7 @@
 
 
   <!-- 精选留言 -->
-  <v-msg msgList='{{commentInfo}}' />
+  <v-msg msgList='{{commentInfo}}' msgLength='{{countCommentNum}}'/>
 
 
   <!-- 评论、点赞、转发 -->

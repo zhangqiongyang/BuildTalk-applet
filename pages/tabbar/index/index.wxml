@@ -45,7 +45,7 @@
         <view class='circle_item' bindtap='toCircle' data-id='{{item.circle_id}}'>
           <image class='circle_image' src='{{item.circle_image.pic_url}}' mode='aspectFill'></image>
           <view class='circle_info'>
-            <text class='circle_name'>{{item.circle_name}}</text>
+            <text class='circle_name oneline'>{{item.circle_name}}</text>
             <view class='circle_master'>
               <text>{{item.name}}</text>
               <image wx:if='{{item.is_author==1}}' src='/image/circle_v.png'></image>
@@ -81,7 +81,7 @@
             <view class='course_master'>
               <text>{{item.name}}</text>
               <image wx:if='{{item.is_author==1}}' src='/image/circle_v.png'></image>
-              <text style='margin-left:20rpx;'>{{item.author_desc}}</text>
+              <text class='oneline' style='margin-left:20rpx;'>{{item.author_desc}}</text>
             </view>
           </view>
         </view>

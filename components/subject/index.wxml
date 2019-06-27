@@ -37,7 +37,7 @@
           <block wx:for='{{subjectInfo.parise_nickName}}' wx:key='key'>
             <text>{{item.name}}</text>
             <image wx:if='{{item.user_type==2}}' class='liked_v' src='/image/circle_v.png'></image>
-            <text>，</text>
+            <text wx:if='{{subjectInfo.parise_nickName.length>1}}'>，</text>
           </block>
         </view>
       </view>

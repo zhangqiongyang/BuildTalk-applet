@@ -181,6 +181,24 @@ Page({
     })
   },
 
+  //解锁
+  jumpToBuy() {
+    var that =this
+    wx.showModal({
+      title: '支付' + this.data.articleinfo.article_price + '元解锁此课程',
+      cancelColor: '#242831',
+      confirmColor: '#32A7FF',
+      success: function(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.pay()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      },
+    })
+  },
+
 
   // 发表留言
   uploadMsg(event) {
@@ -188,8 +206,8 @@ Page({
     const value = event.detail.value
     util.judge(() => {
 
-    // 留言接口
-    this.submitRequest(value)
+      // 留言接口
+      this.submitRequest(value)
     })
   },
 
@@ -289,7 +307,8 @@ Page({
         this.setData({
           guestbookinfo: res.data.guestbookInfo,
           page_count: res.data.page_count,
-          'tabbarlist.guestbookNum': res.data.guestbookInfo.length
+          countCommentNum: res.data.countGuestbookNum,
+          'tabbarlist.guestbookNum': res.data.countGuestbookNum
         })
         wx.hideLoading()
         wx.stopPullDownRefresh()
@@ -315,7 +334,7 @@ Page({
           value: '',
           guestbookinfo: res.data.guestbookInfo,
           page_count: res.data.page_count,
-          'tabbarlist.guestbookNum': res.data.guestbookInfo.length
+          'tabbarlist.guestbookNum': res.data.countGuestbookNum
         })
       })
   },

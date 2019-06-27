@@ -19,7 +19,7 @@ class HTTP {
     function deleteNull(obj) {
       let newKey = Object.keys(obj).sort()
       for (let k = 0; k < newKey.length; k++) {
-        if (obj[newKey[k]] === '') {
+        if (obj[newKey[k]] === '' || obj[newKey[k]].length == 0) {
           let age = newKey[k]
           delete obj[age]
         }
@@ -71,7 +71,7 @@ class HTTP {
     let passSecret = 'a0ny1099ec8yek4wa1pi3l4cf2h86wptorv6o3einn79u',
       passid = 'z7gcawmtu4g1blzgnzftns5435638tdl'
     var strVal = passSecret + str + passSecret //拼接字符串
-    // console.log(strVal)
+    console.log(strVal)
     var strValMd5 = md5(strVal) //MD5加密
     var sign = strValMd5.toUpperCase() //转化为大写
 

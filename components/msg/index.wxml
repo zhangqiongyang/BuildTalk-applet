@@ -2,7 +2,7 @@
 <view class='msg'>
   <view>
     <text class='msg_title'>全部评论</text>
-    <text class='msg_num'>{{msgList.length}}</text>
+    <text class='msg_num'>{{msgLength}}</text>
   </view>
 
   <view wx:if='{{noMsg}}' class='no_record'>

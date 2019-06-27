@@ -15,6 +15,7 @@ view {
   top: 0;
   right: 0;
   padding: 30rpx;
+  z-index: 10;
 }
 
 .joined_circle {
@@ -23,6 +24,16 @@ view {
   margin-top: 284rpx;
   padding-top: 1px;
   border-radius: 44rpx 44rpx 0px 0px;
+}
+
+.masking{
+  width: 100%;
+  height: 422rpx;
+  background:rgba(2,2,3,0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 .author_image {
@@ -268,6 +279,14 @@ view {
   padding: 0 20rpx;
 }
 
+.catalog_video_title  text{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 500rpx;
+}
+
 .catalog_audition {
   width: 60rpx;
   height: 60rpx;
@@ -355,12 +374,9 @@ view {
 
 .content {
   margin-top: 10rpx;
-  margin-bottom: 88rpx;
+  padding-bottom: 88rpx;
 }
 
-.circle_item {
-  /* padding: 40rpx 30rpx; */
-}
 
 /* 加入圈子 */
 

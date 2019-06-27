@@ -83,7 +83,7 @@ Page({
   onReachBottom: function() {
     if(this.data.page<this.data.page_count){
       // 留言
-      guestbookInfo(page) 
+      this.guestbookInfo(page) 
     }else{
       util._showToast('没有更多了')
     }
@@ -192,8 +192,9 @@ Page({
         console.log(res)
 
         this.setData({
-          commentInfo: res.data.commentInfo,
-          'tabbarlist.guestbookNum': res.data.commentInfo.length,
+          commentInfo: res.data.comment_content,
+          countCommentNum: res.data.countCommentNum,
+          'tabbarlist.guestbookNum': res.data.countCommentNum,
           page: res.data.page,
           page_count: res.data.page_count,
         })
@@ -222,8 +223,8 @@ Page({
 
         util._showToastSuccess('提交成功')
         this.setData({
-          commentInfo: res.data.commentInfo,
-          'tabbarlist.guestbookNum': res.data.commentInfo.length,
+          commentInfo: res.data.comment_content,
+          'tabbarlist.guestbookNum': res.data.countCommentNum,
           page: res.data.page,
           page_count: res.data.page_count,
         })

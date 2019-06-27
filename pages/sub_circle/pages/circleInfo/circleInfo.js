@@ -16,7 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    windowHeight: app.globalData.windowHeight + 49 -1.5,
+    windowHeight: app.globalData.windowHeight + 49 - 1.5,
     isMaster: false, // 是否是圈主
   },
 
@@ -103,7 +103,7 @@ Page({
 
   // 跳转到圈子资料
   toCircleData() {
-    if (this.data.circleInfo.is_circleMaster == 1 ) {
+    if (this.data.circleInfo.is_circleMaster == 1) {
       wx.navigateTo({
         url: '../creatCircle/creatCircle?circle_id=' + this.data.circle_id,
       })
@@ -118,11 +118,11 @@ Page({
   // 退出圈子
   exit() {
     let that = this
-    util._showModal('确定退出此圈子？', '',function(){
+    util._showModal('确定退出此圈子？', '', function() {
       // 退出圈子
       that.quitCircle()
     })
-   
+
     // util._showModal('确定退出此圈子？', '', ()=> {
     //   // 退出圈子
     //   that.quitCircle()
@@ -149,33 +149,42 @@ Page({
         console.log('--------圈子信息---------')
         console.log(res)
         this.setData({
-          circleInfo:res.data
+          circleInfo: res.data
         })
+        if (res.data.countUser == 0) {
+          this.setData({
+            isMaster: false
+          })
+        } else if (res.data.is_circleMaster == 1 && res.data.countUser > 0) {
+          this.setData({
+            isMaster: true
+          })
+        }
       })
   },
 
-  
+
   // 退出圈子
-  quitCircle(){
+  quitCircle() {
     http.request({
-      url: api.API_QUITCIRCLE,
-      data:{
-        circle_id: this.data.circle_id,
-        user_id: wx.getStorageSync("user_id"),
-      }
-    })
-    .then(res=>{
-      console.log('----------退出成功-----------')
-      console.log(res)
-
-      util._showToastSuccess('退出成功')
-
-      wx.navigateBack({
-        delta: 2,
+        url: api.API_QUITCIRCLE,
+        data: {
+          circle_id: this.data.circle_id,
+          user_id: wx.getStorageSync("user_id"),
+        }
       })
-      wx.switchTab ({
-        url: '../../../../pages/tabbar/circle/circle',
-      })      
-    })
+      .then(res => {
+        console.log('----------退出成功-----------')
+        console.log(res)
+
+        util._showToastSuccess('退出成功')
+
+        wx.navigateBack({
+          delta: 2,
+        })
+        wx.switchTab({
+          url: '../../../../pages/tabbar/circle/circle',
+        })
+      })
   },
 })

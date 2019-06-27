@@ -18,7 +18,8 @@ Page({
     isAlready: false,
     labelActive: 0,
     label: [],
-    labelText: []
+    labelText: [],
+    intro:''
   },
 
   /**
@@ -31,6 +32,10 @@ Page({
     if (options.circle_id) {
       this.setData({
         circle_id: options.circle_id
+      })
+
+      wx.setNavigationBarTitle({
+        title: '修改圈子'
       })
 
       // 查询圈子信息
@@ -98,7 +103,7 @@ Page({
       labelActive = this.data.labelActive
     let label = this.data.label
 
-    if (labelActive > 5) {
+    if (labelActive >= 5) {
       util._showToast('标签不可以超过5个')
     } else {
       for (let i = 0; i < label.length; i++) {
@@ -233,7 +238,7 @@ Page({
 
   // 判断是否全部填写
   check() {
-    if (!util.isEmpty(this.data.logo) && !util.isEmpty(this.data.labelText) && !util.isEmpty(this.data.name) && !util.isEmpty(this.data.intro)) {
+    if (!util.isEmpty(this.data.logo) && !util.isEmpty(this.data.labelText) && !util.isEmpty(this.data.name)) {
       console.log('-------全部填写-------')
       this.setData({
         isAlready: true
@@ -253,12 +258,6 @@ Page({
     } else if (util.isEmpty(this.data.labelText)) {
       console.log('---------圈子标签不能为空---------')
       util._showToast('圈子标签不能为空')
-      this.setData({
-        isAlready: false
-      })
-    } else if (util.isEmpty(this.data.intro)) {
-      console.log('---------圈子介绍不能为空---------')
-      util._showToast('圈子介绍不能为空')
       this.setData({
         isAlready: false
       })
@@ -380,6 +379,9 @@ Page({
         console.log('------------修改圈子成功------------')
         console.log(res)
         util._showToastSuccess('修改成功')
+        wx.navigateBack({
+          delta: 1,
+        })
       })
   },
 })

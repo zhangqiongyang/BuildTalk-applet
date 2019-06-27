@@ -1,6 +1,8 @@
 // pages/activity/activity.js
 const app = getApp();
 const api = require('../../../../utils/api.js');
+const util = require('../../../../utils/util.js')
+
 Page({
 
   /**
@@ -83,54 +85,12 @@ Page({
   //跳转到相应文章
   jumpToArticle(event){
     var article_id = event.currentTarget.dataset.article_id
-    // wx.navigateTo({
-    //   url: "/pages/sub_browse/pages/video/video?article_id=" + article_id
-    // })
-    //判断是否登录
-    //如果登录，进行下一步判断，如果未登录，引导用户先登录
-    if (app.globalData.isLogin) {
-      //判断用户是否绑定手机号
-      //如果已经绑定手机号，可以进行页面跳转，如果没有绑定，引导用户先绑定手机号
-      if (app.globalData.isBindingPhone) {
-        wx: wx.navigateTo({
-          url: "/pages/sub_browse/pages/video/video?article_id=" + article_id          
-        })
-      }
-      else {
-        wx.showModal({
-          title: '未绑定手机号',
-          content: '请先绑定手机号',
-          showCancel: true,
-          cancelText: '取消',
-          confirmText: '确定',
-          success: function (res) {
-            if (res.confirm) {
-              wx.navigateTo({
-                url: '/pages/phone/phone',
-              })
-            } else if (res.cancel) {
-
-            }
-
-          },
-        })
-      }
-
-
-    } else {
-      wx.showModal({
-        title: '未登录',
-        content: '请先登录',
-        showCancel: true,
-        cancelText: '取消',
-        confirmText: '确定',
-        success: function (res) {
-          wx.switchTab({
-            url: '/pages/tabbar/mine/mine',
-          })
-        },
+    
+    util.judge(() => {
+      wx.navigateTo({
+        url: '../video/video?article_id=' + article_id,
       })
-    }
+    })
   },
 
 

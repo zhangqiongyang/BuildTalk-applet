@@ -1,8 +1,15 @@
 <!--pages/sub_author/pages/collect/collect.wxml-->
 <view>
-  <block wx:for="{{collectList}}" >
-    <view class='collect_item' data-id='{{item.theme_id}}'>
-      <text class='content'>{{item.theme_content}}</text>
+  <block wx:for="{{collectList}}">
+    <view class='collect_item' bindtap='tosubject' data-theme_id='{{item.theme_id}}' data-circle_id='{{item.circle_id}}' data-status='{{item.theme_status}}'>
+      <view wx:if='{{item.theme_image.length>0}}' class='content_box'>
+        <image src='{{item.theme_image[0].pic_url}}'></image>
+        <view class='content_content'>
+          <text class='content_text'>{{item.theme_content}}</text>
+          <text>共{{item.theme_image.length}}张</text>
+        </view>
+      </view>
+      <text wx:else class='content'>{{item.theme_content}}</text>
       <view class='master_info'>
         <view class='master'>
           <text>{{item.name}}</text>

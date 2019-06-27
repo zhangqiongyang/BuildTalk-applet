@@ -17,7 +17,7 @@
     <!-- 大咖列表 -->
     <view class='list'>
       <block wx:for='{{authorList}}' wx:key='key' >
-        <image src='{{item.master_pic}}' bindtap='toAuthor' data-id='{{item.author_id}}'></image>
+        <image src='{{item.master_pic}}' bindtap='toAuthor' data-id='{{item.user_id}}'></image>
       </block>
     </view>
     <!-- 换一换 -->

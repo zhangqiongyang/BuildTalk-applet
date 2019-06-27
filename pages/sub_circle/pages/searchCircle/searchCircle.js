@@ -245,6 +245,10 @@ Page({
       .then(res => {
         console.log("-----------搜索结果（大咖）----------")
         console.log(res)
+
+        if (res.data.authorInfo.length==0){
+          util._showToast('没有大咖')
+        }
         this.setData({
           isAuthorList: true,
           isHistory: false,

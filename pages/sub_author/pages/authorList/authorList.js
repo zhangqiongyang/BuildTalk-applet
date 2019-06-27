@@ -121,8 +121,8 @@ Page({
         console.log('---------获取到大咖列表了--------')
         console.log(res)
         let authorList = this.data.authorList
-        for (let i = 0; i < res.data.authorInfo.length; i++) {
-          authorList.push(res.data.authorInfo[i])
+        for (let i = 0; i < res.data.masterInfo.length; i++) {
+          authorList.push(res.data.masterInfo[i])
         }
         this.setData({
           authorList: authorList,

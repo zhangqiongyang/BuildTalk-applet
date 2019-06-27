@@ -240,7 +240,7 @@
 /* 热点专题 */
 
 .hotTopic {
-  margin-bottom: 60rpx;
+  padding-bottom: 60rpx;
 }
 
 .hotItem {
@@ -263,4 +263,12 @@
 .hotImg text {
   font-size: 24rpx;
   margin-top: 20rpx;
+}
+
+.oneline{
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200rpx;
 }

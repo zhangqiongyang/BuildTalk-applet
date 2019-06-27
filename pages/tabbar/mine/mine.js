@@ -39,6 +39,9 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
+      app.globalData.headImage = app.globalData.userInfo.avatarUrl
+      app.globalData.nickName = app.globalData.userInfo.nickName
+      app.globalData.isLogin=true
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -53,11 +56,31 @@ Page({
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
+          app.globalData.headImage = res.userInfo.headImage
+          app.globalData.nickName = res.userInfo.nickName
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
         }
+      })
+    }
+
+
+    if (!app.globalData.isHavePhone) {
+      if(app.globalData.isLogin){
+        // 查询用户是否绑定手机号
+        this.checkIsHavePhone()
+      }else{
+        wx.hideLoading()
+
+      }
+    
+    } else {
+      wx.hideLoading()
+
+      this.setData({
+        isHavePhone: true
       })
     }
 
@@ -77,21 +100,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (!app.globalData.isHavePhone) {
-      // 查询用户是否绑定手机号
-      this.checkIsHavePhone()
-    } else {
-      this.setData({
-        isHavePhone: true
-      })
-    }
+
 
     this.setData({
+      isHavePhone: app.globalData.isHavePhone,
+      isLogin: app.globalData.isLogin,
       mobile: app.globalData.mobile,
       headImage: app.globalData.headImage,
       nickName: app.globalData.nickName,
     })
-
 
   },
 
@@ -116,14 +133,17 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    if (!app.globalData.isHavePhone) {
-      // 查询用户是否绑定手机号
-      this.checkIsHavePhone()
-    } else {
-      this.setData({
-        isHavePhone: true
-      })
+    if (app.globalData.isLogin) {
+      if (!app.globalData.isHavePhone) {
+        // 查询用户是否绑定手机号
+        this.checkIsHavePhone()
+      } else {
+        this.setData({
+          isHavePhone: true
+        })
+      }
     }
+
 
     this.setData({
       mobile: app.globalData.mobile,
@@ -164,6 +184,8 @@ Page({
 
     } else {
       app.globalData.userInfo = e.detail.userInfo
+      app.globalData.headImage = e.detail.userInfo.avatarUrl
+      app.globalData.nickName = e.detail.userInfo.nickName
       this.setData({
         userInfo: e.detail.userInfo,
         hasUserInfo: true
@@ -183,11 +205,11 @@ Page({
 
   // 跳转到信息
   toMineInfo() {
-    util.judge(() => {
-      wx.navigateTo({
-        url: '/pages/sub_personalCenter/pages/mineInfo/mineInfo',
-      })
+    // util.judge(() => {
+    wx.navigateTo({
+      url: '/pages/sub_personalCenter/pages/mineInfo/mineInfo',
     })
+    // })
   },
   // 跳转到钱包
   toAccount() {
@@ -249,7 +271,9 @@ Page({
     http.request({
         url: api.API_CHECKPHONE,
         data: {
-          login_id: wx.getStorageSync('login_id')
+          login_id: wx.getStorageSync('login_id'),
+          headImage: app.globalData.headImage,
+          nickName: app.globalData.nickName,
         }
       })
       .then(res => {
@@ -287,8 +311,10 @@ Page({
       .catch(err => {
         console.log('------------未绑定手机号------------')
         wx.navigateTo({
-          url: '/pages/sub_personalCeter/pages/bindPhone/bindPhone',
+          url: '/pages/sub_personalCenter/pages/bindPhone/bindPhone',
         })
+        wx.hideLoading()
+        wx.stopPullDownRefresh()
       })
   }
 

@@ -1,5 +1,5 @@
 <!--components/author/index.wxml-->
-<view class='author_item' bindtap='toAuthorDetails' data-id='{{author.author_id}}'>
+<view class='author_item' bindtap='toAuthorDetails' data-id='{{author.user_id}}'>
   <image src='{{author.author_pic}}' mode='aspectFill'></image>
   <view class='item_info'>
     <text class='item_name'>{{author.author_name}}</text>

@@ -16,6 +16,7 @@ Page({
    */
   data: {
     pic: [],
+    content: ''
   },
 
   /**
@@ -109,9 +110,14 @@ Page({
             console.log(data)
             let pic = that.data.pic
             pic.push(data.pic_url)
-            that.setData({
-              pic: pic
-            })
+            if (pic.length <= 9) {
+              that.setData({
+                pic: pic
+              })
+            } else {
+              util._showToast('最多上传9张图片')
+            }
+
           }
         })
       }
@@ -161,7 +167,7 @@ Page({
 
   //发布主题
   submit() {
-    if (!util.isEmpty(this.data.content)) {
+    if (!util.isEmpty(this.data.content) || !util.isEmpty(this.data.pic)) {
       if (this.data.theme_id) {
         //修改主题
         this.change()
@@ -169,8 +175,8 @@ Page({
         //发表主题
         this.publish()
       }
-    } else if (util.isEmpty(this.data.content)) {
-      util._showToast('主题内容不能为空')
+    } else {
+      util._showToast('主题不能为空')
     }
   },
 

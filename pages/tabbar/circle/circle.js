@@ -24,8 +24,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
-    
+
+
   },
 
   /**
@@ -39,24 +39,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    util.judge(() => {
-      // 获取圈子信息
-      this.getCircle()
-    })
+    // util.judge(() => {
+    // 获取圈子信息
+    this.getCircle()
+    // })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    // 关闭弹窗
+    this.setData({
+      isRule: false
+    })
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    // 关闭弹窗
+    this.setData({
+      isRule: false
+    })
   },
 
   /**
@@ -79,17 +85,17 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    if(this.data.page<this.data.page_count){
+    if (this.data.page < this.data.page_count) {
       // 获取圈子信息
       this.getCircle(Number(this.data.page) + 1)
 
       wx.showLoading({
         title: '加载中',
       })
-    }else{
+    } else {
       util._showToast('没有更多了')
     }
-    
+
   },
 
   /**
@@ -141,7 +147,7 @@ Page({
   // 跳转到搜索圈子
   toSearchCircle() {
     wx.navigateTo({
-      url: '/pages/sub_circle/pages/searchCircle/searchCircle?type='+2,
+      url: '/pages/sub_circle/pages/searchCircle/searchCircle?type=' + 2,
     })
   },
 
@@ -158,12 +164,12 @@ Page({
    * 网络请求
    */
   // 获取圈子信息
-  getCircle() {
+  getCircle(page) {
     http.request({
         url: api.API_CIRCLE,
         data: {
           user_id: wx.getStorageSync('user_id'),
-          page: this.data.page,
+          page: page ? page : this.data.page,
           page_size: 20,
         }
       })

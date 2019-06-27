@@ -1,7 +1,9 @@
 /* pages/sub_circle/pages/subjectDetails/subjectDetails.wxss */
 
 @import '/components/subject/index.wxss';
-
+.circle_item {
+  border: none;
+}
 
 /* 精选留言 */
 

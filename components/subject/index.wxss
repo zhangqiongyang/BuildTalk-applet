@@ -1,5 +1,7 @@
 /* components/subject/index.wxss */
-
+.circle_item{
+  border-bottom: 1px solid #E8E7E8;
+}
 .item_author {
   display: flex;
   flex-direction: row;
@@ -138,6 +140,7 @@ button {
 
 .msg {
   margin-top: 37rpx;
+  margin-bottom: 70rpx;
 }
 
 .msg_con {

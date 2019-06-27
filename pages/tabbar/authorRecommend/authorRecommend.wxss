@@ -101,7 +101,7 @@
 .master_list {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 60rpx;
+  padding-bottom: 60rpx;
 }
 
 .master_item {

@@ -181,6 +181,8 @@ Page({
         console.log(res)
 
         app.globalData.headImage=this.data.mineInfo.headImage
+
+        util._showToastSuccess('修改成功')
       })
   },
   //修改背景接口
@@ -196,6 +198,9 @@ Page({
       .then(res => {
         console.log('-------修改背景成功-------')
         console.log(res)
+
+        util._showToastSuccess('修改成功')
+
       })
   },
 })

@@ -27,6 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
     this.setData({
       user_id: options.user_id
     })
@@ -158,13 +159,13 @@ Page({
 
         if (circle_type == 1) {
           this.setData({
-            creatCircleList: res.data.myCircleInfo,
+            creatCircleList: res.data.circleInfo,
             creat_page: res.data.page,
             creat_page_count: res.data.page_count
           })
         } else {
           this.setData({
-            joinCircleList: res.data.myCircleInfo,
+            joinCircleList: res.data.circleInfo,
             join_page: res.data.page,
             join_page_count: res.data.page_count
           })

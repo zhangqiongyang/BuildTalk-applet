@@ -25,7 +25,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      author_id: options.author_id
+      author_user_id: options.author_user_id
     })
 
     // 获取大咖信息
@@ -119,7 +119,7 @@ Page({
         url: api.API_AUTHORDETAILS,
         data: {
           examine_user: wx.getStorageSync('user_id'),
-          user_id: this.data.author_id,
+          user_id: this.data.author_user_id,
           user_type: 1, //1大咖 2圈主
         }
       })
@@ -130,7 +130,7 @@ Page({
         this.setData({
           authorInfo: res.data,
           'authorInfo.isVip': true,
-          'authorInfo.user_id': this.data.author_id,
+          'authorInfo.user_id': this.data.author_user_id,
           articleList: res.data.articleInfo,
         })
       })

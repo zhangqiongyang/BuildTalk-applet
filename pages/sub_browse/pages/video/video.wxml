@@ -54,7 +54,7 @@
     </view>
 
     <!-- 精选留言 -->
-    <v-msg msgList='{{guestbookinfo}}' />
+    <v-msg msgList='{{guestbookinfo}}'  msgLength='{{countCommentNum}}'/>
 
   </scroll-view>
 

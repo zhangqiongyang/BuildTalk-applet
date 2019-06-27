@@ -5,17 +5,17 @@
 
   <!-- 登录及个人信息 -->
   <view class='personalInformation'>
-    <block  wx:if="{{!hasUserInfo && canIUse}}">
+    <block wx:if="{{!hasUserInfo && canIUse}}">
       <view class='userContent'>
         <view class='headPortrait'>
           <image src="/image/mine_tanxiaojian.png" mode="aspectFill"></image>
         </view>
         <view class='userInformation'>
-          <button class="userinfo-nickname" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
+          <button class="userinfo-nickname" open-type="getUserInfo" bindgetuserinfo="getUserInfo">点击登录</button>
           <text class='userinfo_phone'>登录后，可预览更多内容哦～</text>
         </view>
       </view>
-      <image class='mine_more' src='/image/mine_more_white.png' bindtap='toMineInfo'></image>
+      <!-- <image class='mine_more' src='/image/mine_more_white.png'></image> -->
     </block>
     <block wx:else>
       <view class='userContent'>
@@ -25,7 +25,7 @@
         <view class='userInformation'>
           <text class="userinfo-nickname">{{isHavePhone?nickName:userInfo.nickName}}</text>
           <text wx:if='{{isHavePhone}}' class='userinfo_phone'>{{mobile}}</text>
-          <text wx:else class='userinfo_phone' bindtap='toBindPhone'>绑定手机号</text>
+          <text wx:else class='userinfo_phone' style='color:#8BFDC1;' bindtap='toBindPhone'>点击绑定手机号</text>
         </view>
       </view>
       <image class='mine_more' src='/image/mine_more_white.png' bindtap='toMineInfo'></image>

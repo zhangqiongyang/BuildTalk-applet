@@ -41,7 +41,7 @@
         <image wx:if='{{isChecked}}' src='/image/circle_checked.png' bindtap='toChecked'></image>
         <image wx:else src='/image/circle_unchecked.png' bindtap='toChecked'></image>
         <text>我已阅读并同意</text>
-        <text class='color' bindtap='toUserAgreement'>《建谈圈子圈主规则》</text>
+        <text class='color' bindtap='toUserAgreement'>《圈主规则》</text>
       </view>
       <image class='ruleLine' src='/image/circle_line.png'></image>
       <view class='contentText'>包含时政、低俗、色情、暴力引诱等敏感或违禁内容的圈子，将会被封停圈子和账号!</view>

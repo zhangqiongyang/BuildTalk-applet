@@ -22,7 +22,7 @@ Component({
     toAuthorDetails(event){
       const id=event.currentTarget.dataset.id
       wx.navigateTo({
-        url: '/pages/sub_author/pages/authorDetails/authorDetails?author_id='+id,
+        url: '/pages/sub_author/pages/authorDetails/authorDetails?author_user_id='+id,
       })
     }
   }

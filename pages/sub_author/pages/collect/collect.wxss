@@ -12,9 +12,36 @@
   overflow: hidden;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   padding: 40rpx 30rpx 0 30rpx;
+}
+.content_text{
+  font-size: 30rpx;
+  line-height: 42rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  padding: 40rpx 30rpx 0 0;
+}
+.content_box {
+  display: flex;
+  flex-direction: row;
+}
+
+.content_box image {
+  width: 140rpx;
+  height: 140rpx;
+  padding: 40rpx 30rpx 0 30rpx;
+}
+
+.content_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .master_info {
@@ -35,7 +62,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding:30rpx 0;
+  padding: 30rpx 0;
 }
 
 .master text {

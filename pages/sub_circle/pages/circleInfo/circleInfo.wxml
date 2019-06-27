@@ -56,5 +56,5 @@
   </view>
 
   <!-- 退出圈子 -->
-  <view wx:if='{{circleInfo.is_circleMaster==0}}' class='circle_exit' bindtap='exit'>退出圈子</view>
+  <view wx:if='{{!isMaster}}' class='circle_exit' bindtap='exit'>退出圈子</view>
 </view>

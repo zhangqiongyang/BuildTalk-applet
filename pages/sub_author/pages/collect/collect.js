@@ -94,6 +94,23 @@ Page({
   /**
    * 方法
    */
+
+  // 跳转
+  tosubject(event) {
+    const theme_id = event.currentTarget.dataset.theme_id,
+      circle_id = event.currentTarget.dataset.circle_id,
+      status = event.currentTarget.dataset.status
+    if (status == 1) {
+      wx.navigateTo({
+        url: '/pages/sub_circle/pages/subjectDetails/subjectDetails?theme_id=' + theme_id + '&circle_id=' + circle_id,
+      })
+
+    } else {
+      util._showToast('主题已被删除')
+    }
+
+
+  },
   // 删除收藏
   deleteCollect(event) {
     const id = event.currentTarget.dataset.id,

@@ -93,7 +93,11 @@
     <v-pay wx:if='{{isPay}}' bind:cancel='cancel' bind:pay='payment' circleInfo='{{circleInfo}}' />
 
     <!-- 购买 -->
-    <view wx:if='{{!isJoin}}' class='btn fixed' bindtap='pay'>加入圈子￥10.00</view>
+    <!-- <view wx:if='{{!isJoin}}' class='btn fixed' bindtap='pay'>加入圈子￥10.00</view> -->
+
+<view wx:if='{{platform=="ios"}}' class='btn_ios fixed'>由于相关规范，iOS用户暂不可在小程序内订阅</view>
+      <view wx:if='{{platform!="ios"}}' class='btn fixed' bindtap='pay'>加入圈子￥{{circleInfo.course_money}}</view>
+
 
   </scroll-view>
 

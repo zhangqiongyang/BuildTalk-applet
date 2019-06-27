@@ -1,6 +1,6 @@
 <!--pages/sub_circle/pages/publishSubject/publishSubject.wxml-->
 <view>
-  <textarea class='textarea' value='{{content}}' placeholder='说点什么......' bindfocus='focus' bindblur='blur' focus='true' auto-focus='true' auto-height bindinput='input' />
+  <textarea class='textarea' value='{{content}}' placeholder='说点什么......' bindfocus='focus' bindblur='blur' focus='true' auto-focus='true'  bindinput='input' />
 
   <view class='image_box'>
     <block wx:for='{{pic}}'>

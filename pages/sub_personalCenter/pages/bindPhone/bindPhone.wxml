@@ -5,7 +5,7 @@
 
   <view class='form'>
     <view class='phone_item'>
-      <view class='phone_select'>
+      <!-- <view class='phone_select'>
         <view class='select_title' bindtap='seeCode'>
           <text>+{{current}}</text>
           <image src='/image/phone_down.png'></image>
@@ -16,7 +16,7 @@
             <view class='select_item' data-index='{{index}}' bindtap='choseCode'>+{{item}}</view>
           </block>
         </view>
-      </view>
+      </view> -->
 
       <input placeholder='手机号码' placeholder-class='phone_placeholder' bindinput='input' data-id='phone'></input>
     </view>

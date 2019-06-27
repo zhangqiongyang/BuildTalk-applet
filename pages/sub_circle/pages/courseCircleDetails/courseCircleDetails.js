@@ -18,6 +18,7 @@ Page({
    */
   data: {
     windowHeight: app.globalData.windowHeight,
+    platform: app.globalData.platform,
     isCatalog: false, // 是否显示目录详情
     isPicture: false, // 是否显示图文详情
     isPay: false, // 是否显示付费框

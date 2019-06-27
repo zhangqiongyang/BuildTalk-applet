@@ -92,7 +92,7 @@ Component({
           this.setData({
             'subjectclassify.collect_status' : 0
           })
-          util._showToastSuccess('取消成功')
+          util._showToastCancel('取消成功')
           this.triggerEvent('collectSubject', {}, {})
 
         }else{
